@@ -16,7 +16,7 @@ public class MyTreeSet<T extends Comparable<? super T>> implements MySet<T> {
     @Override
     public boolean add(T element) {
         int currentSize = map.size();
-        map.putIfAbsent(element, null);
+        map.putIfAbsent(element, new Object());
         int newSize = map.size();
         return currentSize != newSize;
     }
