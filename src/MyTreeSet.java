@@ -4,7 +4,7 @@
  * @param <T> data type which much implement Comparable
  */
 public class MyTreeSet<T extends Comparable<? super T>> implements MySet<T> {
-    private MyTreeMap<T, Object> map;
+    private final MyTreeMap<T, Object> map;
 
     /**
      * Default constructor for this tree set.
