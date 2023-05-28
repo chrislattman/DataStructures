@@ -131,16 +131,24 @@ public class MyPriorityQueue<T extends Comparable<? super T>> implements MyQueue
             return null;
         }
         T head = array[0];
+        array[0] = array[size - 1];
+        array[size - 1] = null;
+        --size;
+        checkCapacity();
         int currentIndex = 0;
         int bestIndex = getBestIndex(1);
         while (bestIndex > 0) {
-            array[currentIndex] = array[bestIndex];
-            currentIndex = bestIndex;
-            bestIndex = getBestIndex(currentIndex * 2 + 1);
+            T current = array[currentIndex];
+            T best = array[bestIndex];
+            if (isMinHeap && current.compareTo(best) > 0 || !isMinHeap && current.compareTo(best) < 0) {
+                array[currentIndex] = best;
+                array[bestIndex] = current;
+                currentIndex = bestIndex;
+                bestIndex = getBestIndex(currentIndex * 2 + 1);
+            } else {
+                break;
+            }
         }
-        array[currentIndex] = null;
-        --size;
-        checkCapacity();
         return head;
     }
 
@@ -159,13 +167,9 @@ public class MyPriorityQueue<T extends Comparable<? super T>> implements MyQueue
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder("[");
-        int count = 0;
-        for (T element : array) {
-            if (element != null) {
-                builder.append(element);
-                if (++count == size) {
-                    break;
-                }
+        for (int i = 0; i < size; i++) {
+            builder.append(array[i]);
+            if (i != size - 1) {
                 builder.append(", ");
             }
         }
@@ -196,7 +200,7 @@ public class MyPriorityQueue<T extends Comparable<? super T>> implements MyQueue
      *
      * @param leftIndex left array index
      * @return the index of the desired element, or -1 if: leftIndex is out of bounds, array[leftIndex] and
-     * array[leftIndex + 1] are both null, or array[array.length - 1] is null; in a non-null tie, right element wins
+     * array[leftIndex + 1] are both null, or array[array.length - 1] is null; in a non-null tie, left element wins
      */
     private int getBestIndex(int leftIndex) {
         if (leftIndex >= array.length) {
@@ -214,6 +218,8 @@ public class MyPriorityQueue<T extends Comparable<? super T>> implements MyQueue
             } else if (right == null) {
                 return leftIndex;
             } else if (isMinHeap && left.compareTo(right) < 0 || !isMinHeap && left.compareTo(right) > 0) {
+                return leftIndex;
+            } else if (left.compareTo(right) == 0) {
                 return leftIndex;
             } else {
                 return rightIndex;

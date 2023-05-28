@@ -1,16 +1,85 @@
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.HashSet;
+import java.util.Random;
+
 public class Main {
+    private static final int NUMS_LENGTH = 10;
+
     public static void main(String[] args) {
-        MyHashSet<Integer> set = new MyHashSet<>();
-        set.add(12);
-        set.add(15);
-        set.add(10);
-        set.add(3);
-        set.add(13);
-        System.out.println(set);
-        MyPriorityQueue<Integer> minHeap = new MyPriorityQueue<>();
-        minHeap.offer(10);
-        minHeap.offer(2);
-        minHeap.offer(12);
-        System.out.println(minHeap);
+        // Every print statement should output true
+
+        int[] setNums = {12, 15, 10, 3, 13};
+        MyHashSet<Integer> myHashSet = new MyHashSet<>();
+        HashSet<Integer> hashSet = new HashSet<>();
+        for (int setNum : setNums) {
+            myHashSet.add(setNum);
+            hashSet.add(setNum);
+        }
+
+        System.out.println(myHashSet.size() == 5);
+        System.out.println(!myHashSet.add(13));
+        System.out.println(myHashSet.size() == 5);
+        System.out.println(!myHashSet.remove(2));
+        System.out.println(myHashSet.size() == 5);
+        System.out.println(myHashSet.remove(3));
+        System.out.println(myHashSet.size() == 4);
+        System.out.println(myHashSet.contains(10));
+        System.out.println(!myHashSet.contains(4));
+
+        System.out.println(hashSet.size() == 5);
+        System.out.println(!hashSet.add(13));
+        System.out.println(hashSet.size() == 5);
+        System.out.println(!hashSet.remove(2));
+        System.out.println(hashSet.size() == 5);
+        System.out.println(hashSet.remove(3));
+        System.out.println(hashSet.size() == 4);
+        System.out.println(hashSet.contains(10));
+        System.out.println(!hashSet.contains(4));
+
+        Random random = new Random();
+        int[] randomNums = new int[NUMS_LENGTH];
+        for (int i = 0; i < NUMS_LENGTH; i++) {
+            randomNums[i] = random.nextInt(100);
+        }
+
+        MyLinkedList<Integer> myLinkedList = new MyLinkedList<>();
+        LinkedList<Integer> linkedList = new LinkedList<>();
+        MyPriorityQueue<Integer> myMinHeap = new MyPriorityQueue<>();
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        for (int i = 0; i < NUMS_LENGTH; i++) {
+            myLinkedList.add(randomNums[i]);
+            linkedList.add(randomNums[i]);
+            myMinHeap.offer(randomNums[i]);
+            minHeap.offer(randomNums[i]);
+        }
+
+        System.out.println(myLinkedList.size() == NUMS_LENGTH);
+        System.out.println(myLinkedList.toString().equals(linkedList.toString()));
+        myLinkedList.remove(0);
+        linkedList.remove(0);
+        System.out.println(myLinkedList.size() == NUMS_LENGTH - 1);
+        System.out.println(myLinkedList.toString().equals(linkedList.toString()));
+        myLinkedList.remove(4);
+        linkedList.remove(4);
+        System.out.println(myLinkedList.size() == NUMS_LENGTH - 2);
+        System.out.println(myLinkedList.toString().equals(linkedList.toString()));
+        myLinkedList.remove(myLinkedList.size() - 1);
+        linkedList.remove(linkedList.size() - 1);
+        System.out.println(myLinkedList.size() == NUMS_LENGTH - 3);
+        System.out.println(myLinkedList.toString().equals(linkedList.toString()));
+
+        String heapString = myMinHeap.toString();
+        String[] nodes = heapString.substring(1, heapString.length() - 1).split(", ");
+        int root = Integer.parseInt(nodes[0]);
+        System.out.println(myMinHeap.peek() == root);
+        System.out.println(myMinHeap.size() == NUMS_LENGTH);
+        System.out.println(myMinHeap.poll() == root);
+        System.out.println(myMinHeap.size() == NUMS_LENGTH - 1);
+        System.out.println(minHeap.peek() == root);
+        System.out.println(minHeap.size() == NUMS_LENGTH);
+        System.out.println(minHeap.poll() == root);
+        System.out.println(minHeap.size() == NUMS_LENGTH - 1);
+        System.out.println(myMinHeap.toString().equals(minHeap.toString()));
     }
 }
