@@ -111,6 +111,5 @@ public class Main {
         System.out.println(treeSet.remove(7));
 
         System.out.println(myTreeSet.toString().equals(treeSet.toString()));
-
     }
 }

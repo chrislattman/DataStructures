@@ -187,10 +187,13 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
     @Override
     public V put(K key, V value) {
         if (key != null && value != null) {
+            int oldSize = size;
             previousValue = null;
             root = insert(root, key, value, null, false, false);
-            updateBalanceFactor(root);
-            balanceSubtree(root);
+            if (size != oldSize) {
+                updateBalanceFactor(root);
+                balanceSubtree(root);
+            }
             return previousValue;
         }
         return null;
@@ -199,10 +202,13 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
     @Override
     public V putIfAbsent(K key, V value) {
         if (key != null && value != null) {
+            int oldSize = size;
             previousValue = null;
             root = insert(root, key, value, null, true, false);
-            updateBalanceFactor(root);
-            balanceSubtree(root);
+            if (size != oldSize) {
+                updateBalanceFactor(root);
+                balanceSubtree(root);
+            }
             return previousValue;
         }
         return null;
@@ -212,10 +218,13 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
     @SuppressWarnings("unchecked")
     public V remove(Object key) {
         if (key != null) {
+            int oldSize = size;
             previousValue = null;
             root = delete(root, (K) key, null);
-            updateBalanceFactor(root);
-            balanceSubtree(root);
+            if (size != oldSize) {
+                updateBalanceFactor(root);
+                balanceSubtree(root);
+            }
             return previousValue;
         }
         return null;
@@ -225,10 +234,13 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
     @SuppressWarnings("unchecked")
     public boolean remove(Object key, Object value) {
         if (key != null && value != null) {
+            int oldSize = size;
             previousValue = null;
             root = delete(root, (K) key, (V) value);
-            updateBalanceFactor(root);
-            balanceSubtree(root);
+            if (size != oldSize) {
+                updateBalanceFactor(root);
+                balanceSubtree(root);
+            }
             return previousValue != null;
         }
         return false;
