@@ -113,7 +113,7 @@ public interface MyMap<K, V> {
     public V replace(K key, V value);
 
     /**
-     * Replaces the value for a key only if the key's current value matches the specified value.
+     * Replaces the value for a key only if the key's current value matches the specified old value.
      * Null values are not permitted.
      *
      * @param key key to modify value of

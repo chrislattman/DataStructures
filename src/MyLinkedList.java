@@ -152,8 +152,9 @@ public class MyLinkedList<T> implements MyList<T> {
             return true;
         }
         for (Node current = head; current != null; current = current.next) {
-            if (current.next != null && element.equals(current.next.data)) {
-                current.next = current.next.next;
+            Node nextNode = current.next;
+            if (nextNode != null && element.equals(nextNode.data)) {
+                current.next = nextNode.next;
                 --size;
                 return true;
             }

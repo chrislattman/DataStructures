@@ -7,6 +7,7 @@
 public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V> {
     private Node root;
     private int size;
+    private V previousValue;
 
     /**
      * Default constructor for this tree map.
@@ -22,7 +23,15 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
      * @return ceiling key
      */
     public K ceilingKey(K key) {
-        // TODO
+        // lazy implementation
+        if (key != null) {
+            MyArrayList<K> keys = keyList();
+            for (int i = 0; i < size; i++) {
+                if (keys.get(i).compareTo(key) >= 0) {
+                    return keys.get(i);
+                }
+            }
+        }
         return null;
     }
 
@@ -30,6 +39,7 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
     public void clear() {
         root = null;
         size = 0;
+        previousValue = null;
     }
 
     @Override
@@ -83,7 +93,15 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
      * @return floor key
      */
     public K floorKey(K key) {
-        // TODO
+        // lazy implementation
+        if (key != null) {
+            MyArrayList<K> keys = keyList();
+            for (int i = size - 1; i >= 0; i--) {
+                if (keys.get(i).compareTo(key) <= 0) {
+                    return keys.get(i);
+                }
+            }
+        }
         return null;
     }
 
@@ -108,7 +126,15 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
      * @return next greater key
      */
     public K higherKey(K key) {
-        // TODO
+        // lazy implementation
+        if (key != null) {
+            MyArrayList<K> keys = keyList();
+            for (int i = 0; i < size; i++) {
+                if (keys.get(i).compareTo(key) > 0) {
+                    return keys.get(i);
+                }
+            }
+        }
         return null;
     }
 
@@ -146,46 +172,86 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
      * @return greatest prior key
      */
     public K lowerKey(K key) {
-        // TODO
+        // lazy implementation
+        if (key != null) {
+            MyArrayList<K> keys = keyList();
+            for (int i = size - 1; i >= 0; i--) {
+                if (keys.get(i).compareTo(key) < 0) {
+                    return keys.get(i);
+                }
+            }
+        }
         return null;
     }
 
     @Override
     public V put(K key, V value) {
-        V result = insert(root, key, value, null, false, false);
-        update(root);
-        balance(root);
-        return result;
-    }
-
-    @Override
-    public V putIfAbsent(K key, V value) {
-        V result = insert(root, key, value, null, true, false);
-        update(root);
-        balance(root);
-        return result;
-    }
-
-    @Override
-    public V remove(Object key) {
-        // TODO
+        if (key != null && value != null) {
+            previousValue = null;
+            root = insert(root, key, value, null, false, false);
+            updateBalanceFactor(root);
+            balanceSubtree(root);
+            return previousValue;
+        }
         return null;
     }
 
     @Override
+    public V putIfAbsent(K key, V value) {
+        if (key != null && value != null) {
+            previousValue = null;
+            root = insert(root, key, value, null, true, false);
+            updateBalanceFactor(root);
+            balanceSubtree(root);
+            return previousValue;
+        }
+        return null;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public V remove(Object key) {
+        if (key != null) {
+            previousValue = null;
+            root = delete(root, (K) key, null);
+            updateBalanceFactor(root);
+            balanceSubtree(root);
+            return previousValue;
+        }
+        return null;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
     public boolean remove(Object key, Object value) {
-        // TODO
+        if (key != null && value != null) {
+            previousValue = null;
+            root = delete(root, (K) key, (V) value);
+            updateBalanceFactor(root);
+            balanceSubtree(root);
+            return previousValue != null;
+        }
         return false;
     }
 
     @Override
     public V replace(K key, V value) {
-        return insert(root, key, value, null, false, true);
+        if (key != null && value != null) {
+            previousValue = null;
+            root = insert(root, key, value, null, false, true);
+            return previousValue;
+        }
+        return null;
     }
 
     @Override
     public boolean replace(K key, V oldValue, V newValue) {
-        return insert(root, key, newValue, oldValue, false, true) != null;
+        if (key != null && newValue != null) {
+            previousValue = null;
+            root = insert(root, key, newValue, oldValue, false, true);
+            return previousValue != null;
+        }
+        return false;
     }
 
     @Override
@@ -225,11 +291,9 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
      * @param list list to add keys to
      */
     private void collectKeys(Node node, MyArrayList<K> list) {
-        while (node.left != null) {
+        if (node != null) {
             collectKeys(node.left, list);
-        }
-        list.add(node.key);
-        if (node.right != null) {
+            list.add(node.key);
             collectKeys(node.right, list);
         }
     }
@@ -241,11 +305,9 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
      * @param list list to add values to
      */
     private void collectValues(Node node, MyArrayList<V> list) {
-        while (node.left != null) {
+        if (node != null) {
             collectValues(node.left, list);
-        }
-        list.add(node.value);
-        if (node.right != null) {
+            list.add(node.value);
             collectValues(node.right, list);
         }
     }
@@ -298,52 +360,112 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
      * @param oldValue current value to check for (existing key only), leave as null if not applicable
      * @param addOnlyIfAbsent if false, replace current value with specified new value
      * @param addOnlyIfKeyExists if true, only replace value if key already exists
-     * @return previous or current value associated with key, or null if either key was not found, key is null,
-     * or newValue is null
+     * @return root node
      */
-    private V insert(Node node, K key, V newValue, V oldValue, boolean addOnlyIfAbsent, boolean addOnlyIfKeyExists) {
-        if (key == null || newValue == null) {
+    private Node insert(Node node, K key, V newValue, V oldValue, boolean addOnlyIfAbsent, boolean addOnlyIfKeyExists) {
+        if (node == null && !addOnlyIfKeyExists) {
+            ++size;
+            node = new Node();
+            node.key = key;
+            node.value = newValue;
+            return node;
+        } else if (node == null) {
             return null;
         }
-        if (node == null) {
-            if (!addOnlyIfKeyExists) {
-                node = new Node();
-                node.key = key;
-                node.value = newValue;
-                ++size;
-            }
-            return null;
-        }
-        if (node.key.equals(key)) {
-            V previous = node.value;
-            if ((oldValue == null || oldValue.equals(previous)) && !addOnlyIfAbsent) {
+
+        if (key.equals(node.key)) {
+            previousValue = node.value;
+            if ((oldValue == null || oldValue.equals(previousValue)) && !addOnlyIfAbsent) {
                 node.value = newValue;
             } else if (oldValue != null) {
-                return null;
+                previousValue = null;
             }
-            return previous;
-        } else if (node.key.compareTo(key) < 0) {
-            return insert(node.left, key, newValue, oldValue, addOnlyIfAbsent, addOnlyIfKeyExists);
+            return node;
+        } else if (key.compareTo(node.key) < 0) {
+            node.left = insert(node.left, key, newValue, oldValue, addOnlyIfAbsent, addOnlyIfKeyExists);
         } else {
-            return insert(node.right, key, newValue, oldValue, addOnlyIfAbsent, addOnlyIfKeyExists);
+            node.right = insert(node.right, key, newValue, oldValue, addOnlyIfAbsent, addOnlyIfKeyExists);
+        }
+
+        return node;
+    }
+
+    /**
+     * Internal function used to remove a key-value pair in this map.
+     *
+     * @param node current node
+     * @param key key to remove
+     * @param value current value to check for, leave as null if not applicable
+     * @return root node
+     */
+    private Node delete(Node node, K key, V value) {
+        if (node == null) {
+            return null;
+        }
+
+        if (key.compareTo(node.key) < 0) {
+            node.left = delete(node.left, key, value);
+        } else if (key.compareTo(node.key) > 0) {
+            node.right = delete(node.right, key, value);
+        } else if (key.equals(node.key) && (value == null || value.equals(node.value))) {
+            if (node.left == null) {
+                --size;
+                return node.right;
+            } else if (node.right == null) {
+                --size;
+                return node.left;
+            } else {
+                previousValue = node.value;
+                Node successor = node.right;
+                while (successor.left != null) {
+                    successor = successor.left;
+                }
+                node.key = successor.key;
+                node.value = successor.value;
+                node.right = delete(node.right, successor.key, successor.value);
+            }
+        } else {
+            return node;
+        }
+
+        return node;
+    }
+
+    /**
+     * Updates the balance factor for a node and its children.
+     *
+     * @param node root of subtree to update
+     */
+    private void updateBalanceFactor(Node node) {
+        if (node != null) {
+            node.balanceFactor = height(node.left) - height(node.right);
+            updateBalanceFactor(node.left);
+            updateBalanceFactor(node.right);
         }
     }
 
     /**
-     * Updates balance factor and height values for a node and its children.
+     * Returns the height of a subtree rooted at the specified node.
      *
-     * @param node root of subtree to update
+     * @param node root of subtree to get height of
+     * @return height of subtree
      */
-    private void update(Node node) {
-        // TODO
+    private int height(Node node) {
+        if (node == null) {
+            return -1;
+        }
+        if (node.left == null && node.right == null) {
+            return 0;
+        }
+        return Math.max(height(node.left), height(node.right)) + 1;
     }
 
     /**
      * Balances the subtree of a given node.
      *
-     * @param node root of subtree to update
+     * @param node root of subtree to balance
      */
-    private void balance(Node node) {
+    private void balanceSubtree(Node node) {
         // TODO
     }
 
@@ -351,11 +473,9 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
      * Internal node object used by this tree map.
      */
     private class Node {
-        int balanceFactor = 0;
-        int height = 0;
         K key = null;
         V value = null;
-        Node left = null;
-        Node right = null;
+        Node left = null, right = null;
+        int balanceFactor = 0;
     }
 }

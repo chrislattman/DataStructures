@@ -167,9 +167,10 @@ public class MyPriorityQueue<T extends Comparable<? super T>> implements MyQueue
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder("[");
+        int lastIndex = size - 1;
         for (int i = 0; i < size; i++) {
             builder.append(array[i]);
-            if (i != size - 1) {
+            if (i != lastIndex) {
                 builder.append(", ");
             }
         }

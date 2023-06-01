@@ -1,7 +1,4 @@
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.HashSet;
-import java.util.Random;
+import java.util.*;
 
 public class Main {
     private static final int NUMS_LENGTH = 10;
@@ -81,5 +78,39 @@ public class Main {
         System.out.println(minHeap.poll() == root);
         System.out.println(minHeap.size() == NUMS_LENGTH - 1);
         System.out.println(myMinHeap.toString().equals(minHeap.toString()));
+
+        int[] treeNums = {6, 4, 8, 3, 5, 7, 9};
+        MyTreeSet<Integer> myTreeSet = new MyTreeSet<>();
+        TreeSet<Integer> treeSet = new TreeSet<>();
+        for (int treeNum : treeNums) {
+            myTreeSet.add(treeNum);
+            treeSet.add(treeNum);
+        }
+        System.out.println(myTreeSet.toString().equals(treeSet.toString()));
+
+        System.out.println(myTreeSet.size() == 7);
+        System.out.println(!myTreeSet.add(6));
+        System.out.println(myTreeSet.size() == 7);
+        System.out.println(!myTreeSet.remove(2));
+        System.out.println(myTreeSet.size() == 7);
+        System.out.println(myTreeSet.remove(4));
+        System.out.println(myTreeSet.size() == 6);
+        System.out.println(myTreeSet.contains(8));
+        System.out.println(!myTreeSet.contains(10));
+        System.out.println(myTreeSet.remove(7));
+
+        System.out.println(treeSet.size() == 7);
+        System.out.println(!treeSet.add(6));
+        System.out.println(treeSet.size() == 7);
+        System.out.println(!treeSet.remove(2));
+        System.out.println(treeSet.size() == 7);
+        System.out.println(treeSet.remove(4));
+        System.out.println(treeSet.size() == 6);
+        System.out.println(treeSet.contains(8));
+        System.out.println(!treeSet.contains(10));
+        System.out.println(treeSet.remove(7));
+
+        System.out.println(myTreeSet.toString().equals(treeSet.toString()));
+
     }
 }
