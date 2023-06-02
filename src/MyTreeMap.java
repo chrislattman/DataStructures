@@ -187,13 +187,8 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
     @Override
     public V put(K key, V value) {
         if (key != null && value != null) {
-            int oldSize = size;
             previousValue = null;
             root = insert(root, key, value, null, false, false);
-            if (size != oldSize) {
-                updateBalanceFactor(root);
-                balanceSubtree(root);
-            }
             return previousValue;
         }
         return null;
@@ -202,13 +197,8 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
     @Override
     public V putIfAbsent(K key, V value) {
         if (key != null && value != null) {
-            int oldSize = size;
             previousValue = null;
             root = insert(root, key, value, null, true, false);
-            if (size != oldSize) {
-                updateBalanceFactor(root);
-                balanceSubtree(root);
-            }
             return previousValue;
         }
         return null;
@@ -218,13 +208,8 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
     @SuppressWarnings("unchecked")
     public V remove(Object key) {
         if (key != null) {
-            int oldSize = size;
             previousValue = null;
             root = delete(root, (K) key, null);
-            if (size != oldSize) {
-                updateBalanceFactor(root);
-                balanceSubtree(root);
-            }
             return previousValue;
         }
         return null;
@@ -234,13 +219,8 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
     @SuppressWarnings("unchecked")
     public boolean remove(Object key, Object value) {
         if (key != null && value != null) {
-            int oldSize = size;
             previousValue = null;
             root = delete(root, (K) key, (V) value);
-            if (size != oldSize) {
-                updateBalanceFactor(root);
-                balanceSubtree(root);
-            }
             return previousValue != null;
         }
         return false;
@@ -399,6 +379,10 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
             node.right = insert(node.right, key, newValue, oldValue, addOnlyIfAbsent, addOnlyIfKeyExists);
         }
 
+        node.balanceFactor = height(node.left) - height(node.right);
+        if (Math.abs(node.balanceFactor) > 1) {
+            node = balanceSubtree(node);
+        }
         return node;
     }
 
@@ -421,13 +405,14 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
             node.right = delete(node.right, key, value);
         } else if (key.equals(node.key) && (value == null || value.equals(node.value))) {
             if (node.left == null) {
+                previousValue = node.value;
                 --size;
                 return node.right;
             } else if (node.right == null) {
+                previousValue = node.value;
                 --size;
                 return node.left;
             } else {
-                previousValue = node.value;
                 Node successor = node.right;
                 while (successor.left != null) {
                     successor = successor.left;
@@ -440,20 +425,11 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
             return node;
         }
 
-        return node;
-    }
-
-    /**
-     * Updates the balance factor for a node and its children.
-     *
-     * @param node root of subtree to update
-     */
-    private void updateBalanceFactor(Node node) {
-        if (node != null) {
-            node.balanceFactor = height(node.left) - height(node.right);
-            updateBalanceFactor(node.left);
-            updateBalanceFactor(node.right);
+        node.balanceFactor = height(node.left) - height(node.right);
+        if (Math.abs(node.balanceFactor) > 1) {
+            node = balanceSubtree(node);
         }
+        return node;
     }
 
     /**
@@ -473,12 +449,54 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
     }
 
     /**
-     * Balances the subtree of a given node.
+     * Balances the subtree of a given node. There are 4 types of rotations:
+     * left rotation, right rotation, left-right rotation, and right-left
+     * rotation.
      *
      * @param node root of subtree to balance
+     * @return possibly modified root node of subtree
      */
-    private void balanceSubtree(Node node) {
-        // TODO
+    private Node balanceSubtree(Node node) {
+        if (node.balanceFactor > 1) {
+            if (node.left.balanceFactor <= -1) {
+                // if this is called, then it becomes left-right
+                node.left = leftRotation(node.left);
+            }
+            node = rightRotation(node);
+        } else if (node.balanceFactor < -1) {
+            if (node.right.balanceFactor >= 1) {
+                // if this is called, then it becomes right-left
+                node.right = rightRotation(node.right);
+            }
+            node = leftRotation(node);
+        }
+        return node;
+    }
+
+    /**
+     * Performs a left rotation of the subtree rooted at the specified node.
+     *
+     * @param node root of subtree to rotate
+     * @return modified root node of subtree
+     */
+    private Node leftRotation(Node node) {
+        Node newRoot = node.right;
+        node.right = newRoot.left;
+        newRoot.left = node;
+        return newRoot;
+    }
+
+    /**
+     * Performs a right rotation of the subtree rooted at the specified node.
+     *
+     * @param node root of subtree to rotate
+     * @return modified root node of subtree
+     */
+    private Node rightRotation(Node node) {
+        Node newRoot = node.left;
+        node.left = newRoot.right;
+        newRoot.right = node;
+        return newRoot;
     }
 
     /**

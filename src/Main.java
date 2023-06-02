@@ -111,5 +111,109 @@ public class Main {
         System.out.println(treeSet.remove(7));
 
         System.out.println(myTreeSet.toString().equals(treeSet.toString()));
+
+        // right rotations
+
+        myTreeSet.clear();
+        myTreeSet.add(30);
+        myTreeSet.add(20);
+        myTreeSet.add(10);
+        System.out.println(myTreeSet.toString().equals("[10, 20, 30]"));
+
+        myTreeSet.clear();
+        myTreeSet.add(8);
+        myTreeSet.add(6);
+        myTreeSet.add(9);
+        myTreeSet.add(4);
+        myTreeSet.add(7);
+        myTreeSet.add(3);
+        System.out.println(myTreeSet.toString().equals("[3, 4, 6, 7, 8, 9]"));
+
+        myTreeSet.clear();
+        myTreeSet.add(8);
+        myTreeSet.add(6);
+        myTreeSet.add(9);
+        myTreeSet.add(4);
+        myTreeSet.add(7);
+        myTreeSet.add(5);
+        System.out.println(myTreeSet.toString().equals("[4, 5, 6, 7, 8, 9]"));
+
+        // left-right rotations
+
+        myTreeSet.clear();
+        myTreeSet.add(30);
+        myTreeSet.add(10);
+        myTreeSet.add(20);
+        System.out.println(myTreeSet.toString().equals("[10, 20, 30]"));
+
+        myTreeSet.clear();
+        myTreeSet.add(8);
+        myTreeSet.add(4);
+        myTreeSet.add(9);
+        myTreeSet.add(3);
+        myTreeSet.add(6);
+        myTreeSet.add(5);
+        System.out.println(myTreeSet.toString().equals("[3, 4, 5, 6, 8, 9]"));
+
+        myTreeSet.clear();
+        myTreeSet.add(8);
+        myTreeSet.add(4);
+        myTreeSet.add(9);
+        myTreeSet.add(3);
+        myTreeSet.add(6);
+        myTreeSet.add(7);
+        System.out.println(myTreeSet.toString().equals("[3, 4, 6, 7, 8, 9]"));
+
+        // left rotations
+
+        myTreeSet.clear();
+        myTreeSet.add(10);
+        myTreeSet.add(20);
+        myTreeSet.add(30);
+        System.out.println(myTreeSet.toString().equals("[10, 20, 30]"));
+
+        myTreeSet.clear();
+        myTreeSet.add(4);
+        myTreeSet.add(3);
+        myTreeSet.add(6);
+        myTreeSet.add(5);
+        myTreeSet.add(8);
+        myTreeSet.add(7);
+        System.out.println(myTreeSet.toString().equals("[3, 4, 5, 6, 7, 8]"));
+
+        myTreeSet.clear();
+        myTreeSet.add(4);
+        myTreeSet.add(3);
+        myTreeSet.add(6);
+        myTreeSet.add(5);
+        myTreeSet.add(8);
+        myTreeSet.add(9);
+        System.out.println(myTreeSet.toString().equals("[3, 4, 5, 6, 8, 9]"));
+
+        // right-left rotations
+
+        myTreeSet.clear();
+        myTreeSet.add(30);
+        myTreeSet.add(10);
+        myTreeSet.add(20);
+        System.out.println(myTreeSet.toString().equals("[10, 20, 30]"));
+
+        myTreeSet.clear();
+        myTreeSet.add(4);
+        myTreeSet.add(3);
+        myTreeSet.add(8);
+        myTreeSet.add(6);
+        myTreeSet.add(9);
+        myTreeSet.add(5);
+        System.out.println(myTreeSet.toString().equals("[3, 4, 5, 6, 8, 9]"));
+
+        myTreeSet.clear();
+        myTreeSet.add(4);
+        myTreeSet.add(3);
+        myTreeSet.add(8);
+        myTreeSet.add(6);
+        myTreeSet.add(9);
+        myTreeSet.add(7);
+        System.out.println(myTreeSet.toString().equals("[3, 4, 6, 7, 8, 9]"));
     }
 }
