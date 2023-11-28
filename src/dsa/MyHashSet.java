@@ -1,16 +1,42 @@
+package dsa;
+
 /**
- * A tree set data structure built upon a tree map.
+ * A hash set data structure built upon a hash map.
  *
- * @param <T> data type which much implement Comparable
+ * @param <T> data type
  */
-public class MyTreeSet<T extends Comparable<? super T>> implements MySet<T> {
-    private final MyTreeMap<T, Object> map;
+public class MyHashSet<T> implements MySet<T> {
+    private final MyHashMap<T, Object> map;
+    private static final int defaultCapacity = 16;
+    private static final float defaultLoadFactor = 0.75f;
 
     /**
-     * Default constructor for this tree set.
+     * Constructs a hash set instance with a default initial capacity of 16 and a default load factor of 0.75.
      */
-    public MyTreeSet() {
-        map = new MyTreeMap<>();
+    public MyHashSet() {
+        this(defaultCapacity, defaultLoadFactor);
+    }
+
+    /**
+     * Constructs a hash set instance with the specified initial capacity and a default load factor of 0.75.
+     *
+     * @param initialCapacity initial capacity of this hash set
+     * @throws IllegalArgumentException if initialCapacity is negative
+     */
+    public MyHashSet(int initialCapacity) throws IllegalArgumentException {
+        this(initialCapacity, defaultLoadFactor);
+    }
+
+    /**
+     * Constructs a hash set instance with the specified initial capacity and load factor.
+     *
+     * @param initialCapacity initial capacity of this hash set
+     * @param loadFactor maximum value of (number of elements / number of total slots in hash set) before rehashing
+     *                   occurs
+     * @throws IllegalArgumentException if initialCapacity is negative or loadFactor is nonpositive
+     */
+    public MyHashSet(int initialCapacity, float loadFactor) throws IllegalArgumentException {
+        map = new MyHashMap<>(initialCapacity, loadFactor);
     }
 
     @Override
@@ -19,16 +45,6 @@ public class MyTreeSet<T extends Comparable<? super T>> implements MySet<T> {
         map.putIfAbsent(element, new Object());
         int newSize = map.size();
         return currentSize != newSize;
-    }
-
-    /**
-     * Returns the least element greater than or equal to the given element, or null if no such element exists.
-     *
-     * @param element element to reference
-     * @return ceiling element
-     */
-    public T ceiling(T element) {
-        return map.ceilingKey(element);
     }
 
     @Override
@@ -66,57 +82,9 @@ public class MyTreeSet<T extends Comparable<? super T>> implements MySet<T> {
         return true;
     }
 
-    /**
-     * Returns the smallest element.
-     *
-     * @return first element
-     */
-    public T first() {
-        return map.firstKey();
-    }
-
-    /**
-     * Returns the greatest element less than or equal to the given element, or null if no such element exists.
-     *
-     * @param element element to reference
-     * @return floor element
-     */
-    public T floor(T element) {
-        return map.floorKey(element);
-    }
-
-    /**
-     * Returns the least element strictly greater than the given element, or null if no such element exists.
-     *
-     * @param element element to reference
-     * @return next greater element
-     */
-    public T higher(T element) {
-        return map.higherKey(element);
-    }
-
     @Override
     public boolean isEmpty() {
         return map.isEmpty();
-    }
-
-    /**
-     * Returns the largest element.
-     *
-     * @return last element
-     */
-    public T last() {
-        return map.lastKey();
-    }
-
-    /**
-     * Returns the greatest element strictly less than the given element, or null if no such element exists.
-     *
-     * @param element element to reference
-     * @return greatest prior element
-     */
-    public T lower(T element) {
-        return map.lowerKey(element);
     }
 
     @Override

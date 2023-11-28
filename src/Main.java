@@ -1,5 +1,10 @@
 import java.util.*;
 
+import dsa.MyHashSet;
+import dsa.MyLinkedList;
+import dsa.MyPriorityQueue;
+import dsa.MyTreeSet;
+
 public class Main {
     private static final int NUMS_LENGTH = 10;
 

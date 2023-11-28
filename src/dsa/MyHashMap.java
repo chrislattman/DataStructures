@@ -1,3 +1,5 @@
+package dsa;
+
 /**
  * A hash map data structure utilizing quadratic probing (open addressing). Also called a hash table.
  *

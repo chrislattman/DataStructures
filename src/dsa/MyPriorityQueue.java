@@ -1,3 +1,5 @@
+package dsa;
+
 /**
  * A priority queue data structure. Also called a (binary) heap.
  *
