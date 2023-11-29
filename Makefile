@@ -1,7 +1,10 @@
 SHELL=/bin/bash
 
 lib:
-	jar -cf dsa.jar src/dsa/*.java
+	cp src/Main.java .
+	cd src; jar -cf dsa.jar dsa/*.java; mv dsa.jar ..
+	javac -cp dsa.jar Main.java
+	java -cp dsa.jar:. Main
 
 debug:
 	javac -g -d out -cp src/dsa/*.java src/Main.java
@@ -10,4 +13,4 @@ docs:
 	javadoc -d public src/dsa/*.java
 
 clean:
-	rm -rf dsa.jar out public
+	rm -rf *.jar Main.java *.class out public
