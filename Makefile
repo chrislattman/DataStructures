@@ -8,6 +8,7 @@ lib:
 
 debug:
 	javac -g -d out -cp src/dsa/*.java src/Main.java
+	# cd out; jdb Main
 
 docs:
 	javadoc -d public src/dsa/*.java
