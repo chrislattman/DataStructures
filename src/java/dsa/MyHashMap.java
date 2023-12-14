@@ -89,8 +89,8 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         if (obj.size() != size) {
             return false;
         }
-        MyArrayList<?> keys = obj.keyList();
-        MyArrayList<?> values = obj.values();
+        MyList<?> keys = obj.keyList();
+        MyList<?> values = obj.values();
         return keys.equals(keyList()) && values.equals(values());
     }
 
@@ -125,8 +125,8 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
     }
 
     @Override
-    public MyArrayList<K> keyList() {
-        MyArrayList<K> list = new MyArrayList<>();
+    public MyList<K> keyList() {
+        MyList<K> list = new MyArrayList<>();
         for (K key : keys) {
             if (key != null) {
                 list.add(key);
@@ -223,8 +223,8 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
     }
 
     @Override
-    public MyArrayList<V> values() {
-        MyArrayList<V> valueList = new MyArrayList<>();
+    public MyList<V> values() {
+        MyList<V> valueList = new MyArrayList<>();
         for (V value : values) {
             if (value != null) {
                 valueList.add(value);

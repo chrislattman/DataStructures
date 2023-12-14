@@ -68,7 +68,7 @@ public interface MyMap<K, V> {
      *
      * @return a list of the keys
      */
-    public MyArrayList<K> keyList();
+    public MyList<K> keyList();
 
     /**
      * Inserts a key-value pair into this map. Null keys and null values are not permitted.
@@ -148,5 +148,5 @@ public interface MyMap<K, V> {
      *
      * @return a list of the values
      */
-    public MyArrayList<V> values();
+    public MyList<V> values();
 }

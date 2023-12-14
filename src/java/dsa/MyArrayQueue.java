@@ -81,7 +81,7 @@ public class MyArrayQueue<T> implements MyQueue<T> {
         if (isEmpty()) {
             return null;
         }
-        return array[size - 1];
+        return array[0];
     }
 
     @Override

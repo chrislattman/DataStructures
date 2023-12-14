@@ -1,7 +1,7 @@
 package dsa;
 
 /**
- *  An array list data structure.
+ * An array list data structure.
  *
  * @param <T> data type
  */
@@ -122,8 +122,8 @@ public class MyArrayList<T> implements MyList<T> {
     public T remove(int index) throws IndexOutOfBoundsException {
         checkIndex(index, size);
         T element = array[index];
-        System.arraycopy(array, index + 1, array, index, size - index);
         --size;
+        System.arraycopy(array, index + 1, array, index, size - index);
         checkCapacity();
         return element;
     }
@@ -132,8 +132,8 @@ public class MyArrayList<T> implements MyList<T> {
     public boolean removeElement(T element) {
         for (int i = 0; i < size; i++) {
             if (element.equals(array[i])) {
-                System.arraycopy(array, i + 1, array, i, size - i);
                 --size;
+                System.arraycopy(array, i + 1, array, i, size - i);
                 checkCapacity();
                 return true;
             }

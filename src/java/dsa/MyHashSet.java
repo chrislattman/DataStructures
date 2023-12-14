@@ -99,7 +99,7 @@ public class MyHashSet<T> implements MySet<T> {
 
     @Override
     public Object[] toArray() {
-        MyArrayList<T> keys = map.keyList();
+        MyList<T> keys = map.keyList();
         Object[] array = new Object[map.size()];
         for (int i = 0; i < array.length; i++) {
             array[i] = keys.get(i);
@@ -109,7 +109,7 @@ public class MyHashSet<T> implements MySet<T> {
 
     @Override
     public String toString() {
-        MyArrayList<T> keys = map.keyList();
+        MyList<T> keys = map.keyList();
         StringBuilder builder = new StringBuilder("[");
         int length = map.size();
         int lastIndex = length - 1;

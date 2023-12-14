@@ -11,7 +11,7 @@ public interface MyList<T> {
      *
      * @param index index to add element
      * @param element element to add
-     * @throws IndexOutOfBoundsException if index is out of bounds (0 <= index <= size())
+     * @throws IndexOutOfBoundsException if index is out of bounds (index must be between 0 and size(), inclusive)
      */
     public void add(int index, T element) throws IndexOutOfBoundsException;
 
@@ -49,7 +49,7 @@ public interface MyList<T> {
      *
      * @param index index to retrieve element from
      * @return element found
-     * @throws IndexOutOfBoundsException if index is out of bounds (0 <= index < size())
+     * @throws IndexOutOfBoundsException if index is out of bounds (index must be between 0 and size() - 1, inclusive)
      */
     public T get(int index) throws IndexOutOfBoundsException;
 
@@ -81,7 +81,7 @@ public interface MyList<T> {
      *
      * @param index index to remove element from
      * @return element found at index
-     * @throws IndexOutOfBoundsException if index is out of bounds (0 <= index < size())
+     * @throws IndexOutOfBoundsException if index is out of bounds (index must be between 0 and size() - 1, inclusive)
      */
     public T remove(int index) throws IndexOutOfBoundsException;
 
@@ -99,7 +99,7 @@ public interface MyList<T> {
      * @param index index to set element at
      * @param element new value to set existing element to
      * @return old value of the element at position index
-     * @throws IndexOutOfBoundsException if index is out of bounds (0 <= index < size())
+     * @throws IndexOutOfBoundsException if index is out of bounds (index must be between 0 and size() - 1, inclusive)
      */
     public T set(int index, T element) throws IndexOutOfBoundsException;
 
