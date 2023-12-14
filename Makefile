@@ -32,13 +32,14 @@ debugcpp:
 	# gdb main
 
 debugpy:
-	python3 -m pdb src/python/main.py
+	# python3 -m pdb src/python/main.py
 
 docsjava:
 	javadoc -d public/java src/java/dsa/*.java
 
 docscpp:
-	# TODO: use doxygen
+	mkdir -p public/cpp
+	doxygen Doxyfile
 
 docspy:
 	mkdir -p public/python
