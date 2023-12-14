@@ -140,3 +140,14 @@ class MyHashSet: public MySet<T> {
             return builder.str();
         }
 };
+
+/// @brief Prints out the hash set without needing to manually call toString().
+///
+/// @tparam T data type
+/// @param str ostream
+/// @param list hash set to print out
+/// @return updated ostream
+template<typename T>
+ostream& operator<<(ostream &str, const MyHashSet<T> &set) {
+    return str << set.toString();
+}
