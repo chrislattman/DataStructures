@@ -12,10 +12,9 @@ endif
 CPP_FLAGS=-Wall -Wextra -pedantic -std=c++14
 
 runjava: libjava
-	cp src/java/Main.java .
-	javac -cp dsa.jar Main.java
-	java -cp dsa.jar:. Main
-	# java -cp dsa.jar Main.java
+	javac -cp dsa.jar src/java/Main.java
+	java -cp dsa.jar:src/java Main
+	# java -cp dsa.jar src/java/Main.java
 
 runcpp:
 	g++ $(CPP_FLAGS) -o main src/cpp/main.cpp
@@ -42,11 +41,12 @@ docscpp:
 	# TODO: use doxygen
 
 docspy:
-	python3 -m pydoc src/python/dsa/*
+	mkdir -p public/python
+	cd public/python; python3 -m pydoc -w ../../src/python/dsa/*
 
 libjava:
 	javac src/java/dsa/*.java
 	cd src/java; jar -cf dsa.jar dsa/*.class; mv dsa.jar ../..
 
 clean:
-	rm -rf *.jar *$(LIBEXT) Main.class main Main.java src/java/dsa/*.class out public
+	rm -rf *.jar *$(LIBEXT) main src/java/Main.class src/java/dsa/*.class out public

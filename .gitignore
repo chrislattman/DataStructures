@@ -65,4 +65,3 @@ __pycache__/
 .DS_Store
 out/
 public/
-./Main.java
