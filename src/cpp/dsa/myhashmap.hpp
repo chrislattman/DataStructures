@@ -8,8 +8,8 @@ using namespace std;
 
 /// @brief A hash map data structure utilizing quadratic probing (open addressing). Also called a hash table.
 ///
-/// @tparam const K &key data type
-/// @tparam const V &value data type
+/// @tparam K key data type
+/// @tparam V value data type
 /// @tparam Hash hash function used for keys
 template<typename K, typename V, class Hash = hash<K>>
 class MyHashMap: public MyMap<K, V> {
