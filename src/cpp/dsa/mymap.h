@@ -5,8 +5,8 @@
 
 /// @brief Abstract class (used as an interface) which defines methods for maps.
 ///
-/// @tparam const K &key data type
-/// @tparam const V &value data type
+/// @tparam K key data type
+/// @tparam V value data type
 template<typename K, typename V>
 class MyMap {
     public:
@@ -17,55 +17,55 @@ class MyMap {
         ///
         /// @param key key to check for
         /// @return true if key was found, false otherwise
-        virtual bool containsKey(const K &key) = 0;
+        virtual bool containsKey(const K &key) const = 0;
 
         /// @brief Checks if a value is in this map.
         ///
         /// @param value value to check for
         /// @return true if value was found, false otherwise
-        virtual bool containsValue(const V &value) = 0;
+        virtual bool containsValue(const V &value) const = 0;
 
         /// @brief Returns the value associated with the specified key.
         ///
         /// @param key key to search for
-        /// @return value associated with key, or null if key was not found
-        virtual V get(const K &key) = 0;
+        /// @return value associated with key, or NULL if key was not found
+        virtual V get(const K &key) const = 0;
 
         /// @brief Returns the value associated with the specified key, or a default value if they key was not found.
         ///
         /// @param key key to search for
         /// @param defaultValue value to return if key was not found in this map
         /// @return value associated with key, or defaultValue if key was not found
-        virtual V getOrDefault(const K &key, const V &defaultValue) = 0;
+        virtual V getOrDefault(const K &key, const V &defaultValue) const = 0;
 
         /// @brief Checks if this map has no key-value pairs.
         ///
         /// @return true if this map is empty, false otherwise
-        virtual bool isEmpty() = 0;
+        virtual bool isEmpty() const = 0;
 
         /// @brief Returns a copy of the keys in this map.
         ///
         /// @return a list of the keys
-        virtual MyList<K> keyList() = 0;
+        virtual MyList<K> *keyList() const = 0;
 
-        /// @brief Inserts a key-value pair into this map. Null keys and null values are not permitted.
+        /// @brief Inserts a key-value pair into this map. Null keys and NULL values are not permitted.
         ///
         /// @param key key to add
         /// @param value value associated with key
-        /// @return previous value associated with key, or null if either key was not found, key is null, or value is null
+        /// @return previous value associated with key, or NULL if either key was not found, key is NULL, or value is NULL
         virtual V put(const K &key, const V &value) = 0;
 
-        /// @brief Inserts a key-value pair into this map only if key was not found. Null keys and null values are not permitted.
+        /// @brief Inserts a key-value pair into this map only if key was not found. Null keys and NULL values are not permitted.
         ///
         /// @param key key to add
         /// @param value value associated with key
-        /// @return current value associated with key, or null if either key was not found, key is null, or value is null
+        /// @return current value associated with key, or NULL if either key was not found, key is NULL, or value is NULL
         virtual V putIfAbsent(const K &key, const V &value) = 0;
 
         /// @brief Removes a key-value pair from this map.
         ///
         /// @param key key to remove
-        /// @return value associated with key prior to removal, or null if key was not found
+        /// @return value associated with key prior to removal, or NULL if key was not found
         virtual V remove(const K &key) = 0;
 
         /// @brief Removes a key-value pair from this map only if the key's current value matches the specified value.
@@ -79,7 +79,7 @@ class MyMap {
         ///
         /// @param key key to modify value of
         /// @param value new value for key
-        /// @return previous value associated with key, or null if key was not found or value is null
+        /// @return previous value associated with key, or NULL if key was not found or value is NULL
         virtual V replace(const K &key, const V &value) = 0;
 
         /// @brief Replaces the value for a key only if the key's current value matches the specified old value.
@@ -94,15 +94,15 @@ class MyMap {
         /// @brief Returns the number of key-value pairs in this map.
         ///
         /// @return size of map
-        virtual int size() = 0;
+        virtual int size() const = 0;
 
         /// @brief Returns a string representation of this map, e.g. "{key1=value1, key2=value2, key3=value3, ..., keyN=valueN}".
         ///
         /// @return string form of this map
-        virtual std::string toString() = 0;
+        virtual std::string toString() const = 0;
 
         /// @brief Returns a copy of the values in this map.
         ///
         /// @return a list of the values
-        virtual MyList<V> values() = 0;
+        virtual MyList<V> *values() const = 0;
 };

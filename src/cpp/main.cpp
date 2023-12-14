@@ -2,6 +2,7 @@
 #include "dsa/myarrayqueue.hpp"
 #include "dsa/mylinkedlist.hpp"
 #include "dsa/mystack.hpp"
+#include "dsa/myhashmap.hpp"
 #include <iostream>
 
 using namespace std;
@@ -148,4 +149,10 @@ int main(void) {
     myStack.pop();
     cout << boolalpha << (myStack.toString() == string("[10]")) << endl;
     cout << boolalpha << (myStack == myStack) << endl;
+
+    // MyHashMap (and therefore MyHashSet) doesn't work
+    // MyHashMap<string, int> myHashMap;
+    // myHashMap.put("hello", 1);
+    // myHashMap.put("world", 4);
+    // cout << myHashMap.size() << endl;
 }

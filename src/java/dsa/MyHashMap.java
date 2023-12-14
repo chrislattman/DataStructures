@@ -224,13 +224,13 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
 
     @Override
     public MyList<V> values() {
-        MyList<V> valueList = new MyArrayList<>();
+        MyList<V> list = new MyArrayList<>();
         for (V value : values) {
             if (value != null) {
-                valueList.add(value);
+                list.add(value);
             }
         }
-        return valueList;
+        return list;
     }
 
     /**

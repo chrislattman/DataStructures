@@ -23,12 +23,12 @@ class MyQueue {
 
         /// @brief Retrieves, but does not remove, the element at the front of this queue.
         ///
-        /// @return element at the front of this queue, or null if queue is empty
+        /// @return element at the front of this queue, or NULL if queue is empty
         virtual T peek() const = 0;
 
         /// @brief Retrieves and removes the element at the front of this queue.
         ///
-        /// @return element at the front of this queue, or null if queue is empty
+        /// @return element at the front of this queue, or NULL if queue is empty
         virtual T poll() = 0;
 
         /// @brief Returns the number of elements in this queue.

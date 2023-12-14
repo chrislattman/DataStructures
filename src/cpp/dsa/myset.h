@@ -21,12 +21,12 @@ class MySet {
         ///
         /// @param element element to check for
         /// @return true if found, false otherwise
-        virtual bool contains(const T &element) = 0;
+        virtual bool contains(const T &element) const = 0;
 
         /// @brief Checks if this set has no elements.
         ///
         /// @return true if this set is empty, false otherwise
-        virtual bool isEmpty() = 0;
+        virtual bool isEmpty() const = 0;
 
         /// @brief Removes an element from this set.
         ///
@@ -37,15 +37,15 @@ class MySet {
         /// @brief Returns the number of elements in this set.
         ///
         /// @return size of set
-        virtual int size() = 0;
+        virtual int size() const = 0;
 
         /// @brief Returns an array containing all the elements in this set.
         ///
         /// @return array of set elements
-        virtual T *toArray() = 0;
+        virtual T *toArray() const = 0;
 
         /// @brief Returns a string representation of this set, e.g. "[element1, element2, element3, ..., elementN]".
         ///
         /// @return string form of this set
-        virtual std::string toString() = 0;
+        virtual std::string toString() const = 0;
 };
