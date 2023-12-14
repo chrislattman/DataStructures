@@ -139,7 +139,7 @@ public class Main {
         System.out.println(poll1 == poll2);
         System.out.println(myArrayQueue.size() == NUMS_LENGTH - 1);
         System.out.println(myArrayQueue.toString().equals(arrayQueue.toString()));
-        
+
         System.out.println(myStack.size() == NUMS_LENGTH);
         System.out.println(myStack.toString().equals(stack.toString()));
         int pop1 = myStack.pop();
