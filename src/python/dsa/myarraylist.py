@@ -42,6 +42,9 @@ class MyArrayList(MyList[T]):
 
         Args:
             index (int): index to remove element from
+
+        Raises:
+            IndexError: if index is out of bounds (index must be between 0 and size() - 1, inclusive)
         """
         self.remove(index)
 
@@ -72,6 +75,9 @@ class MyArrayList(MyList[T]):
 
         Returns:
             element found
+
+        Raises:
+            IndexError: if index is out of bounds (index must be between 0 and size() - 1, inclusive)
         """
         self.get(index)
 
@@ -85,6 +91,9 @@ class MyArrayList(MyList[T]):
         Args:
             index (int): index to add element
             element: element to add
+
+        Raises:
+            IndexError: if index is out of bounds (index must be between 0 and size(), inclusive)
         """
         self.add(index, element)
 
@@ -119,6 +128,9 @@ class MyArrayList(MyList[T]):
         Args:
             index (int): index to add element
             element: element to add
+
+        Raises:
+            IndexError: if index is out of bounds (index must be between 0 and size(), inclusive)
         """
         self.add(index, element)
 
@@ -139,3 +151,17 @@ class MyArrayList(MyList[T]):
             str: result from `toString`
         """
         return self.toString()
+
+    def _checkCapacity(self) -> None:
+        """Doubles or halves the size of the internal array depending on size. Used in add and remove methods."""
+
+    def _checkIndex(self, index: int, upperBound: int) -> None:
+        """Helper function for index validation.
+
+        Args:
+            index (int): index to validate
+            upperBound (int): value that index must be strictly less than
+
+        Raises:
+            IndexError: if index is out of bounds
+        """

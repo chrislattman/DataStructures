@@ -30,6 +30,9 @@ class MyLinkedList(MyList[T]):
 
         Args:
             index (int): index to remove element from
+
+        Raises:
+            IndexError: if index is out of bounds (index must be between 0 and size() - 1, inclusive)
         """
         self.remove(index)
 
@@ -60,6 +63,9 @@ class MyLinkedList(MyList[T]):
 
         Returns:
             element found
+
+        Raises:
+            IndexError: if index is out of bounds (index must be between 0 and size() - 1, inclusive)
         """
         self.get(index)
 
@@ -73,6 +79,9 @@ class MyLinkedList(MyList[T]):
         Args:
             index (int): index to add element
             element: element to add
+
+        Raises:
+            IndexError: if index is out of bounds (index must be between 0 and size(), inclusive)
         """
         self.add(index, element)
 
@@ -107,6 +116,9 @@ class MyLinkedList(MyList[T]):
         Args:
             index (int): index to add element
             element: element to add
+
+        Raises:
+            IndexError: if index is out of bounds (index must be between 0 and size(), inclusive)
         """
         self.add(index, element)
 
@@ -128,7 +140,18 @@ class MyLinkedList(MyList[T]):
         """
         return self.toString()
 
+    def _checkIndex(self, index: int, upperBound: int) -> None:
+        """Helper function for index validation.
+
+        Args:
+            index (int): index to validate
+            upperBound (int): value that index must be strictly less than
+
+        Raises:
+            IndexError: if index is out of bounds
+        """
+
     class Node:
-        def __init__(self, data: T = None):
+        def __init__(self, data: T = None) -> None:
             self.data = data
             self.next: MyLinkedList.Node = None

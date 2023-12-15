@@ -149,3 +149,21 @@ class MyHashMap(MyMap[KT, VT]):
             str: result from `toString`
         """
         return self.toString()
+
+    def _insert(self, key: KT, newValue: VT, oldValue: VT, addOnlyIfAbsent: bool, addOnlyIfKeyExists: bool) -> VT:
+        """Internal function used to add or modify a key-value pair in this map.
+
+        Args:
+            key: key to add
+            newValue: value to be associated with key
+            oldValue: current value to check for (existing key only), leave as null if not applicable
+            addOnlyIfAbsent (bool): if false, replace current value with specified new value
+            addOnlyIfKeyExists (bool): if true, only replace value if key already exists
+
+        Returns:
+            previous or current value associated with key, or None if either key was not found, key is None,
+            or newValue is None
+        """
+
+    def _resizeMap(self) -> None:
+        """Increases the map size and rehashes the key-value pairs when load factor has been surpassed."""
