@@ -12,13 +12,6 @@ class MyMap(ABC, MutableMapping[KT, VT]):
     `__iter__`, and `__len__`, as part of inheriting from `MutableMapping`.
     """
 
-    @classmethod
-    def __subclasshook__(cls, __subclass: type) -> bool:
-        """Ensures that any subclass of this class overrides all abstract methods."""
-        methods_list = [func for func in dir(MyMap) if not func.startswith("_")]
-        callable_methods = [hasattr(__subclass, func) and callable(getattr(__subclass, func)) for func in methods_list]
-        return all(callable_methods) or NotImplemented
-
     @abstractmethod
     def clear(self) -> None:
         """Empties this map of all key-value pairs."""
@@ -131,7 +124,7 @@ class MyMap(ABC, MutableMapping[KT, VT]):
         """
 
     @abstractmethod
-    def remove(self, key: KT, value: VT) -> bool:
+    def removeIfPresent(self, key: KT, value: VT) -> bool:
         """Removes a key-value pair from this map only if the key's current value matches the specified value.
 
         Args:
@@ -155,7 +148,7 @@ class MyMap(ABC, MutableMapping[KT, VT]):
         """
 
     @abstractmethod
-    def replace(self, key: KT, oldValue: VT, newValue: VT) -> bool:
+    def replaceIfPresent(self, key: KT, oldValue: VT, newValue: VT) -> bool:
         """Replaces the value for a key only if the key's current value matches the specified old value.
 
         None values are not permitted.

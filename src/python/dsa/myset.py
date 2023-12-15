@@ -10,24 +10,6 @@ class MySet(ABC, MutableSet[T]):
     `add`, and `discard`, as part of inheriting from `MutableSet`.
     """
 
-    @classmethod
-    def __subclasshook__(cls, __subclass: type) -> bool:
-        """Ensures that any subclass of this class overrides all abstract methods."""
-        methods_list = [func for func in dir(MySet) if not func.startswith("__")]
-        callable_methods = [hasattr(__subclass, func) and callable(getattr(__subclass, func)) for func in methods_list]
-        return all(callable_methods) or NotImplemented
-
-    @abstractmethod
-    def add(self, element: T) -> bool:
-        """Inserts an element into this set if it is not already there.
-
-        Args:
-            element: element to add
-
-        Returns:
-            bool: True if element was not present, False otherwise
-        """
-
     @abstractmethod
     def clear(self) -> None:
         """Empties this set of all elements."""

@@ -9,13 +9,6 @@ class MyQueue(ABC, Sized[T]):
     Any subclass also needs to override `__len__` as part of inheriting from `Sized`.
     """
 
-    @classmethod
-    def __subclasshook__(cls, __subclass: type) -> bool:
-        """Ensures that any subclass of this class overrides all abstract methods."""
-        methods_list = [func for func in dir(MyQueue) if not func.startswith("__")]
-        callable_methods = [hasattr(__subclass, func) and callable(getattr(__subclass, func)) for func in methods_list]
-        return all(callable_methods) or NotImplemented
-
     @abstractmethod
     def clear(self) -> None:
         """Empties this queue of all elements."""

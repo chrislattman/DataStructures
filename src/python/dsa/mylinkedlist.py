@@ -11,10 +11,7 @@ class MyLinkedList(MyList[T]):
         """Default constructor for this linked list."""
         self.clear()
 
-    def add(self, index: int, element: T) -> None:
-        pass
-
-    def add(self, element: T) -> None:
+    def add(self, element: T, index: int = None) -> None:
         pass
 
     def clear(self) -> None:
@@ -24,7 +21,6 @@ class MyLinkedList(MyList[T]):
     def contains(self, element: T) -> bool:
         return False
 
-    @override
     def __delitem__(self, index: int) -> None:
         """Retrieves and removes an element from this list at a specified index.
 
@@ -54,7 +50,6 @@ class MyLinkedList(MyList[T]):
     def get(self, index: int) -> T:
         return None
 
-    @override
     def __getitem__(self, index: int) -> T:
         """Retrieves, but does not remove, an element from this list at the specified index.
 
@@ -72,7 +67,6 @@ class MyLinkedList(MyList[T]):
     def indexOf(self, element: T) -> int:
         return 0
 
-    @override
     def insert(self, index: int, element: T) -> None:
         """Inserts an element at the specified index.
 
@@ -83,7 +77,7 @@ class MyLinkedList(MyList[T]):
         Raises:
             IndexError: if index is out of bounds (index must be between 0 and size(), inclusive)
         """
-        self.add(index, element)
+        self.add(element, index)
 
     def isEmpty(self) -> bool:
         return False
@@ -91,7 +85,6 @@ class MyLinkedList(MyList[T]):
     def lastIndexOf(self, element: T) -> int:
         return 0
 
-    @override
     def __len__(self) -> int:
         """Returns the number of elements in this list.
 
@@ -109,7 +102,6 @@ class MyLinkedList(MyList[T]):
     def set(self, index: int, element: T) -> T:
         return None
 
-    @override
     def __setitem__(self, index: int, element: T) -> None:
         """Inserts an element at the specified index.
 
@@ -120,7 +112,7 @@ class MyLinkedList(MyList[T]):
         Raises:
             IndexError: if index is out of bounds (index must be between 0 and size(), inclusive)
         """
-        self.add(index, element)
+        self.add(element, index)
 
     def size(self) -> int:
         return 0

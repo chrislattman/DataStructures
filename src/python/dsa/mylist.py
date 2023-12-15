@@ -10,31 +10,16 @@ class MyList(ABC, MutableSequence[T]):
     `__len__`, and `insert`, as part of inheriting from `MutableSequence`.
     """
 
-    @classmethod
-    def __subclasshook__(cls, __subclass: type) -> bool:
-        """Ensures that any subclass of this class overrides all abstract methods."""
-        methods_list = [func for func in dir(MyList) if not func.startswith("__")]
-        callable_methods = [hasattr(__subclass, func) and callable(getattr(__subclass, func)) for func in methods_list]
-        return all(callable_methods) or NotImplemented
-
     @abstractmethod
-    def add(self, index: int, element: T) -> None:
+    def add(self, element: T, index: int = None) -> None:
         """Inserts an element at the specified index.
 
         Args:
-            index (int): index to add element
-            element: element to add
+            element (T): element to add
+            index (int, optional): index to add element. Defaults to last index.
 
         Raises:
             IndexError: if index is out of bounds (index must be between 0 and size(), inclusive)
-        """
-
-    @abstractmethod
-    def add(self, element: T) -> None:
-        """Inserts an element at the end of this list.
-
-        Args:
-            element: element to add
         """
 
     @abstractmethod

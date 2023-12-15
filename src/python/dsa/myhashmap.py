@@ -41,7 +41,6 @@ class MyHashMap(MyMap[KT, VT]):
     def containsValue(self, value: VT) -> bool:
         return False
 
-    @override
     def __delitem__(self, key: KT) -> None:
         """Necessary for inheriting from `MyMap`. Calls `remove`.
 
@@ -68,7 +67,6 @@ class MyHashMap(MyMap[KT, VT]):
     def get(self, key: KT) -> VT:
         return None
 
-    @override
     def __getitem__(self, key: KT) -> VT:
         """Necessary for inheriting from `MyMap`. Calls `get`.
 
@@ -86,7 +84,6 @@ class MyHashMap(MyMap[KT, VT]):
     def isEmpty(self) -> bool:
         return False
 
-    @override
     def __iter__(self) -> Any:
         """Necessary for inheriting from `MyMap`. Returns an iterator over the keys.
 
@@ -98,7 +95,6 @@ class MyHashMap(MyMap[KT, VT]):
     def keyList(self) -> MyList[KT]:
         return None
 
-    @override
     def __len__(self) -> int:
         """Necessary for inheriting from `MyMap`. Returns the size of the hash map.
 
@@ -116,16 +112,15 @@ class MyHashMap(MyMap[KT, VT]):
     def remove(self, key: KT) -> VT:
         return None
 
-    def remove(self, key: KT, value: VT) -> bool:
+    def removeIfPresent(self, key: KT, value: VT) -> bool:
         return False
 
     def replace(self, key: KT, value: VT) -> VT:
         return None
 
-    def replace(self, key: KT, oldValue: VT, newValue: VT) -> bool:
+    def replaceIfPresent(self, key: KT, oldValue: VT, newValue: VT) -> bool:
         return False
 
-    @override
     def __setitem__(self, key: KT, value: VT) -> None:
         """Necessary for inheriting from `MyMap`. Calls `put`.
 
