@@ -164,6 +164,8 @@ class MyHashMap(MyMap[KT, VT]):
             previous or current value associated with key, or None if either key was not found, key is None,
             or newValue is None
         """
+        return None
 
     def _resizeMap(self) -> None:
         """Increases the map size and rehashes the key-value pairs when load factor has been surpassed."""
+        pass

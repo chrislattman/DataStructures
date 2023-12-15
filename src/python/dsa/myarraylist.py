@@ -154,6 +154,7 @@ class MyArrayList(MyList[T]):
 
     def _checkCapacity(self) -> None:
         """Doubles or halves the size of the internal array depending on size. Used in add and remove methods."""
+        pass
 
     def _checkIndex(self, index: int, upperBound: int) -> None:
         """Helper function for index validation.
@@ -165,3 +166,4 @@ class MyArrayList(MyList[T]):
         Raises:
             IndexError: if index is out of bounds
         """
+        pass

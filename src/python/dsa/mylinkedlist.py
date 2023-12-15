@@ -150,6 +150,7 @@ class MyLinkedList(MyList[T]):
         Raises:
             IndexError: if index is out of bounds
         """
+        pass
 
     class Node:
         def __init__(self, data: T = None) -> None:
