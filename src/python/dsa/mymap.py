@@ -88,7 +88,7 @@ class MyMap(ABC, Mapping[KT, VT]):
 
     @abstractmethod
     def keyList(self) -> MyList[KT]:
-        """Returns a c of the keys in this map.
+        """Returns a copy of the keys in this map.
 
         Returns:
             MyList: a list of the keys
@@ -155,17 +155,17 @@ class MyMap(ABC, Mapping[KT, VT]):
 
     @abstractmethod
     def replace(self, key: KT, oldValue: VT, newValue: VT) -> bool:
-        """Replaces the value for a key only if the key's current value matches the specified new value.
+        """Replaces the value for a key only if the key's current value matches the specified old value.
 
         None values are not permitted.
 
         Args:
             key: key to modify value of
-            oldValue: new value for key
+            oldValue: old value for key
             newValue: new value for key
 
         Returns:
-            bool: True if the key was found and had a value of newValue, False otherwise
+            bool: True if the key was found and had a value of oldValue, False otherwise
         """
 
     @abstractmethod

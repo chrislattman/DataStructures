@@ -137,7 +137,7 @@ class MyList(ABC, Generic[T]):
             element: new value to set existing element to
 
         Returns:
-            new value of the element at position index
+            old value of the element at position index
 
         Raises:
             IndexError: if index is out of bounds (index must be between 0 and size() - 1, inclusive)
