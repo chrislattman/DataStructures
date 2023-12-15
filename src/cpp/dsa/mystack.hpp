@@ -7,9 +7,9 @@ using namespace std;
 
 /**
  * Implementations need to be in this header file due to generic templates.
- * Otherwise you could leave method signatures here and implement the 
+ * Otherwise you could leave method signatures here and implement the
  * functions in a .cpp file like:
- * 
+ *
  * template<typename T>
  * return-type MyStack<T>::method(args) {
  *     ...
@@ -69,7 +69,7 @@ class MyStack {
 
         /// @brief Compares an object with this stack for equality.
         ///
-        /// @param object object to compare to this stack
+        /// @param stack object to compare to this stack
         /// @return true if object and this stack are equal
         bool operator==(const MyStack<T> &stack) {
             if (&stack == this) {

@@ -9,9 +9,9 @@ using namespace std;
 
 /**
  * Implementations need to be in this header file due to generic templates.
- * Otherwise you could leave method signatures here and implement the 
+ * Otherwise you could leave method signatures here and implement the
  * functions in a .cpp file like:
- * 
+ *
  * template<typename T>
  * return-type MyArrayQueue<T>::method(args) {
  *     ...
@@ -79,7 +79,7 @@ class MyArrayQueue: public MyQueue<T> {
 
         /// @brief Compares an object with this queue for equality.
         ///
-        /// @param object object to compare to this queue
+        /// @param queue object to compare to this queue
         /// @return true if object and this queue are equal
         bool operator==(const MyArrayQueue<T> &queue) const {
             if (&queue == this) {
