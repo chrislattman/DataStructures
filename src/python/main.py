@@ -6,3 +6,5 @@ arraylist.add(5)
 
 hashmap = MyHashMap[str, int]()
 hashmap.put("hello", 2)
+
+print("Hi")

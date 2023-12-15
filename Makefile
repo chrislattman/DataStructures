@@ -1,15 +1,8 @@
 SHELL=/bin/bash
 
-OS=$(shell echo `uname`)
-ifneq ($(findstring Darwin,$(OS)),)
-LIBEXT=.dylib
-else ifneq ($(findstring Linux,$(OS)),)
-LIBEXT=.so
-else # MinGW-w64 (Windows)
-LIBEXT=.dll
-endif
-
 CPP_FLAGS=-Wall -Wextra -pedantic -std=c++14
+PYTHON_FILES=$(shell echo `cd src/python/dsa; ls *.py`)
+FILES=$(basename $(PYTHON_FILES))
 
 runjava: libjava
 	javac -cp dsa.jar src/java/Main.java
@@ -42,12 +35,16 @@ docscpp:
 	doxygen Doxyfile
 
 docspy:
+	python3 -m pydoc -w src.python.dsa
+	for file in $(FILES); do \
+		python3 -m pydoc -w src.python.dsa.$$file; \
+	done
 	mkdir -p public/python
-	cd public/python; python3 -m pydoc -w ../../src/python/dsa
+	mv *.html public/python
 
 libjava:
 	javac src/java/dsa/*.java
 	cd src/java; jar -cf dsa.jar dsa/*.class; mv dsa.jar ../..
 
 clean:
-	rm -rf *.jar *$(LIBEXT) main src/java/Main.class src/java/dsa/*.class out public src/python/dsa/__pycache__
+	rm -rf *.jar main src/java/Main.class src/java/dsa/*.class out public src/python/dsa/__pycache__

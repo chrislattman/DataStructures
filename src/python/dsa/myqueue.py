@@ -73,7 +73,7 @@ class MyQueue(ABC, Generic[T]):
         """Returns an array containing all the elements in this queue.
 
         Returns:
-            List[T]: array of queue elements
+            List: array of queue elements
         """
 
     @abstractmethod

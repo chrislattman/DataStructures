@@ -67,7 +67,7 @@ class MyList(ABC, Generic[T]):
             index (int): index to retrieve element from
 
         Returns:
-            T: element found
+            element found
 
         Raises:
             IndexError: if index is out of bounds (index must be between 0 and size() - 1, inclusive)
@@ -111,7 +111,7 @@ class MyList(ABC, Generic[T]):
             index (int): index to remove element from
 
         Returns:
-            T: element found at index
+            element found at index
 
         Raises:
             IndexError: if index is out of bounds (index must be between 0 and size() - 1, inclusive)
@@ -137,7 +137,7 @@ class MyList(ABC, Generic[T]):
             element: new value to set existing element to
 
         Returns:
-            T: old value of the element at position index
+            new value of the element at position index
 
         Raises:
             IndexError: if index is out of bounds (index must be between 0 and size() - 1, inclusive)
@@ -156,7 +156,7 @@ class MyList(ABC, Generic[T]):
         """Returns an array containing all the elements in this list.
 
         Returns:
-            List[T]: array of list elements
+            List: array of list elements
         """
 
     @abstractmethod

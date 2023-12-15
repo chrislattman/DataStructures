@@ -82,7 +82,7 @@ class MySet(ABC, Generic[T]):
         """Returns an array containing all the elements in this set.
 
         Returns:
-            List[T]: array of set elements
+            List: array of set elements
         """
 
     @abstractmethod
