@@ -6,7 +6,7 @@ package dsa;
  * @param <T> data type
  */
 public class MyHashSet<T> implements MySet<T> {
-    private final MyHashMap<T, Object> map;
+    private final MyHashMap<T, Integer> map;
     private static final int defaultCapacity = 16;
     private static final float defaultLoadFactor = 0.75f;
 
@@ -42,7 +42,7 @@ public class MyHashSet<T> implements MySet<T> {
     @Override
     public boolean add(T element) {
         int currentSize = map.size();
-        map.putIfAbsent(element, new Object());
+        map.putIfAbsent(element, 0);
         int newSize = map.size();
         return currentSize != newSize;
     }
