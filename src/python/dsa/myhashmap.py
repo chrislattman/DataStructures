@@ -61,7 +61,7 @@ class MyHashMap(MyMap[KT, VT]):
 
     @override
     def __getitem__(self, key: KT) -> VT:
-        """Necessary for inheriting from Mapping. Calls `get`.
+        """Necessary for inheriting from `MyMap`. Calls `get`.
 
         Args:
             key: key to search for
@@ -79,7 +79,7 @@ class MyHashMap(MyMap[KT, VT]):
 
     @override
     def __iter__(self) -> Any:
-        """Necessary for inheriting from Mapping. Returns an iterator over the keys.
+        """Necessary for inheriting from `MyMap`. Returns an iterator over the keys.
 
         Returns:
             iterator for this hash map's keys
@@ -91,7 +91,7 @@ class MyHashMap(MyMap[KT, VT]):
 
     @override
     def __len__(self) -> int:
-        """Necessary for inheriting from Mapping. Returns the size of the hash map.
+        """Necessary for inheriting from `MyMap`. Returns the size of the hash map.
 
         Returns:
             int: size of hash map

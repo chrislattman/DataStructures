@@ -8,7 +8,7 @@ VT = TypeVar("VT")
 class MyMap(ABC, Mapping[KT, VT]):
     """Abstract base class (used as an interface) which defines methods for maps.
 
-    Any subclass also needs to override `__getitem__`, `__iter__`, and `__len__`.
+    Any subclass also needs to override `__getitem__`, `__iter__`, and `__len__`, as part of inheriting from `Mapping`.
     """
 
     @classmethod
