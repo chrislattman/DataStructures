@@ -1,10 +1,14 @@
 from abc import ABC, abstractmethod
-from typing import Any, Generic, List, TypeVar
+from typing import Any, List, MutableSequence, TypeVar
 
 T = TypeVar("T")
 
-class MyList(ABC, Generic[T]):
-    """Abstract base class (used as an interface) which defines methods for lists."""
+class MyList(ABC, MutableSequence[T]):
+    """Abstract base class (used as an interface) which defines methods for lists.
+
+    Any subclass also needs to override `__getitem__`, `__setitem__`, `__delitem__`,
+    `__len__`, and `insert`, as part of inheriting from `MutableSequence`.
+    """
 
     @classmethod
     def __subclasshook__(cls, __subclass: type) -> bool:

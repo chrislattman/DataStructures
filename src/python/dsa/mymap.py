@@ -1,14 +1,15 @@
 from abc import ABC, abstractmethod
-from typing import Any, Mapping, TypeVar
+from typing import Any, MutableMapping, TypeVar
 from .mylist import MyList
 
 KT = TypeVar("KT")
 VT = TypeVar("VT")
 
-class MyMap(ABC, Mapping[KT, VT]):
+class MyMap(ABC, MutableMapping[KT, VT]):
     """Abstract base class (used as an interface) which defines methods for maps.
 
-    Any subclass also needs to override `__getitem__`, `__iter__`, and `__len__`, as part of inheriting from `Mapping`.
+    Any subclass also needs to override `__getitem__`, `__setitem__`, `__delitem__`,
+    `__iter__`, and `__len__`, as part of inheriting from `MutableMapping`.
     """
 
     @classmethod

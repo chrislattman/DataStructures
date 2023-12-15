@@ -33,6 +33,27 @@ class MyHashSet(MySet[T]):
     def contains(self, element: T) -> bool:
         return False
 
+    @override
+    def __contains__(self, element: T) -> bool:
+        """Checks if an element is in this set.
+
+        Args:
+            element: element to check for
+
+        Returns:
+            bool: True if found, False otherwise
+        """
+        return self.contains(element)
+
+    @override
+    def discard(self, element: T) -> None:
+        """Removes an element from this set.
+
+        Args:
+            element: element to remove
+        """
+        self.remove(element)
+
     def equals(self, object: Any) -> bool:
         return False
 
@@ -50,6 +71,24 @@ class MyHashSet(MySet[T]):
 
     def isEmpty(self) -> bool:
         return False
+
+    @override
+    def __iter__(self) -> Any:
+        """Returns an iterator over the keys.
+
+        Returns:
+            iterator for this hash set
+        """
+        return iter(self._map._key_array)
+
+    @override
+    def __len__(self) -> int:
+        """Returns the number of elements in this set.
+
+        Returns:
+            int: size of set
+        """
+        return self.size()
 
     def remove(self, element: T) -> bool:
         return False

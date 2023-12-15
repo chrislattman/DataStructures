@@ -1,10 +1,14 @@
 from abc import ABC, abstractmethod
-from typing import Any, Generic, List, TypeVar
+from typing import Any, List, MutableSet, TypeVar
 
 T = TypeVar("T")
 
-class MySet(ABC, Generic[T]):
-    """Abstract base class (used as an interface) which defines methods for sets."""
+class MySet(ABC, MutableSet[T]):
+    """Abstract base class (used as an interface) which defines methods for sets.
+
+    Any subclass also needs to override `__contains__`, `__iter__`, `__len__`,
+    `add`, and `discard`, as part of inheriting from `MutableSet`.
+    """
 
     @classmethod
     def __subclasshook__(cls, __subclass: type) -> bool:

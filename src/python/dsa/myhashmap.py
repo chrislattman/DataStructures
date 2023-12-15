@@ -41,6 +41,15 @@ class MyHashMap(MyMap[KT, VT]):
     def containsValue(self, value: VT) -> bool:
         return False
 
+    @override
+    def __delitem__(self, key: KT) -> None:
+        """Necessary for inheriting from `MyMap`. Calls `remove`.
+
+        Args:
+            key: key to remove
+        """
+        self.remove(key)
+
     def equals(self, object: Any) -> bool:
         return False
 
@@ -115,6 +124,16 @@ class MyHashMap(MyMap[KT, VT]):
 
     def replace(self, key: KT, oldValue: VT, newValue: VT) -> bool:
         return False
+
+    @override
+    def __setitem__(self, key: KT, value: VT) -> None:
+        """Necessary for inheriting from `MyMap`. Calls `put`.
+
+        Args:
+            key: key to add
+            value: value associated with key
+        """
+        return self.put(key, value)
 
     def size(self) -> int:
         return 0
