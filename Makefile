@@ -5,7 +5,7 @@ ifneq ($(findstring Darwin,$(OS)),)
 LIBEXT=.dylib
 else ifneq ($(findstring Linux,$(OS)),)
 LIBEXT=.so
-else # MinGW-w64
+else # MinGW-w64 (Windows)
 LIBEXT=.dll
 endif
 
@@ -43,11 +43,11 @@ docscpp:
 
 docspy:
 	mkdir -p public/python
-	cd public/python; python3 -m pydoc -w ../../src/python/dsa/*
+	cd public/python; python3 -m pydoc -w ../../src/python/dsa
 
 libjava:
 	javac src/java/dsa/*.java
 	cd src/java; jar -cf dsa.jar dsa/*.class; mv dsa.jar ../..
 
 clean:
-	rm -rf *.jar *$(LIBEXT) main src/java/Main.class src/java/dsa/*.class out public
+	rm -rf *.jar *$(LIBEXT) main src/java/Main.class src/java/dsa/*.class out public src/python/dsa/__pycache__

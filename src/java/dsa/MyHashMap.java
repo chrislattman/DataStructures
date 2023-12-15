@@ -44,7 +44,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         if (initialCapacity < 0) {
             throw new IllegalArgumentException("Initial capacity is negative");
         }
-        if (loadFactor < 0 || Float.compare(Math.ulp(loadFactor), Float.MIN_VALUE) == 0) {
+        if (loadFactor <= 0 || Float.compare(Math.ulp(loadFactor), Float.MIN_VALUE) == 0) {
             throw new IllegalArgumentException("Load factor is nonpositive");
         }
         keys = (K[]) new Object[initialCapacity];

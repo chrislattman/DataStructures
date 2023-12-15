@@ -97,7 +97,7 @@ class MyHashMap: public MyMap<K, V> {
             if (initialCapacity < 0) {
                 throw invalid_argument("Initial capacity is negative");
             }
-            if (loadFactor < 0) {
+            if (loadFactor <= 0) {
                 throw invalid_argument("Load factor is nonpositive");
             }
             keys = new K[initialCapacity];
