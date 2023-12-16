@@ -14,7 +14,7 @@ class MyArrayList(MyList[T]):
         """Constructs an array list instance with a specified initial capacity.
 
         Args:
-            initialCapacity (int): initial capacity of this array list. Defaults to DEFAULT_CAPACITY.
+            initialCapacity (int): initial capacity of this array list. Defaults to 10.
 
         Raises:
             ValueError: if initialCapacity is negative

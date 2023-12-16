@@ -9,7 +9,7 @@ public class MyHashSet<T> implements MySet<T> {
     private final MyHashMap<T, Integer> map;
 
     /**
-     * Constructs a hash set instance with thr default initial capacity and the default load factor.
+     * Constructs a hash set instance with the default initial capacity and load factor.
      */
     public MyHashSet() {
         map = new MyHashMap<>();
