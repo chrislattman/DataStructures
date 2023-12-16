@@ -155,7 +155,7 @@ class MyHashMap(MyMap[KT, VT]):
         Args:
             key: key to add
             newValue: value to be associated with key
-            oldValue: current value to check for (existing key only), leave as null if not applicable
+            oldValue: current value to check for (existing key only), leave as None if not applicable
             addOnlyIfAbsent (bool): if false, replace current value with specified new value
             addOnlyIfKeyExists (bool): if true, only replace value if key already exists
 
