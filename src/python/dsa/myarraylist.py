@@ -36,7 +36,7 @@ class MyArrayList(MyList[T]):
         return False
 
     def __delitem__(self, index: int) -> None:
-        """Retrieves and removes an element from this list at a specified index.
+        """Retrieves and removes an element from this array list at a specified index.
 
         Args:
             index (int): index to remove element from
@@ -65,7 +65,7 @@ class MyArrayList(MyList[T]):
         return None
 
     def __getitem__(self, index: int) -> T:
-        """Retrieves, but does not remove, an element from this list at the specified index.
+        """Retrieves, but does not remove, an element from this array list at the specified index.
 
         Args:
             index (int): index to retrieve element from
@@ -100,10 +100,10 @@ class MyArrayList(MyList[T]):
         return 0
 
     def __len__(self) -> int:
-        """Returns the number of elements in this list.
+        """Returns the number of elements in this array list.
 
         Returns:
-            int: size of list
+            int: size of array list
         """
         return self.size()
 

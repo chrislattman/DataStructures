@@ -22,7 +22,7 @@ class MyHashSet(MySet[T]):
         self._map = MyHashMap[T, int](initialCapacity, loadFactor)
 
     def add(self, element: T) -> None:
-        """Inserts an element into this set if it is not already there.
+        """Inserts an element into this hash set if it is not already there.
 
         Args:
             element: element to add
@@ -36,7 +36,7 @@ class MyHashSet(MySet[T]):
         return False
 
     def __contains__(self, element: T) -> bool:
-        """Checks if an element is in this set.
+        """Checks if an element is in this hash set.
 
         Args:
             element: element to check for
@@ -47,7 +47,7 @@ class MyHashSet(MySet[T]):
         return self.contains(element)
 
     def discard(self, element: T) -> None:
-        """Removes an element from this set.
+        """Removes an element from this hash set.
 
         Args:
             element: element to remove
@@ -81,10 +81,10 @@ class MyHashSet(MySet[T]):
         return iter(self._map._key_array)
 
     def __len__(self) -> int:
-        """Returns the number of elements in this set.
+        """Returns the number of elements in this hash set.
 
         Returns:
-            int: size of set
+            int: size of hash set
         """
         return self.size()
 

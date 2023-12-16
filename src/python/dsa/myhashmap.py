@@ -150,7 +150,7 @@ class MyHashMap(MyMap[KT, VT]):
         return self.toString()
 
     def _insert(self, key: KT, newValue: VT, oldValue: VT, addOnlyIfAbsent: bool, addOnlyIfKeyExists: bool) -> VT:
-        """Internal function used to add or modify a key-value pair in this map.
+        """Internal function used to add or modify a key-value pair in this hash map.
 
         Args:
             key: key to add
@@ -166,5 +166,5 @@ class MyHashMap(MyMap[KT, VT]):
         return None
 
     def _resizeMap(self) -> None:
-        """Increases the map size and rehashes the key-value pairs when load factor has been surpassed."""
+        """Increases the hash map size and rehashes the key-value pairs when load factor has been surpassed."""
         pass

@@ -1,9 +1,9 @@
 from abc import ABC, abstractmethod
-from typing import Any, List, Sized, TypeVar
+from typing import Any, Generic, List, Sized, TypeVar
 
 T = TypeVar("T")
 
-class MyQueue(ABC, Sized[T]):
+class MyQueue(ABC, Sized, Generic[T]):
     """Abstract base class (used as an interface) which defines methods for lists.
 
     Any subclass also needs to override `__len__` as part of inheriting from `Sized`.
