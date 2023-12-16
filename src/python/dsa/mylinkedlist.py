@@ -145,6 +145,6 @@ class MyLinkedList(MyList[T]):
         pass
 
     class Node:
-        def __init__(self, data: T = None) -> None:
-            self.data = data
+        def __init__(self) -> None:
+            self.data: T = None
             self.next: MyLinkedList.Node = None
