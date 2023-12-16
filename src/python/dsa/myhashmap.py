@@ -101,7 +101,7 @@ class MyHashMap(MyMap[KT, VT]):
         Returns:
             int: size of hash map
         """
-        return self._map_size
+        return self.size()
 
     def put(self, key: KT, value: VT) -> VT:
         return None

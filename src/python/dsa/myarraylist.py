@@ -74,7 +74,7 @@ class MyArrayList(MyList[T]):
         Raises:
             IndexError: if index is out of bounds (index must be between 0 and size() - 1, inclusive)
         """
-        self.get(index)
+        return self.get(index)
 
     def indexOf(self, element: T) -> int:
         return 0
@@ -103,7 +103,7 @@ class MyArrayList(MyList[T]):
         Returns:
             int: size of list
         """
-        return self._array_size
+        return self.size()
 
     def remove(self, index: int) -> T:
         return None
