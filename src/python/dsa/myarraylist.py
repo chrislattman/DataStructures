@@ -10,16 +10,18 @@ class MyArrayList(MyList[T]):
     DEFAULT_CAPACITY = 10
     MIN_ARR_LENGTH_THRESHOLD = 100
 
-    def __init__(self, initialCapacity: int = 10) -> None:
+    def __init__(self, initialCapacity: int = None) -> None:
         """Constructs an array list instance with a specified initial capacity.
 
         Args:
-            initialCapacity (int): initial capacity of this array list
+            initialCapacity (int): initial capacity of this array list. Defaults to DEFAULT_CAPACITY.
 
         Raises:
             ValueError: if initialCapacity is negative
         """
-        if initialCapacity < 0:
+        if not initialCapacity:
+            initialCapacity = self.DEFAULT_CAPACITY
+        elif initialCapacity < 0:
             raise ValueError("Negative capacity provided.")
         self._array = [T] * initialCapacity
         self._array_size = 0

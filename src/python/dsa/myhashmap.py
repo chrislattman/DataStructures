@@ -12,7 +12,7 @@ class MyHashMap(MyMap[KT, VT]):
     DEFAULT_CAPACITY = 16
     DEFAULT_LOAD_FACTOR = 0.75
 
-    def __init__(self, initialCapacity: int = 16, loadFactor: float = 0.75) -> None:
+    def __init__(self, initialCapacity: int = None, loadFactor: float = None) -> None:
         """Constructs a hash map instance with the specified initial capacity and load factor.
 
         Args:
@@ -23,9 +23,13 @@ class MyHashMap(MyMap[KT, VT]):
         Raises:
             ValueError: if initialCapacity is negative or loadFactor is nonpositive
         """
-        if initialCapacity < 0:
+        if not initialCapacity:
+            initialCapacity = self.DEFAULT_CAPACITY
+        elif initialCapacity < 0:
             raise ValueError("Initial capacity is negative")
-        if loadFactor <= 0:
+        if not loadFactor:
+            loadFactor = self.DEFAULT_LOAD_FACTOR
+        elif loadFactor <= 0:
             raise ValueError("Load factor is nonpositive")
         self._key_array = [KT] * initialCapacity
         self._value_array = [VT] * initialCapacity

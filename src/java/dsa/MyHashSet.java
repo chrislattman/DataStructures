@@ -7,24 +7,22 @@ package dsa;
  */
 public class MyHashSet<T> implements MySet<T> {
     private final MyHashMap<T, Integer> map;
-    private static final int defaultCapacity = 16;
-    private static final float defaultLoadFactor = 0.75f;
 
     /**
-     * Constructs a hash set instance with a default initial capacity of 16 and a default load factor of 0.75.
+     * Constructs a hash set instance with thr default initial capacity and the default load factor.
      */
     public MyHashSet() {
-        this(defaultCapacity, defaultLoadFactor);
+        map = new MyHashMap<>();
     }
 
     /**
-     * Constructs a hash set instance with the specified initial capacity and a default load factor of 0.75.
+     * Constructs a hash set instance with the specified initial capacity and the default load factor.
      *
      * @param initialCapacity initial capacity of this hash set
      * @throws IllegalArgumentException if initialCapacity is negative
      */
     public MyHashSet(int initialCapacity) throws IllegalArgumentException {
-        this(initialCapacity, defaultLoadFactor);
+        map = new MyHashMap<>(initialCapacity);
     }
 
     /**

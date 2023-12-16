@@ -8,16 +8,13 @@ T = TypeVar("T")
 class MyHashSet(MySet[T]):
     """A hash set data structure built upon a hash map."""
 
-    DEFAULT_CAPACITY = 16
-    DEFAULT_LOAD_FACTOR = 0.75
-
-    def __init__(self, initialCapacity: int = 16, loadFactor: float = 0.75) -> None:
+    def __init__(self, initialCapacity: int = None, loadFactor: float = None) -> None:
         """Constructs a hash set instance with the specified initial capacity and load factor.
 
         Args:
-            initialCapacity (int, optional): initial capacity of this hash set. Defaults to 16.
+            initialCapacity (int, optional): initial capacity of this hash set
             loadFactor (float, optional): maximum value of (number of key-value pairs / number of total slots in hash set)
-            before rehashing occurs. Defaults to 0.75.
+            before rehashing occurs
 
         Raises:
             ValueError: if initialCapacity is negative or loadFactor is nonpositive
