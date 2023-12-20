@@ -7,6 +7,17 @@
 
 using namespace std;
 
+/**
+ * Implementations need to be in this header file due to generic templates.
+ * Otherwise you could leave method signatures here and implement the
+ * functions in a .cpp file like:
+ *
+ * template<typename T>
+ * return-type MyHashSet<T>::method(args) {
+ *     ...
+ * }
+ */
+
 /// @brief A hash set data structure built upon a hash map.
 ///
 /// @tparam T data type

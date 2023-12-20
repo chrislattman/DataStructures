@@ -6,6 +6,17 @@
 
 using namespace std;
 
+/**
+ * Implementations need to be in this header file due to generic templates.
+ * Otherwise you could leave method signatures here and implement the
+ * functions in a .cpp file like:
+ *
+ * template<typename K, typename V>
+ * return-type MyHashMap<K, V>::method(args) {
+ *     ...
+ * }
+ */
+
 /// @brief A hash map data structure utilizing quadratic probing (open addressing). Also called a hash table.
 ///
 /// @tparam K key data type

@@ -9,9 +9,9 @@ using namespace std;
 
 /**
  * Implementations need to be in this header file due to generic templates.
- * Otherwise you could leave method signatures here and implement the 
+ * Otherwise you could leave method signatures here and implement the
  * functions in a .cpp file like:
- * 
+ *
  * template<typename T>
  * return-type MyArrayList<T>::method(args) {
  *     ...
