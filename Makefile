@@ -1,8 +1,8 @@
 SHELL=/bin/bash
 
 CPP_FLAGS=-Wall -Wextra -pedantic -std=c++14
-PY_FILES=$(shell echo `cd src/python/dsa; ls *.py`)
-FILES=$(basename $(PY_FILES))
+# PY_FILES=$(shell echo `cd src/python/dsa; ls *.py`)
+# FILES=$(basename $(PY_FILES))
 
 runjava: libjava
 	javac -cp dsa.jar src/java/Main.java
