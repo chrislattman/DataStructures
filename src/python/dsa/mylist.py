@@ -15,7 +15,7 @@ class MyList(ABC, MutableSequence[T]):
         """Inserts an element at the specified index.
 
         Args:
-            element (T): element to add
+            element: element to add
             index (int, optional): index to add element. Defaults to last index.
 
         Raises:

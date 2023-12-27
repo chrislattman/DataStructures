@@ -35,12 +35,13 @@ docscpp:
 	doxygen Doxyfile
 
 docspy:
-	python3 -m pydoc -w src.python.dsa
-	for file in $(FILES); do \
-		python3 -m pydoc -w src.python.dsa.$$file; \
-	done
-	mkdir -p public/python
-	mv *.html public/python
+	# python3 -m pydoc -w src.python.dsa
+	# for file in $(FILES); do \
+	# 	python3 -m pydoc -w src.python.dsa.$$file; \
+	# done
+	# mkdir -p public/python
+	# mv *.html public/python
+	cd sphinx; make html
 
 libjava:
 	javac src/java/dsa/*.java

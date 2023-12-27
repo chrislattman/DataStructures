@@ -14,7 +14,7 @@ class Algorithms(Generic[T]):
 
         Args:
             mylist (List): list to search in
-            key (T): key to find
+            key: key to find
             startIndex (int, optional): index of first element to search.
             endIndex (int, optional): index of last element to search. Defaults to len(list) - 1.
 
@@ -111,9 +111,9 @@ class Algorithms(Generic[T]):
         """Finds the median of three values. Used for quicksort.
 
         Args:
-            a (T): first value
-            b (T): second value
-            c (T): third value
+            a: first value
+            b: second value
+            c: third value
 
         Returns:
             T: the median of the first, second, and third values
