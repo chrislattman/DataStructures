@@ -1,5 +1,5 @@
-# Note: this script is executed when this module (dsa) is imported
-# __all__ defines what gets imported when "from dsa import *" is ran
+# Note: this script is executed when this package (dsa) or any of its submodules is imported
+# __all__ defines what modules get imported when "from dsa import *" is ran
 __all__ = [
     "algorithms",
     "myarraylist",
