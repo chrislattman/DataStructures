@@ -33,7 +33,7 @@ class MyLinkedList(MyList[T]):
         Raises:
             IndexError: if index is out of bounds (index must be between 0 and size() - 1, inclusive)
         """
-        self.remove(index)
+        self.removeAtIndex(index)
 
     def equals(self, object: Any) -> bool:
         return False
@@ -96,7 +96,7 @@ class MyLinkedList(MyList[T]):
         """
         return self.size()
 
-    def remove(self, index: int) -> T:
+    def removeAtIndex(self, index: int) -> T:
         raise IndexError()
 
     def removeElement(self, element: T) -> bool:

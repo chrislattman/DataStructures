@@ -94,7 +94,7 @@ class MyList(ABC, MutableSequence[T]):
         """
 
     @abstractmethod
-    def remove(self, index: int) -> T:
+    def removeAtIndex(self, index: int) -> T:
         """Retrieves and removes an element from this list at a specified index.
 
         Args:

@@ -74,7 +74,7 @@ class MyHashMap(MyMap[KT, VT]):
         """
         return self.equals(object)
 
-    def get(self, key: KT) -> Optional[VT]:
+    def getValue(self, key: KT) -> Optional[VT]:
         return None
 
     def __getitem__(self, key: KT) -> Optional[VT]:
@@ -86,7 +86,7 @@ class MyHashMap(MyMap[KT, VT]):
         Returns:
             value associated with key, or None if key was not found
         """
-        return self.get(key)
+        return self.getValue(key)
 
     def getOrDefault(self, key: KT, defaultValue: VT) -> Optional[VT]:
         return None

@@ -52,7 +52,7 @@ class MyMap(ABC, MutableMapping[KT, VT]):
         """
 
     @abstractmethod
-    def get(self, key: KT) -> Optional[VT]:
+    def getValue(self, key: KT) -> Optional[VT]:
         """Returns the value associated with the specified key.
 
         Args:

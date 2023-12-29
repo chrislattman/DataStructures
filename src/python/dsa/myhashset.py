@@ -39,7 +39,7 @@ class MyHashSet(MySet[T]):
     def contains(self, element: T) -> bool:
         return False
 
-    def __contains__(self, element: T) -> bool:
+    def __contains__(self, element: object) -> bool:
         """Checks if an element is in this hash set.
 
         Args:
@@ -48,7 +48,9 @@ class MyHashSet(MySet[T]):
         Returns:
             bool: True if found, False otherwise
         """
-        return self.contains(element)
+        if isinstance(element, T):
+            return self.contains(element)
+        return False
 
     def discard(self, element: T) -> None:
         """Removes an element from this hash set.
@@ -92,7 +94,7 @@ class MyHashSet(MySet[T]):
         """
         return self.size()
 
-    def remove(self, element: T) -> bool:
+    def removeElement(self, element: T) -> bool:
         return False
 
     def size(self) -> int:

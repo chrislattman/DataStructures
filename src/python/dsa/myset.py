@@ -46,7 +46,7 @@ class MySet(ABC, MutableSet[T]):
         """
 
     @abstractmethod
-    def remove(self, element: T) -> bool:
+    def removeElement(self, element: T) -> bool:
         """Removes an element from this set.
 
         Args:
