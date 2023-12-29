@@ -1,10 +1,14 @@
-from typing import Any, TypeVar
+from typing import Any, Optional, TypeVar
+
 from typing_extensions import override
-from .mymap import MyMap
+
+from .myarraylist import MyArrayList
 from .mylist import MyList
+from .mymap import MyMap
 
 KT = TypeVar("KT")
 VT = TypeVar("VT")
+
 
 class MyHashMap(MyMap[KT, VT]):
     """A hash map data structure utilizing quadratic probing (open addressing). Also called a hash table."""
@@ -12,7 +16,9 @@ class MyHashMap(MyMap[KT, VT]):
     DEFAULT_CAPACITY = 16
     DEFAULT_LOAD_FACTOR = 0.75
 
-    def __init__(self, initialCapacity: int = None, loadFactor: float = None) -> None:
+    def __init__(
+        self, initialCapacity: Optional[int] = None, loadFactor: Optional[float] = None
+    ) -> None:
         """Constructs a hash map instance with the specified initial capacity and load factor.
 
         Args:
@@ -31,8 +37,8 @@ class MyHashMap(MyMap[KT, VT]):
             loadFactor = self.DEFAULT_LOAD_FACTOR
         elif loadFactor <= 0:
             raise ValueError("Load factor is nonpositive")
-        self._key_array = [KT] * initialCapacity
-        self._value_array = [VT] * initialCapacity
+        self._key_array = [None] * initialCapacity
+        self._value_array = [None] * initialCapacity
         self._loadFactor = loadFactor
         self._map_size = 0
 
@@ -68,10 +74,10 @@ class MyHashMap(MyMap[KT, VT]):
         """
         return self.equals(object)
 
-    def get(self, key: KT) -> VT:
+    def get(self, key: KT) -> Optional[VT]:
         return None
 
-    def __getitem__(self, key: KT) -> VT:
+    def __getitem__(self, key: KT) -> Optional[VT]:
         """Necessary for inheriting from `MyMap`. Calls `get`.
 
         Args:
@@ -82,7 +88,7 @@ class MyHashMap(MyMap[KT, VT]):
         """
         return self.get(key)
 
-    def getOrDefault(self, key: KT, defaultValue: VT) -> VT:
+    def getOrDefault(self, key: KT, defaultValue: VT) -> Optional[VT]:
         return None
 
     def isEmpty(self) -> bool:
@@ -97,7 +103,8 @@ class MyHashMap(MyMap[KT, VT]):
         return iter(self._key_array)
 
     def keyList(self) -> MyList[KT]:
-        return None
+        newlist = MyArrayList[KT]()
+        return newlist
 
     def __len__(self) -> int:
         """Necessary for inheriting from `MyMap`. Returns the size of the hash map.
@@ -107,19 +114,19 @@ class MyHashMap(MyMap[KT, VT]):
         """
         return self.size()
 
-    def put(self, key: KT, value: VT) -> VT:
+    def put(self, key: KT, value: VT) -> Optional[VT]:
         return None
 
-    def putIfAbsent(self, key: KT, value: VT) -> VT:
+    def putIfAbsent(self, key: KT, value: VT) -> Optional[VT]:
         return None
 
-    def remove(self, key: KT) -> VT:
+    def remove(self, key: KT) -> Optional[VT]:
         return None
 
     def removeIfPresent(self, key: KT, value: VT) -> bool:
         return False
 
-    def replace(self, key: KT, value: VT) -> VT:
+    def replace(self, key: KT, value: VT) -> Optional[VT]:
         return None
 
     def replaceIfPresent(self, key: KT, oldValue: VT, newValue: VT) -> bool:
@@ -132,7 +139,7 @@ class MyHashMap(MyMap[KT, VT]):
             key: key to add
             value: value associated with key
         """
-        return self.put(key, value)
+        self.put(key, value)
 
     def size(self) -> int:
         return 0
@@ -149,7 +156,14 @@ class MyHashMap(MyMap[KT, VT]):
         """
         return self.toString()
 
-    def _insert(self, key: KT, newValue: VT, oldValue: VT, addOnlyIfAbsent: bool, addOnlyIfKeyExists: bool) -> VT:
+    def _insert(
+        self,
+        key: KT,
+        newValue: VT,
+        oldValue: VT,
+        addOnlyIfAbsent: bool,
+        addOnlyIfKeyExists: bool,
+    ) -> Optional[VT]:
         """Internal function used to add or modify a key-value pair in this hash map.
 
         Args:
@@ -167,4 +181,3 @@ class MyHashMap(MyMap[KT, VT]):
 
     def _resizeMap(self) -> None:
         """Increases the hash map size and rehashes the key-value pairs when load factor has been surpassed."""
-        pass

@@ -1,14 +1,19 @@
-from typing import Any, List, TypeVar
+from typing import Any, List, Optional, TypeVar
+
 from typing_extensions import override
-from .myset import MySet
+
 from .myhashmap import MyHashMap
+from .myset import MySet
 
 T = TypeVar("T")
+
 
 class MyHashSet(MySet[T]):
     """A hash set data structure built upon a hash map."""
 
-    def __init__(self, initialCapacity: int = None, loadFactor: float = None) -> None:
+    def __init__(
+        self, initialCapacity: Optional[int] = None, loadFactor: Optional[float] = None
+    ) -> None:
         """Constructs a hash set instance with the specified initial capacity and load factor.
 
         Args:
@@ -27,7 +32,6 @@ class MyHashSet(MySet[T]):
         Args:
             element: element to add
         """
-        pass
 
     def clear(self) -> None:
         pass
@@ -95,7 +99,7 @@ class MyHashSet(MySet[T]):
         return 0
 
     def toArray(self) -> List[T]:
-        return None
+        return []
 
     def toString(self) -> str:
         return ""

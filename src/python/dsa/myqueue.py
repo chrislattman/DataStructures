@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Any, Generic, List, Sized, TypeVar
+from typing import Any, Generic, List, Optional, Sized, TypeVar
 
 T = TypeVar("T")
+
 
 class MyQueue(ABC, Sized, Generic[T]):
     """Abstract base class (used as an interface) which defines methods for lists.
@@ -41,7 +42,7 @@ class MyQueue(ABC, Sized, Generic[T]):
         """
 
     @abstractmethod
-    def peek(self) -> T:
+    def peek(self) -> Optional[T]:
         """Retrieves, but does not remove, the element at the front of this queue.
 
         Returns:
@@ -49,7 +50,7 @@ class MyQueue(ABC, Sized, Generic[T]):
         """
 
     @abstractmethod
-    def poll(self) -> T:
+    def poll(self) -> Optional[T]:
         """Retrieves and removes the element at the front of this queue.
 
         Returns:

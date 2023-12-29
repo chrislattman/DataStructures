@@ -1,8 +1,11 @@
-from typing import Any, List, TypeVar
+from typing import Any, List, Optional, TypeVar
+
 from typing_extensions import override
+
 from .myqueue import MyQueue
 
 T = TypeVar("T")
+
 
 class MyPriorityQueue(MyQueue[T]):
     """A priority queue data structure. Also called a (binary) heap."""
@@ -10,7 +13,9 @@ class MyPriorityQueue(MyQueue[T]):
     DEFAULT_CAPACITY = 11
     MIN_ARR_LENGTH_THRESHOLD = 100
 
-    def __init__(self, initialCapacity: int = None, isMinHeap: bool = True) -> None:
+    def __init__(
+        self, initialCapacity: Optional[int] = None, isMinHeap: bool = True
+    ) -> None:
         """Constructs either a min heap or a max heap with a specified initial capacity.
 
         Args:
@@ -24,7 +29,7 @@ class MyPriorityQueue(MyQueue[T]):
             initialCapacity = self.DEFAULT_CAPACITY
         elif initialCapacity < 0:
             raise ValueError("Negative capacity provided.")
-        self._array = [T] * initialCapacity
+        self._array = [None] * initialCapacity
         self._array_size = 0
         self._isMinHeap = isMinHeap
 
@@ -60,17 +65,17 @@ class MyPriorityQueue(MyQueue[T]):
     def offer(self, element: T) -> None:
         pass
 
-    def peek(self) -> T:
+    def peek(self) -> Optional[T]:
         return None
 
-    def poll(self) -> T:
+    def poll(self) -> Optional[T]:
         return None
 
     def size(self) -> int:
         return 0
 
     def toArray(self) -> List[T]:
-        return None
+        return []
 
     def toString(self) -> str:
         return ""
@@ -86,7 +91,6 @@ class MyPriorityQueue(MyQueue[T]):
 
     def _checkCapacity(self) -> None:
         """Doubles or halves the size of the internal array depending on size. Used in offer and poll methods."""
-        pass
 
     def _getBestIndex(self, leftIndex: int) -> int:
         """Returns the index of the lesser element of the internal array if this is a min heap.

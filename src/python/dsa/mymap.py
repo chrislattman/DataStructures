@@ -1,9 +1,11 @@
 from abc import ABC, abstractmethod
-from typing import Any, MutableMapping, TypeVar
+from typing import Any, MutableMapping, Optional, TypeVar
+
 from .mylist import MyList
 
 KT = TypeVar("KT")
 VT = TypeVar("VT")
+
 
 class MyMap(ABC, MutableMapping[KT, VT]):
     """Abstract base class (used as an interface) which defines methods for maps.
@@ -50,7 +52,7 @@ class MyMap(ABC, MutableMapping[KT, VT]):
         """
 
     @abstractmethod
-    def get(self, key: KT) -> VT:
+    def get(self, key: KT) -> Optional[VT]:
         """Returns the value associated with the specified key.
 
         Args:
@@ -61,7 +63,7 @@ class MyMap(ABC, MutableMapping[KT, VT]):
         """
 
     @abstractmethod
-    def getOrDefault(self, key: KT, defaultValue: VT) -> VT:
+    def getOrDefault(self, key: KT, defaultValue: VT) -> Optional[VT]:
         """Returns the value associated with the specified key, or a default value if they key was not found.
 
         Args:
@@ -89,7 +91,7 @@ class MyMap(ABC, MutableMapping[KT, VT]):
         """
 
     @abstractmethod
-    def put(self, key: KT, value: VT) -> VT:
+    def put(self, key: KT, value: VT) -> Optional[VT]:
         """Inserts a key-value pair into this map. None keys and None values are not permitted.
 
         Args:
@@ -101,7 +103,7 @@ class MyMap(ABC, MutableMapping[KT, VT]):
         """
 
     @abstractmethod
-    def putIfAbsent(self, key: KT, value: VT) -> VT:
+    def putIfAbsent(self, key: KT, value: VT) -> Optional[VT]:
         """Inserts a key-value pair into this map only if key was not found. None keys and None values are not permitted.
 
         Args:
@@ -113,7 +115,7 @@ class MyMap(ABC, MutableMapping[KT, VT]):
         """
 
     @abstractmethod
-    def remove(self, key: KT) -> VT:
+    def remove(self, key: KT) -> Optional[VT]:
         """Removes a key-value pair from this map.
 
         Args:
@@ -136,7 +138,7 @@ class MyMap(ABC, MutableMapping[KT, VT]):
         """
 
     @abstractmethod
-    def replace(self, key: KT, value: VT) -> VT:
+    def replace(self, key: KT, value: VT) -> Optional[VT]:
         """Replaces the value for a key with another value. None values are not permitted.
 
         Args:

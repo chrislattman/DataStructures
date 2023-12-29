@@ -3,6 +3,7 @@ from typing import Any, List, MutableSet, TypeVar
 
 T = TypeVar("T")
 
+
 class MySet(ABC, MutableSet[T]):
     """Abstract base class (used as an interface) which defines methods for sets.
 

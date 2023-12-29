@@ -1,8 +1,11 @@
-from typing import Any, List, TypeVar
+from typing import Any, List, Optional, TypeVar
+
 from typing_extensions import override
+
 from .mylist import MyList
 
 T = TypeVar("T")
+
 
 class MyLinkedList(MyList[T]):
     """A singly linked list data structure."""
@@ -11,7 +14,7 @@ class MyLinkedList(MyList[T]):
         """Default constructor for this linked list."""
         self.clear()
 
-    def add(self, element: T, index: int = None) -> None:
+    def add(self, element: T, index: Optional[int] = None) -> None:
         pass
 
     def clear(self) -> None:
@@ -48,7 +51,7 @@ class MyLinkedList(MyList[T]):
         return self.equals(object)
 
     def get(self, index: int) -> T:
-        return None
+        raise IndexError()
 
     def __getitem__(self, index: int) -> T:
         """Retrieves, but does not remove, an element from this linked list at the specified index.
@@ -94,13 +97,13 @@ class MyLinkedList(MyList[T]):
         return self.size()
 
     def remove(self, index: int) -> T:
-        return None
+        raise IndexError()
 
     def removeElement(self, element: T) -> bool:
         return False
 
     def set(self, index: int, element: T) -> T:
-        return None
+        raise IndexError()
 
     def __setitem__(self, index: int, element: T) -> None:
         """Inserts an element at the specified index.
@@ -118,7 +121,7 @@ class MyLinkedList(MyList[T]):
         return 0
 
     def toArray(self) -> List[T]:
-        return None
+        return []
 
     def toString(self) -> str:
         return ""
@@ -142,9 +145,8 @@ class MyLinkedList(MyList[T]):
         Raises:
             IndexError: if index is out of bounds
         """
-        pass
 
     class Node:
         def __init__(self) -> None:
-            self.data: T = None
-            self.next: MyLinkedList.Node = None
+            self.data: Optional[T] = None
+            self.next: Optional[MyLinkedList.Node] = None

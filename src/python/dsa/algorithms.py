@@ -1,13 +1,17 @@
-from typing import Generic, List, TypeVar
+from typing import Generic, List, Optional, TypeVar
+
 from .mypriorityqueue import MyPriorityQueue
 
 T = TypeVar("T")
+
 
 class Algorithms(Generic[T]):
     """Functions to search and sort lists."""
 
     @staticmethod
-    def binarySearch(mylist: List[T], key: T, startIndex: int = 0, endIndex: int = None) -> int:
+    def binarySearch(
+        mylist: List[T], key: T, startIndex: int = 0, endIndex: Optional[int] = None
+    ) -> int:
         """Performs a binary search on a list for a specified key, and returns the index of the first match found.
 
         Result is undefined for an unsorted list.
@@ -33,7 +37,7 @@ class Algorithms(Generic[T]):
             mylist (List): list to sort
         """
         size = len(mylist)
-        temp = [T] * size
+        temp = [None] * size
         for i in range(size):
             temp[i] = mylist[i]
         Algorithms._mergesort(mylist, temp, 0, size - 1)
@@ -72,7 +76,6 @@ class Algorithms(Generic[T]):
             left (int): left index
             right (int): right index
         """
-        pass
 
     @staticmethod
     def _quicksort(mylist: List[T], left: int, right: int) -> None:
@@ -101,7 +104,9 @@ class Algorithms(Generic[T]):
             int: pivot location
         """
         if right - left > 1:
-            pivot = Algorithms._findMedian(mylist[left], mylist[(left + right) / 2], mylist[right])
+            pivot = Algorithms._findMedian(
+                mylist[left], mylist[(left + right) // 2], mylist[right]
+            )
         else:
             pivot = mylist[left]
         return 0
@@ -118,4 +123,4 @@ class Algorithms(Generic[T]):
         Returns:
             T: the median of the first, second, and third values
         """
-        return None
+        return a

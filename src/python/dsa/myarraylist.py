@@ -1,8 +1,11 @@
-from typing import Any, List, TypeVar
+from typing import Any, List, Optional, TypeVar
+
 from typing_extensions import override
+
 from .mylist import MyList
 
 T = TypeVar("T")
+
 
 class MyArrayList(MyList[T]):
     """An array list data structure."""
@@ -10,7 +13,7 @@ class MyArrayList(MyList[T]):
     DEFAULT_CAPACITY = 10
     MIN_ARR_LENGTH_THRESHOLD = 100
 
-    def __init__(self, initialCapacity: int = None) -> None:
+    def __init__(self, initialCapacity: Optional[int] = None) -> None:
         """Constructs an array list instance with a specified initial capacity.
 
         Args:
@@ -23,10 +26,10 @@ class MyArrayList(MyList[T]):
             initialCapacity = self.DEFAULT_CAPACITY
         elif initialCapacity < 0:
             raise ValueError("Negative capacity provided.")
-        self._array = [T] * initialCapacity
+        self._array = [None] * initialCapacity
         self._array_size = 0
 
-    def add(self, element: T, index: int = None) -> None:
+    def add(self, element: T, index: Optional[int] = None) -> None:
         pass
 
     def clear(self) -> None:
@@ -62,7 +65,7 @@ class MyArrayList(MyList[T]):
         return self.equals(object)
 
     def get(self, index: int) -> T:
-        return None
+        raise IndexError()
 
     def __getitem__(self, index: int) -> T:
         """Retrieves, but does not remove, an element from this array list at the specified index.
@@ -108,13 +111,13 @@ class MyArrayList(MyList[T]):
         return self.size()
 
     def remove(self, index: int) -> T:
-        return None
+        raise IndexError()
 
     def removeElement(self, element: T) -> bool:
         return False
 
     def set(self, index: int, element: T) -> T:
-        return None
+        raise IndexError()
 
     def __setitem__(self, index: int, element: T) -> None:
         """Inserts an element at the specified index.
@@ -132,7 +135,7 @@ class MyArrayList(MyList[T]):
         return 0
 
     def toArray(self) -> List[T]:
-        return None
+        return []
 
     def toString(self) -> str:
         return ""
@@ -148,7 +151,6 @@ class MyArrayList(MyList[T]):
 
     def _checkCapacity(self) -> None:
         """Doubles or halves the size of the internal array depending on size. Used in add and remove methods."""
-        pass
 
     def _checkIndex(self, index: int, upperBound: int) -> None:
         """Helper function for index validation.
@@ -160,4 +162,3 @@ class MyArrayList(MyList[T]):
         Raises:
             IndexError: if index is out of bounds
         """
-        pass

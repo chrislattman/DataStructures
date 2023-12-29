@@ -16,6 +16,17 @@ runcpp:
 runpy:
 	python3 src/python/main.py
 
+lintpy:
+	autoflake -i --remove-all-unused-imports src/python/main.py
+	autoflake -i --remove-all-unused-imports src/python/dsa/*.py
+	black src/python/main.py
+	black src/python/dsa/*.py
+	isort src/python/main.py
+	isort src/python/dsa/*.py
+	pyupgrade src/python/main.py
+	pyupgrade src/python/dsa/*.py
+	mypy src/python/dsa/*.py
+
 debugjava:
 	javac -g -d out -cp src/java/dsa/*.java src/java/Main.java
 	# cd out; jdb Main
@@ -52,4 +63,4 @@ libjava:
 	cd src/java; jar -cf dsa.jar dsa/*.class; mv dsa.jar ../..
 
 clean:
-	rm -rf *.jar main src/java/Main.class src/java/dsa/*.class out public src/python/dsa/__pycache__
+	rm -rf *.jar main src/java/Main.class src/java/dsa/*.class out public src/python/dsa/__pycache__ .mypy_cache

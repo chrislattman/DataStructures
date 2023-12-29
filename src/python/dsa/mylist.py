@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Any, List, MutableSequence, TypeVar
+from typing import Any, List, MutableSequence, Optional, TypeVar
 
 T = TypeVar("T")
+
 
 class MyList(ABC, MutableSequence[T]):
     """Abstract base class (used as an interface) which defines methods for lists.
@@ -11,7 +12,7 @@ class MyList(ABC, MutableSequence[T]):
     """
 
     @abstractmethod
-    def add(self, element: T, index: int = None) -> None:
+    def add(self, element: T, index: Optional[int] = None) -> None:
         """Inserts an element at the specified index.
 
         Args:
