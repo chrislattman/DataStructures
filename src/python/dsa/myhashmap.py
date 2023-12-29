@@ -59,20 +59,20 @@ class MyHashMap(MyMap[KT, VT]):
         """
         self.remove(key)
 
-    def equals(self, object: Any) -> bool:
+    def equals(self, obj: Any) -> bool:
         return False
 
     @override
-    def __eq__(self, object: Any) -> bool:
+    def __eq__(self, obj: Any) -> bool:
         """Overrides the `__eq__` method in the `object` class. Calls `equals`.
 
         Args:
-            object (Any): object to compare to this hash map
+            obj (Any): object to compare to this hash map
 
         Returns:
             bool: result from `equals`
         """
-        return self.equals(object)
+        return self.equals(obj)
 
     def getValue(self, key: KT) -> Optional[VT]:
         return None

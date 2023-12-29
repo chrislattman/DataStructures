@@ -15,14 +15,14 @@ class MyQueue(ABC, Sized, Generic[T]):
         """Empties this queue of all elements."""
 
     @abstractmethod
-    def equals(self, object: Any) -> bool:
+    def equals(self, obj: Any) -> bool:
         """Compares an object with this queue for equality.
 
         Args:
-            object (Any): object to compare to this queue
+            obj (Any): object to compare to this queue
 
         Returns:
-            bool: True if object and this queue are equal
+            bool: True if obj and this queue are equal
         """
 
     @abstractmethod

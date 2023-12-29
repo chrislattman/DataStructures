@@ -35,20 +35,20 @@ class MyLinkedList(MyList[T]):
         """
         self.removeAtIndex(index)
 
-    def equals(self, object: Any) -> bool:
+    def equals(self, obj: Any) -> bool:
         return False
 
     @override
-    def __eq__(self, object: Any) -> bool:
+    def __eq__(self, obj: Any) -> bool:
         """Overrides the `__eq__` method in the `object` class. Calls `equals`.
 
         Args:
-            object (Any): object to compare to this linked list
+            obj (Any): object to compare to this linked list
 
         Returns:
             bool: result from `equals`
         """
-        return self.equals(object)
+        return self.equals(obj)
 
     def get(self, index: int) -> T:
         raise IndexError()

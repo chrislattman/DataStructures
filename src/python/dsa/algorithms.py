@@ -123,4 +123,4 @@ class Algorithms(Generic[T]):
         Returns:
             T: the median of the first, second, and third values
         """
-        return a
+        return b

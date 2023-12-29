@@ -39,14 +39,14 @@ class MyList(ABC, MutableSequence[T]):
         """
 
     @abstractmethod
-    def equals(self, object: Any) -> bool:
+    def equals(self, obj: Any) -> bool:
         """Compares an object with this list for equality.
 
         Args:
-            object (Any): object to compare to this list
+            obj (Any): object to compare to this list
 
         Returns:
-            bool: True if object and this list are equal
+            bool: True if obj and this list are equal
         """
 
     @abstractmethod

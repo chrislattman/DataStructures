@@ -36,20 +36,20 @@ class MyPriorityQueue(MyQueue[T]):
     def clear(self) -> None:
         pass
 
-    def equals(self, object: Any) -> bool:
+    def equals(self, obj: Any) -> bool:
         return False
 
     @override
-    def __eq__(self, object: Any) -> bool:
+    def __eq__(self, obj: Any) -> bool:
         """Overrides the `__eq__` method in the `object` class. Calls `equals`.
 
         Args:
-            object (Any): object to compare to this priority queue
+            obj (Any): object to compare to this priority queue
 
         Returns:
             bool: result from `equals`
         """
-        return self.equals(object)
+        return self.equals(obj)
 
     def isEmpty(self) -> bool:
         return False

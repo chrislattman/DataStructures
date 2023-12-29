@@ -41,14 +41,14 @@ class MyMap(ABC, MutableMapping[KT, VT]):
         """
 
     @abstractmethod
-    def equals(self, object: Any) -> bool:
+    def equals(self, obj: Any) -> bool:
         """Compares an object with this map for equality.
 
         Args:
-            object (Any): object to compare to this map
+            obj (Any): object to compare to this map
 
         Returns:
-            bool: True if object and this map are equal
+            bool: True if obj and this map are equal
         """
 
     @abstractmethod
