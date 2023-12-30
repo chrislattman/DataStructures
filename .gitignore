@@ -67,3 +67,8 @@ out/
 public/
 main
 .mypy_cache
+jacoco.exec
+bin/
+lib/
+*-coverage-report/
+.coverage

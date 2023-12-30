@@ -7,8 +7,14 @@ Collection of implemented data structures and algorithms in Java, some C++, and 
 
 The multithreading examples were taken from [`https://www.youtube.com/watch?v=d9s_d28yJq0&list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2`](https://www.youtube.com/watch?v=d9s_d28yJq0&list=PLfqABt5AS4FmuQf70psXrsMLEDQXNkLq2)
 
-Note: before building documentation for the Python code, run
+Note: before building documentation or generating code coverage for the Python code, run
 
 ```
 pip install -r requirements.txt
+```
+
+Likewise for Java, run
+
+```
+./installj.sh
 ```

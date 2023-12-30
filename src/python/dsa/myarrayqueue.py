@@ -7,20 +7,17 @@ from .myqueue import MyQueue
 T = TypeVar("T")
 
 
-class MyPriorityQueue(MyQueue[T]):
-    """A priority queue data structure. Also called a (binary) heap."""
+class MyArrayQueue(MyQueue[T]):
+    """An array queue data structure (FIFO)."""
 
-    DEFAULT_CAPACITY = 11
+    DEFAULT_CAPACITY = 16
     MIN_ARR_LENGTH_THRESHOLD = 100
 
-    def __init__(
-        self, initialCapacity: Optional[int] = None, isMinHeap: bool = True
-    ) -> None:
-        """Constructs either a min heap or a max heap with a specified initial capacity.
+    def __init__(self, initialCapacity: Optional[int] = None) -> None:
+        """Constructs an array queue instance with a specified initial capacity.
 
         Args:
-            initialCapacity (int, optional): initial capacity of this priority queue. Defaults to 11.
-            isMinHeap (bool, optional): if True, this priority queue will be a min heap; otherwise, it will be a max heap
+            initialCapacity (int): initial capacity of this array queue. Defaults to 16.
 
         Raises:
             ValueError: if initialCapacity is negative
@@ -31,7 +28,6 @@ class MyPriorityQueue(MyQueue[T]):
             raise ValueError("Negative capacity provided.")
         self._array = [None] * initialCapacity
         self._array_size = 0
-        self._isMinHeap = isMinHeap
 
     def clear(self) -> None:
         pass
@@ -44,7 +40,7 @@ class MyPriorityQueue(MyQueue[T]):
         """Overrides the `__eq__` method in the `object` class. Calls `equals`.
 
         Args:
-            obj (Any): object to compare to this priority queue
+            obj (Any): object to compare to this array queue
 
         Returns:
             bool: result from `equals`
@@ -55,10 +51,10 @@ class MyPriorityQueue(MyQueue[T]):
         return True
 
     def __len__(self) -> int:
-        """Returns the number of elements in this priority queue.
+        """Returns the number of elements in this array queue.
 
         Returns:
-            int: size of priority queue
+            int: size of array queue
         """
         return self.size()
 
@@ -91,17 +87,3 @@ class MyPriorityQueue(MyQueue[T]):
 
     def _checkCapacity(self) -> None:
         """Doubles or halves the size of the internal array depending on size. Used in offer and poll methods."""
-
-    def _getBestIndex(self, leftIndex: int) -> int:
-        """Returns the index of the lesser element of the internal array if this is a min heap.
-
-        Otherwise, returns the index of the greater element. Indices should be distinct and increasing.
-
-        Args:
-            leftIndex (int): left array index
-
-        Returns:
-            int: the index of the desired element, or -1 if: leftIndex is out of bounds, _array[leftIndex] and
-            _array[leftIndex + 1] are both None, or _array[-1] is None; in a non-None tie, left element wins
-        """
-        return -1

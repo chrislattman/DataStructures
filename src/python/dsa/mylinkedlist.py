@@ -68,7 +68,7 @@ class MyLinkedList(MyList[T]):
         return self.get(index)
 
     def indexOf(self, element: T) -> int:
-        return 0
+        return -1
 
     def insert(self, index: int, element: T) -> None:
         """Inserts an element at the specified index.
@@ -83,10 +83,10 @@ class MyLinkedList(MyList[T]):
         self.add(element, index)
 
     def isEmpty(self) -> bool:
-        return False
+        return True
 
     def lastIndexOf(self, element: T) -> int:
-        return 0
+        return -1
 
     def __len__(self) -> int:
         """Returns the number of elements in this linked list.

@@ -92,7 +92,7 @@ class MyHashMap(MyMap[KT, VT]):
         return None
 
     def isEmpty(self) -> bool:
-        return False
+        return True
 
     def __iter__(self) -> Any:
         """Necessary for inheriting from `MyMap`. Returns an iterator over the keys.

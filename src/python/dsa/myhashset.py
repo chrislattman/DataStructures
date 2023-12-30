@@ -76,7 +76,7 @@ class MyHashSet(MySet[T]):
         return self.equals(obj)
 
     def isEmpty(self) -> bool:
-        return False
+        return True
 
     def __iter__(self) -> Any:
         """Returns an iterator over the keys.

@@ -10,7 +10,12 @@ Welcome to DataStructures' documentation!
    :maxdepth: 2
    :caption: Contents:
 
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+   :caption: Packages
 
+   modules
 
 Indices and tables
 ==================
