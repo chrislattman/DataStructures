@@ -20,6 +20,14 @@ dsa.myarraylist module
    :undoc-members:
    :show-inheritance:
 
+dsa.myarrayqueue module
+-----------------------
+
+.. automodule:: dsa.myarrayqueue
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 dsa.myhashmap module
 --------------------
 
@@ -80,6 +88,14 @@ dsa.myset module
 ----------------
 
 .. automodule:: dsa.myset
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+dsa.mystack module
+------------------
+
+.. automodule:: dsa.mystack
    :members:
    :undoc-members:
    :show-inheritance:
