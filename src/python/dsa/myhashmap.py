@@ -145,7 +145,7 @@ class MyHashMap(MyMap[KT, VT]):
         return 0
 
     def toString(self) -> str:
-        return ""
+        return "{}"
 
     @override
     def __str__(self) -> str:

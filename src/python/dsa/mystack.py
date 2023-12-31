@@ -96,7 +96,7 @@ class MyStack(Generic[T]):
         Returns:
             str: string form of this stack
         """
-        return ""
+        return "[]"
 
     @override
     def __str__(self) -> str:

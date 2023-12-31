@@ -50,7 +50,7 @@ class MyArrayListTest(unittest.TestCase):
         self.assertEqual(0, self.myArrayList.size())
 
     def test_toString(self):
-        self.assertEqual("", self.myArrayList.toString())
+        self.assertEqual("[]", self.myArrayList.toString())
 
     def tearDown(self) -> None:
         return super().tearDown()

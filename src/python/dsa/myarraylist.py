@@ -138,7 +138,7 @@ class MyArrayList(MyList[T]):
         return []
 
     def toString(self) -> str:
-        return ""
+        return "[]"
 
     @override
     def __str__(self) -> str:

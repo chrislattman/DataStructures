@@ -34,7 +34,7 @@ class MyArrayQueueTest(unittest.TestCase):
         self.assertEqual(0, self.myArrayQueue.size())
 
     def test_toString(self):
-        self.assertEqual("", self.myArrayQueue.toString())
+        self.assertEqual("[]", self.myArrayQueue.toString())
 
     def tearDown(self) -> None:
         return super().tearDown()
