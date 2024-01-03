@@ -81,7 +81,7 @@ docscpp:
 docspy:
 	sphinx-apidoc -f -o sphinx src/python/dsa
 	cd sphinx; make html
-	open public/python/html/index.html
+	open public/python/html/modules.html
 
 libjava:
 	javac src/java/dsa/*.java
