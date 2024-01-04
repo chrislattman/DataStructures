@@ -18,7 +18,9 @@ using namespace std;
  * }
  */
 
-/// @brief An array list data structure.
+/// @brief An array list data structure. This class demonstrates explicit use of
+/// the `override` keyword. It should be used for all overridden methods or
+/// none of them (as is the case for the other classes).
 ///
 /// @tparam T data type
 template<typename T>
@@ -101,7 +103,7 @@ class MyArrayList: public MyList<T> {
         ///
         /// @param index index to add element
         /// @param element element to add
-        void add(int index, const T &element) {
+        void add(int index, const T &element) override {
             checkIndex(index, array_size + 1);
             checkCapacity();
             if (index < array_size) {
@@ -114,12 +116,12 @@ class MyArrayList: public MyList<T> {
         /// @brief Inserts an element at the end of this list.
         ///
         /// @param element element to add
-        void add(const T &element) {
+        void add(const T &element) override {
             add(array_size, element);
         }
 
         /// @brief Empties this list of all elements.
-        void clear() {
+        void clear() override {
             delete[] array;
             array = new T[defaultCapacity];
             array_length = defaultCapacity;
@@ -130,7 +132,7 @@ class MyArrayList: public MyList<T> {
         ///
         /// @param element element to check for
         /// @return true if found, false otherwise
-        bool contains(const T &element) const {
+        bool contains(const T &element) const override {
             for (int i = 0; i < array_size; i++) {
                 if (element == array[i]) {
                     return true;
@@ -162,7 +164,7 @@ class MyArrayList: public MyList<T> {
         ///
         /// @param index index to retrieve element from
         /// @return element found
-        T get(int index) const {
+        T get(int index) const override {
             checkIndex(index, array_size);
             return array[index];
         }
@@ -171,7 +173,7 @@ class MyArrayList: public MyList<T> {
         ///
         /// @param element element to search for
         /// @return index of the first occurrence of element, or -1 if not found
-        int indexOf(const T &element) const {
+        int indexOf(const T &element) const override {
             for (int i = 0; i < array_size; i++) {
                 if (element == array[i]) {
                     return i;
@@ -183,7 +185,7 @@ class MyArrayList: public MyList<T> {
         /// @brief Checks if this list has no elements.
         ///
         /// @return true if this list is empty, false otherwise
-        bool isEmpty() const {
+        bool isEmpty() const override {
             return array_size == 0;
         }
 
@@ -191,7 +193,7 @@ class MyArrayList: public MyList<T> {
         ///
         /// @param element element to search for
         /// @return index of the last occurrence of element, or -1 if not found
-        int lastIndexOf(const T &element) const {
+        int lastIndexOf(const T &element) const override {
             for (int i = array_size - 1; i >= 0; i--) {
                 if (element == array[i]) {
                     return i;
@@ -204,7 +206,7 @@ class MyArrayList: public MyList<T> {
         ///
         /// @param index index to remove element from
         /// @return element found at index
-        T remove(int index) {
+        T remove(int index) override {
             checkIndex(index, array_size);
             T element = array[index];
             --array_size;
@@ -217,7 +219,7 @@ class MyArrayList: public MyList<T> {
         ///
         /// @param element element to remove first occurrence of
         /// @return true if successful, false otherwise
-        bool removeElement(const T &element) {
+        bool removeElement(const T &element) override {
             for (int i = 0; i < array_size; i++) {
                 if (element == array[i]) {
                     --array_size;
@@ -234,7 +236,7 @@ class MyArrayList: public MyList<T> {
         /// @param index index to set element at
         /// @param element new value to set existing element to
         /// @return old value of the element at position index
-        T set(int index, const T &element) {
+        T set(int index, const T &element) override {
             checkIndex(index, array_size);
             T oldValue = array[index];
             array[index] = element;
@@ -244,14 +246,14 @@ class MyArrayList: public MyList<T> {
         /// @brief Returns the number of elements in this list.
         ///
         /// @return size of list
-        int size() const {
+        int size() const override {
             return array_size;
         }
 
         /// @brief Returns an array containing all the elements in this list.
         ///
         /// @return array of list elements
-        T *toArray() const {
+        T *toArray() const override {
             T *arrayCopy = new T[array_size];
             memcpy(arrayCopy, array, array_size);
             return arrayCopy;
@@ -260,7 +262,7 @@ class MyArrayList: public MyList<T> {
         /// @brief Returns a string representation of this list, e.g. "[element1, element2, element3, ..., elementN]".
         ///
         /// @return string form of this list
-        string toString() const {
+        string toString() const override {
             stringstream builder;
             builder << "[";
             int lastIndex = array_size - 1;
