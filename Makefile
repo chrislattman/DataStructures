@@ -112,7 +112,14 @@ libjava:
 	javac src/java/dsa/*.java
 	cd src/java; jar -cf dsa.jar dsa/*.class; mv dsa.jar ../..
 
+libpy:
+	pip wheel --no-deps -w dist .
+
+libts:
+	npm pack
+
 clean:
 	rm -rf *.jar main src/java/Main.class src/java/dsa/*.class out public \
 		src/python/dsa/__pycache__ test/python/dsa/__pycache__ \
-		.mypy_cache bin jacoco.exec *-coverage-report .coverage
+		.mypy_cache bin jacoco.exec *-coverage-report .coverage \
+		dist dsa.egg-info dsa-1.0.tgz

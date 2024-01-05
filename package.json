@@ -1,5 +1,7 @@
 {
   "type": "module",
+  "name": "dsa",
+  "version": "1.0",
   "dependencies": {
     "@types/node": "^20.10.6"
   },
