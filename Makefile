@@ -16,6 +16,9 @@ runcpp:
 runpy:
 	python3 src/python/main.py
 
+runts:
+	npx tsx src/typescript/main.ts
+
 lintpy:
 	autoflake -i --remove-all-unused-imports src/python/main.py
 	autoflake -i --remove-all-unused-imports src/python/dsa/*.py
@@ -31,6 +34,11 @@ lintpy:
 	pyupgrade test/python/dsa/*.py
 	mypy src/python/dsa/*.py
 
+lintts:
+	npx eslint src/typescript/main.ts || true
+	npx eslint src/typescript/dsa/*.ts || true
+	npx eslint test/typescript/dsa/*.ts
+
 coveragejava: testjava
 	rm bin/dsa/*Test.class # excluding tests from code coverage report
 	java -jar lib/org.jacoco.cli-0.8.9-nodeps.jar report jacoco.exec \
@@ -42,9 +50,14 @@ coveragepy:
 		cd test/python/dsa; coverage run -a -m unittest $$file; \
 	done
 	mv test/python/dsa/.coverage .
-	coverage html
+	coverage html --omit=*test*,*__init__*,*typing_extensions*
 	mv htmlcov python-coverage-report
 	open python-coverage-report/index.html
+
+coveragets:
+	npm run coverage
+	mv coverage typescript-coverage-report
+	open typescript-coverage-report/lcov-report/index.html
 
 testjava:
 	javac -d bin src/java/dsa/*.java
@@ -58,6 +71,9 @@ testpy:
 		cd test/python/dsa; python3 -m unittest $$file; \
 	done
 
+testts:
+	npm test
+
 debugjava:
 	javac -g -d out -cp src/java/dsa/*.java src/java/Main.java
 	# cd out; jdb Main
@@ -68,6 +84,9 @@ debugcpp:
 
 debugpy:
 	# python3 -m pdb src/python/main.py
+
+debugts:
+	# npm run debug
 
 docsjava:
 	javadoc -d public/java src/java/dsa/*.java
@@ -82,6 +101,12 @@ docspy:
 	sphinx-apidoc -f -o sphinx src/python/dsa
 	cd sphinx; make html
 	open public/python/html/modules.html
+
+docsts:
+	mkdir public
+	npx typedoc --readme none --name DataStructures src/typescript/dsa/*.ts
+	mv docs public/typescript
+	open public/typescript/index.html
 
 libjava:
 	javac src/java/dsa/*.java

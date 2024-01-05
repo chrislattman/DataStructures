@@ -1,0 +1,23 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@types/node": "^20.10.6"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.11",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "eslint": "^8.56.0",
+    "eslint-plugin-jsdoc": "^48.0.2",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "tsx": "^4.7.0",
+    "typedoc": "^0.25.6",
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "debug": "node inspect src/typescript/main.ts",
+    "test": "npx jest",
+    "coverage": "npx jest --coverage"
+  }
+}

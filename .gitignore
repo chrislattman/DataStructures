@@ -72,3 +72,5 @@ bin/
 lib/
 *-coverage-report/
 .coverage
+node_modules/
+package-lock.json
