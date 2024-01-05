@@ -32,7 +32,7 @@ class MyHashMap(MyMap[KT, VT]):
         if not initialCapacity:
             initialCapacity = self.DEFAULT_CAPACITY
         elif initialCapacity < 0:
-            raise ValueError("Initial capacity is negative")
+            raise ValueError("Negative capacity provided")
         if not loadFactor:
             loadFactor = self.DEFAULT_LOAD_FACTOR
         elif loadFactor <= 0:
@@ -156,6 +156,10 @@ class MyHashMap(MyMap[KT, VT]):
         """
         return self.toString()
 
+    def valuesList(self) -> MyList[VT]:
+        newlist = MyArrayList[VT]()
+        return newlist
+
     def _insert(
         self,
         key: KT,
@@ -170,8 +174,8 @@ class MyHashMap(MyMap[KT, VT]):
             key: key to add
             newValue: value to be associated with key
             oldValue: current value to check for (existing key only), leave as None if not applicable
-            addOnlyIfAbsent (bool): if false, replace current value with specified new value
-            addOnlyIfKeyExists (bool): if true, only replace value if key already exists
+            addOnlyIfAbsent (bool): if False, replace current value with specified new value
+            addOnlyIfKeyExists (bool): if True, only replace value if key already exists
 
         Returns:
             previous or current value associated with key, or None if either key was not found, key is None,

@@ -5,28 +5,27 @@ import { MyList } from "./mylist";
  * `public` keyword for public methods; however, it's not required.
  */
 export class MyArrayList<T> implements MyList<T> {
-    private array: Array<T>;
+    public discriminator: "LIST";
+    private array: T[];
     private array_size: number;
     private static readonly defaultCapacity = 10;
     private readonly minArrLenThreshold = 100;
 
     /**
      * Constructs an array list instance with a specified initial capacity.
-     * @param initialCapacity initial capacity of this array list. Defaults to 10.
+     * @param initialCapacity initial capacity of this array list. Defaults to
+     * 10.
      */
     constructor(initialCapacity?: number) {
         if (initialCapacity === undefined) {
             initialCapacity = MyArrayList.defaultCapacity;
+        } else if (initialCapacity < 0) {
+            throw new Error("Negative capacity provided");
         }
         this.array = new Array<T>(initialCapacity);
         this.array_size = 0;
     }
 
-    // TypeScript overload signatures
-    public add(element: T, index: number): void;
-    public add(element: T): void;
-
-    // TypeScript implementation signature
     public add(element: T, index?: number): void {
 
     }
@@ -75,7 +74,7 @@ export class MyArrayList<T> implements MyList<T> {
         return 0;
     }
 
-    public toArray(): Array<T> {
+    public toArray(): T[] {
         return new Array<T>();
     }
 
@@ -84,7 +83,8 @@ export class MyArrayList<T> implements MyList<T> {
     }
 
     /**
-     * Doubles or halves the size of the internal array depending on size. Used in add and remove methods.
+     * Doubles or halves the size of the internal array depending on size.
+     * Used in add and remove methods.
      */
     private checkCapacity(): void {
 

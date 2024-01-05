@@ -179,3 +179,11 @@ class MyMap(ABC, MutableMapping[KT, VT]):
         Returns:
             str: string form of this map
         """
+
+    @abstractmethod
+    def valuesList(self) -> MyList[VT]:
+        """Returns a copy of the values in this map.
+
+        Returns:
+            MyList: a list of the values
+        """

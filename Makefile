@@ -103,7 +103,7 @@ docspy:
 	open public/python/html/modules.html
 
 docsts:
-	mkdir public
+	mkdir -p public
 	npx typedoc --readme none --name DataStructures src/typescript/dsa/*.ts
 	mv docs public/typescript
 	open public/typescript/index.html

@@ -42,7 +42,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
      */
     public MyHashMap(int initialCapacity, float loadFactor) throws IllegalArgumentException {
         if (initialCapacity < 0) {
-            throw new IllegalArgumentException("Initial capacity is negative");
+            throw new IllegalArgumentException("Negative capacity provided");
         }
         if (loadFactor <= 0 || Float.compare(Math.ulp(loadFactor), Float.MIN_VALUE) == 0) {
             throw new IllegalArgumentException("Load factor is nonpositive");

@@ -27,7 +27,7 @@ public class MyArrayList<T> implements MyList<T> {
      */
     public MyArrayList(int initialCapacity) throws IllegalArgumentException {
         if (initialCapacity < 0) {
-            throw new IllegalArgumentException("Negative capacity provided.");
+            throw new IllegalArgumentException("Negative capacity provided");
         }
         array = (T[]) new Object[initialCapacity];
         size = 0;

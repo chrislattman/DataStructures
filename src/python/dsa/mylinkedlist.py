@@ -147,6 +147,8 @@ class MyLinkedList(MyList[T]):
         """
 
     class Node:
+        """Internal node object used by this linked list."""
+
         def __init__(self) -> None:
             self.data: Optional[T] = None
             self.next: Optional[MyLinkedList.Node] = None

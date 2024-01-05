@@ -25,7 +25,7 @@ class MyArrayList(MyList[T]):
         if not initialCapacity:
             initialCapacity = self.DEFAULT_CAPACITY
         elif initialCapacity < 0:
-            raise ValueError("Negative capacity provided.")
+            raise ValueError("Negative capacity provided")
         self._array = [None] * initialCapacity
         self._array_size = 0
 

@@ -2,18 +2,14 @@
  * Interface which defines methods for lists.
  */
 export interface MyList<T> {
+    discriminator: "LIST";
+
     /**
      * Inserts an element at the specified index.
      * @param element element to add
-     * @param index index to add element
+     * @param index index to add element. Defaults to last index.
      */
-    add(element: T, index: number): void;
-
-    /**
-     * Inserts an element at the end of this list.
-     * @param element element to add
-     */
-    add(element: T): void;
+    add(element: T, index?: number): void;
 
     /**
      * Empties this list of all elements.
@@ -35,14 +31,16 @@ export interface MyList<T> {
     equals(obj: object): boolean;
 
     /**
-     * Retrieves, but does not remove, an element from this list at the specified index.
+     * Retrieves, but does not remove, an element from this list at the
+     * specified index.
      * @param index index to retrieve element from
      * @returns element found
      */
     get(index: number): T;
 
     /**
-     * Returns the index of the first occurrence of an element found in this list.
+     * Returns the index of the first occurrence of an element found in this
+     * list.
      * @param element element to search for
      * @returns index of the first occurrence of element, or -1 if not found
      */
@@ -55,7 +53,8 @@ export interface MyList<T> {
     isEmpty(): boolean;
 
     /**
-     * Returns the index of the last occurrence of an element found in this list.
+     * Returns the index of the last occurrence of an element found in this
+     * list.
      * @param element element to search for
      * @returns index of the last occurrence of element, or -1 if not found
      */
@@ -93,10 +92,11 @@ export interface MyList<T> {
      * Returns an array containing all the elements in this list.
      * @returns array of list elements
      */
-    toArray(): Array<T>;
+    toArray(): T[];
 
     /**
-     * Returns a string representation of this list, e.g. "[element1, element2, element3, ..., elementN]".
+     * Returns a string representation of this list, e.g.
+     * "[element1, element2, element3, ..., elementN]".
      * @returns string form of this list
      */
     toString(): string;
