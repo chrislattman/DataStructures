@@ -68,7 +68,7 @@ export interface MyList<T> {
     remove(index: number): T;
 
     /**
-     * Retrieves and removes the first occurrence of an element from this list.
+     * Removes the first occurrence of an element from this list.
      * @param element element to remove first occurrence of
      * @returns true if successful, false otherwise
      */

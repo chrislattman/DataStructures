@@ -57,7 +57,7 @@ class MyList {
         /// @return element found at index
         virtual T remove(int index) = 0;
 
-        /// @brief Retrieves and removes the first occurrence of an element from this list.
+        /// @brief Removes the first occurrence of an element from this list.
         ///
         /// @param element element to remove first occurrence of
         /// @return true if successful, false otherwise

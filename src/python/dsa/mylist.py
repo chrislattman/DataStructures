@@ -109,7 +109,7 @@ class MyList(ABC, MutableSequence[T]):
 
     @abstractmethod
     def removeElement(self, element: T) -> bool:
-        """Retrieves and removes the first occurrence of an element from this list.
+        """Removes the first occurrence of an element from this list.
 
         Args:
             element: element to remove first occurrence of

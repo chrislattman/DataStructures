@@ -86,7 +86,7 @@ public interface MyList<T> {
     public T remove(int index) throws IndexOutOfBoundsException;
 
     /**
-     * Retrieves and removes the first occurrence of an element from this list.
+     * Removes the first occurrence of an element from this list.
      *
      * @param element element to remove first occurrence of
      * @return true if successful, false otherwise
