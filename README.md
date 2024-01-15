@@ -24,6 +24,8 @@ Likewise for Java, run
 ./installj.sh
 ```
 
+- A real-world Java project would use something like [Maven](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html) and conform to its requirements
+
 For TypeScript, run
 
 ```
