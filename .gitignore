@@ -78,3 +78,4 @@ dist/
 dsa.egg-info
 dsa-*.tgz
 .venv/
+build/
