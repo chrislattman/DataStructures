@@ -18,7 +18,7 @@ class MyLinkedList(MyList[T]):
         pass
 
     def clear(self) -> None:
-        self._head = self.Node()
+        self._head = self._Node()
         self._size = 0
 
     def contains(self, element: T) -> bool:
@@ -146,9 +146,9 @@ class MyLinkedList(MyList[T]):
             IndexError: if index is out of bounds
         """
 
-    class Node:
+    class _Node:
         """Internal node object used by this linked list."""
 
         def __init__(self) -> None:
             self.data: Optional[T] = None
-            self.next: Optional[MyLinkedList.Node] = None
+            self.next: Optional[MyLinkedList._Node] = None

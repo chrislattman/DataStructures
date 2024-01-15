@@ -1,5 +1,6 @@
 import { MyArrayList } from "./myarraylist";
 import { MyList } from "./mylist";
+import { MyPriorityQueue } from "./mypriorityqueue";
 
 /**
  * Functions to search and sort lists.
@@ -7,6 +8,14 @@ import { MyList } from "./mylist";
 export class Algorithms {
     // The below TypeScript overload signatures aren't functionally necessary,
     // but they make code documentation cleaner when using the methods
+
+    /**
+     * Default constructor which should not be documented.
+     * @ignore
+     */
+    constructor() {
+        // Empty constructor
+    }
 
     /**
      * Performs a binary search on a range of a list for a specified key, and
@@ -70,10 +79,7 @@ export class Algorithms {
             }
         } else {
             size = listOrArray.length;
-            temp = new Array<T>(size);
-            for (let i = 0; i < size; i++) {
-                temp[i] = listOrArray[i];
-            }
+            temp = Array.from(listOrArray);
         }
         this.internal_mergesort(listOrArray, temp, 0, size - 1);
     }
@@ -113,7 +119,28 @@ export class Algorithms {
     static heapsort<T>(array: T[]): void;
 
     static heapsort<T>(listOrArray: MyList<T> | T[]): void {
-
+        let size: number;
+        if (this.instanceOfMyList(listOrArray)) {
+            size = listOrArray.size();
+        } else {
+            size = listOrArray.length;
+        }
+        const minHeap = new MyPriorityQueue<T>(size);
+        if (this.instanceOfMyList(listOrArray)) {
+            for (let i = 0; i < size; i++) {
+                minHeap.offer(listOrArray.remove(i));
+            }
+            for (let i = 0; i < size; i++) {
+                listOrArray.add(minHeap.poll());
+            }
+        } else {
+            for (const element of listOrArray) {
+                minHeap.offer(element);
+            }
+            for (let i = 0; i < listOrArray.length; i++) {
+                listOrArray[i] = minHeap.poll();
+            }
+        }
     }
 
     /**
@@ -189,7 +216,8 @@ export class Algorithms {
      * @param obj object to check
      * @returns true if obj implements MyList, false otherwise
      */
-    private static instanceOfMyList<T>(obj: any): obj is MyList<T> { // eslint-disable-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    private static instanceOfMyList<T>(obj: any): obj is MyList<T> {
         return obj.discriminator === "LIST";
     }
 }

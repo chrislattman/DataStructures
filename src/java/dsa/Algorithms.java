@@ -5,6 +5,15 @@ package dsa;
  */
 public class Algorithms {
     /**
+     * Default constructor which should not be documented.
+     *
+     * @hidden
+     */
+    public Algorithms() {
+        // Empty constructor
+    }
+
+    /**
      * Performs a binary search on a list for a specified key, and returns the index of the first match found.
      * Result is undefined for an unsorted list.
      *
@@ -107,6 +116,7 @@ public class Algorithms {
     @SuppressWarnings("unchecked")
     public static <T extends Comparable<? super T>> void mergesort(T[] array) {
         T[] temp = (T[]) new Comparable[array.length];
+        System.arraycopy(array, 0, temp, 0, array.length);
         mergesort(array, temp, 0, array.length - 1);
     }
 
@@ -137,8 +147,8 @@ public class Algorithms {
      * @param <T> data type which much implement Comparable
      */
     public static <T extends Comparable<? super T>> void heapsort(MyList<T> list) {
-        MyPriorityQueue<T> minHeap = new MyPriorityQueue<>(list.size());
         int size = list.size();
+        MyPriorityQueue<T> minHeap = new MyPriorityQueue<>(size);
         for (int i = 0; i < size; i++) {
             minHeap.offer(list.remove(0));
         }

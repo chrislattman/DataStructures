@@ -1,5 +1,8 @@
 import { MyQueue } from "./myqueue";
 
+/**
+ * A priority queue data structure. Also called a (binary) heap.
+ */
 export class MyPriorityQueue<T> implements MyQueue<T> {
     private array: T[];
     private array_size: number;
@@ -77,7 +80,7 @@ export class MyPriorityQueue<T> implements MyQueue<T> {
      * @param leftIndex left array index
      * @returns the index of the desired element, or -1 if: leftIndex is out of
      * bounds, array[leftIndex] and array[leftIndex + 1] are both null, or
-     * array[-1] is null; in a non-null tie, left element wins
+     * array[array.length - 1] is null; in a non-null tie, left element wins
      */
     private getBestIndex(leftIndex: number): number {
         return -1;

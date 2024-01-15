@@ -22,7 +22,7 @@ class MyArrayQueue(MyQueue[T]):
         Raises:
             ValueError: if initialCapacity is negative
         """
-        if not initialCapacity:
+        if initialCapacity is None:
             initialCapacity = self.DEFAULT_CAPACITY
         elif initialCapacity < 0:
             raise ValueError("Negative capacity provided")

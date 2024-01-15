@@ -16,7 +16,7 @@ export class MyArrayList<T> implements MyList<T> {
      * @param initialCapacity initial capacity of this array list. Defaults to
      * 10.
      */
-    constructor(initialCapacity?: number) {
+    public constructor(initialCapacity?: number) {
         if (initialCapacity === undefined) {
             initialCapacity = MyArrayList.defaultCapacity;
         } else if (initialCapacity < 0) {

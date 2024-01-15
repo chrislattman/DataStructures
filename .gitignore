@@ -61,12 +61,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-.vscode
+.vscode/
 .DS_Store
 out/
 public/
 main
-.mypy_cache
+.mypy_cache/
 jacoco.exec
 bin/
 lib/
@@ -77,3 +77,4 @@ package-lock.json
 dist/
 dsa.egg-info
 dsa-*.tgz
+.venv/

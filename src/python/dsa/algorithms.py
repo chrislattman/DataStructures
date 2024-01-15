@@ -25,7 +25,7 @@ class Algorithms(Generic[T]):
         Returns:
             int: index of key in list, or -1 if key not found
         """
-        if not endIndex:
+        if endIndex is None:
             endIndex = len(mylist) - 1
         return -1
 
@@ -58,8 +58,8 @@ class Algorithms(Generic[T]):
         Args:
             mylist (List): list to sort
         """
-        minHeap = MyPriorityQueue[T](len(mylist))
         mylist_size = len(mylist)
+        minHeap = MyPriorityQueue[T](mylist_size)
         for i in range(mylist_size):
             minHeap.offer(mylist[i])
             del mylist[i]

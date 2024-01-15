@@ -10,8 +10,13 @@ The multithreading examples were taken from [`https://www.youtube.com/watch?v=d9
 Note: before building documentation or generating code coverage for the Python code, run
 
 ```
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
+
+- This creates a Python virtual environment, which indicates that all non-standard Python dependencies specific to this project be stored in the `.venv` folder, uses this folder as the default Python environment, and proceeds to download the high-level dependencies in `requirements.txt` to it
+- To leave this virtual environment, simply run `deactivate`
 
 Likewise for Java, run
 
@@ -24,3 +29,6 @@ For TypeScript, run
 ```
 npm install
 ```
+
+- The TypeScript analog to the Python `.venv` folder is called `node_modules`
+- TypeScript non-standard high-level dependencies are listed in `package.json`

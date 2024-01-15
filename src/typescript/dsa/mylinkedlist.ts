@@ -5,6 +5,7 @@ import { MyList } from "./mylist";
  */
 class Node<T> {
     data?: T;
+    // eslint-disable-next-line no-use-before-define
     next?: Node<T>;
 }
 

@@ -29,11 +29,11 @@ class MyHashMap(MyMap[KT, VT]):
         Raises:
             ValueError: if initialCapacity is negative or loadFactor is nonpositive
         """
-        if not initialCapacity:
+        if initialCapacity is None:
             initialCapacity = self.DEFAULT_CAPACITY
         elif initialCapacity < 0:
             raise ValueError("Negative capacity provided")
-        if not loadFactor:
+        if loadFactor is None:
             loadFactor = self.DEFAULT_LOAD_FACTOR
         elif loadFactor <= 0:
             raise ValueError("Load factor is nonpositive")

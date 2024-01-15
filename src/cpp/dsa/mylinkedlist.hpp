@@ -98,7 +98,6 @@ class MyLinkedList: public MyList<T> {
                 delete head;
                 head = next;
             }
-            head = nullptr;
             list_size = 0;
         }
 

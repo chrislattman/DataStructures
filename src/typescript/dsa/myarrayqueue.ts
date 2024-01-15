@@ -1,7 +1,7 @@
 import { MyQueue } from "./myqueue";
 
 /**
- * An array queue data structure.
+ * An array queue data structure (FIFO).
  */
 export class MyArrayQueue<T> implements MyQueue<T> {
     private array: T[];
