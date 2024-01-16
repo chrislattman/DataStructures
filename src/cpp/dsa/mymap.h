@@ -31,7 +31,7 @@ class MyMap {
         /// @return value associated with key, or NULL if key was not found
         virtual V get(const K &key) const = 0;
 
-        /// @brief Returns the value associated with the specified key, or a default value if they key was not found.
+        /// @brief Returns the value associated with the specified key, or a default value if the key was not found.
         ///
         /// @param key key to search for
         /// @param defaultValue value to return if key was not found in this map

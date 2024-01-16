@@ -39,7 +39,7 @@ export interface MyMap<K, V> {
 
     /**
      * Returns the value associated with the specified key, or a default value
-     * if they key was not found.
+     * if the key was not found.
      * @param key key to search for
      * @param defaultValue value to return if key was not found in this map
      * @returns value associated with key, or defaultValue if key was not found
@@ -47,7 +47,7 @@ export interface MyMap<K, V> {
     getOrDefault(key: K, defaultValue: V): V;
 
     /**
-     * Checks if this map has no elements.
+     * Checks if this map has no key-value pairs.
      * @returns true if this map is empty, false otherwise
      */
     isEmpty(): boolean;

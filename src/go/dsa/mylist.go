@@ -40,7 +40,7 @@ type MyList[T comparable] interface {
 	Remove(idx uint64) (T, error)
 
 	// RemoveElement attempts to remove element elem from a list, and reports
-	// whether the operation was successful.
+	// whether the deletion was successful.
 	RemoveElement(elem T) bool
 
 	// Set sets the existing element at index idx of a list to element elem and

@@ -29,7 +29,7 @@ export class MyLinkedList<T> implements MyList<T> {
     }
 
     clear(): void {
-        this.head = new Node<T>();
+        this.head = null;
         this.list_size = 0;
     }
 

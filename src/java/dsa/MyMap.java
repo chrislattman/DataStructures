@@ -46,7 +46,7 @@ public interface MyMap<K, V> {
     public V get(Object key);
 
     /**
-     * Returns the value associated with the specified key, or a default value if they key was not found.
+     * Returns the value associated with the specified key, or a default value if the key was not found.
      *
      * @param key key to search for
      * @param defaultValue value to return if key was not found in this map

@@ -1,13 +1,21 @@
+from abc import abstractmethod
 from typing import Any, List, Optional, TypeVar
 
-from typing_extensions import override
+from typing_extensions import Protocol, override
 
 from .myqueue import MyQueue
 
-T = TypeVar("T")
+
+class Comparable(Protocol):
+    @abstractmethod
+    def __lt__(self, other: Any) -> bool:
+        pass
 
 
-class MyPriorityQueue(MyQueue[T]):
+CT = TypeVar("CT", bound=Comparable)
+
+
+class MyPriorityQueue(MyQueue[CT]):
     """A priority queue data structure. Also called a (binary) heap."""
 
     DEFAULT_CAPACITY = 11
@@ -62,19 +70,19 @@ class MyPriorityQueue(MyQueue[T]):
         """
         return self.size()
 
-    def offer(self, element: T) -> None:
+    def offer(self, element: CT) -> None:
         pass
 
-    def peek(self) -> Optional[T]:
+    def peek(self) -> Optional[CT]:
         return None
 
-    def poll(self) -> Optional[T]:
+    def poll(self) -> Optional[CT]:
         return None
 
     def size(self) -> int:
         return 0
 
-    def toArray(self) -> List[T]:
+    def toArray(self) -> List[CT]:
         return []
 
     def toString(self) -> str:

@@ -1,43 +1,45 @@
 package dsa
 
-func BinarySearchList[T comparable](list MyList[T], key T) int {
+import "cmp"
+
+func BinarySearchList[CT cmp.Ordered](list *MyList[CT], key CT) int {
 	return -1
 }
 
-func BinarySearchListIndices[T comparable](list MyList[T], startIndex uint32,
-	endIndex uint32, key T) int {
+func BinarySearchListIndices[CT cmp.Ordered](list *MyList[CT],
+	startIndex uint32, endIndex uint32, key CT) int {
 	return -1
 }
 
-func BinarySearchArray[T comparable](array []T, key T) int {
+func BinarySearchArray[CT cmp.Ordered](array []CT, key CT) int {
 	return -1
 }
 
-func BinarySearchArrayIndices[T comparable](array []T, startIndex uint32,
-	endIndex uint32, key T) int {
+func BinarySearchArrayIndices[CT cmp.Ordered](array []CT, startIndex uint32,
+	endIndex uint32, key CT) int {
 	return -1
 }
 
-func MergesortList[T comparable](list MyList[T]) {
+func MergesortList[CT cmp.Ordered](list *MyList[CT]) {
 
 }
 
-func MergesortArray[T comparable](array []T) {
+func MergesortArray[CT cmp.Ordered](array []CT) {
 
 }
 
-func QuicksortList[T comparable](list MyList[T]) {
+func QuicksortList[CT cmp.Ordered](list *MyList[CT]) {
 
 }
 
-func QuicksortArray[T comparable](array []T) {
+func QuicksortArray[CT cmp.Ordered](array []CT) {
 
 }
 
-func HeapsortList[T comparable](list MyList[T]) {
+func HeapsortList[CT cmp.Ordered](list *MyList[CT]) {
 
 }
 
-func HeapsortArray[T comparable](array []T) {
+func HeapsortArray[CT cmp.Ordered](array []CT) {
 
 }

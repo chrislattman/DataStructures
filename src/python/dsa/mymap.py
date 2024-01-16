@@ -64,7 +64,7 @@ class MyMap(ABC, MutableMapping[KT, VT]):
 
     @abstractmethod
     def getOrDefault(self, key: KT, defaultValue: VT) -> Optional[VT]:
-        """Returns the value associated with the specified key, or a default value if they key was not found.
+        """Returns the value associated with the specified key, or a default value if the key was not found.
 
         Args:
             key: key to search for

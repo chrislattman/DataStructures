@@ -18,7 +18,7 @@ class MyLinkedList(MyList[T]):
         pass
 
     def clear(self) -> None:
-        self._head = self._Node()
+        self._head = None
         self._size = 0
 
     def contains(self, element: T) -> bool:

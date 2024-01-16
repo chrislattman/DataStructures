@@ -1,16 +1,24 @@
-from typing import Generic, List, Optional, TypeVar
+from abc import abstractmethod
+from typing import Any, Generic, List, Optional, Protocol, TypeVar
 
 from .mypriorityqueue import MyPriorityQueue
 
-T = TypeVar("T")
+
+class Comparable(Protocol):
+    @abstractmethod
+    def __lt__(self, other: Any) -> bool:
+        pass
 
 
-class Algorithms(Generic[T]):
+CT = TypeVar("CT", bound=Comparable)
+
+
+class Algorithms(Generic[CT]):
     """Functions to search and sort lists."""
 
     @staticmethod
     def binarySearch(
-        mylist: List[T], key: T, startIndex: int = 0, endIndex: Optional[int] = None
+        mylist: List[CT], key: CT, startIndex: int = 0, endIndex: Optional[int] = None
     ) -> int:
         """Performs a binary search on a list for a specified key, and returns the index of the first match found.
 
@@ -30,7 +38,7 @@ class Algorithms(Generic[T]):
         return -1
 
     @staticmethod
-    def mergesort(mylist: List[T]) -> None:
+    def mergesort(mylist: List[CT]) -> None:
         """Performs an in-memory merge sort of the list.
 
         Args:
@@ -43,7 +51,7 @@ class Algorithms(Generic[T]):
         Algorithms._mergesort(mylist, temp, 0, size - 1)
 
     @staticmethod
-    def quicksort(mylist: List[T]) -> None:
+    def quicksort(mylist: List[CT]) -> None:
         """Performs an in-memory quicksort of the list.
 
         Args:
@@ -52,14 +60,14 @@ class Algorithms(Generic[T]):
         Algorithms._quicksort(mylist, 0, len(mylist) - 1)
 
     @staticmethod
-    def heapsort(mylist: List[T]) -> None:
+    def heapsort(mylist: List[CT]) -> None:
         """Performs an in-memory heapsort of the list.
 
         Args:
             mylist (List): list to sort
         """
         mylist_size = len(mylist)
-        minHeap = MyPriorityQueue[T](mylist_size)
+        minHeap = MyPriorityQueue[CT](mylist_size)
         for i in range(mylist_size):
             minHeap.offer(mylist[i])
             del mylist[i]
@@ -67,7 +75,7 @@ class Algorithms(Generic[T]):
             mylist.append(minHeap.poll())
 
     @staticmethod
-    def _mergesort(mylist: List[T], temp: List[T], left: int, right: int) -> None:
+    def _mergesort(mylist: List[CT], temp: List[CT], left: int, right: int) -> None:
         """Internal merge sort divide and conquer function for lists.
 
         Args:
@@ -78,7 +86,7 @@ class Algorithms(Generic[T]):
         """
 
     @staticmethod
-    def _quicksort(mylist: List[T], left: int, right: int) -> None:
+    def _quicksort(mylist: List[CT], left: int, right: int) -> None:
         """Internal high level quicksort function for lists.
 
         Args:
@@ -92,7 +100,7 @@ class Algorithms(Generic[T]):
             Algorithms._quicksort(mylist, pivotIndex, right)
 
     @staticmethod
-    def _partition(mylist: List[T], left: int, right: int) -> int:
+    def _partition(mylist: List[CT], left: int, right: int) -> int:
         """Partition function for quicksort for lists.
 
         Args:
@@ -112,7 +120,7 @@ class Algorithms(Generic[T]):
         return 0
 
     @staticmethod
-    def _findMedian(a: T, b: T, c: T) -> T:
+    def _findMedian(a: CT, b: CT, c: CT) -> CT:
         """Finds the median of three values. Used for quicksort.
 
         Args:
