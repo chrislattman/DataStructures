@@ -130,8 +130,8 @@ docsts:
 
 docsgo:
 	# godoc starts a web server
-	# The documentation is located at http://127.0.0.1:6060/pkg/example.com/dsa/
-	cd src/go/dsa; godoc
+	# The documentation is located at http://127.0.0.1:8080/example.com/dsa
+	pkgsite
 
 libjava:
 	javac src/java/dsa/*.java

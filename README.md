@@ -40,7 +40,7 @@ For Go, run
 ```
 echo "export PATH=$HOME/go/bin:$PATH" >> ~/.bashrc
 source ~/.bashrc
-go install golang.org/x/tools/cmd/godoc@latest
+go install golang.org/x/pkgsite/cmd/pkgsite@latest
 cd src/go
 go mod init example.com/main
 cd dsa
