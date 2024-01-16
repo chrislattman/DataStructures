@@ -19,6 +19,9 @@ runpy:
 runts:
 	npx tsx src/typescript/main.ts
 
+rungo:
+	go run ./src/go
+
 lintpy:
 	autoflake -i --remove-all-unused-imports src/python/main.py
 	autoflake -i --remove-all-unused-imports src/python/dsa/*.py
@@ -38,6 +41,12 @@ lintts:
 	npx eslint src/typescript/main.ts || true
 	npx eslint src/typescript/dsa/*.ts || true
 	npx eslint test/typescript/dsa/*.ts
+
+lintgo:
+	gofmt -w src/go/main.go
+	gofmt -w src/go/dsa/*.go
+	go vet src/go/main.go
+	go vet src/go/dsa/*.go
 
 coveragejava: testjava
 	rm bin/dsa/*Test.class # excluding tests from code coverage report
@@ -59,6 +68,10 @@ coveragets:
 	mv coverage typescript-coverage-report
 	open typescript-coverage-report/lcov-report/index.html
 
+coveragego:
+	go test -v -coverprofile=coverage.out ./src/go/dsa
+	go tool cover -html=coverage.out
+
 testjava:
 	javac -d bin src/java/dsa/*.java
 	javac -d bin -cp bin:lib/junit-platform-console-standalone-1.9.3.jar test/java/dsa/*.java
@@ -74,6 +87,9 @@ testpy:
 testts:
 	npm test
 
+testgo:
+	go test -v ./src/go/dsa
+
 debugjava:
 	javac -g -d out -cp src/java/dsa/*.java src/java/Main.java
 	# cd out; jdb Main
@@ -86,7 +102,11 @@ debugpy:
 	# python3 -m pdb src/python/main.py
 
 debugts:
+	# Doesn't work
 	# npm run debug
+
+debuggo:
+	# dlv debug ./src/go
 
 docsjava:
 	javadoc -d public/java src/java/dsa/*.java
@@ -108,6 +128,11 @@ docsts:
 	mv docs public/typescript
 	open public/typescript/index.html
 
+docsgo:
+	# godoc starts a web server
+	# The documentation is located at http://127.0.0.1:6060/pkg/example.com/dsa/
+	cd src/go/dsa; godoc
+
 libjava:
 	javac src/java/dsa/*.java
 	cd src/java; jar -cf dsa.jar dsa/*.class; mv dsa.jar ../..
@@ -122,4 +147,4 @@ clean:
 	rm -rf *.jar main src/java/Main.class src/java/dsa/*.class out public \
 		src/python/dsa/__pycache__ test/python/dsa/__pycache__ \
 		.mypy_cache bin jacoco.exec *-coverage-report .coverage \
-		dist dsa.egg-info dsa-1.0.tgz build
+		dist dsa.egg-info dsa-1.0.tgz build coverage.out

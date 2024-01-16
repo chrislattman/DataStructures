@@ -34,3 +34,13 @@ npm install
 
 - The TypeScript analog to the Python `.venv` folder is called `node_modules`
 - TypeScript non-standard high-level dependencies are listed in `package.json`
+
+For Go, run
+
+```
+echo "export PATH=$HOME/go/bin:$PATH" >> ~/.bashrc
+source ~/.bashrc
+go install golang.org/x/tools/cmd/godoc@latest
+```
+
+- By convention, Go test files are located in the same folder as the source files
