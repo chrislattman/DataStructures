@@ -20,7 +20,9 @@ runts:
 	npx tsx src/typescript/main.ts
 
 rungo:
-	go run ./src/go
+	go build ./src/go
+	./main
+	# go run ./src/go
 
 lintpy:
 	autoflake -i --remove-all-unused-imports src/python/main.py
