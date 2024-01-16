@@ -129,7 +129,7 @@ docsts:
 	open public/typescript/index.html
 
 docsgo:
-	# godoc starts a web server
+	# pkgsite starts a local web server
 	# The documentation is located at http://127.0.0.1:8080/example.com/dsa
 	pkgsite
 
