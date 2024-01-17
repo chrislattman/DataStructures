@@ -45,7 +45,8 @@ cd src/go
 go mod init example.com/main
 cd dsa
 go mod init example.com/dsa
+cd ../../..
+go work use
 ```
 
-- You make have to update the go version in `go.work`
 - By convention, Go test files are located in the same folder as the source files
