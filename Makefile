@@ -15,7 +15,7 @@ runpy:
 	python3 src/python/main.py
 
 runts:
-	npx tsx src/typescript/main.ts
+	npm start
 
 rungo:
 	go build ./src/go
@@ -122,7 +122,7 @@ docspy:
 
 docsts:
 	mkdir -p public
-	npx typedoc --readme none --name DataStructures src/typescript/dsa/*.ts
+	npm run docs
 	mv docs public/typescript
 	open public/typescript/index.html
 

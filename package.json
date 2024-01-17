@@ -18,8 +18,10 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "debug": "node inspect src/typescript/main.ts",
+    "start": "npx tsx src/typescript/main.ts",
+    "coverage": "npx jest --coverage --verbose",
     "test": "npx jest --verbose",
-    "coverage": "npx jest --coverage --verbose"
+    "debug": "node inspect src/typescript/main.ts",
+    "docs": "npx typedoc --excludePrivate --readme none --name DataStructures src/typescript/dsa/*.ts"
   }
 }
