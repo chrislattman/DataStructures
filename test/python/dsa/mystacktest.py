@@ -1,7 +1,7 @@
 import sys
 import unittest
 
-sys.path.append("../../../src/python")
+sys.path.append("src/python")
 from dsa.mystack import MyStack
 
 

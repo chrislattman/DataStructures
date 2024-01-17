@@ -19,7 +19,7 @@
   },
   "scripts": {
     "debug": "node inspect src/typescript/main.ts",
-    "test": "npx jest",
-    "coverage": "npx jest --coverage"
+    "test": "npx jest --verbose",
+    "coverage": "npx jest --coverage --verbose"
   }
 }

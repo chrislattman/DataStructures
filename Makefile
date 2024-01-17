@@ -1,8 +1,6 @@
 SHELL=/bin/bash
 
 CPP_FLAGS=-Wall -Wextra -pedantic -std=c++14
-PY_TEST_FILES=$(shell echo `cd test/python/dsa; ls *.py`)
-FILES=$(basename $(PY_TEST_FILES))
 
 runjava: libjava
 	javac -cp dsa.jar src/java/Main.java
@@ -57,10 +55,7 @@ coveragejava: testjava
 	open java-coverage-report/index.html
 
 coveragepy:
-	for file in $(FILES); do \
-		cd test/python/dsa; coverage run -a -m unittest $$file; \
-	done
-	mv test/python/dsa/.coverage .
+	coverage run -a -m unittest discover -v -s test/python/dsa -p "*test.py"
 	coverage html --omit=*test*,*__init__*,*typing_extensions*
 	mv htmlcov python-coverage-report
 	open python-coverage-report/index.html
@@ -72,6 +67,9 @@ coveragets:
 
 coveragego:
 	go test -v -coverprofile=coverage.out ./src/go/dsa
+	grep -v "test_helpers" coverage.out > coverage.out.bak
+	rm coverage.out
+	mv coverage.out.bak coverage.out
 	go tool cover -html=coverage.out
 
 testjava:
@@ -82,9 +80,7 @@ testjava:
 		--class-path=bin --scan-classpath --fail-if-no-tests
 
 testpy:
-	for file in $(FILES); do \
-		cd test/python/dsa; python3 -m unittest $$file; \
-	done
+	python3 -m unittest discover -v -s test/python/dsa -p "*test.py"
 
 testts:
 	npm test
