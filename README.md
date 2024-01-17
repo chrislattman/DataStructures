@@ -15,8 +15,10 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-- This creates a Python virtual environment, which indicates that all non-standard Python dependencies specific to this project be stored in the `.venv` folder, uses this folder as the default Python environment, and proceeds to download the high-level dependencies in `requirements.txt` to it
+- This creates a Python virtual environment, which indicates that all non-standard Python dependencies specific to this project be stored in the `.venv` folder, uses this folder as the default Python environment, and proceeds to download the dependencies in `requirements.txt` to it
+- `requirements.in` contains the primary non-standard dependencies, whereas `requirements.txt`, which is updated with `pip-compile`, contains all non-standard dependencies
 - To leave this virtual environment, simply run `deactivate`
+- Other Python projects use [build](https://build.pypa.io/en/stable/) which use `pyproject.toml` files
 
 Likewise for Java, run
 
@@ -33,7 +35,7 @@ npm install
 ```
 
 - The TypeScript analog to the Python `.venv` folder is called `node_modules`
-- TypeScript non-standard high-level dependencies are listed in `package.json`
+- TypeScript non-standard primary dependencies are listed in `package.json`, whereas all dependencies are located in `package-lock.json`, which is updated with `npm update`
 
 For Go, run
 

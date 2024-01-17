@@ -73,9 +73,6 @@ lib/
 *-coverage-report/
 .coverage
 node_modules/
-package-lock.json
 dist/
-dsa.egg-info
 dsa-*.tgz
 .venv/
-build/

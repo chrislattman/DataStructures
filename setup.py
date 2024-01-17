@@ -3,5 +3,6 @@ from setuptools import setup, find_packages
 setup(
     name="dsa",
     version="1.0",
-    packages = find_packages("src/python/dsa")
+    packages = find_packages("src/python"),
+    package_dir={"": "src/python"}
 )
