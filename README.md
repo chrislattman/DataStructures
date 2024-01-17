@@ -49,4 +49,5 @@ cd ../../..
 go work use
 ```
 
+- The specific versions of non-standard dependencies for a Go package are listed in the package's `go.mod` file
 - By convention, Go test files are located in the same folder as the source files
