@@ -2,6 +2,14 @@
   "type": "module",
   "name": "dsa",
   "version": "1.0",
+  "files": ["src/typescript/dsa/*.ts"],
+  "scripts": {
+    "start": "npx tsx src/typescript/main.ts",
+    "coverage": "npx jest --coverage --verbose",
+    "test": "npx jest --verbose",
+    "debug": "node inspect src/typescript/main.ts",
+    "docs": "npx typedoc --excludePrivate --readme none --name DataStructures src/typescript/dsa/*.ts"
+  },
   "dependencies": {
     "@types/node": "^20.10.6"
   },
@@ -16,12 +24,5 @@
     "tsx": "^4.7.0",
     "typedoc": "^0.25.6",
     "typescript": "^5.3.3"
-  },
-  "scripts": {
-    "start": "npx tsx src/typescript/main.ts",
-    "coverage": "npx jest --coverage --verbose",
-    "test": "npx jest --verbose",
-    "debug": "node inspect src/typescript/main.ts",
-    "docs": "npx typedoc --excludePrivate --readme none --name DataStructures src/typescript/dsa/*.ts"
   }
 }
