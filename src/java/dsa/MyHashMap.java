@@ -1,62 +1,92 @@
 package dsa;
 
 /**
- * A hash map data structure utilizing quadratic probing (open addressing). Also called a hash table.
+ * A hash map data structure utilizing quadratic probing (open addressing). Also
+ * called a hash table.
  *
  * @param <K> key data type
  * @param <V> value data type
  */
 @SuppressWarnings("unchecked")
 public class MyHashMap<K, V> implements MyMap<K, V> {
+    /**
+     * Internal key array used by this hash map.
+     */
     private K[] keys;
-    private V[] values;
-    private int size;
-    private final float loadFactor;
-    private static final int defaultCapacity = 16;
-    private static final float defaultLoadFactor = 0.75f;
 
     /**
-     * Constructs a hash map instance with a default initial capacity of 16 and a default load factor of 0.75.
+     * Interval value array used by this hash map.
+     */
+    private V[] values;
+
+    /**
+     * Number of key-value pairs in hash map.
+     */
+    private int size;
+
+    /**
+     * Ratio at which hash map is rehashed.
+     */
+    private final float loadFactor;
+
+    /**
+     * Default capacity for a hash map.
+     */
+    private static final int DEFAULT_CAPACITY = 16;
+
+    /**
+     * Default load factor for a hash map.
+     */
+    private static final float DEFAULT_LOAD_FACTOR = 0.75f;
+
+    /**
+     * Constructs a hash map instance with a default initial capacity of 16 and
+     * a default load factor of 0.75.
      */
     public MyHashMap() {
-        this(defaultCapacity, defaultLoadFactor);
+        this(DEFAULT_CAPACITY, DEFAULT_LOAD_FACTOR);
     }
 
     /**
-     * Constructs a hash map instance with the specified initial capacity and a default load factor of 0.75.
+     * Constructs a hash map instance with the specified initial capacity and a
+     * default load factor of 0.75.
      *
      * @param initialCapacity initial capacity of this hash map
      * @throws IllegalArgumentException if initialCapacity is negative
      */
     public MyHashMap(int initialCapacity) throws IllegalArgumentException {
-        this(initialCapacity, defaultLoadFactor);
+        this(initialCapacity, DEFAULT_LOAD_FACTOR);
     }
 
     /**
-     * Constructs a hash map instance with the specified initial capacity and load factor.
+     * Constructs a hash map instance with the specified initial capacity and
+     * load factor.
      *
      * @param initialCapacity initial capacity of this hash map
-     * @param loadFactor maximum value of (number of key-value pairs / number of total slots in hash map) before
-     *                   rehashing occurs
-     * @throws IllegalArgumentException if initialCapacity is negative or loadFactor is nonpositive
+     * @param inputLoadFactor maximum value of (number of key-value pairs /
+     * number of total slots in hash map) before rehashing occurs
+     * @throws IllegalArgumentException if initialCapacity is negative or
+     * loadFactor is nonpositive
      */
-    public MyHashMap(int initialCapacity, float loadFactor) throws IllegalArgumentException {
+    public MyHashMap(int initialCapacity, float inputLoadFactor)
+        throws IllegalArgumentException {
         if (initialCapacity < 0) {
             throw new IllegalArgumentException("Negative capacity provided");
         }
-        if (loadFactor <= 0 || Float.compare(Math.ulp(loadFactor), Float.MIN_VALUE) == 0) {
+        if (inputLoadFactor <= 0 || Float.compare(Math.ulp(inputLoadFactor),
+            Float.MIN_VALUE) == 0) {
             throw new IllegalArgumentException("Load factor is nonpositive");
         }
         keys = (K[]) new Object[initialCapacity];
         values = (V[]) new Object[initialCapacity];
-        this.loadFactor = loadFactor;
+        loadFactor = inputLoadFactor;
         size = 0;
     }
 
     @Override
     public void clear() {
-        keys = (K[]) new Object[defaultCapacity];
-        values = (V[]) new Object[defaultCapacity];
+        keys = (K[]) new Object[DEFAULT_CAPACITY];
+        values = (V[]) new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 
@@ -89,9 +119,9 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         if (obj.size() != size) {
             return false;
         }
-        MyList<?> keys = obj.keyList();
-        MyList<?> values = obj.values();
-        return keys.equals(keyList()) && values.equals(values());
+        MyList<?> objKeys = obj.keyList();
+        MyList<?> objValues = obj.values();
+        return objKeys.equals(keyList()) && objValues.equals(values());
     }
 
     @Override
@@ -107,7 +137,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         int mapLength = keys.length;
         int hash = key.hashCode();
         for (int i = 0; i < mapLength; i++) {
-            int mapIndex = (hash + i*i) % mapLength;
+            int mapIndex = (hash + i * i) % mapLength;
             K currentKey = keys[mapIndex];
             if (key.equals(currentKey)) {
                 return values[mapIndex];
@@ -117,6 +147,11 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
             }
         }
         return defaultValue;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     @Override
@@ -153,7 +188,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         int mapLength = keys.length;
         int hash = key.hashCode();
         for (int i = 0; i < mapLength; i++) {
-            int mapIndex = (hash + i*i) % mapLength;
+            int mapIndex = (hash + i * i) % mapLength;
             K currentKey = keys[mapIndex];
             if (key.equals(currentKey)) {
                 keys[mapIndex] = null;
@@ -175,7 +210,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         int mapLength = keys.length;
         int hash = key.hashCode();
         for (int i = 0; i < mapLength; i++) {
-            int mapIndex = (hash + i*i) % mapLength;
+            int mapIndex = (hash + i * i) % mapLength;
             K currentKey = keys[mapIndex];
             V currentValue = values[mapIndex];
             if (key.equals(currentKey) && value.equals(currentValue)) {
@@ -238,13 +273,17 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
      *
      * @param key key to add
      * @param newValue value to be associated with key
-     * @param oldValue current value to check for (existing key only), leave as null if not applicable
-     * @param addOnlyIfAbsent if false, replace current value with specified new value
-     * @param addOnlyIfKeyExists if true, only replace value if key already exists
-     * @return previous or current value associated with key, or null if either key was not found, key is null,
-     * or newValue is null
+     * @param oldValue current value to check for (existing key only), leave as
+     * null if not applicable
+     * @param addOnlyIfAbsent if false, replace current value with specified new
+     * value
+     * @param addOnlyIfKeyExists if true, only replace value if key already
+     * exists
+     * @return previous or current value associated with key, or null if either
+     * key was not found, key is null, or newValue is null
      */
-    private V insert(K key, V newValue, V oldValue, boolean addOnlyIfAbsent, boolean addOnlyIfKeyExists) {
+    private V insert(K key, V newValue, V oldValue, boolean addOnlyIfAbsent,
+        boolean addOnlyIfKeyExists) {
         if (key == null || newValue == null) {
             return null;
         }
@@ -253,11 +292,12 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
             clear();
         } else if ((float) size > loadFactor * mapLength) {
             resizeMap();
-            return insert(key, newValue, oldValue, addOnlyIfAbsent, addOnlyIfKeyExists);
+            return insert(key, newValue, oldValue, addOnlyIfAbsent,
+                addOnlyIfKeyExists);
         }
         int hash = key.hashCode();
         for (int i = 0; i < mapLength; i++) {
-            int mapIndex = (hash + i*i) % mapLength;
+            int mapIndex = (hash + i * i) % mapLength;
             K currentKey = keys[mapIndex];
             if (currentKey == null) {
                 if (!addOnlyIfKeyExists) {
@@ -269,7 +309,8 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
             }
             if (currentKey.equals(key)) {
                 V previous = values[mapIndex];
-                if ((oldValue == null || oldValue.equals(previous)) && !addOnlyIfAbsent) {
+                if ((oldValue == null || oldValue.equals(previous))
+                    && !addOnlyIfAbsent) {
                     values[mapIndex] = newValue;
                 } else if (oldValue != null) {
                     return null;
@@ -279,11 +320,13 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
         }
         // Needed if loadFactor == 1
         resizeMap();
-        return insert(key, newValue, oldValue, addOnlyIfAbsent, addOnlyIfKeyExists);
+        return insert(key, newValue, oldValue, addOnlyIfAbsent,
+            addOnlyIfKeyExists);
     }
 
     /**
-     * Increases the map size and rehashes the key-value pairs when load factor has been surpassed.
+     * Increases the map size and rehashes the key-value pairs when load factor
+     * has been surpassed.
      */
     private void resizeMap() {
         K[] keysCopy = (K[]) new Object[keys.length];

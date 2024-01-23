@@ -6,7 +6,14 @@ package dsa;
  * @param <T> data type
  */
 public class MyLinkedList<T> implements MyList<T> {
+    /**
+     * Internal head node used by this linked list.
+     */
     private Node head;
+
+    /**
+     * Number of connected nodes in this linked list.
+     */
     private int size;
 
     /**
@@ -94,6 +101,11 @@ public class MyLinkedList<T> implements MyList<T> {
             current = current.next;
         }
         return current.data;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     @Override
@@ -212,7 +224,8 @@ public class MyLinkedList<T> implements MyList<T> {
      * @param upperBound value that index must be strictly less than
      * @throws IndexOutOfBoundsException if index is out of bounds
      */
-    private void checkIndex(int index, int upperBound) throws IndexOutOfBoundsException {
+    private void checkIndex(int index, int upperBound)
+        throws IndexOutOfBoundsException {
         if (index < 0 || index >= upperBound) {
             throw new IndexOutOfBoundsException("Index is out of bounds");
         }
@@ -222,7 +235,14 @@ public class MyLinkedList<T> implements MyList<T> {
      * Internal node object used by this linked list.
      */
     private class Node {
-        T data = null;
-        Node next = null;
+        /**
+         * Data stored in this node.
+         */
+        private T data = null;
+
+        /**
+         * Node following this node.
+         */
+        private Node next = null;
     }
 }

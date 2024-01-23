@@ -6,9 +6,22 @@ package dsa;
  * @param <K> key data type which much implement Comparable
  * @param <V> value data type
  */
-public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V> {
+public class MyTreeMap<K extends Comparable<? super K>, V>
+    implements MyMap<K, V> {
+    /**
+     * Internal root node used by this tree map.
+     */
     private Node root;
+
+    /**
+     * Number of connected nodes in this tree map.
+     */
     private int size;
+
+    /**
+     * The previous value associated with a key for an insertion or removal
+     * operation.
+     */
     private V previousValue;
 
     /**
@@ -19,7 +32,8 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
     }
 
     /**
-     * Returns the least key greater than or equal to the given key, or null if no such key exists.
+     * Returns the least key greater than or equal to the given key, or null if
+     * no such key exists.
      *
      * @param key key to reference
      * @return ceiling key
@@ -89,7 +103,8 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
     }
 
     /**
-     * Returns the greatest key less than or equal to the given key, or null if no such key exists.
+     * Returns the greatest key less than or equal to the given key, or null if
+     * no such key exists.
      *
      * @param key key to reference
      * @return floor key
@@ -121,8 +136,14 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
         return value;
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
     /**
-     * Returns the least key strictly greater than the given key, or null if no such key exists.
+     * Returns the least key strictly greater than the given key, or null if no
+     * such key exists.
      *
      * @param key key to reference
      * @return next greater key
@@ -168,7 +189,8 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
     }
 
     /**
-     * Returns the greatest key strictly less than the given key, or null if no such key exists.
+     * Returns the greatest key strictly less than the given key, or null if no
+     * such key exists.
      *
      * @param key key to reference
      * @return greatest prior key
@@ -279,7 +301,8 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
     }
 
     /**
-     * Performs an in-order traversal of the nodes in this tree map and stores the found keys in a list.
+     * Performs an in-order traversal of the nodes in this tree map and stores
+     * the found keys in a list.
      *
      * @param node current node
      * @param list list to add keys to
@@ -293,7 +316,8 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
     }
 
     /**
-     * Performs an in-order traversal of the nodes in this tree map and stores the found values in a list.
+     * Performs an in-order traversal of the nodes in this tree map and stores
+     * the found values in a list.
      *
      * @param node current node
      * @param list list to add values to
@@ -351,12 +375,16 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
      * @param node current node
      * @param key key to add
      * @param newValue value to be associated with key
-     * @param oldValue current value to check for (existing key only), leave as null if not applicable
-     * @param addOnlyIfAbsent if false, replace current value with specified new value
-     * @param addOnlyIfKeyExists if true, only replace value if key already exists
+     * @param oldValue current value to check for (existing key only), leave as
+     * null if not applicable
+     * @param addOnlyIfAbsent if false, replace current value with specified new
+     * value
+     * @param addOnlyIfKeyExists if true, only replace value if key already
+     * exists
      * @return root node
      */
-    private Node insert(Node node, K key, V newValue, V oldValue, boolean addOnlyIfAbsent, boolean addOnlyIfKeyExists) {
+    private Node insert(Node node, K key, V newValue, V oldValue,
+        boolean addOnlyIfAbsent, boolean addOnlyIfKeyExists) {
         if (node == null && !addOnlyIfKeyExists) {
             ++size;
             node = new Node();
@@ -369,16 +397,19 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
 
         if (key.equals(node.key)) {
             previousValue = node.value;
-            if ((oldValue == null || oldValue.equals(previousValue)) && !addOnlyIfAbsent) {
+            if ((oldValue == null || oldValue.equals(previousValue))
+                && !addOnlyIfAbsent) {
                 node.value = newValue;
             } else if (oldValue != null) {
                 previousValue = null;
             }
             return node;
         } else if (key.compareTo(node.key) < 0) {
-            node.left = insert(node.left, key, newValue, oldValue, addOnlyIfAbsent, addOnlyIfKeyExists);
+            node.left = insert(node.left, key, newValue, oldValue,
+                addOnlyIfAbsent, addOnlyIfKeyExists);
         } else {
-            node.right = insert(node.right, key, newValue, oldValue, addOnlyIfAbsent, addOnlyIfKeyExists);
+            node.right = insert(node.right, key, newValue, oldValue,
+                addOnlyIfAbsent, addOnlyIfKeyExists);
         }
 
         node.balanceFactor = height(node.left) - height(node.right);
@@ -405,7 +436,8 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
             node.left = delete(node.left, key, value);
         } else if (key.compareTo(node.key) > 0) {
             node.right = delete(node.right, key, value);
-        } else if (key.equals(node.key) && (value == null || value.equals(node.value))) {
+        } else if (key.equals(node.key)
+                   && (value == null || value.equals(node.value))) {
             if (node.left == null) {
                 previousValue = node.value;
                 --size;
@@ -505,9 +537,30 @@ public class MyTreeMap<K extends Comparable<? super K>, V> implements MyMap<K, V
      * Internal node object used by this tree map.
      */
     private class Node {
-        K key = null;
-        V value = null;
-        Node left = null, right = null;
-        int balanceFactor = 0;
+        /**
+         * Key for this node.
+         */
+        private K key = null;
+
+        /**
+         * Value associated with key.
+         */
+        private V value = null;
+
+        /**
+         * Left leaf/child node of this node.
+         */
+        private Node left = null;
+
+        /**
+         * Right leaf/child node of this node.
+         */
+        private Node right = null;
+
+        /**
+         * Difference in height between left subtree and right subtree of this
+         * node.
+         */
+        private int balanceFactor = 0;
     }
 }

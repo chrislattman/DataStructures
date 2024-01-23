@@ -6,29 +6,29 @@ package dsa;
 public class Algorithms {
     /**
      * Default constructor which should not be documented.
-     *
-     * @hidden
      */
-    public Algorithms() {
+    private Algorithms() {
         // Empty constructor
     }
 
     /**
-     * Performs a binary search on a list for a specified key, and returns the index of the first match found.
-     * Result is undefined for an unsorted list.
+     * Performs a binary search on a list for a specified key, and returns the
+     * index of the first match found. Result is undefined for an unsorted list.
      *
      * @param list list to search in
      * @param key key to find
      * @return index of key in list, or -1 if key not found
      * @param <T> data type which much implement Comparable
      */
-    public static <T extends Comparable<? super T>> int binarySearch(MyList<T> list, T key) {
+    public static <T extends Comparable<? super T>> int binarySearch(
+        MyList<T> list, T key) {
         return binarySearch(list, 0, list.size() - 1, key);
     }
 
     /**
-     * Performs a binary search on a range of a list for a specified key, and returns the index of the first match found.
-     * Result is undefined for an unsorted list.
+     * Performs a binary search on a range of a list for a specified key, and
+     * returns the index of the first match found. Result is undefined for an
+     * unsorted list.
      *
      * @param list list to search in
      * @param startIndex index of first element to search
@@ -37,7 +37,8 @@ public class Algorithms {
      * @return index of key in array, or -1 if key not found
      * @param <T> data type which much implement Comparable
      */
-    public static <T extends Comparable<? super T>> int binarySearch(MyList<T> list, int startIndex, int endIndex, T key) {
+    public static <T extends Comparable<? super T>> int binarySearch(
+        MyList<T> list, int startIndex, int endIndex, T key) {
         while (startIndex <= endIndex) {
             int mid = (startIndex + endIndex) / 2;
             T current = list.get(mid);
@@ -53,21 +54,24 @@ public class Algorithms {
     }
 
     /**
-     * Performs a binary search on an array for a specified key, and returns the index of the first match found.
-     * Result is undefined for an unsorted array.
+     * Performs a binary search on an array for a specified key, and returns the
+     * index of the first match found. Result is undefined for an unsorted
+     * array.
      *
      * @param array array to search in
      * @param key key to find
      * @return index of key in array, or -1 if key not found
      * @param <T> data type which much implement Comparable
      */
-    public static <T extends Comparable<? super T>> int binarySearch(T[] array, T key) {
+    public static <T extends Comparable<? super T>> int binarySearch(
+        T[] array, T key) {
         return binarySearch(array, 0, array.length - 1, key);
     }
 
     /**
-     * Performs a binary search on a range of an array for a specified key, and returns the index of the first match found.
-     * Result is undefined for an unsorted array.
+     * Performs a binary search on a range of an array for a specified key, and
+     * returns the index of the first match found. Result is undefined for an
+     * unsorted array.
      *
      * @param array array to search in
      * @param startIndex index of first element to search
@@ -77,7 +81,8 @@ public class Algorithms {
      * @param <T> data type which much implement Comparable
      * @throws IllegalArgumentException if array is not sorted
      */
-    public static <T extends Comparable<? super T>> int binarySearch(T[] array, int startIndex, int endIndex, T key) {
+    public static <T extends Comparable<? super T>> int binarySearch(
+        T[] array, int startIndex, int endIndex, T key) {
         while (startIndex <= endIndex) {
             int mid = (startIndex + endIndex) / 2;
             T current = array[mid];
@@ -98,7 +103,8 @@ public class Algorithms {
      * @param list list to sort
      * @param <T> data type which much implement Comparable
      */
-    public static <T extends Comparable<? super T>> void mergesort(MyList<T> list) {
+    public static <T extends Comparable<? super T>> void mergesort(
+        MyList<T> list) {
         int size = list.size();
         MyArrayList<T> temp = new MyArrayList<>(size);
         for (int i = 0; i < size; i++) {
@@ -126,7 +132,8 @@ public class Algorithms {
      * @param list list to sort
      * @param <T> data type which much implement Comparable
      */
-    public static <T extends Comparable<? super T>> void quicksort(MyList<T> list) {
+    public static <T extends Comparable<? super T>> void quicksort(
+        MyList<T> list) {
         quicksort(list, 0, list.size() - 1);
     }
 
@@ -146,7 +153,8 @@ public class Algorithms {
      * @param list list to sort
      * @param <T> data type which much implement Comparable
      */
-    public static <T extends Comparable<? super T>> void heapsort(MyList<T> list) {
+    public static <T extends Comparable<? super T>> void heapsort(
+        MyList<T> list) {
         int size = list.size();
         MyPriorityQueue<T> minHeap = new MyPriorityQueue<>(size);
         for (int i = 0; i < size; i++) {
@@ -182,7 +190,8 @@ public class Algorithms {
      * @param right right index
      * @param <T> data type which much implement Comparable
      */
-    private static <T extends Comparable<? super T>> void mergesort(MyList<T> list, MyList<T> temp, int left, int right) {
+    private static <T extends Comparable<? super T>> void mergesort(
+        MyList<T> list, MyList<T> temp, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
             mergesort(list, temp, left, mid);
@@ -193,7 +202,8 @@ public class Algorithms {
             int counter = left;
 
             while (leftPointer <= mid && rightPointer <= right) {
-                if (list.get(leftPointer).compareTo(list.get(rightPointer)) <= 0) {
+                if (list.get(leftPointer).compareTo(
+                    list.get(rightPointer)) <= 0) {
                     temp.set(counter++, list.get(leftPointer++));
                 } else {
                     temp.set(counter++, list.get(rightPointer++));
@@ -225,7 +235,8 @@ public class Algorithms {
      * @param right right index
      * @param <T> data type which much implement Comparable
      */
-    private static <T extends Comparable<? super T>> void mergesort(T[] array, T[] temp, int left, int right) {
+    private static <T extends Comparable<? super T>> void mergesort(
+        T[] array, T[] temp, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
             mergesort(array, temp, left, mid);
@@ -264,7 +275,8 @@ public class Algorithms {
      * @param right right index
      * @param <T> data type which much implement Comparable
      */
-    private static <T extends Comparable<? super T>> void quicksort(MyList<T> list, int left, int right) {
+    private static <T extends Comparable<? super T>> void quicksort(
+        MyList<T> list, int left, int right) {
         if (left < right) {
             int pivotIndex = partition(list, left, right);
             quicksort(list, left, pivotIndex - 1);
@@ -281,10 +293,15 @@ public class Algorithms {
      * @return pivot location
      * @param <T> data type which much implement Comparable
      */
-    private static <T extends Comparable<? super T>> int partition(MyList<T> list, int left, int right) {
+    private static <T extends Comparable<? super T>> int partition(
+        MyList<T> list, int left, int right) {
         T pivot;
         if (right - left > 1) {
-            pivot = findMedian(list.get(left), list.get((left + right) / 2), list.get(right));
+            pivot = findMedian(
+                list.get(left),
+                list.get((left + right) / 2),
+                list.get(right)
+            );
         } else {
             pivot = list.get(left);
         }
@@ -315,7 +332,8 @@ public class Algorithms {
      * @param right right index
      * @param <T> data type which much implement Comparable
      */
-    private static <T extends Comparable<? super T>> void quicksort(T[] array, int left, int right) {
+    private static <T extends Comparable<? super T>> void quicksort(
+        T[] array, int left, int right) {
         if (left < right) {
             int pivotIndex = partition(array, left, right);
             quicksort(array, left, pivotIndex - 1);
@@ -332,10 +350,15 @@ public class Algorithms {
      * @return pivot location
      * @param <T> data type which much implement Comparable
      */
-    private static <T extends Comparable<? super T>> int partition(T[] array, int left, int right) {
+    private static <T extends Comparable<? super T>> int partition(
+        T[] array, int left, int right) {
         T pivot;
         if (right - left > 1) {
-            pivot = findMedian(array[left], array[(left + right) / 2], array[right]);
+            pivot = findMedian(
+                array[left],
+                array[(left + right) / 2],
+                array[right]
+            );
         } else {
             pivot = array[left];
         }
@@ -367,7 +390,8 @@ public class Algorithms {
      * @return the median of the first, second, and third values
      * @param <T> data type which much implement Comparable
      */
-    private static <T extends Comparable<? super T>> T findMedian(T a, T b, T c) {
+    private static <T extends Comparable<? super T>> T findMedian(
+        T a, T b, T c) {
         boolean aLEb = a.compareTo(b) <= 0;
         boolean bLEc = b.compareTo(c) <= 0;
         boolean aLEc = a.compareTo(c) <= 0;

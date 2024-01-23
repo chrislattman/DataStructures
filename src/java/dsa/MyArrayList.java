@@ -7,16 +7,31 @@ package dsa;
  */
 @SuppressWarnings("unchecked")
 public class MyArrayList<T> implements MyList<T> {
+    /**
+     * Internal array used by this array list.
+     */
     private T[] array;
+
+    /**
+     * Number of elements in internal array.
+     */
     private int size;
-    private static final int defaultCapacity = 10;
+
+    /**
+     * Default capacity for an array list.
+     */
+    private static final int DEFAULT_CAPACITY = 10;
+
+    /**
+     * Size at which the internal array should be shrunk if it is too sparse.
+     */
     private final int minArrLenThreshold = 100;
 
     /**
      * Constructs an array list instance with a default initial capacity of 10.
      */
     public MyArrayList() {
-        this(defaultCapacity);
+        this(DEFAULT_CAPACITY);
     }
 
     /**
@@ -51,7 +66,7 @@ public class MyArrayList<T> implements MyList<T> {
 
     @Override
     public void clear() {
-        array = (T[]) new Object[defaultCapacity];
+        array = (T[]) new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 
@@ -91,6 +106,11 @@ public class MyArrayList<T> implements MyList<T> {
     public T get(int index) throws IndexOutOfBoundsException {
         checkIndex(index, size);
         return array[index];
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     @Override
@@ -176,16 +196,18 @@ public class MyArrayList<T> implements MyList<T> {
     }
 
     /**
-     * Doubles or halves the size of the internal array depending on size. Used in add and remove methods.
+     * Doubles or halves the size of the internal array depending on size. Used
+     * in add and remove methods.
      */
     private void checkCapacity() {
         if (array.length == 0) {
-            array = (T[]) new Object[defaultCapacity];
+            array = (T[]) new Object[DEFAULT_CAPACITY];
         } else if (size == array.length) {
             T[] newArray = (T[]) new Object[size * 2];
             System.arraycopy(array, 0, newArray, 0, size);
             array = newArray;
-        } else if (array.length > minArrLenThreshold && size * 2 < array.length) {
+        } else if (array.length > minArrLenThreshold
+            && size * 2 < array.length) {
             T[] newArray = (T[]) new Object[size / 2];
             System.arraycopy(array, 0, newArray, 0, size);
             array = newArray;
@@ -199,7 +221,8 @@ public class MyArrayList<T> implements MyList<T> {
      * @param upperBound value that index must be strictly less than
      * @throws IndexOutOfBoundsException if index is out of bounds
      */
-    private void checkIndex(int index, int upperBound) throws IndexOutOfBoundsException {
+    private void checkIndex(int index, int upperBound)
+        throws IndexOutOfBoundsException {
         if (index < 0 || index >= upperBound) {
             throw new IndexOutOfBoundsException("Index is out of bounds");
         }

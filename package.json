@@ -5,6 +5,7 @@
   "files": ["src/typescript/dsa/*.ts"],
   "scripts": {
     "start": "npx tsx src/typescript/main.ts",
+    "lint": "npx eslint **/*.ts",
     "coverage": "npx jest --coverage --verbose",
     "test": "npx jest --verbose",
     "debug": "node inspect src/typescript/main.ts",

@@ -7,16 +7,31 @@ package dsa;
  */
 @SuppressWarnings("unchecked")
 public class MyArrayQueue<T> implements MyQueue<T> {
+    /**
+     * Internal array used by this array queue.
+     */
     private T[] array;
+
+    /**
+     * Number of elements in internal array.
+     */
     private int size;
-    private static final int defaultCapacity = 16;
+
+    /**
+     * Default capacity for an array queue.
+     */
+    private static final int DEFAULT_CAPACITY = 16;
+
+    /**
+     * Size at which the internal array should be shrunk if it is too sparse.
+     */
     private final int minArrLenThreshold = 100;
 
     /**
      * Constructs an array queue instance with a default initial capacity of 16.
      */
     public MyArrayQueue() {
-        this(defaultCapacity);
+        this(DEFAULT_CAPACITY);
     }
 
     /**
@@ -35,7 +50,7 @@ public class MyArrayQueue<T> implements MyQueue<T> {
 
     @Override
     public void clear() {
-        array = (T[]) new Object[defaultCapacity];
+        array = (T[]) new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 
@@ -60,6 +75,11 @@ public class MyArrayQueue<T> implements MyQueue<T> {
             }
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     @Override
@@ -123,16 +143,18 @@ public class MyArrayQueue<T> implements MyQueue<T> {
     }
 
     /**
-     * Doubles or halves the size of the internal array depending on size. Used in offer and poll methods.
+     * Doubles or halves the size of the internal array depending on size. Used
+     * in offer and poll methods.
      */
     private void checkCapacity() {
         if (array.length == 0) {
-            array = (T[]) new Object[defaultCapacity];
+            array = (T[]) new Object[DEFAULT_CAPACITY];
         } else if (size == array.length) {
             T[] newArray = (T[]) new Object[size * 2];
             System.arraycopy(array, 0, newArray, 0, size);
             array = newArray;
-        } else if (array.length > minArrLenThreshold && size * 2 < array.length) {
+        } else if (array.length > minArrLenThreshold
+            && size * 2 < array.length) {
             T[] newArray = (T[]) new Object[size / 2];
             System.arraycopy(array, 0, newArray, 0, size);
             array = newArray;

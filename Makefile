@@ -22,6 +22,12 @@ rungo:
 	./main
 	# go run ./src/go
 
+lintjava:
+	java -jar lib/checkstyle-10.12.7-all.jar -c lib/checks.xml src/java/dsa
+
+lintcpp:
+	cppcheck --std=c++14 --language=c++ src/cpp src/cpp/dsa/*.h*
+
 lintpy:
 	autoflake -i --remove-all-unused-imports src/python/main.py
 	autoflake -i --remove-all-unused-imports src/python/dsa/*.py
@@ -38,9 +44,7 @@ lintpy:
 	mypy src/python/dsa/*.py
 
 lintts:
-	npx eslint src/typescript/main.ts || true
-	npx eslint src/typescript/dsa/*.ts || true
-	npx eslint test/typescript/dsa/*.ts
+	npm run lint
 
 lintgo:
 	gofmt -w src/go/main.go
@@ -74,7 +78,8 @@ coveragego:
 
 testjava:
 	javac -d bin src/java/dsa/*.java
-	javac -d bin -cp bin:lib/junit-platform-console-standalone-1.9.3.jar test/java/dsa/*.java
+	javac -d bin -cp bin:lib/junit-platform-console-standalone-1.9.3.jar \
+		test/java/dsa/*.java
 	java -javaagent:lib/org.jacoco.agent-0.8.9-runtime.jar \
 		-jar lib/junit-platform-console-standalone-1.9.3.jar \
 		--class-path=bin --scan-classpath --fail-if-no-tests

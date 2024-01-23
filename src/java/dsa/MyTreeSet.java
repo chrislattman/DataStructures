@@ -6,6 +6,9 @@ package dsa;
  * @param <T> data type which much implement Comparable
  */
 public class MyTreeSet<T extends Comparable<? super T>> implements MySet<T> {
+    /**
+     * Internal tree map used by this tree set.
+     */
     private final MyTreeMap<T, Object> map;
 
     /**
@@ -24,7 +27,8 @@ public class MyTreeSet<T extends Comparable<? super T>> implements MySet<T> {
     }
 
     /**
-     * Returns the least element greater than or equal to the given element, or null if no such element exists.
+     * Returns the least element greater than or equal to the given element, or
+     * null if no such element exists.
      *
      * @param element element to reference
      * @return ceiling element
@@ -78,7 +82,8 @@ public class MyTreeSet<T extends Comparable<? super T>> implements MySet<T> {
     }
 
     /**
-     * Returns the greatest element less than or equal to the given element, or null if no such element exists.
+     * Returns the greatest element less than or equal to the given element, or
+     * null if no such element exists.
      *
      * @param element element to reference
      * @return floor element
@@ -87,8 +92,14 @@ public class MyTreeSet<T extends Comparable<? super T>> implements MySet<T> {
         return map.floorKey(element);
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
     /**
-     * Returns the least element strictly greater than the given element, or null if no such element exists.
+     * Returns the least element strictly greater than the given element, or
+     * null if no such element exists.
      *
      * @param element element to reference
      * @return next greater element
@@ -112,7 +123,8 @@ public class MyTreeSet<T extends Comparable<? super T>> implements MySet<T> {
     }
 
     /**
-     * Returns the greatest element strictly less than the given element, or null if no such element exists.
+     * Returns the greatest element strictly less than the given element, or
+     * null if no such element exists.
      *
      * @param element element to reference
      * @return greatest prior element

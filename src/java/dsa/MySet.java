@@ -12,12 +12,12 @@ public interface MySet<T> {
      * @param element element to add
      * @return true if element was not present, false otherwise
      */
-    public boolean add(T element);
+     boolean add(T element);
 
     /**
      * Empties this set of all elements.
      */
-    public void clear();
+     void clear();
 
     /**
      * Checks if an element is in this set.
@@ -25,7 +25,7 @@ public interface MySet<T> {
      * @param element element to check for
      * @return true if found, false otherwise
      */
-    public boolean contains(Object element);
+     boolean contains(Object element);
 
     /**
      * Compares an object with this set for equality.
@@ -34,14 +34,22 @@ public interface MySet<T> {
      * @return true if object and this set are equal
      */
     @Override
-    public boolean equals(Object object);
+     boolean equals(Object object);
+
+    /**
+     * Returns the Object class-generated hash code of this set.
+     *
+     * @return hash code of this set
+     */
+    @Override
+     int hashCode();
 
     /**
      * Checks if this set has no elements.
      *
      * @return true if this set is empty, false otherwise
      */
-    public boolean isEmpty();
+     boolean isEmpty();
 
     /**
      * Removes an element from this set.
@@ -49,27 +57,28 @@ public interface MySet<T> {
      * @param element element to remove
      * @return true if element found, false otherwise
      */
-    public boolean remove(Object element);
+     boolean remove(Object element);
 
     /**
      * Returns the number of elements in this set.
      *
      * @return size of set
      */
-    public int size();
+     int size();
 
     /**
      * Returns an array containing all the elements in this set.
      *
      * @return array of set elements
      */
-    public Object[] toArray();
+     Object[] toArray();
 
     /**
-     * Returns a string representation of this set, e.g. "[element1, element2, element3, ..., elementN]".
+     * Returns a string representation of this set, e.g.
+     * "[element1, element2, element3, ..., elementN]".
      *
      * @return string form of this set
      */
     @Override
-    public String toString();
+     String toString();
 }

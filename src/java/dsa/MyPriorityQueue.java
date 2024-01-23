@@ -6,18 +6,38 @@ package dsa;
  * @param <T> data type which much implement Comparable
  */
 @SuppressWarnings("unchecked")
-public class MyPriorityQueue<T extends Comparable<? super T>> implements MyQueue<T> {
+public class MyPriorityQueue<T extends Comparable<? super T>>
+    implements MyQueue<T> {
+    /**
+     * Internal array used by this priority queue.
+     */
     private T[] array;
+
+    /**
+     * Number of elements in internal array.
+     */
     private int size;
+
+    /**
+     * Whether this priority queue is backed by a min heap or a max heap.
+     */
     private final boolean isMinHeap;
-    private static final int defaultCapacity = 11;
+
+    /**
+     * Default capacity for a priority queue.
+     */
+    private static final int DEFAULT_CAPACITY = 11;
+
+    /**
+     * Size at which the internal array should be shrunk if it is too sparse.
+     */
     private final int minArrLenThreshold = 100;
 
     /**
      * Constructs a min heap with a default initial capacity of 11.
      */
     public MyPriorityQueue() {
-        this(defaultCapacity, true);
+        this(DEFAULT_CAPACITY, true);
     }
 
     /**
@@ -26,38 +46,44 @@ public class MyPriorityQueue<T extends Comparable<? super T>> implements MyQueue
      * @param initialCapacity initial capacity of this priority queue
      * @throws IllegalArgumentException if initialCapacity is negative
      */
-    public MyPriorityQueue(int initialCapacity) throws IllegalArgumentException {
+    public MyPriorityQueue(int initialCapacity)
+        throws IllegalArgumentException {
         this(initialCapacity, true);
     }
 
     /**
-     * Constructs either a min heap or max heap with a default initial capacity of 11.
+     * Constructs either a min heap or max heap with a default initial capacity
+     * of 11.
      *
-     * @param isMinHeap if true, this priority queue will be a min heap; otherwise, it will be a max heap
+     * @param inputIsMinHeap if true, this priority queue will be a min heap;
+     * otherwise, it will be a max heap
      */
-    public MyPriorityQueue(boolean isMinHeap) {
-        this(defaultCapacity, isMinHeap);
+    public MyPriorityQueue(boolean inputIsMinHeap) {
+        this(DEFAULT_CAPACITY, inputIsMinHeap);
     }
 
     /**
-     * Constructs either a min heap or a max heap with a specified initial capacity.
+     * Constructs either a min heap or a max heap with a specified initial
+     * capacity.
      *
      * @param initialCapacity initial capacity of this priority queue
-     * @param isMinHeap if true, this priority queue will be a min heap; otherwise, it will be a max heap
+     * @param inputIsMinHeap if true, this priority queue will be a min heap;
+     * otherwise, it will be a max heap
      * @throws IllegalArgumentException if initialCapacity is negative
      */
-    public MyPriorityQueue(int initialCapacity, boolean isMinHeap) throws IllegalArgumentException {
+    public MyPriorityQueue(int initialCapacity, boolean inputIsMinHeap)
+        throws IllegalArgumentException {
         if (initialCapacity < 0) {
             throw new IllegalArgumentException("Negative capacity provided");
         }
         array = (T[]) new Comparable[initialCapacity];
         size = 0;
-        this.isMinHeap = isMinHeap;
+        this.isMinHeap = inputIsMinHeap;
     }
 
     @Override
     public void clear() {
-        array = (T[]) new Comparable[defaultCapacity];
+        array = (T[]) new Comparable[DEFAULT_CAPACITY];
         size = 0;
     }
 
@@ -85,6 +111,11 @@ public class MyPriorityQueue<T extends Comparable<? super T>> implements MyQueue
     }
 
     @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
@@ -107,7 +138,8 @@ public class MyPriorityQueue<T extends Comparable<? super T>> implements MyQueue
                 }
                 parentIndex /= 2;
                 T parent = array[parentIndex];
-                if (isMinHeap && element.compareTo(parent) < 0 || !isMinHeap && element.compareTo(parent) > 0) {
+                if (isMinHeap && element.compareTo(parent) < 0
+                    || !isMinHeap && element.compareTo(parent) > 0) {
                     array[parentIndex] = element;
                     array[i] = parent;
                     i = parentIndex;
@@ -142,7 +174,8 @@ public class MyPriorityQueue<T extends Comparable<? super T>> implements MyQueue
         while (bestIndex > 0) {
             T current = array[currentIndex];
             T best = array[bestIndex];
-            if (isMinHeap && current.compareTo(best) > 0 || !isMinHeap && current.compareTo(best) < 0) {
+            if (isMinHeap && current.compareTo(best) > 0
+                || !isMinHeap && current.compareTo(best) < 0) {
                 array[currentIndex] = best;
                 array[bestIndex] = current;
                 currentIndex = bestIndex;
@@ -181,16 +214,18 @@ public class MyPriorityQueue<T extends Comparable<? super T>> implements MyQueue
     }
 
     /**
-     * Doubles or halves the size of the internal array depending on size. Used in offer and poll methods.
+     * Doubles or halves the size of the internal array depending on size. Used
+     * in offer and poll methods.
      */
     private void checkCapacity() {
         if (array.length == 0) {
-            array = (T[]) new Comparable[defaultCapacity];
+            array = (T[]) new Comparable[DEFAULT_CAPACITY];
         } else if (size == array.length) {
             T[] newArray = (T[]) new Comparable[size * 2];
             System.arraycopy(array, 0, newArray, 0, size);
             array = newArray;
-        } else if (array.length > minArrLenThreshold && size * 2 < array.length) {
+        } else if (array.length > minArrLenThreshold
+                   && size * 2 < array.length) {
             T[] newArray = (T[]) new Comparable[size / 2];
             System.arraycopy(array, 0, newArray, 0, size);
             array = newArray;
@@ -198,12 +233,14 @@ public class MyPriorityQueue<T extends Comparable<? super T>> implements MyQueue
     }
 
     /**
-     * Returns the index of the lesser element of the internal array if this is a min heap. Otherwise, getBestIndex
-     * returns the index of the greater element. Indices should be distinct and increasing.
+     * Returns the index of the lesser element of the internal array if this is
+     * a min heap. Otherwise, getBestIndex returns the index of the greater
+     * element. Indices should be distinct and increasing.
      *
      * @param leftIndex left array index
-     * @return the index of the desired element, or -1 if: leftIndex is out of bounds, array[leftIndex] and
-     * array[leftIndex + 1] are both null, or array[array.length - 1] is null; in a non-null tie, left element wins
+     * @return the index of the desired element, or -1 if: leftIndex is out of
+     * bounds, array[leftIndex] and array[leftIndex + 1] are both null, or
+     * array[array.length - 1] is null; in a non-null tie, left element wins
      */
     private int getBestIndex(int leftIndex) {
         if (leftIndex >= array.length) {
@@ -220,7 +257,8 @@ public class MyPriorityQueue<T extends Comparable<? super T>> implements MyQueue
                 return rightIndex;
             } else if (right == null) {
                 return leftIndex;
-            } else if (isMinHeap && left.compareTo(right) < 0 || !isMinHeap && left.compareTo(right) > 0) {
+            } else if (isMinHeap && left.compareTo(right) < 0
+                       || !isMinHeap && left.compareTo(right) > 0) {
                 return leftIndex;
             } else if (left.compareTo(right) == 0) {
                 return leftIndex;

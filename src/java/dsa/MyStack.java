@@ -7,9 +7,24 @@ package dsa;
  */
 @SuppressWarnings("unchecked")
 public class MyStack<T> {
+    /**
+     * Internal array used by this stack.
+     */
     private T[] array;
+
+    /**
+     * Number of elements in internal array.
+     */
     private int size;
+
+    /**
+     * Default capacity for a stack.
+     */
     private final int defaultCapacity = 10;
+
+    /**
+     * Size at which the internal array should be shrunk if it is too sparse.
+     */
     private final int minArrLenThreshold = 100;
 
     /**
@@ -54,6 +69,16 @@ public class MyStack<T> {
             }
         }
         return true;
+    }
+
+    /**
+     * Returns the Object class-generated hash code of this stack.
+     *
+     * @return hash code of this stack
+     */
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     /**
@@ -124,7 +149,8 @@ public class MyStack<T> {
     }
 
     /**
-     * Returns a string representation of this stack, e.g. "[element1, element2, element3, ..., elementN]".
+     * Returns a string representation of this stack, e.g.
+     * "[element1, element2, element3, ..., elementN]".
      *
      * @return string form of this stack
      */
@@ -143,7 +169,8 @@ public class MyStack<T> {
     }
 
     /**
-     * Doubles or halves the size of the internal array depending on size. Used in pop and push methods.
+     * Doubles or halves the size of the internal array depending on size. Used
+     * in pop and push methods.
      */
     private void checkCapacity() {
         if (array.length == 0) {
@@ -152,7 +179,8 @@ public class MyStack<T> {
             T[] newArray = (T[]) new Object[size * 2];
             System.arraycopy(array, 0, newArray, 0, size);
             array = newArray;
-        } else if (array.length > minArrLenThreshold && size * 2 < array.length) {
+        } else if (array.length > minArrLenThreshold
+                   && size * 2 < array.length) {
             T[] newArray = (T[]) new Object[size / 2];
             System.arraycopy(array, 0, newArray, 0, size);
             array = newArray;

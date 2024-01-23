@@ -6,17 +6,22 @@ package dsa;
  * @param <T> data type
  */
 public class MyHashSet<T> implements MySet<T> {
+    /**
+     * Internal hash map used by this hash set.
+     */
     private final MyHashMap<T, Integer> map;
 
     /**
-     * Constructs a hash set instance with the default initial capacity and load factor.
+     * Constructs a hash set instance with the default initial capacity and load
+     * factor.
      */
     public MyHashSet() {
         map = new MyHashMap<>();
     }
 
     /**
-     * Constructs a hash set instance with the specified initial capacity and the default load factor.
+     * Constructs a hash set instance with the specified initial capacity and
+     * the default load factor.
      *
      * @param initialCapacity initial capacity of this hash set
      * @throws IllegalArgumentException if initialCapacity is negative
@@ -26,14 +31,17 @@ public class MyHashSet<T> implements MySet<T> {
     }
 
     /**
-     * Constructs a hash set instance with the specified initial capacity and load factor.
+     * Constructs a hash set instance with the specified initial capacity and
+     * load factor.
      *
      * @param initialCapacity initial capacity of this hash set
-     * @param loadFactor maximum value of (number of elements / number of total slots in hash set) before rehashing
-     *                   occurs
-     * @throws IllegalArgumentException if initialCapacity is negative or loadFactor is nonpositive
+     * @param loadFactor maximum value of (number of elements / number of total
+     * slots in hash set) before rehashing occurs
+     * @throws IllegalArgumentException if initialCapacity is negative or
+     * loadFactor is nonpositive
      */
-    public MyHashSet(int initialCapacity, float loadFactor) throws IllegalArgumentException {
+    public MyHashSet(int initialCapacity, float loadFactor)
+        throws IllegalArgumentException {
         map = new MyHashMap<>(initialCapacity, loadFactor);
     }
 
@@ -78,6 +86,11 @@ public class MyHashSet<T> implements MySet<T> {
             }
         }
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     @Override
