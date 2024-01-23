@@ -7,3 +7,5 @@ isort
 pyupgrade
 mypy
 pip-tools
+pydocstyle
+pycodestyle

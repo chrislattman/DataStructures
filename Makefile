@@ -42,6 +42,8 @@ lintpy:
 	pyupgrade src/python/dsa/*.py
 	pyupgrade test/python/dsa/*.py
 	mypy src/python/dsa/*.py
+	pycodestyle src/python/dsa/*.py
+	pydocstyle --convention=google src/python/dsa/*.py
 
 lintts:
 	npm run lint
