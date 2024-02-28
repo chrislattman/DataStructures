@@ -1,4 +1,4 @@
-import { MyArrayList } from "../../../src/typescript/dsa/myarraylist";
+import MyArrayList from "../../../src/typescript/dsa/myarraylist";
 
 let myArrayList: MyArrayList<number>;
 
@@ -9,6 +9,12 @@ beforeAll(() => {
 beforeEach(() => {
     myArrayList = new MyArrayList<number>();
     myArrayList.clear();
+});
+
+test("Test constructor", () => {
+    expect(() => {
+        new MyArrayList<number>(-1);
+    }).toThrow(Error);
 });
 
 test("Test add", () => {

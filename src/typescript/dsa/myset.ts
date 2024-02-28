@@ -1,7 +1,7 @@
 /**
  * Interface which defines methods for sets.
  */
-export interface MySet<T> {
+export default interface MySet<T> {
     /**
      * Inserts an element into this set if it is not already there.
      * @param element element to add

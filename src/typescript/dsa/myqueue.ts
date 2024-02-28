@@ -1,7 +1,7 @@
 /**
  * Interface which defines methods for queues.
  */
-export interface MyQueue<T> {
+export default interface MyQueue<T> {
     /**
      * Empties this queue of all elements.
      */

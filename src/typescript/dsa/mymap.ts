@@ -1,9 +1,9 @@
-import { MyList } from "./mylist";
+import MyList from "./mylist";
 
 /**
  * Interface which defines methods for maps.
  */
-export interface MyMap<K, V> {
+export default interface MyMap<K, V> {
     /**
      * Empties this map of all elements.
      */

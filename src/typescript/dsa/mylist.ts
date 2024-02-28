@@ -1,7 +1,7 @@
 /**
  * Interface which defines methods for lists.
  */
-export interface MyList<T> {
+export default interface MyList<T> {
     discriminator: "LIST";
 
     /**

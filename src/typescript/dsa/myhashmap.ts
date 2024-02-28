@@ -1,12 +1,12 @@
-import { MyArrayList } from "./myarraylist";
-import { MyList } from "./mylist";
-import { MyMap } from "./mymap";
+import MyArrayList from "./myarraylist";
+import MyList from "./mylist";
+import MyMap from "./mymap";
 
 /**
  * A hash map data structure utilizing quadratic probing (open addressing).
  * Also called a hash table.
  */
-export class MyHashMap<K, V> implements MyMap<K, V> {
+export default class MyHashMap<K, V> implements MyMap<K, V> {
     private keys: K[];
     private values_array: V[];
     private map_size: number;

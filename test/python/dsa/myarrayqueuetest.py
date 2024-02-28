@@ -14,6 +14,9 @@ class MyArrayQueueTest(unittest.TestCase):
         self.myArrayQueue = MyArrayQueue[int]()
         self.myArrayQueue.clear()
 
+    def test_constructor(self):
+        self.assertRaises(ValueError, lambda: MyArrayQueue[int](-1))
+
     def test_equals(self):
         self.assertFalse(self.myArrayQueue.equals(self.myArrayQueue))
 

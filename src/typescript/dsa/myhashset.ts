@@ -1,10 +1,10 @@
-import { MyHashMap } from "./myhashmap";
-import { MySet } from "./myset";
+import MyHashMap from "./myhashmap";
+import MySet from "./myset";
 
 /**
  * A hash set data structure built upon a hash map.
  */
-export class MyHashSet<T> implements MySet<T> {
+export default class MyHashSet<T> implements MySet<T> {
     private map: MyHashMap<T, number>;
 
     /**

@@ -1,4 +1,4 @@
-import { MyList } from "./mylist";
+import MyList from "./mylist";
 
 /**
  * Internal node object used by this linked list.
@@ -12,7 +12,7 @@ class Node<T> {
 /**
  * A singly linked list data structure.
  */
-export class MyLinkedList<T> implements MyList<T> {
+export default class MyLinkedList<T> implements MyList<T> {
     discriminator: "LIST";
     private head: Node<T>;
     private list_size: number;

@@ -1,10 +1,10 @@
-import { MyList } from "./mylist";
+import MyList from "./mylist";
 
 /**
  * An array list data structure. This class demonstrates explicit use of the
  * `public` keyword for public methods; however, it's not required.
  */
-export class MyArrayList<T> implements MyList<T> {
+export default class MyArrayList<T> implements MyList<T> {
     public discriminator: "LIST";
     private array: T[];
     private array_size: number;

@@ -1,9 +1,9 @@
-import { MyQueue } from "./myqueue";
+import MyQueue from "./myqueue";
 
 /**
  * A priority queue data structure. Also called a (binary) heap.
  */
-export class MyPriorityQueue<T> implements MyQueue<T> {
+export default class MyPriorityQueue<T> implements MyQueue<T> {
     private array: T[];
     private array_size: number;
     private isMinHeap: boolean;

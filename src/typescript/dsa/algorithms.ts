@@ -1,11 +1,11 @@
-import { MyArrayList } from "./myarraylist";
-import { MyList } from "./mylist";
-import { MyPriorityQueue } from "./mypriorityqueue";
+import MyArrayList from "./myarraylist";
+import MyList from "./mylist";
+import MyPriorityQueue from "./mypriorityqueue";
 
 /**
  * Functions to search and sort lists.
  */
-export class Algorithms {
+export default class Algorithms {
     // The below TypeScript overload signatures aren't functionally necessary,
     // but they make code documentation cleaner when using the methods
 

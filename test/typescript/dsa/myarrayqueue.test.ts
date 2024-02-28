@@ -1,4 +1,4 @@
-import { MyArrayQueue } from "../../../src/typescript/dsa/myarrayqueue";
+import MyArrayQueue from "../../../src/typescript/dsa/myarrayqueue";
 
 let myArrayQueue: MyArrayQueue<number>;
 
@@ -9,6 +9,12 @@ beforeAll(() => {
 beforeEach(() => {
     myArrayQueue = new MyArrayQueue<number>();
     myArrayQueue.clear();
+});
+
+test("Test constructor", () => {
+    expect(() => {
+        new MyArrayQueue<number>(-1);
+    }).toThrow(Error);
 });
 
 test("Test equals", () => {

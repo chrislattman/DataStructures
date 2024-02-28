@@ -1,9 +1,9 @@
-import { MyQueue } from "./myqueue";
+import MyQueue from "./myqueue";
 
 /**
  * An array queue data structure (FIFO).
  */
-export class MyArrayQueue<T> implements MyQueue<T> {
+export default class MyArrayQueue<T> implements MyQueue<T> {
     private array: T[];
     private array_size: number;
     private static readonly defaultCapacity = 16;

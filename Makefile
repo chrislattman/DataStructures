@@ -1,6 +1,7 @@
 SHELL=/bin/bash
 
 CPP_FLAGS=-Wall -Wextra -pedantic -std=c++14
+MOCK=lib/mockito-core-5.9.0.jar:lib/byte-buddy-1.14.11.jar:lib/objenesis-3.3.jar
 
 runjava: libjava
 	javac -cp dsa.jar src/java/Main.java
@@ -23,7 +24,7 @@ rungo:
 	# go run ./src/go
 
 lintjava:
-	java -jar lib/checkstyle-10.12.7-all.jar -c lib/checks.xml src/java/dsa
+	java -jar lib/checkstyle-10.13.0-all.jar -c lib/checks.xml src/java/dsa
 
 lintcpp:
 	cppcheck --std=c++14 --language=c++ src/cpp src/cpp/dsa/*.h*
@@ -80,11 +81,13 @@ coveragego:
 
 testjava:
 	javac -d bin src/java/dsa/*.java
-	javac -d bin -cp bin:lib/junit-platform-console-standalone-1.9.3.jar \
+	javac -d bin -cp bin:lib/junit-platform-console-standalone-1.9.3.jar:$(MOCK) \
 		test/java/dsa/*.java
 	java -javaagent:lib/org.jacoco.agent-0.8.9-runtime.jar \
+		-javaagent:lib/byte-buddy-agent-1.14.11.jar \
+		-Xshare:off \
 		-jar lib/junit-platform-console-standalone-1.9.3.jar \
-		--class-path=bin --scan-classpath --fail-if-no-tests
+		-cp bin:$(MOCK) --scan-classpath --fail-if-no-tests
 
 testpy:
 	python3 -m unittest discover -v -s test/python/dsa -p "*test.py"

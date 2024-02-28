@@ -23,6 +23,11 @@ class MyArrayQueueTest {
     }
 
     @Test
+    void testConstructor() {
+        assertThrows(IllegalArgumentException.class, () -> new MyArrayQueue<Integer>(-1));
+    }
+
+    @Test
     void testEquals() {
         assertTrue(myArrayQueue.equals(myArrayQueue));
         assertFalse(myArrayQueue.equals(null));

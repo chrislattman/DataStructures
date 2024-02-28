@@ -1,5 +1,6 @@
 package dsa;
 
+import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterAll;
@@ -7,9 +8,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 class MyArrayListTest {
     MyArrayList<Integer> myArrayList;
+
+    @Mock
+    MyArrayList<Integer> mockList;
 
     @BeforeAll
     static void initAll() {
@@ -20,6 +26,11 @@ class MyArrayListTest {
     void init() {
         myArrayList = new MyArrayList<>();
         myArrayList.clear();
+    }
+
+    @Test
+    void testConstructor() {
+        assertThrows(IllegalArgumentException.class, () -> new MyArrayList<Integer>(-1));
     }
 
     @Test
@@ -108,6 +119,20 @@ class MyArrayListTest {
         assertEquals("[5]", myArrayList.toString());
         myArrayList.add(6);
         assertEquals("[5, 6]", myArrayList.toString());
+    }
+
+    @Test
+    void testMock() {
+        // MyArrayList<Integer> mockList = mock(MyArrayList.class);
+        MockitoAnnotations.openMocks(this);
+        when(mockList.size()).thenReturn(10);
+        assertEquals(10, mockList.size());
+
+        MyArrayList<Integer> spyList = spy(myArrayList);
+        when(spyList.contains(3)).thenReturn(true);
+        assertTrue(spyList.contains(3));
+        assertFalse(spyList.contains(4));
+        assertEquals(0, spyList.size());
     }
 
     @AfterEach

@@ -1,7 +1,7 @@
 /**
  * A stack data structure (LIFO).
  */
-export class MyStack<T> {
+export default class MyStack<T> {
     private array: T[];
     private array_size: number;
     private readonly defaultCapacity = 10;
