@@ -1,6 +1,6 @@
 import sys
 import unittest
-from unittest.mock import Mock #, patch
+from unittest.mock import MagicMock
 
 sys.path.append("src/python")
 from dsa.myarraylist import MyArrayList
@@ -57,15 +57,11 @@ class MyArrayListTest(unittest.TestCase):
         self.assertEqual("[]", self.myArrayList.toString())
 
     def test_mock(self):
-        # with patch("dsa.myarraylist.MyArrayList") as mock:
-        #     mockList = mock.return_value
-        #     mockList.size.return_value = 10
-        #     self.assertEqual(10, mockList.size())
-        mockList = Mock(spec=MyArrayList)
+        mockList = MagicMock(spec=MyArrayList)
         mockList.size.return_value = 10
         self.assertEqual(10, mockList.size())
 
-        spyList = Mock(wraps=self.myArrayList)
+        spyList = MagicMock(wraps=self.myArrayList)
         def my_side_effect(value: int) -> bool:
             if value == 3:
                 return True
