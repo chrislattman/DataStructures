@@ -1,5 +1,5 @@
-import { Algorithms } from "./dsa/algorithms";
-import { MyArrayList } from "./dsa/myarraylist";
+import Algorithms from "./dsa/algorithms";
+import MyArrayList from "./dsa/myarraylist";
 
 console.log("Hello world!");
 const myarraylist = new MyArrayList<number>(10);
