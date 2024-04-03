@@ -153,6 +153,9 @@ libpy:
 libts:
 	npm pack
 
+updatejava:
+	@echo "Must update dependencies manually in installj.sh"
+
 updatepy:
 	pip-compile requirements.in --upgrade
 	pip install -r requirements.txt
@@ -160,6 +163,9 @@ updatepy:
 updatets:
 	npm update
 	npm install
+
+updatego:
+	cd src/go/dsa; go get -u; go mod tidy
 
 clean:
 	rm -rf *.jar main src/java/Main.class src/java/dsa/*.class out public \
