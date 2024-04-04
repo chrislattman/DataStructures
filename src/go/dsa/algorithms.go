@@ -2,21 +2,21 @@ package dsa
 
 import "cmp"
 
-func BinarySearchList[CT cmp.Ordered](list *MyList[CT], key CT) int {
+func BinarySearchList[CT cmp.Ordered](list *MyList[CT], key CT) int64 {
 	return -1
 }
 
 func BinarySearchListIndices[CT cmp.Ordered](list *MyList[CT],
-	startIndex uint32, endIndex uint32, key CT) int {
+	startIndex uint32, endIndex uint32, key CT) int64 {
 	return -1
 }
 
-func BinarySearchArray[CT cmp.Ordered](array []CT, key CT) int {
+func BinarySearchArray[CT cmp.Ordered](array []CT, key CT) int64 {
 	return -1
 }
 
 func BinarySearchArrayIndices[CT cmp.Ordered](array []CT, startIndex uint32,
-	endIndex uint32, key CT) int {
+	endIndex uint32, key CT) int64 {
 	return -1
 }
 

@@ -39,36 +39,36 @@ func (m *MyLinkedList[T]) Clear() {
 }
 
 // Contains reports whether element elem is in a linked list.
-func (m *MyLinkedList[T]) Contains(elem T) bool {
+func (m MyLinkedList[T]) Contains(elem T) bool {
 	return false
 }
 
 // Equals reports whether obj is equal to a linked list.
-func (m *MyLinkedList[T]) Equals(obj any) bool {
+func (m MyLinkedList[T]) Equals(obj any) bool {
 	return false
 }
 
 // Get returns, but does not remove, an element from a linked list at index idx.
 // Returns an error if idx is out of bounds (idx must be between 0 and
 // Size() - 1, inclusive).
-func (m *MyLinkedList[T]) Get(idx uint32) (T, error) {
+func (m MyLinkedList[T]) Get(idx uint32) (T, error) {
 	return make([]T, 1)[0], nil
 }
 
 // IndexOf returns the index of the first occurrence of element elem found
 // in a linked list, or -1 if not found.
-func (m *MyLinkedList[T]) IndexOf(elem T) int64 {
+func (m MyLinkedList[T]) IndexOf(elem T) int64 {
 	return -1
 }
 
 // IsEmpty reports whether a linked list has no elements.
-func (m *MyLinkedList[T]) IsEmpty() bool {
+func (m MyLinkedList[T]) IsEmpty() bool {
 	return true
 }
 
 // IndexOf returns the index of the last occurrence of element elem found
 // in a linked list, or -1 if not found.
-func (m *MyLinkedList[T]) LastIndexOf(elem T) int64 {
+func (m MyLinkedList[T]) LastIndexOf(elem T) int64 {
 	return -1
 }
 
@@ -93,24 +93,24 @@ func (m *MyLinkedList[T]) Set(idx uint32, elem T) (T, error) {
 }
 
 // Size returns the number of elements in a linked list.
-func (m *MyLinkedList[T]) Size() uint32 {
+func (m MyLinkedList[T]) Size() uint32 {
 	return 0
 }
 
 // ToArray returns an array containing all the elements in a linked list.
-func (m *MyLinkedList[T]) ToArray() []T {
+func (m MyLinkedList[T]) ToArray() []T {
 	return make([]T, 0)
 }
 
 // ToString returns a string representation of a linked list, e.g.
 // "[element1, element2, element3, ..., elementN]".
-func (m *MyLinkedList[T]) ToString() string {
+func (m MyLinkedList[T]) ToString() string {
 	return "[]"
 }
 
 // checkIndex validates that index idx is in bounds. Returns an error if idx is
 // greater than or equal to upperBound.
-func (m *MyLinkedList[T]) checkIndex(idx uint32, upperBound uint32) error {
+func (m MyLinkedList[T]) checkIndex(idx uint32, upperBound uint32) error {
 	if idx >= upperBound {
 		return errors.New("index is out of bounds")
 	}

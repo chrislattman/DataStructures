@@ -19,6 +19,7 @@ pip install -r requirements.txt
 - `requirements.in` contains the direct non-standard dependencies, whereas `requirements.txt`, which is updated with `pip-compile`, contains all (direct and transitive) non-standard dependencies
 - To leave this virtual environment, simply run `deactivate`
 - Other Python projects use [build](https://build.pypa.io/en/stable/) which use `pyproject.toml` files
+- Add a Python dependency by running `pip install <package>` and add it to `requirements.in`
 
 Likewise for Java, run
 
@@ -36,6 +37,7 @@ npm install
 
 - The TypeScript analog to the Python `.venv` folder is called `node_modules`
 - TypeScript non-standard direct dependencies are listed in `package.json`, whereas all (direct and transitive) dependencies are located in `package-lock.json`, which is updated with `npm update`
+- Add a TypeScript dependency by running `npm install -D <package>`
 
 For Go, run
 
@@ -51,7 +53,7 @@ go work use
     - Binaries are located in `~/go/bin/`
 - The specific versions of non-standard dependencies for a Go package are listed in the package's `go.mod` file
 - The hashes of those dependencies are listed in `go.sum`
-- By convention, Go test files are located in the same folder as the source files
+- By convention, Go unit test files are located in the same folder as the source files
 
 To add a Go dependency in a Go module:
 
@@ -71,3 +73,15 @@ To add a Go dependency in a Go module:
         }
         ```
 - Run `go mod tidy`, which reorganizes the `go.mod` and `go.sum` files
+
+For Rust, run
+
+```
+echo "export PATH=$HOME/.cargo/bin:$PATH" >> ~/.bashrc
+source ~/.bashrc
+cargo fetch
+```
+
+- By convention, Rust unit tests are in the same file as the corresponding source code
+- `cargo install --path .` installs the local package in `~/.cargo/bin`
+- Add a Rust dependency by running `cargo install <package>`

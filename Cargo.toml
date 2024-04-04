@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "src/rust/dsa",
+    "src/rust/dsa-tester",
+]
+resolver = "2"

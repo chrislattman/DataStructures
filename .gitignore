@@ -72,3 +72,6 @@ node_modules/
 dist/
 dsa-*.tgz
 .venv/
+target/
+*.profraw
+*.profdata
