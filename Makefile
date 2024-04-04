@@ -91,7 +91,7 @@ coveragego:
 coveragerust:
 	RUSTFLAGS="-C instrument-coverage" cargo test
 	llvm-profdata merge --sparse -o default.profdata src/rust/dsa/default*.profraw
-	rm target/debug/deps/dsa-*.o target/debug/deps/dsa-*.d
+	rm -f target/debug/deps/dsa-*.o target/debug/deps/dsa-*.d
 	llvm-cov show -format=html -output-dir=rust-coverage-report \
 		-instr-profile=default.profdata ./target/debug/deps/dsa-*
 	open rust-coverage-report/index.html
