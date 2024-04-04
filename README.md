@@ -84,4 +84,4 @@ cargo fetch
 
 - By convention, Rust unit tests are in the same file as the corresponding source code
 - `cargo install --path .` installs the local package in `~/.cargo/bin`
-- Add a Rust dependency by running `cargo install <package>`
+- Add a Rust dependency by running `cargo add <package>`
