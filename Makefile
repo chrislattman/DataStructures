@@ -168,6 +168,7 @@ docsgo:
 
 docsrust:
 	cargo doc
+	open target/doc/dsa/index.html
 
 libjava:
 	javac src/java/dsa/*.java
