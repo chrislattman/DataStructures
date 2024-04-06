@@ -5,6 +5,7 @@ import MySet from "./myset";
  * A hash set data structure built upon a hash map.
  */
 export default class MyHashSet<T> implements MySet<T> {
+    discriminator = "SET";
     private map: MyHashMap<T, number>;
 
     /**

@@ -4,6 +4,7 @@ import MyQueue from "./myqueue";
  * An array queue data structure (FIFO).
  */
 export default class MyArrayQueue<T> implements MyQueue<T> {
+    discriminator = "QUEUE";
     private array: T[];
     private array_size: number;
     private static readonly defaultCapacity = 16;

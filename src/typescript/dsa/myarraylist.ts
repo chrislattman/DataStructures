@@ -5,7 +5,7 @@ import MyList from "./mylist";
  * `public` keyword for public methods; however, it's not required.
  */
 export default class MyArrayList<T> implements MyList<T> {
-    public discriminator: "LIST";
+    public discriminator = "LIST";
     private array: T[];
     private array_size: number;
     private static readonly defaultCapacity = 10;

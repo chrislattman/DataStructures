@@ -37,7 +37,7 @@ type MyList[T comparable] interface {
 	// Remove retrieves and removes an element from a list at index idx.
 	// Returns an error if idx is out of bounds (idx must be between 0 and
 	// Size() - 1, inclusive).
-	Remove(idx uint64) (T, error)
+	Remove(idx uint32) (T, error)
 
 	// RemoveElement attempts to remove element elem from a list, and reports
 	// whether the deletion was successful.

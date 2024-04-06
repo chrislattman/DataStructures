@@ -75,7 +75,7 @@ func (m MyLinkedList[T]) LastIndexOf(elem T) int64 {
 // Remove retrieves and removes an element from a linked list at index idx.
 // Returns an error if idx is out of bounds (idx must be between 0 and
 // Size() - 1, inclusive).
-func (m *MyLinkedList[T]) Remove(idx uint64) (T, error) {
+func (m *MyLinkedList[T]) Remove(idx uint32) (T, error) {
 	return make([]T, 1)[0], nil
 }
 

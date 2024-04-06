@@ -2,7 +2,7 @@
  * Interface which defines methods for lists.
  */
 export default interface MyList<T> {
-    discriminator: "LIST";
+    discriminator: string;
 
     /**
      * Inserts an element at the specified index.

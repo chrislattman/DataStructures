@@ -7,6 +7,7 @@ import MyMap from "./mymap";
  * Also called a hash table.
  */
 export default class MyHashMap<K, V> implements MyMap<K, V> {
+    discriminator = "MAP";
     private keys: K[];
     private values_array: V[];
     private map_size: number;

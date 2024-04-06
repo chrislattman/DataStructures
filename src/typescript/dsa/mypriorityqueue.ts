@@ -4,6 +4,7 @@ import MyQueue from "./myqueue";
  * A priority queue data structure. Also called a (binary) heap.
  */
 export default class MyPriorityQueue<T> implements MyQueue<T> {
+    discriminator = "QUEUE";
     private array: T[];
     private array_size: number;
     private isMinHeap: boolean;

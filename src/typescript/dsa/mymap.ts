@@ -4,6 +4,8 @@ import MyList from "./mylist";
  * Interface which defines methods for maps.
  */
 export default interface MyMap<K, V> {
+    discriminator: string;
+
     /**
      * Empties this map of all elements.
      */

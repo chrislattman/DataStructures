@@ -13,7 +13,7 @@ class Node<T> {
  * A singly linked list data structure.
  */
 export default class MyLinkedList<T> implements MyList<T> {
-    discriminator: "LIST";
+    discriminator = "LIST";
     private head: Node<T>;
     private list_size: number;
 

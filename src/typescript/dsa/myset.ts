@@ -2,6 +2,8 @@
  * Interface which defines methods for sets.
  */
 export default interface MySet<T> {
+    discriminator: string;
+
     /**
      * Inserts an element into this set if it is not already there.
      * @param element element to add
