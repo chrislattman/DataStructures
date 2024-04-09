@@ -33,6 +33,7 @@ lintjava:
 
 lintcpp:
 	cppcheck --std=c++14 --language=c++ src/cpp src/cpp/dsa/*.h*
+	flawfinder src/cpp/
 
 lintpy:
 	autoflake -i --remove-all-unused-imports src/python/main.py
