@@ -62,10 +62,12 @@ class MyArrayListTest(unittest.TestCase):
         self.assertEqual(10, mockList.size())
 
         spyList = MagicMock(wraps=self.myArrayList)
+
         def my_side_effect(value: int) -> bool:
             if value == 3:
                 return True
             return False
+
         spyList.contains.side_effect = my_side_effect
         self.assertTrue(spyList.contains(3))
         self.assertFalse(spyList.contains(4))
