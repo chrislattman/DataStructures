@@ -2,8 +2,6 @@
  * Interface which defines methods for queues.
  */
 export default interface MyQueue<T> {
-    
-
     /**
      * Empties this queue of all elements.
      */
@@ -14,7 +12,7 @@ export default interface MyQueue<T> {
      * @param obj object to compare to this queue
      * @returns true if object and this queue are equal
      */
-    equals(obj: object): boolean;
+    equals(obj: unknown): boolean;
 
     /**
      * Checks if this queue has no elements.

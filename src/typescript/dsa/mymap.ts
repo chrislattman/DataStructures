@@ -30,7 +30,7 @@ export default interface MyMap<K, V> {
      * @param obj object to compare to this map
      * @returns true if object and this map are equal
      */
-    equals(obj: object): boolean;
+    equals(obj: unknown): boolean;
 
     /**
      * Returns the value associated with the specified key.

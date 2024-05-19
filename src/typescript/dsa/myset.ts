@@ -28,7 +28,7 @@ export default interface MySet<T> {
      * @param obj object to compare to this set
      * @returns true if object and this set are equal
      */
-    equals(obj: object): boolean;
+    equals(obj: unknown): boolean;
 
     /**
      * Checks if this set has no elements.

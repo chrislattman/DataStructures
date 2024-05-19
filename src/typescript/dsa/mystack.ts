@@ -27,7 +27,7 @@ export default class MyStack<T> {
      * @param obj object to compare to this stack
      * @returns true if object and this stack are equal
      */
-    equals(obj: object): boolean {
+    equals(obj: unknown): boolean {
         return false;
     }
 

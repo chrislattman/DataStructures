@@ -44,7 +44,7 @@ func (m MyLinkedList[T]) Contains(elem T) bool {
 }
 
 // Equals reports whether obj is equal to a linked list.
-func (m MyLinkedList[T]) Equals(obj any) bool {
+func (m MyLinkedList[T]) Equals(obj interface{}) bool {
 	return false
 }
 

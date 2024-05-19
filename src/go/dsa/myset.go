@@ -13,7 +13,7 @@ type MySet[T comparable] interface {
 	Contains(elem T) bool
 
 	// Equals reports whether obj is equal to a set.
-	Equals(obj any) bool
+	Equals(obj interface{}) bool
 
 	// IsEmpty reports whether a set has no elements.
 	IsEmpty() bool

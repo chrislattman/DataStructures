@@ -30,7 +30,7 @@ export default class MyHashSet<T> implements MySet<T> {
         return false;
     }
 
-    equals(obj: object): boolean {
+    equals(obj: unknown): boolean {
         return false;
     }
 

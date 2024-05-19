@@ -6,7 +6,7 @@ type MyQueue[T comparable] interface {
 	Clear()
 
 	// Equals reports whether obj is equal to a queue.
-	Equals(obj any) bool
+	Equals(obj interface{}) bool
 
 	// IsEmpty reports whether a queue has no elements.
 	IsEmpty() bool

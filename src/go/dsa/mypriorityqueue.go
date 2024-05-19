@@ -50,7 +50,7 @@ func (m *MyPriorityQueue[CT]) Clear() {
 }
 
 // Equals reports whether obj is equal to a priority queue.
-func (m MyPriorityQueue[CT]) Equals(obj any) bool {
+func (m MyPriorityQueue[CT]) Equals(obj interface{}) bool {
 	return false
 }
 

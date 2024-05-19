@@ -51,7 +51,7 @@ export default class MyHashMap<K, V> implements MyMap<K, V> {
         return false;
     }
 
-    equals(obj: object): boolean {
+    equals(obj: unknown): boolean {
         return false;
     }
 

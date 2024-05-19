@@ -16,7 +16,7 @@ type MyList[T comparable] interface {
 	Contains(elem T) bool
 
 	// Equals reports whether obj is equal to a list.
-	Equals(obj any) bool
+	Equals(obj interface{}) bool
 
 	// Get returns, but does not remove, an element from a list at index idx.
 	// Returns an error if idx is out of bounds (idx must be between 0 and

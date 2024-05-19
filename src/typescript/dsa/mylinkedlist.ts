@@ -37,7 +37,7 @@ export default class MyLinkedList<T> implements MyList<T> {
         return false;
     }
 
-    equals(obj: object): boolean {
+    equals(obj: unknown): boolean {
         return false;
     }
 

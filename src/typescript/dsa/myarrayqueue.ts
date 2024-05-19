@@ -29,7 +29,7 @@ export default class MyArrayQueue<T> implements MyQueue<T> {
 
     }
 
-    equals(obj: object): boolean {
+    equals(obj: unknown): boolean {
         return false;
     }
 

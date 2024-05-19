@@ -12,7 +12,7 @@ type MyMap[K, V comparable] interface {
 	ContainsValue(value V) bool
 
 	// Equals reports whether obj is equal to a map.
-	Equals(obj any) bool
+	Equals(obj interface{}) bool
 
 	// GetValue returns the value associated with key. False is returned if key
 	// was not found.

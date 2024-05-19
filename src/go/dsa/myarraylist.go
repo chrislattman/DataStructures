@@ -48,7 +48,7 @@ func (m MyArrayList[T]) Contains(elem T) bool {
 }
 
 // Equals reports whether obj is equal to an array list.
-func (m MyArrayList[T]) Equals(obj any) bool {
+func (m MyArrayList[T]) Equals(obj interface{}) bool {
 	return false
 }
 

@@ -38,7 +38,7 @@ export default class MyArrayList<T> implements MyList<T> {
         return false;
     }
 
-    public equals(obj: object): boolean {
+    public equals(obj: unknown): boolean {
         return false;
     }
 

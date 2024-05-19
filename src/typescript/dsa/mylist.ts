@@ -28,7 +28,7 @@ export default interface MyList<T> {
      * @param obj object to compare to this list
      * @returns true if object and this list are equal
      */
-    equals(obj: object): boolean;
+    equals(obj: unknown): boolean;
 
     /**
      * Retrieves, but does not remove, an element from this list at the
