@@ -24,9 +24,9 @@ rungo:
 	# go run ./src/go
 
 runrust:
-	cargo build --release
+	cargo build -q --release
 	./target/release/dsa-tester
-	# cargo run
+	# cargo run -q
 
 lintjava:
 	java -jar lib/checkstyle-10.13.0-all.jar -c lib/checks.xml src/java/dsa
@@ -90,7 +90,7 @@ coveragego:
 	go tool cover -html=coverage.out
 
 coveragerust:
-	RUSTFLAGS="-C instrument-coverage" cargo test
+	RUSTFLAGS="-C instrument-coverage" cargo test -q
 	llvm-profdata merge --sparse -o default.profdata src/rust/dsa/default*.profraw
 	rm -f target/debug/deps/dsa-*.o target/debug/deps/dsa-*.d
 	llvm-cov show -format=html -output-dir=rust-coverage-report \
@@ -117,7 +117,7 @@ testgo:
 	go test -v ./src/go/dsa
 
 testrust:
-	cargo test
+	cargo test -q
 
 debugjava:
 	javac -g -d out -cp src/java/dsa/*.java src/java/Main.java
@@ -139,7 +139,7 @@ debuggo:
 	# dlv debug ./src/go
 
 debugrust:
-	cargo build
+	cargo build -q
 	# rust-lldb ./target/debug/dsa-tester
 
 docsjava:
