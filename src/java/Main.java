@@ -1,5 +1,6 @@
 import java.util.*;
 
+import dsa.Algorithms;
 import dsa.MyArrayList;
 import dsa.MyArrayQueue;
 import dsa.MyHashSet;
@@ -15,24 +16,45 @@ public class Main {
         // Every print statement should output true
 
         MyArrayList<Integer> myList = new MyArrayList<>();
+        ArrayList<Integer> arrayList = new ArrayList<>();
         myList.add(5);
         myList.add(10);
         myList.add(12);
         myList.add(3, 17);
+        arrayList.add(5);
+        arrayList.add(10);
+        arrayList.add(12);
+        arrayList.add(3, 17);
         System.out.println(myList.toString().compareTo("[5, 10, 12, 17]") == 0);
+        System.out.println(arrayList.toString().equals(myList.toString()));
         System.out.println(myList.contains(5));
+        System.out.println(arrayList.contains(5));
+        System.out.println(myList.get(0) == 5);
+        System.out.println(arrayList.get(0) == 5);
         System.out.println(!myList.contains(6));
+        System.out.println(!arrayList.contains(6));
         System.out.println(!myList.isEmpty());
+        System.out.println(!arrayList.isEmpty());
         System.out.println(myList.indexOf(12) == 2);
+        System.out.println(arrayList.indexOf(12) == 2);
         System.out.println(myList.lastIndexOf(13) == -1);
+        System.out.println(arrayList.lastIndexOf(13) == -1);
+        System.out.println(myList.toString().equals(arrayList.toString()));
         myList.removeElement(10);
+        arrayList.remove(Integer.valueOf(10));
         System.out.println(myList.toString().equals("[5, 12, 17]"));
+        System.out.println(arrayList.toString().equals(myList.toString()));
         myList.set(1, 13);
+        arrayList.set(1, 13);
         System.out.println(myList.toString().equals("[5, 13, 17]"));
+        System.out.println(arrayList.toString().equals(myList.toString()));
         System.out.println(myList.size() == 3);
+        System.out.println(arrayList.size() == 3);
         System.out.println(myList.equals(myList));
         myList.remove(1);
+        arrayList.remove(1);
         System.out.println(myList.toString().equals("[5, 17]"));
+        System.out.println(arrayList.toString().equals(myList.toString()));
 
         MyArrayList<Integer> myList2 = new MyArrayList<>();
         myList2.add(5);
@@ -50,6 +72,30 @@ public class Main {
         System.out.println(!listRef.isEmpty());
         System.out.println(listRef.equals(listRef));
 
+        myList.clear();
+        arrayList.clear();
+        System.out.println(myList.size() == 0);
+        System.out.println(myList.toString().equals(arrayList.toString()));
+        myList.add(6);
+        myList.add(4);
+        myList.add(19);
+        myList.add(11);
+        myList.add(5);
+        arrayList.add(6);
+        arrayList.add(4);
+        arrayList.add(19);
+        arrayList.add(11);
+        arrayList.add(5);
+        Algorithms.quicksort(myList);
+        Collections.sort(arrayList);
+        System.out.println(myList.toString().equals("[4, 5, 6, 11, 19]"));
+        System.out.println(myList.toString().equals(arrayList.toString()));
+        System.out.println(Algorithms.binarySearch(myList, 11) == 3);
+        System.out.println(Algorithms.binarySearch(myList, 2) == -1);
+        System.out.println(Collections.frequency(arrayList, 19) == 1);
+        Collections.reverse(arrayList);
+        System.out.println(arrayList.toString().equals("[19, 11, 6, 5, 4]"));
+
         int[] setNums = {12, 15, 10, 3, 13};
         MyHashSet<Integer> myHashSet = new MyHashSet<>();
         HashSet<Integer> hashSet = new HashSet<>();
@@ -58,6 +104,7 @@ public class Main {
             hashSet.add(setNum);
         }
 
+        System.out.println(!myHashSet.isEmpty());
         System.out.println(myHashSet.size() == 5);
         System.out.println(!myHashSet.add(13));
         System.out.println(myHashSet.size() == 5);
@@ -67,7 +114,11 @@ public class Main {
         System.out.println(myHashSet.size() == 4);
         System.out.println(myHashSet.contains(10));
         System.out.println(!myHashSet.contains(4));
+        myHashSet.clear();
+        System.out.println(myHashSet.size() == 0);
+        System.out.println(myHashSet.equals(myHashSet));
 
+        System.out.println(!hashSet.isEmpty());
         System.out.println(hashSet.size() == 5);
         System.out.println(!hashSet.add(13));
         System.out.println(hashSet.size() == 5);
@@ -77,6 +128,9 @@ public class Main {
         System.out.println(hashSet.size() == 4);
         System.out.println(hashSet.contains(10));
         System.out.println(!hashSet.contains(4));
+        hashSet.clear();
+        System.out.println(hashSet.size() == 0);
+        System.out.println(hashSet.equals(hashSet));
 
         Random random = new Random();
         int[] randomNums = new int[NUMS_LENGTH];
@@ -119,6 +173,9 @@ public class Main {
         System.out.println(myLinkedList.size() == NUMS_LENGTH - 3);
         System.out.println(myLinkedList.toString().equals(linkedList.toString()));
 
+        System.out.println(!myMinHeap.isEmpty());
+        System.out.println(!minHeap.isEmpty());
+        System.out.println(myMinHeap.toString().equals(minHeap.toString()));
         String heapString = myMinHeap.toString();
         String[] nodes = heapString.substring(1, heapString.length() - 1).split(", ");
         int root = Integer.parseInt(nodes[0]);
@@ -131,22 +188,31 @@ public class Main {
         System.out.println(minHeap.poll() == root);
         System.out.println(minHeap.size() == NUMS_LENGTH - 1);
         System.out.println(myMinHeap.toString().equals(minHeap.toString()));
+        System.out.println(myMinHeap.equals(myMinHeap));
 
+        System.out.println(!myArrayQueue.isEmpty());
+        System.out.println(!arrayQueue.isEmpty());
         System.out.println(myArrayQueue.size() == NUMS_LENGTH);
         System.out.println(myArrayQueue.toString().equals(arrayQueue.toString()));
         int poll1 = myArrayQueue.poll();
         int poll2 = arrayQueue.poll();
         System.out.println(poll1 == poll2);
+        System.out.println(myArrayQueue.peek() == arrayQueue.peek());
         System.out.println(myArrayQueue.size() == NUMS_LENGTH - 1);
         System.out.println(myArrayQueue.toString().equals(arrayQueue.toString()));
+        System.out.println(myArrayQueue.equals(myArrayQueue));
 
+        System.out.println(!myStack.isEmpty());
+        System.out.println(!stack.isEmpty());
         System.out.println(myStack.size() == NUMS_LENGTH);
         System.out.println(myStack.toString().equals(stack.toString()));
         int pop1 = myStack.pop();
         int pop2 = stack.pop();
         System.out.println(pop1 == pop2);
+        System.out.println(myStack.peek() == stack.peek());
         System.out.println(myStack.size() == NUMS_LENGTH - 1);
         System.out.println(myStack.toString().equals(stack.toString()));
+        System.out.println(myStack.equals(myStack));
 
         int[] treeNums = {6, 4, 8, 3, 5, 7, 9};
         MyTreeSet<Integer> myTreeSet = new MyTreeSet<>();
@@ -156,6 +222,9 @@ public class Main {
             treeSet.add(treeNum);
         }
         System.out.println(myTreeSet.toString().equals(treeSet.toString()));
+        System.out.println(!myTreeSet.isEmpty());
+        System.out.println(!treeSet.isEmpty());
+        System.out.println(myTreeSet.equals(myTreeSet));
 
         System.out.println(myTreeSet.size() == 7);
         System.out.println(!myTreeSet.add(6));
