@@ -135,7 +135,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
             return null;
         }
         int mapLength = keys.length;
-        int hash = key.hashCode();
+        int hash = Math.abs(key.hashCode());
         for (int i = 0; i < mapLength; i++) {
             int mapIndex = (hash + i * i) % mapLength;
             K currentKey = keys[mapIndex];
@@ -186,7 +186,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
             return null;
         }
         int mapLength = keys.length;
-        int hash = key.hashCode();
+        int hash = Math.abs(key.hashCode());
         for (int i = 0; i < mapLength; i++) {
             int mapIndex = (hash + i * i) % mapLength;
             K currentKey = keys[mapIndex];
@@ -208,7 +208,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
             return false;
         }
         int mapLength = keys.length;
-        int hash = key.hashCode();
+        int hash = Math.abs(key.hashCode());
         for (int i = 0; i < mapLength; i++) {
             int mapIndex = (hash + i * i) % mapLength;
             K currentKey = keys[mapIndex];
@@ -295,7 +295,7 @@ public class MyHashMap<K, V> implements MyMap<K, V> {
             return insert(key, newValue, oldValue, addOnlyIfAbsent,
                 addOnlyIfKeyExists);
         }
-        int hash = key.hashCode();
+        int hash = Math.abs(key.hashCode());
         for (int i = 0; i < mapLength; i++) {
             int mapIndex = (hash + i * i) % mapLength;
             K currentKey = keys[mapIndex];

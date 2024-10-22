@@ -8,6 +8,8 @@ from dsa.algorithms import Algorithms
 from dsa.myarraylist import MyArrayList
 from dsa.myhashmap import MyHashMap
 
+NUMS_LENGTH = 10
+
 mylist = MyArrayList[int]()
 mylist.add(6, 0)
 mylist.add(5)
@@ -27,32 +29,36 @@ arraylist: list[int] = []
 arraylist.append(5)
 arraylist.append(10)
 arraylist.append(12)
-arraylist.insert(3, 17)
-print(str(arraylist) == "[5, 10, 12, 17]")
+arraylist.insert(2, 17)
+print(str(arraylist) == "[5, 10, 17, 12]")
 print(5 in arraylist)
 print(arraylist[0] == 5)
 print(6 not in arraylist)
 print(len(arraylist) != 0)
-print(arraylist.index(12) == 2)
+print(arraylist.index(12) == 3)
 try:
     arraylist.index(13)
     print(False)
 except ValueError:
     print(True)
+try:
+    arraylist.remove(19)
+except ValueError:
+    print(True)
 arraylist.remove(10)
-print(str(arraylist) == "[5, 12, 17]")
+print(str(arraylist) == "[5, 17, 12]")
 arraylist[1] = 13
-print(str(arraylist) == "[5, 13, 17]")
+print(str(arraylist) == "[5, 13, 12]")
 print(len(arraylist) == 3)
 print(arraylist == arraylist)
 del arraylist[1]
-print(str(arraylist) == "[5, 17]")
+print(str(arraylist) == "[5, 12]")
 
-mylist2 = [5, 17]
+mylist2 = [5, 12]
 print(arraylist == mylist2)
 
 listref = arraylist
-print(str(listref) == "[5, 17]")
+print(str(listref) == "[5, 12]")
 
 arraylist.clear()
 print(len(arraylist) == 0)
@@ -69,10 +75,46 @@ print(arraylist.count(19) == 1)
 arraylist.reverse()
 print(str(arraylist) == "[19, 11, 6, 5, 4]")
 
+keys = ["hello", "world", "hi", "bye"]
+values = [5, 17, 3, 0]
+hashmap: dict[str, int] = {}
+for i in range(4):
+    hashmap[keys[i]] = values[i]
+
+print(len(hashmap) == 4)
+print("hello" in hashmap)
+print("hellos" not in hashmap)
+print(5 in hashmap.values())
+print(6 not in hashmap.values())
+print(hashmap["hello"] == 5)
+try:
+    hashmap["hellos"]
+    print(False)
+except KeyError:
+    print(True)
+print(hashmap.get("hellos") == None)
+print(hashmap.get("hello", -1) == 5)
+print(hashmap.get("hellos", -1) == -1)
+print(hashmap.setdefault("pigeon", 7) == 7)
+print(hashmap.setdefault("hello", 13) == 5)
+hashmap["hello"] = 6
+del hashmap["hi"]
+print(hashmap.pop("bye") == 0)
+try:
+    del hashmap["hellos"]
+    print(False)
+except KeyError:
+    print(True)
+print(hashmap.pop("hellos", None) == None)
+hashmap.clear()
+print(len(hashmap) == 0)
+print(hashmap == hashmap)
+
 setnums = [12, 15, 10, 3, 13]
 hashset: set[int] = set()
 for elem in setnums:
     hashset.add(elem)
+
 print(len(hashset) == 5)
 hashset.add(13)
 print(len(hashset) == 5)
@@ -90,9 +132,9 @@ hashset.clear()
 print(len(hashset) == 0)
 print(hashset == hashset)
 
-randnums: list[int] = []
-for i in range(10):
-    randnums.append(random.randint(0, 99))
+randnums = [0] * NUMS_LENGTH
+for i in range(NUMS_LENGTH):
+    randnums[i] = random.randint(0, 99)
 
 minheap: list[int] = []
 arrayqueue: list[int] = []
@@ -109,19 +151,21 @@ root = int(nodes[0])
 print(minheap[0] == root)
 print(len(minheap) == 10)
 print(heapq.heappop(minheap) == root)
-print(len(minheap) == 9)
+print(len(minheap) == NUMS_LENGTH - 1)
 print(minheap == minheap)
 
-print(len(arrayqueue) == 10)
+print(len(arrayqueue) == NUMS_LENGTH)
 poll = arrayqueue.pop(0)
-peek = arrayqueue[0]
-print(len(arrayqueue) == 9)
+print(poll == randnums[0])
+print(arrayqueue[0] == randnums[1])
+print(len(arrayqueue) == NUMS_LENGTH - 1)
 print(arrayqueue == arrayqueue)
 
-print(len(stack) == 10)
+print(len(stack) == NUMS_LENGTH)
 pop = stack.pop()
-peek = stack[-1]
-print(len(stack) == 9)
+print(pop == randnums[-1])
+print(stack[-1] == randnums[-2])
+print(len(stack) == NUMS_LENGTH - 1)
 print(stack == stack)
 
 treenums = [6, 4, 8, 3, 5, 7, 9]

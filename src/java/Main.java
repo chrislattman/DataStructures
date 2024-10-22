@@ -3,6 +3,7 @@ import java.util.*;
 import dsa.Algorithms;
 import dsa.MyArrayList;
 import dsa.MyArrayQueue;
+import dsa.MyHashMap;
 import dsa.MyHashSet;
 import dsa.MyLinkedList;
 import dsa.MyPriorityQueue;
@@ -20,12 +21,12 @@ public class Main {
         myList.add(5);
         myList.add(10);
         myList.add(12);
-        myList.add(3, 17);
+        myList.add(2, 17);
         arrayList.add(5);
         arrayList.add(10);
         arrayList.add(12);
-        arrayList.add(3, 17);
-        System.out.println(myList.toString().compareTo("[5, 10, 12, 17]") == 0);
+        arrayList.add(2, 17);
+        System.out.println(myList.toString().compareTo("[5, 10, 17, 12]") == 0);
         System.out.println(arrayList.toString().equals(myList.toString()));
         System.out.println(myList.contains(5));
         System.out.println(arrayList.contains(5));
@@ -35,37 +36,39 @@ public class Main {
         System.out.println(!arrayList.contains(6));
         System.out.println(!myList.isEmpty());
         System.out.println(!arrayList.isEmpty());
-        System.out.println(myList.indexOf(12) == 2);
-        System.out.println(arrayList.indexOf(12) == 2);
+        System.out.println(myList.indexOf(12) == 3);
+        System.out.println(arrayList.indexOf(12) == 3);
         System.out.println(myList.lastIndexOf(13) == -1);
         System.out.println(arrayList.lastIndexOf(13) == -1);
         System.out.println(myList.toString().equals(arrayList.toString()));
+        System.out.println(!myList.removeElement(19));
+        System.out.println(!arrayList.remove(Integer.valueOf(19)));
         myList.removeElement(10);
         arrayList.remove(Integer.valueOf(10));
-        System.out.println(myList.toString().equals("[5, 12, 17]"));
+        System.out.println(myList.toString().equals("[5, 17, 12]"));
         System.out.println(arrayList.toString().equals(myList.toString()));
         myList.set(1, 13);
         arrayList.set(1, 13);
-        System.out.println(myList.toString().equals("[5, 13, 17]"));
+        System.out.println(myList.toString().equals("[5, 13, 12]"));
         System.out.println(arrayList.toString().equals(myList.toString()));
         System.out.println(myList.size() == 3);
         System.out.println(arrayList.size() == 3);
         System.out.println(myList.equals(myList));
         myList.remove(1);
         arrayList.remove(1);
-        System.out.println(myList.toString().equals("[5, 17]"));
+        System.out.println(myList.toString().equals("[5, 12]"));
         System.out.println(arrayList.toString().equals(myList.toString()));
 
         MyArrayList<Integer> myList2 = new MyArrayList<>();
         myList2.add(5);
-        myList2.add(17);
+        myList2.add(12);
         myList2.remove(0);
         myList2.add(0, 5);
         System.out.println(myList.equals(myList2));
         System.out.println(myList2.equals(myList));
 
         MyArrayList<Integer> listRef = myList;
-        System.out.println(listRef.toString().equals("[5, 17]"));
+        System.out.println(listRef.toString().equals("[5, 12]"));
         System.out.println(listRef.size() == 2);
         System.out.println(listRef.contains(5));
         System.out.println(!listRef.contains(6));
@@ -92,9 +95,60 @@ public class Main {
         System.out.println(myList.toString().equals(arrayList.toString()));
         System.out.println(Algorithms.binarySearch(myList, 11) == 3);
         System.out.println(Algorithms.binarySearch(myList, 2) == -1);
+        System.out.println(Collections.binarySearch(arrayList, 11) == 3);
+        System.out.println(Collections.binarySearch(arrayList, 2) == -1);
         System.out.println(Collections.frequency(arrayList, 19) == 1);
         Collections.reverse(arrayList);
         System.out.println(arrayList.toString().equals("[19, 11, 6, 5, 4]"));
+
+        String[] keys = {"hello", "world", "hi", "bye"};
+        int[] values = {5, 17, 3, 0};
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        MyHashMap<String, Integer> myHashMap = new MyHashMap<>();
+        for (int i = 0; i < 4; i++) {
+            myHashMap.put(keys[i], values[i]);
+            hashMap.put(keys[i], values[i]);
+        }
+
+        System.out.println(!myHashMap.isEmpty());
+        System.out.println(myHashMap.size() == 4);
+        System.out.println(myHashMap.containsKey("hello"));
+        System.out.println(!myHashMap.containsKey("hellos"));
+        System.out.println(myHashMap.containsValue(5));
+        System.out.println(!myHashMap.containsValue(6));
+        System.out.println(myHashMap.get("hello") == 5);
+        System.out.println(myHashMap.get("hellos") == null);
+        System.out.println(myHashMap.getOrDefault("hello", -1) == 5);
+        System.out.println(myHashMap.getOrDefault("hellos", -1) == -1);
+        System.out.println(myHashMap.putIfAbsent("pigeon", 7) == null);
+        System.out.println(myHashMap.putIfAbsent("hello", 13) == 5);
+        myHashMap.replace("hello", 6);
+        myHashMap.remove("hi");
+        System.out.println(myHashMap.remove("bye") == 0);
+        System.out.println(myHashMap.remove("hellos") == null);
+        myHashMap.clear();
+        System.out.println(myHashMap.size() == 0);
+        System.out.println(myHashMap.equals(myHashMap));
+
+        System.out.println(!hashMap.isEmpty());
+        System.out.println(hashMap.size() == 4);
+        System.out.println(hashMap.containsKey("hello"));
+        System.out.println(!hashMap.containsKey("hellos"));
+        System.out.println(hashMap.containsValue(5));
+        System.out.println(!hashMap.containsValue(6));
+        System.out.println(hashMap.get("hello") == 5);
+        System.out.println(hashMap.get("hellos") == null);
+        System.out.println(hashMap.getOrDefault("hello", -1) == 5);
+        System.out.println(hashMap.getOrDefault("hellos", -1) == -1);
+        System.out.println(hashMap.putIfAbsent("pigeon", 7) == null);
+        System.out.println(hashMap.putIfAbsent("hello", 13) == 5);
+        hashMap.replace("hello", 6);
+        hashMap.remove("hi");
+        System.out.println(hashMap.remove("bye") == 0);
+        System.out.println(hashMap.remove("hellos") == null);
+        hashMap.clear();
+        System.out.println(hashMap.size() == 0);
+        System.out.println(hashMap.equals(hashMap));
 
         int[] setNums = {12, 15, 10, 3, 13};
         MyHashSet<Integer> myHashSet = new MyHashSet<>();
@@ -110,7 +164,7 @@ public class Main {
         System.out.println(myHashSet.size() == 5);
         System.out.println(!myHashSet.remove(2));
         System.out.println(myHashSet.size() == 5);
-        System.out.println(myHashSet.remove(3));
+        myHashSet.remove(3);
         System.out.println(myHashSet.size() == 4);
         System.out.println(myHashSet.contains(10));
         System.out.println(!myHashSet.contains(4));
@@ -133,9 +187,9 @@ public class Main {
         System.out.println(hashSet.equals(hashSet));
 
         Random random = new Random();
-        int[] randomNums = new int[NUMS_LENGTH];
+        int[] randnums = new int[NUMS_LENGTH];
         for (int i = 0; i < NUMS_LENGTH; i++) {
-            randomNums[i] = random.nextInt(100);
+            randnums[i] = random.nextInt(100);
         }
 
         MyLinkedList<Integer> myLinkedList = new MyLinkedList<>();
@@ -147,14 +201,14 @@ public class Main {
         MyStack<Integer> myStack = new MyStack<>();
         Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < NUMS_LENGTH; i++) {
-            myLinkedList.add(randomNums[i]);
-            linkedList.add(randomNums[i]);
-            myMinHeap.offer(randomNums[i]);
-            minHeap.offer(randomNums[i]);
-            myArrayQueue.offer(randomNums[i]);
-            arrayQueue.offer(randomNums[i]);
-            myStack.push(randomNums[i]);
-            stack.push(randomNums[i]);
+            myLinkedList.add(randnums[i]);
+            linkedList.add(randnums[i]);
+            myMinHeap.offer(randnums[i]);
+            minHeap.offer(randnums[i]);
+            myArrayQueue.offer(randnums[i]);
+            arrayQueue.offer(randnums[i]);
+            myStack.push(randnums[i]);
+            stack.push(randnums[i]);
         }
 
         System.out.println(myLinkedList.size() == NUMS_LENGTH);
@@ -196,7 +250,9 @@ public class Main {
         System.out.println(myArrayQueue.toString().equals(arrayQueue.toString()));
         int poll1 = myArrayQueue.poll();
         int poll2 = arrayQueue.poll();
+        System.out.println(poll1 == randnums[0]);
         System.out.println(poll1 == poll2);
+        System.out.println(myArrayQueue.peek() == randnums[1]);
         System.out.println(myArrayQueue.peek() == arrayQueue.peek());
         System.out.println(myArrayQueue.size() == NUMS_LENGTH - 1);
         System.out.println(myArrayQueue.toString().equals(arrayQueue.toString()));
@@ -208,7 +264,9 @@ public class Main {
         System.out.println(myStack.toString().equals(stack.toString()));
         int pop1 = myStack.pop();
         int pop2 = stack.pop();
+        System.out.println(pop1 == randnums[randnums.length - 1]);
         System.out.println(pop1 == pop2);
+        System.out.println(myStack.peek() == randnums[randnums.length - 2]);
         System.out.println(myStack.peek() == stack.peek());
         System.out.println(myStack.size() == NUMS_LENGTH - 1);
         System.out.println(myStack.toString().equals(stack.toString()));
