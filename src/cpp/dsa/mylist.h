@@ -8,6 +8,9 @@
 template<typename T>
 class MyList {
     public:
+        /// @brief Frees dynamically allocated resources.
+        virtual ~MyList() {};
+
         /// @brief Inserts an element at the specified index.
         ///
         /// @param index index to add element

@@ -2,6 +2,7 @@
 
 #include "mymap.h"
 #include "myarraylist.hpp"
+#include <sstream>
 #include <string>
 
 using namespace std;
@@ -193,6 +194,29 @@ class MyHashMap: public MyMap<K, V> {
             return getOrDefault(key, V(NULL));
         }
 
+        /// @brief Returns the value associated with the specified key.
+        /// Can also be used to modify the hash map.
+        ///
+        /// @param key key to search for
+        /// @return value associated with key, or NULL if key was not found
+        V& operator[](const K &key) {
+            if (key == K(NULL)) {
+                return V(NULL);
+            }
+            int hash = (int) Hash{}(key);
+            for (int i = 0; i < map_length; i++) {
+                int mapIndex = (hash + i*i) % map_length;
+                K currentKey = keys[mapIndex];
+                if (key == currentKey) {
+                    return value_array[mapIndex];
+                }
+                if (currentKey == K(NULL) && value_array[mapIndex] == V(NULL)) {
+                    return V(NULL);
+                }
+            }
+            return V(NULL);
+        }
+
         /// @brief Returns the value associated with the specified key, or a default value if they key was not found.
         ///
         /// @param key key to search for
@@ -347,7 +371,9 @@ class MyHashMap: public MyMap<K, V> {
                 }
             }
             string result = builder.str();
-            result.erase(result.length() - 2, 2);
+            if (map_size > 0) {
+                result.erase(result.length() - 2, 2);
+            }
             result += "}";
             return result;
         }

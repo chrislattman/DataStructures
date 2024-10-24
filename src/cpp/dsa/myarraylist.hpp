@@ -60,24 +60,6 @@ class MyArrayList: public MyList<T> {
             }
         }
 
-        /// @brief Because apparently `memmove` is broken for removeElement.
-        ///
-        /// @param dst destination buffer
-        /// @param src source buffer
-        /// @param len number of elements to shift
-        /// @return destination buffer
-        T *custom_memmove(T *dst, T *src, size_t len) {
-            T *middle = new T[len];
-            for (size_t i = 0; i < len; i++) {
-                middle[i] = src[i];
-            }
-            for (size_t i = 0; i < len; i++) {
-                dst[i] = middle[i];
-            }
-            delete[] middle;
-            return dst;
-        }
-
     public:
         /// @brief Constructs an array list instance with a specified initial capacity.
         ///
@@ -107,7 +89,7 @@ class MyArrayList: public MyList<T> {
             checkIndex(index, array_size + 1);
             checkCapacity();
             if (index < array_size) {
-                memmove(array + index + 1, array + index, array_size - index);
+                memmove(array + index + 1, array + index, (array_size - index) * sizeof(T));
             }
             array[index] = element;
             ++array_size;
@@ -169,6 +151,16 @@ class MyArrayList: public MyList<T> {
             return array[index];
         }
 
+        /// @brief Retrieves, but does not remove, an element from this list at the specified index.
+        /// Can also be used to modify the array list.
+        ///
+        /// @param index index to retrieve element from
+        /// @return element found
+        T& operator[](int index) {
+            checkIndex(index, array_size);
+            return array[index];
+        }
+
         /// @brief Returns the index of the first occurrence of an element found in this list.
         ///
         /// @param element element to search for
@@ -210,7 +202,7 @@ class MyArrayList: public MyList<T> {
             checkIndex(index, array_size);
             T element = array[index];
             --array_size;
-            memmove(array + index, array + index + 1, array_size - index);
+            memmove(array + index, array + index + 1, (array_size - index) * sizeof(T));
             checkCapacity();
             return element;
         }
@@ -223,7 +215,7 @@ class MyArrayList: public MyList<T> {
             for (int i = 0; i < array_size; i++) {
                 if (element == array[i]) {
                     --array_size;
-                    custom_memmove(array + i, array + i + 1, array_size - i);
+                    memmove(array + i, array + i + 1, (array_size - i) * sizeof(T));
                     checkCapacity();
                     return true;
                 }

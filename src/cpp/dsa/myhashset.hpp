@@ -3,6 +3,7 @@
 #include "myset.h"
 #include "mylist.h"
 #include "myhashmap.hpp"
+#include <sstream>
 #include <string>
 
 using namespace std;
@@ -55,7 +56,7 @@ class MyHashSet: public MySet<T> {
         ///
         /// @param element element to add
         /// @return true if element was not present, false otherwise
-        bool add(T element) {
+        bool add(const T &element) {
             int currentSize = map->size();
             map->putIfAbsent(element, 0);
             int newSize = map->size();
@@ -123,11 +124,11 @@ class MyHashSet: public MySet<T> {
         ///
         /// @return array of set elements
         T *toArray() const {
-            MyList<T> keys = map->keyList();
+            MyList<T> *keys = map->keyList();
             int array_length = size();
             T *array = new T[array_length];
             for (int i = 0; i < array_length; i++) {
-                array[i] = keys.get(i);
+                array[i] = keys->get(i);
             }
             return array;
         }
@@ -136,13 +137,13 @@ class MyHashSet: public MySet<T> {
         ///
         /// @return string form of this set
         string toString() const {
-            MyList<T> keys = map->keyList();
+            MyList<T> *keys = map->keyList();
             stringstream builder;
             builder << "[";
             int length = size();
             int lastIndex = length - 1;
             for (int i = 0; i < length; i++) {
-                builder << keys.get(i);
+                builder << keys->get(i);
                 if (i != lastIndex) {
                     builder << ", ";
                 }

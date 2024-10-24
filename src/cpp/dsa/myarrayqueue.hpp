@@ -137,7 +137,7 @@ class MyArrayQueue: public MyQueue<T> {
             }
             T element = array[0];
             --array_size;
-            memmove(array, array + 1, array_size);
+            memmove(array, array + 1, array_size * sizeof(T));
             checkCapacity();
             return element;
         }

@@ -30,6 +30,7 @@ func main() {
 	// Every print statement should output true
 
 	var arraylist []int
+	fmt.Println(fmt.Sprint(arraylist) == "[]")
 	arraylist = append(arraylist, 5)
 	arraylist = append(arraylist, 10)
 	arraylist = append(arraylist, 12)
@@ -80,6 +81,7 @@ func main() {
 	keys := []string{"hello", "world", "hi", "bye"}
 	values := []int{5, 17, 3, 0}
 	hashmap := make(map[string]int)
+	fmt.Println(fmt.Sprint(hashmap) == "map[]")
 	for i := 0; i < 4; i++ {
 		hashmap[keys[i]] = values[i]
 	}
@@ -101,8 +103,8 @@ func main() {
 	hashmap["hello"] = 6
 	delete(hashmap, "hi")
 	// no remove/pop method
-	for k := range hashmap {
-		delete(hashmap, k)
+	for key := range hashmap {
+		delete(hashmap, key)
 	}
 	fmt.Println(len(hashmap) == 0)
 	fmt.Println(maps.Equal(hashmap, hashmap))
@@ -130,8 +132,8 @@ func main() {
     } else {
         fmt.Println(true)
     }
-	for k := range hashset {
-		delete(hashset, k)
+	for elem := range hashset {
+		delete(hashset, elem)
 	}
 	fmt.Println(len(hashset) == 0)
 	fmt.Println(maps.Equal(hashset, hashset))
@@ -159,8 +161,8 @@ func main() {
 	fmt.Println(len(stack) == NUMS_LENGTH)
 	pop := stack[len(stack) - 1]
 	stack = stack[:len(stack) - 1]
-	fmt.Println(pop == randnums[len(randnums) - 1]) // false
-	fmt.Println(stack[len(stack) - 1] == randnums[len(randnums) - 2]) // false
+	fmt.Println(pop == randnums[len(randnums) - 1])
+	fmt.Println(stack[len(stack) - 1] == randnums[len(randnums) - 2])
 	fmt.Println(len(stack) == NUMS_LENGTH - 1)
 	fmt.Println(slices.Equal(stack, stack))
 }

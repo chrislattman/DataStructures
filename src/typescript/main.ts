@@ -15,6 +15,7 @@ Algorithms.heapsort(myArrayList);
 // Every print statement should output true
 
 const arraylist = [];
+console.log(arraylist.toString() === "");
 arraylist.push(5);
 arraylist.push(10);
 arraylist.push(12);
@@ -74,14 +75,14 @@ console.log((hashmap.has("pigeon") ? hashmap.get("pigeon") : hashmap.set("pigeon
 console.log((hashmap.has("hello") ? hashmap.get("hello") : hashmap.set("hello", 13).get("hello")) === 5);
 hashmap.set("hello", 6);
 hashmap.delete("hi");
-// no remove/pop method
+// delete only returns true or false
 hashmap.clear();
 console.log(hashmap.size === 0);
 console.log(hashmap === hashmap);
 
 const setnums = [12, 15, 10, 3, 13];
 const hashset = new Set();
-setnums.forEach((a) => hashset.add(a));
+setnums.forEach((elem) => hashset.add(elem));
 
 console.log(hashset.size === 5);
 hashset.add(13);
@@ -103,9 +104,9 @@ for (let i = 0; i < NUMS_LENGTH; i++) {
 
 const arrayqueue = [];
 const stack = [];
-randnums.forEach((a) => {
-    arrayqueue.push(a);
-    stack.push(a);
+randnums.forEach((elem) => {
+    arrayqueue.push(elem);
+    stack.push(elem);
 });
 
 console.log(arrayqueue.length === NUMS_LENGTH);

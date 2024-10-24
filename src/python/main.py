@@ -26,6 +26,7 @@ Algorithms.heapsort(mylist)
 # Every print statement should output True
 
 arraylist: list[int] = []
+print(str(arraylist) == "[]")
 arraylist.append(5)
 arraylist.append(10)
 arraylist.append(12)
@@ -78,6 +79,7 @@ print(str(arraylist) == "[19, 11, 6, 5, 4]")
 keys = ["hello", "world", "hi", "bye"]
 values = [5, 17, 3, 0]
 hashmap: dict[str, int] = {}
+print(str(hashmap) == "{}")
 for i in range(4):
     hashmap[keys[i]] = values[i]
 
@@ -112,6 +114,7 @@ print(hashmap == hashmap)
 
 setnums = [12, 15, 10, 3, 13]
 hashset: set[int] = set()
+print(str(hashset) == "set()")
 for elem in setnums:
     hashset.add(elem)
 
@@ -136,6 +139,7 @@ randnums = [0] * NUMS_LENGTH
 for i in range(NUMS_LENGTH):
     randnums[i] = random.randint(0, 99)
 
+# for max heap: multiply numbers by -1
 minheap: list[int] = []
 arrayqueue: list[int] = []
 stack: list[int] = []
@@ -170,9 +174,9 @@ print(stack == stack)
 
 treenums = [6, 4, 8, 3, 5, 7, 9]
 treeset: SortedSet[int] = SortedSet()
+print(str(treeset) == "SortedSet([])")
 for elem in treenums:
     treeset.add(elem)
-print(treeset == treeset)
 
 print(len(treeset) == 7)
 treeset.add(6)
@@ -186,7 +190,7 @@ treeset.remove(4)
 print(len(treeset) == 6)
 print(8 in treeset)
 print(10 not in treeset)
-treeset.remove(7)
+print(treeset == treeset)
 
 # right rotations
 
