@@ -124,7 +124,7 @@ fn main() {
 
     let mut randnums = [0; NUMS_LENGTH];
     for i in 0..NUMS_LENGTH {
-        randnums[i] = rand::random::<i32>().abs() % 100;
+        randnums[i] = rand::random::<i32>().abs() % 100; // (rand::random::<f64>() * 100.0) as i32;
     }
 
     let mut linkedlist = LinkedList::new();
@@ -148,12 +148,12 @@ fn main() {
 
     println!("{}", !minheap.is_empty());
     println!("{}", minheap.len() == NUMS_LENGTH);
-    // for max heap: minheap.iter().map(|x| *x).collect::<Vec<_>>()
+    // for max heap: maxheap.iter().map(|x| *x).collect::<Vec<_>>()
     let heapstring = format!("{:?}", minheap.iter().map(|x| x.0).collect::<Vec<_>>());
     let nodes: Vec<_> = (&heapstring[1..heapstring.len() - 1]).split(", ").collect();
     let root = nodes[0].parse::<i32>().unwrap();
-    println!("{}", minheap.peek().unwrap().0 == root); // for max heap: *minheap.peek().unwrap() == root
-    println!("{}", minheap.pop().unwrap().0 == root); // for max heap: minheap.pop().unwrap() == root
+    println!("{}", minheap.peek().unwrap().0 == root); // for max heap: *maxheap.peek().unwrap() == root
+    println!("{}", minheap.pop().unwrap().0 == root); // for max heap: maxheap.pop().unwrap() == root
     println!("{}", minheap.len() == NUMS_LENGTH - 1);
     println!("{}", minheap.as_slice() == minheap.as_slice());
 

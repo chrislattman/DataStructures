@@ -198,7 +198,7 @@ int main(void) {
     hashset.clear();
     cout << (hashset.size() == 0) << endl;
     cout << (hashset == hashset) << endl;
-    // For the following operations, you must sort the sets first and initialize a temporary vector:
+    // For the following operations, you must sort the sets into vectors first and initialize a temporary vector:
     // vector<int> hashset_vec(hashset.begin(), hashset.end());
     // vector<int> otherset_vec(otherset.begin(), otherset.end());
     // sort(hashset_vec.begin(), hashset_vec.end());
@@ -250,8 +250,8 @@ int main(void) {
     copy(linkedlist.begin(), range_end, ostream_iterator<int>(oss, ", "));
     oss << linkedlist.back() << "]";
     cout << (mylinkedlist.toString().compare(oss.str()) == 0) << endl;
-    // no built-in remove method that returns element removed at index
     mylinkedlist.remove(4);
+    // no built-in remove method that returns element removed at index
     range_end = linkedlist.begin();
     advance(range_end, 4);
     linkedlist.erase(range_end);
