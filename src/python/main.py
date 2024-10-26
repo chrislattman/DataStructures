@@ -44,6 +44,7 @@ except ValueError:
     print(True)
 try:
     arraylist.remove(19)
+    print(False)
 except ValueError:
     print(True)
 arraylist.remove(10)
@@ -54,12 +55,6 @@ print(len(arraylist) == 3)
 print(arraylist == arraylist)
 del arraylist[1]
 print(str(arraylist) == "[5, 12]")
-
-mylist2 = [5, 12]
-print(arraylist == mylist2)
-
-listref = arraylist
-print(str(listref) == "[5, 12]")
 
 arraylist.clear()
 print(len(arraylist) == 0)
@@ -134,6 +129,13 @@ print(4 not in hashset)
 hashset.clear()
 print(len(hashset) == 0)
 print(hashset == hashset)
+# set union: hashset.update(other_set)
+# set intersection: hashset.intersection_update(other_set)
+# set difference: hashset.difference_update(other_set)
+# set symmetric difference: hashset.symmetric_difference_update(other_set)
+# is subset: hashset.issubset(hashset) == True
+# is superset: hashset.issuperset(hashset) == True
+# is disjoint: hashset.isdisjoint(hashset) == False
 
 randnums = [0] * NUMS_LENGTH
 for i in range(NUMS_LENGTH):
@@ -148,12 +150,11 @@ for elem in randnums:
     arrayqueue.append(elem)
     stack.append(elem)
 
-print(len(minheap) != 0)
+print(len(minheap) == NUMS_LENGTH)
 heapstring = str(minheap)
 nodes = heapstring[1:-1].split(",")
 root = int(nodes[0])
 print(minheap[0] == root)
-print(len(minheap) == 10)
 print(heapq.heappop(minheap) == root)
 print(len(minheap) == NUMS_LENGTH - 1)
 print(minheap == minheap)

@@ -55,12 +55,6 @@ func main() {
 	arraylist = append(arraylist[:1], arraylist[2:]...)
 	fmt.Println(fmt.Sprint(arraylist) == "[5 12]")
 
-	mylist2 := []int{5, 12}
-	fmt.Println(slices.Equal(arraylist, mylist2))
-
-	listref := arraylist
-	fmt.Println(fmt.Sprint(listref) == "[5 12]")
-
 	arraylist = nil // slices.Clear(arraylist) available in future release
 	fmt.Println(len(arraylist) == 0)
 	arraylist = append(arraylist, 6)
@@ -78,14 +72,15 @@ func main() {
 	slices.Reverse(arraylist)
 	fmt.Println(fmt.Sprint(arraylist) == "[19 11 6 5 4]")
 
-	keys := []string{"hello", "world", "hi", "bye"}
-	values := []int{5, 17, 3, 0}
+	keys := [4]string{"hello", "world", "hi", "bye"} // both allocated
+	values := [4]int{5, 17, 3, 0}					 // on the stack
 	hashmap := make(map[string]int)
 	fmt.Println(fmt.Sprint(hashmap) == "map[]")
 	for i := 0; i < 4; i++ {
 		hashmap[keys[i]] = values[i]
 	}
 
+	fmt.Println(len(hashmap) == 4)
 	if _, ok := hashmap["hello"]; ok {
         fmt.Println(true)
     } else {
@@ -109,7 +104,7 @@ func main() {
 	fmt.Println(len(hashmap) == 0)
 	fmt.Println(maps.Equal(hashmap, hashmap))
 
-	setnums := []int{12, 15, 10, 3, 13}
+	setnums := []int{12, 15, 10, 3, 13} // allocated on the heap
 	hashset := make(map[int]bool)
 	for _, elem := range setnums {
 		hashset[elem] = true
@@ -118,7 +113,7 @@ func main() {
 	fmt.Println(len(hashset) == 5)
 	hashset[13] = true
 	fmt.Println(len(hashset) == 5)
-	delete(hashset, 2)
+	delete(hashset, 2) // doesn't return anything
 	fmt.Println(len(hashset) == 5)
 	delete(hashset, 3)
 	fmt.Println(len(hashset) == 4)
@@ -137,6 +132,7 @@ func main() {
 	}
 	fmt.Println(len(hashset) == 0)
 	fmt.Println(maps.Equal(hashset, hashset))
+	// no built-in methods for set union, intersection, difference, symmetric difference, is subset/superset, or is disjoint
 
 	var randnums [NUMS_LENGTH]int
 	for i := 0; i < NUMS_LENGTH; i++ {

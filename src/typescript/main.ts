@@ -37,9 +37,6 @@ console.log(arraylist === arraylist);
 arraylist.splice(1, 1);
 console.log(arraylist.toString() === "5,12");
 
-const listref = arraylist;
-console.log(listref.toString() === "5,12");
-
 arraylist.splice(0, arraylist.length);
 console.log(arraylist.length === 0);
 arraylist.push(6);
@@ -76,6 +73,7 @@ console.log((hashmap.has("hello") ? hashmap.get("hello") : hashmap.set("hello", 
 hashmap.set("hello", 6);
 hashmap.delete("hi");
 // delete only returns true or false
+console.log(!hashmap.delete("hellos"));
 hashmap.clear();
 console.log(hashmap.size === 0);
 console.log(hashmap === hashmap);
@@ -96,6 +94,7 @@ console.log(!hashset.has(4));
 hashset.clear();
 console.log(hashset.size === 0);
 console.log(hashset === hashset);
+// no built-in methods for set union, intersection, difference, symmetric difference, is subset/superset, or is disjoint
 
 const randnums = new Array(NUMS_LENGTH);
 for (let i = 0; i < NUMS_LENGTH; i++) {

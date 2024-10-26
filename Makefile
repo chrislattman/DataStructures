@@ -24,7 +24,7 @@ rungo:
 	# go run ./src/go
 
 runrust:
-	cargo build -q --release
+	RUSTFLAGS=-Awarnings cargo build -q --release # don't set RUSTFLAGS env var in practicew
 	./target/release/dsa-tester
 	# cargo run -q
 

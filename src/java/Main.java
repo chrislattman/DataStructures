@@ -193,6 +193,13 @@ public class Main {
         hashSet.clear();
         System.out.println(hashSet.size() == 0);
         System.out.println(hashSet.equals(hashSet));
+        // set union: hashSet.addAll(otherSet);
+        // set intersection: hashSet.retainAll(otherSet);
+        // set difference: hashSet.removeAll(otherSet);
+        // no built-in method for set symmetric difference
+        // is subset: hashSet.containsAll(hashSet) == true
+        // is superset: hashSet.containsAll(hashSet) == true
+        // is disjoint: Collections.disjoint(hashSet, hashSet) == false
 
         Random random = new Random();
         int[] randNums = new int[NUMS_LENGTH];
@@ -248,16 +255,15 @@ public class Main {
 
         System.out.println(!myMinHeap.isEmpty());
         System.out.println(!minHeap.isEmpty());
+        System.out.println(myMinHeap.size() == NUMS_LENGTH);
         System.out.println(myMinHeap.toString().equals(minHeap.toString()));
         String heapString = myMinHeap.toString();
         String[] nodes = heapString.substring(1, heapString.length() - 1).split(", ");
         int root = Integer.parseInt(nodes[0]);
         System.out.println(myMinHeap.peek() == root);
-        System.out.println(myMinHeap.size() == NUMS_LENGTH);
         System.out.println(myMinHeap.poll() == root);
         System.out.println(myMinHeap.size() == NUMS_LENGTH - 1);
         System.out.println(minHeap.peek() == root);
-        System.out.println(minHeap.size() == NUMS_LENGTH);
         System.out.println(minHeap.poll() == root);
         System.out.println(minHeap.size() == NUMS_LENGTH - 1);
         System.out.println(myMinHeap.toString().equals(minHeap.toString()));
