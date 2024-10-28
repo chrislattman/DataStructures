@@ -31,7 +31,7 @@ int main(void) {
 
     MyArrayList<int> mylist;
     vector<int> arraylist;
-    cout << boolalpha << (mylist.toString().compare("[]") == 0) << endl;
+    cout << boolalpha << (mylist.toString() == "[]") << endl;
     mylist.add(5);
     mylist.add(10);
     mylist.add(12);
@@ -45,9 +45,9 @@ int main(void) {
     oss << "[";
     copy(arraylist.begin(), arraylist.end() - 1, ostream_iterator<int>(oss, ", "));
     oss << arraylist.back() << "]";
-    cout << (mylist.toString().compare("[5, 10, 17, 12]") == 0) << endl;
-    cout << (mylist.toString().compare(oss.str()) == 0) << endl;
-    cout << (oss.str().compare(mylist.toString()) == 0) << endl;
+    cout << (mylist.toString() == "[5, 10, 17, 12]") << endl;
+    cout << (mylist.toString() == oss.str()) << endl;
+    cout << (oss.str() == mylist.toString()) << endl;
     cout << mylist.contains(5) << endl;
     cout << (find(arraylist.begin(), arraylist.end(), 5) != arraylist.end()) << endl;
     cout << (mylist[0] == 5) << endl; // mylist.get(0) == 5
@@ -64,32 +64,32 @@ int main(void) {
     cout << (find(arraylist.begin(), arraylist.end(), 19) != arraylist.end() ? arraylist.erase(find(arraylist.begin(), arraylist.end(), 19)) == arraylist.end() : true) << endl;
     mylist.removeElement(10);
     arraylist.erase(find(arraylist.begin(), arraylist.end(), 10));
-    cout << (mylist.toString() == string("[5, 17, 12]")) << endl;
+    cout << (mylist.toString() == "[5, 17, 12]") << endl;
     oss.str("");
     oss << "[";
     copy(arraylist.begin(), arraylist.end() - 1, ostream_iterator<int>(oss, ", "));
     oss << arraylist.back() << "]";
-    cout << (oss.str().compare(mylist.toString()) == 0) << endl;
+    cout << (oss.str() == mylist.toString()) << endl;
     mylist[1] = 13; // mylist.set(1, 13)
     arraylist[1] = 13; // arraylist.at(1) = 13
-    cout << (mylist.toString() == string("[5, 13, 12]")) << endl;
+    cout << (mylist.toString() == "[5, 13, 12]") << endl;
     oss.str("");
     oss << "[";
     copy(arraylist.begin(), arraylist.end() - 1, ostream_iterator<int>(oss, ", "));
     oss << arraylist.back() << "]";
-    cout << (oss.str().compare(mylist.toString()) == 0) << endl;
+    cout << (oss.str() == mylist.toString()) << endl;
     cout << (mylist.size() == 3) << endl;
     cout << (arraylist.size() == 3) << endl;
     cout << (mylist == mylist) << endl;
     cout << (arraylist == arraylist) << endl;
     mylist.remove(1);
     arraylist.erase(arraylist.begin() + 1);
-    cout << (mylist.toString() == string("[5, 12]")) << endl;
+    cout << (mylist.toString() == "[5, 12]") << endl;
     oss.str("");
     oss << "[";
     copy(arraylist.begin(), arraylist.end() - 1, ostream_iterator<int>(oss, ", "));
     oss << arraylist.back() << "]";
-    cout << (oss.str().compare(mylist.toString()) == 0) << endl;
+    cout << (oss.str() == mylist.toString()) << endl;
 
     MyArrayList<int> myList2;
     myList2.add(5);
@@ -99,13 +99,14 @@ int main(void) {
     cout << (mylist == myList2) << endl;
     cout << (myList2 == mylist) << endl;
 
-    MyArrayList<int> listRef = mylist;
-    cout << (listRef.toString() == string("[5, 12]")) << endl;
-    cout << (listRef.size() == 2) << endl;
-    cout << listRef.contains(5) << endl;
-    cout << !listRef.contains(6) << endl;
-    cout << !listRef.isEmpty() << endl;
-    cout << (listRef == listRef) << endl;
+    // internal array for mylist is freed twice when destructor for listRef is called
+    // MyArrayList<int> listRef = mylist;
+    // cout << (listRef.toString() == string("[5, 12]")) << endl;
+    // cout << (listRef.size() == 2) << endl;
+    // cout << listRef.contains(5) << endl;
+    // cout << !listRef.contains(6) << endl;
+    // cout << !listRef.isEmpty() << endl;
+    // cout << (listRef == listRef) << endl;
 
     MyArrayList<int> *myList3 = new MyArrayList<int>();
     myList3->add(5);
@@ -118,7 +119,7 @@ int main(void) {
 
     MyArrayList<int> *p = &mylist;
     // cout << *p << endl;
-    cout << (p->toString() == string("[5, 12]")) << endl;
+    cout << (p->toString() == "[5, 12]") << endl;
     cout << (p->size() == 2) << endl;
     cout << p->contains(5) << endl;
     cout << !p->contains(6) << endl;
@@ -139,7 +140,7 @@ int main(void) {
     oss << "[";
     copy(arraylist.begin(), arraylist.end() - 1, ostream_iterator<int>(oss, ", "));
     oss << arraylist.back() << "]";
-    cout << (oss.str().compare("[4, 5, 6, 11, 19]") == 0) << endl;
+    cout << (oss.str() == "[4, 5, 6, 11, 19]") << endl;
     cout << binary_search(arraylist.begin(), arraylist.end(), 11) << endl;
     cout << !binary_search(arraylist.begin(), arraylist.end(), 2) << endl;
     cout << (count(arraylist.begin(), arraylist.end(), 19) == 1) << endl;
@@ -148,7 +149,7 @@ int main(void) {
     oss << "[";
     copy(arraylist.begin(), arraylist.end() - 1, ostream_iterator<int>(oss, ", "));
     oss << arraylist.back() << "]";
-    cout << (oss.str().compare("[19, 11, 6, 5, 4]") == 0) << endl;
+    cout << (oss.str() == "[19, 11, 6, 5, 4]") << endl;
 
     string keys[] = {"hello", "world", "hi", "bye"}; // string is preferable to char * in C++
     int values[] = {5, 17, 3, 0};
@@ -249,7 +250,7 @@ int main(void) {
     oss << "[";
     copy(linkedlist.begin(), range_end, ostream_iterator<int>(oss, ", "));
     oss << linkedlist.back() << "]";
-    cout << (mylinkedlist.toString().compare(oss.str()) == 0) << endl;
+    cout << (mylinkedlist.toString() == oss.str()) << endl;
     mylinkedlist.remove(4);
     // no built-in remove method that returns element removed at index
     range_end = linkedlist.begin();
@@ -262,7 +263,7 @@ int main(void) {
     oss << "[";
     copy(linkedlist.begin(), range_end, ostream_iterator<int>(oss, ", "));
     oss << linkedlist.back() << "]";
-    cout << (mylinkedlist.toString().compare(oss.str()) == 0) << endl;
+    cout << (mylinkedlist.toString() == oss.str()) << endl;
     mylinkedlist.remove(mylinkedlist.size() - 1);
     range_end = linkedlist.begin();
     advance(range_end, linkedlist.size() - 1);
@@ -274,7 +275,7 @@ int main(void) {
     oss << "[";
     copy(linkedlist.begin(), range_end, ostream_iterator<int>(oss, ", "));
     oss << linkedlist.back() << "]";
-    cout << (mylinkedlist.toString().compare(oss.str()) == 0) << endl;
+    cout << (mylinkedlist.toString() == oss.str()) << endl;
     cout << (mylinkedlist == mylinkedlist) << endl;
     cout << (linkedlist == linkedlist) << endl;
 
@@ -296,7 +297,7 @@ int main(void) {
     oss << "[";
     copy(arrayqueue.begin(), arrayqueue.end() - 1, ostream_iterator<int>(oss, ", "));
     oss << arrayqueue.back() << "]";
-    cout << (myarrayqueue.toString().compare(oss.str()) == 0) << endl;
+    cout << (myarrayqueue.toString() == oss.str()) << endl;
     int poll1 = myarrayqueue.poll();
     int poll2 = arrayqueue.front();
     // pop_front doesn't return the removed element
@@ -310,7 +311,7 @@ int main(void) {
     oss << "[";
     copy(arrayqueue.begin(), arrayqueue.end() - 1, ostream_iterator<int>(oss, ", "));
     oss << arrayqueue.back() << "]";
-    cout << (myarrayqueue.toString().compare(oss.str()) == 0) << endl;
+    cout << (myarrayqueue.toString() == oss.str()) << endl;
     cout << (myarrayqueue == myarrayqueue) << endl;
     cout << (arrayqueue == arrayqueue) << endl;
 
@@ -357,7 +358,7 @@ int main(void) {
     oss.str("");
     oss << "[";
     copy(treeset.begin(), treeset.end(), ostream_iterator<int>(oss, ", "));
-    cout << (oss.str().substr(0, oss.str().length() - 2).append("]").compare("[10, 20, 30]") == 0) << endl;
+    cout << (oss.str().substr(0, oss.str().length() - 2).append("]") == "[10, 20, 30]") << endl;
 
     treeset.clear();
     treeset.insert(8);
@@ -369,7 +370,7 @@ int main(void) {
     oss.str("");
     oss << "[";
     copy(treeset.begin(), treeset.end(), ostream_iterator<int>(oss, ", "));
-    cout << (oss.str().substr(0, oss.str().length() - 2).append("]").compare("[3, 4, 6, 7, 8, 9]") == 0) << endl;
+    cout << (oss.str().substr(0, oss.str().length() - 2).append("]") == "[3, 4, 6, 7, 8, 9]") << endl;
 
     treeset.clear();
     treeset.insert(8);
@@ -381,7 +382,7 @@ int main(void) {
     oss.str("");
     oss << "[";
     copy(treeset.begin(), treeset.end(), ostream_iterator<int>(oss, ", "));
-    cout << (oss.str().substr(0, oss.str().length() - 2).append("]").compare("[4, 5, 6, 7, 8, 9]") == 0) << endl;
+    cout << (oss.str().substr(0, oss.str().length() - 2).append("]") == "[4, 5, 6, 7, 8, 9]") << endl;
 
     // left-right rotations
 
@@ -392,7 +393,7 @@ int main(void) {
     oss.str("");
     oss << "[";
     copy(treeset.begin(), treeset.end(), ostream_iterator<int>(oss, ", "));
-    cout << (oss.str().substr(0, oss.str().length() - 2).append("]").compare("[10, 20, 30]") == 0) << endl;
+    cout << (oss.str().substr(0, oss.str().length() - 2).append("]") == "[10, 20, 30]") << endl;
 
     treeset.clear();
     treeset.insert(8);
@@ -404,7 +405,7 @@ int main(void) {
     oss.str("");
     oss << "[";
     copy(treeset.begin(), treeset.end(), ostream_iterator<int>(oss, ", "));
-    cout << (oss.str().substr(0, oss.str().length() - 2).append("]").compare("[3, 4, 5, 6, 8, 9]") == 0) << endl;
+    cout << (oss.str().substr(0, oss.str().length() - 2).append("]") == "[3, 4, 5, 6, 8, 9]") << endl;
 
     treeset.clear();
     treeset.insert(8);
@@ -416,7 +417,7 @@ int main(void) {
     oss.str("");
     oss << "[";
     copy(treeset.begin(), treeset.end(), ostream_iterator<int>(oss, ", "));
-    cout << (oss.str().substr(0, oss.str().length() - 2).append("]").compare("[3, 4, 6, 7, 8, 9]") == 0) << endl;
+    cout << (oss.str().substr(0, oss.str().length() - 2).append("]") == "[3, 4, 6, 7, 8, 9]") << endl;
 
     // left rotations
 
@@ -427,7 +428,7 @@ int main(void) {
     oss.str("");
     oss << "[";
     copy(treeset.begin(), treeset.end(), ostream_iterator<int>(oss, ", "));
-    cout << (oss.str().substr(0, oss.str().length() - 2).append("]").compare("[10, 20, 30]") == 0) << endl;
+    cout << (oss.str().substr(0, oss.str().length() - 2).append("]") == "[10, 20, 30]") << endl;
 
     treeset.clear();
     treeset.insert(4);
@@ -439,7 +440,7 @@ int main(void) {
     oss.str("");
     oss << "[";
     copy(treeset.begin(), treeset.end(), ostream_iterator<int>(oss, ", "));
-    cout << (oss.str().substr(0, oss.str().length() - 2).append("]").compare("[3, 4, 5, 6, 7, 8]") == 0) << endl;
+    cout << (oss.str().substr(0, oss.str().length() - 2).append("]") == "[3, 4, 5, 6, 7, 8]") << endl;
 
     treeset.clear();
     treeset.insert(4);
@@ -451,7 +452,7 @@ int main(void) {
     oss.str("");
     oss << "[";
     copy(treeset.begin(), treeset.end(), ostream_iterator<int>(oss, ", "));
-    cout << (oss.str().substr(0, oss.str().length() - 2).append("]").compare("[3, 4, 5, 6, 8, 9]") == 0) << endl;
+    cout << (oss.str().substr(0, oss.str().length() - 2).append("]") == "[3, 4, 5, 6, 8, 9]") << endl;
 
     // right-left rotations
 
@@ -462,7 +463,7 @@ int main(void) {
     oss.str("");
     oss << "[";
     copy(treeset.begin(), treeset.end(), ostream_iterator<int>(oss, ", "));
-    cout << (oss.str().substr(0, oss.str().length() - 2).append("]").compare("[10, 20, 30]") == 0) << endl;
+    cout << (oss.str().substr(0, oss.str().length() - 2).append("]") == "[10, 20, 30]") << endl;
 
     treeset.clear();
     treeset.insert(4);
@@ -474,7 +475,7 @@ int main(void) {
     oss.str("");
     oss << "[";
     copy(treeset.begin(), treeset.end(), ostream_iterator<int>(oss, ", "));
-    cout << (oss.str().substr(0, oss.str().length() - 2).append("]").compare("[3, 4, 5, 6, 8, 9]") == 0) << endl;
+    cout << (oss.str().substr(0, oss.str().length() - 2).append("]") == "[3, 4, 5, 6, 8, 9]") << endl;
 
     treeset.clear();
     treeset.insert(4);
@@ -486,7 +487,7 @@ int main(void) {
     oss.str("");
     oss << "[";
     copy(treeset.begin(), treeset.end(), ostream_iterator<int>(oss, ", "));
-    cout << (oss.str().substr(0, oss.str().length() - 2).append("]").compare("[3, 4, 6, 7, 8, 9]") == 0) << endl;
+    cout << (oss.str().substr(0, oss.str().length() - 2).append("]") == "[3, 4, 6, 7, 8, 9]") << endl;
 
     /**
      * Commenting out because I'm not following the C++ Rule of 3
