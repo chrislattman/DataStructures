@@ -1,13 +1,30 @@
 package main
 
 import (
+	"container/heap"
+	"container/list"
 	"fmt"
 	"maps"
 	"math/rand"
 	"slices"
+	"strconv"
+	"strings"
 
 	"example.com/dsa"
 )
+
+type PriorityQueue []int
+func (h PriorityQueue) Len() int           { return len(h) }
+func (h PriorityQueue) Less(i, j int) bool { return h[i] < h[j] }
+func (h PriorityQueue) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+func (h *PriorityQueue) Push(x any)        { *h = append(*h, x.(int)) }
+func (h *PriorityQueue) Pop() any {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[0:n-1]
+	return x
+}
 
 const NUMS_LENGTH = 10
 
@@ -92,6 +109,18 @@ func main() {
         fmt.Println(true)
     }
 	// no built-in containsValue/values function
+	for val := range maps.Values(hashmap) {
+		if val == 5 {
+			fmt.Println(true)
+			break
+		}
+	}
+	for val := range maps.Values(hashmap) {
+		if val == 6 {
+			fmt.Println(false)
+			break
+		}
+	}
 	fmt.Println(hashmap["hello"] == 5)
 	// no built-in getOrDefault/get function
 	// no built-in putIfAbsent/setdefault function
@@ -139,12 +168,35 @@ func main() {
 		randnums[i] = rand.Intn(100)
 	}
 
+	linkedlist := list.New()
+	// for max heap: multiply numbers by -1
+	var minheap PriorityQueue
 	var arrayqueue []int
 	var stack []int
+	fmt.Println(fmt.Sprint(minheap) == "[]")
 	for _, elem := range randnums {
+		linkedlist.PushBack(elem)
+		heap.Push(&minheap, elem)
 		arrayqueue = append(arrayqueue, elem)
 		stack = append(stack, elem)
 	}
+
+	fmt.Println(linkedlist.Len() == NUMS_LENGTH)
+	// can only get front or back of a list
+	linkedlist.Remove(linkedlist.Front()) // Remove returns removed element (but it's unused here)
+	fmt.Println(linkedlist.Len() == NUMS_LENGTH - 1)
+	linkedlist.Remove(linkedlist.Back())
+	fmt.Println(linkedlist.Len() == NUMS_LENGTH - 2)
+	fmt.Println(linkedlist == linkedlist)
+
+	fmt.Println(minheap.Len() == NUMS_LENGTH)
+	heapstring := fmt.Sprint(minheap)
+	nodes := strings.Split(heapstring[1:len(heapstring) - 1], " ")
+	root, _ := strconv.Atoi(nodes[0])
+	fmt.Println(minheap[0] == root)
+	fmt.Println(heap.Pop(&minheap) == root)
+	fmt.Println(minheap.Len() == NUMS_LENGTH - 1)
+	fmt.Println(slices.Equal(minheap, minheap))
 
 	fmt.Println(len(arrayqueue) == NUMS_LENGTH)
 	poll := arrayqueue[0]

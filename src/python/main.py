@@ -141,6 +141,7 @@ randnums = [0] * NUMS_LENGTH
 for i in range(NUMS_LENGTH):
     randnums[i] = random.randint(0, 99)
 
+# Python 3 currently has no linked list data structure
 # for max heap: multiply numbers by -1
 minheap: list[int] = []
 arrayqueue: list[int] = []
