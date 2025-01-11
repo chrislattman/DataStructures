@@ -9,7 +9,7 @@ runjava: libjava
 	# java -cp dsa.jar src/java/Main.java
 
 runcpp:
-	g++ $(CPP_FLAGS) -o main src/cpp/main.cpp
+	g++ $(CPP_FLAGS) -O2 -o main src/cpp/main.cpp
 	./main
 
 runpy:
@@ -124,7 +124,7 @@ debugjava:
 	# cd out; jdb Main
 
 debugcpp:
-	g++ $(CPP_FLAGS) -Og -ggdb3 -o main src/cpp/dsa/*.cpp src/cpp/main.cpp
+	g++ $(CPP_FLAGS) -Og -ggdb -o main src/cpp/dsa/*.cpp src/cpp/main.cpp
 	# gdb main
 
 debugpy:
