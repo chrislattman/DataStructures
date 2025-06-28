@@ -1,4 +1,7 @@
-use std::{cmp::Reverse, collections::{BTreeSet, BinaryHeap, HashMap, HashSet, LinkedList, VecDeque}};
+use std::{
+    cmp::Reverse,
+    collections::{BTreeSet, BinaryHeap, HashMap, HashSet, LinkedList, VecDeque},
+};
 
 use dsa::{
     algorithms::{binary_search_list, heapsort_list, mergesort_list, quicksort_list},
@@ -21,21 +24,21 @@ fn main() {
     // Every print statement should output true
 
     let mut arraylist = Vec::new();
-    println!("{}", format!("{:?}", arraylist) == "[]");
+    println!("{}", format!("{arraylist:?}") == "[]");
     arraylist.push(5);
     arraylist.push(10);
     arraylist.push(12);
     arraylist.insert(2, 17);
-    println!("{}", format!("{:?}", arraylist) == "[5, 10, 17, 12]");
+    println!("{}", format!("{arraylist:?}") == "[5, 10, 17, 12]");
     println!("{}", arraylist.contains(&5));
     println!("{}", arraylist[0] == 5);
     println!("{}", !arraylist.contains(&6));
     println!("{}", !arraylist.is_empty());
     println!("{}", arraylist.iter().position(|&x| x == 12).unwrap() == 3);
-    println!("{}", arraylist.iter().position(|&x| x == 13) == None);
+    println!("{}", arraylist.iter().position(|&x| x == 13).is_none());
     match arraylist.iter().position(|&x| x == 13) {
-        None => println!("{}", true),
-        Some(_) => println!("{}", false)
+        None => println!("true"),
+        Some(_) => println!("false"),
     }
     match arraylist.iter().position(|&x| x == 19) {
         None => println!("true"),
@@ -45,13 +48,13 @@ fn main() {
         }
     }
     arraylist.remove(arraylist.iter().position(|&x| x == 10).unwrap());
-    println!("{}", format!("{:?}", arraylist) == "[5, 17, 12]");
+    println!("{}", format!("{arraylist:?}") == "[5, 17, 12]");
     arraylist[1] = 13;
-    println!("{}", format!("{:?}", arraylist) == "[5, 13, 12]");
+    println!("{}", format!("{arraylist:?}") == "[5, 13, 12]");
     println!("{}", arraylist.len() == 3);
     println!("{}", arraylist == arraylist);
     arraylist.remove(1);
-    println!("{}", format!("{:?}", arraylist) == "[5, 12]");
+    println!("{}", format!("{arraylist:?}") == "[5, 12]");
 
     arraylist.clear();
     println!("{}", arraylist.len() == 0);
@@ -61,17 +64,17 @@ fn main() {
     arraylist.push(11);
     arraylist.push(5);
     arraylist.sort();
-    println!("{}", format!("{:?}", arraylist) == "[4, 5, 6, 11, 19]");
+    println!("{}", format!("{arraylist:?}") == "[4, 5, 6, 11, 19]");
     println!("{}", arraylist.binary_search(&11).unwrap() == 3);
     println!("{}", arraylist.binary_search(&2) == Err(0));
     println!("{}", arraylist.iter().filter(|&x| *x == 19).count() == 1);
     arraylist.reverse();
-    println!("{}", format!("{:?}", arraylist) == "[19, 11, 6, 5, 4]");
+    println!("{}", format!("{arraylist:?}") == "[19, 11, 6, 5, 4]");
 
     let keys = ["hello", "world", "hi", "bye"];
     let values = [5, 17, 3, 0];
     let mut hashmap = HashMap::new();
-    println!("{}", format!("{:?}", hashmap) == "{}");
+    println!("{}", format!("{hashmap:?}") == "{}");
     for i in 0..4 {
         hashmap.insert(keys[i], values[i]);
     }
@@ -83,20 +86,20 @@ fn main() {
     println!("{}", hashmap.values().any(|&x| x == 5));
     println!("{}", !hashmap.values().any(|&x| x == 6));
     println!("{}", hashmap["hello"] == 5);
-    println!("{}", hashmap.get("hellos") == None);
+    println!("{}", hashmap.get("hellos").is_none());
     // no built-in getOrDefault function
     // no built-in putIfAbsent function
     hashmap.insert("hello", 6);
     hashmap.remove("hi");
     println!("{}", hashmap.remove("bye").unwrap() == 0);
-    println!("{}", hashmap.remove("hellos") == None);
+    println!("{}", hashmap.remove("hellos").is_none());
     hashmap.clear();
     println!("{}", hashmap.len() == 0);
     println!("{}", hashmap == hashmap);
 
     let setnums = [12, 15, 10, 3, 13];
     let mut hashset = HashSet::new();
-    println!("{}", format!("{:?}", hashset) == "{}");
+    println!("{}", format!("{hashset:?}") == "{}");
     for elem in setnums {
         hashset.insert(elem);
     }
@@ -123,8 +126,8 @@ fn main() {
     // is disjoint: hashset.is_disjoint(&hashset) == false
 
     let mut randnums = [0; NUMS_LENGTH];
-    for i in 0..NUMS_LENGTH {
-        randnums[i] = rand::random::<i32>().abs() % 100; // (rand::random::<f64>() * 100.0) as i32;
+    for elem in randnums.iter_mut() {
+        *elem = rand::random::<i32>().abs() % 100; // (rand::random::<f64>() * 100.0) as i32;
     }
 
     let mut linkedlist = LinkedList::new();
@@ -150,7 +153,7 @@ fn main() {
     println!("{}", minheap.len() == NUMS_LENGTH);
     // for max heap: maxheap.iter().map(|x| *x).collect::<Vec<_>>()
     let heapstring = format!("{:?}", minheap.iter().map(|x| x.0).collect::<Vec<_>>());
-    let nodes: Vec<_> = (&heapstring[1..heapstring.len() - 1]).split(", ").collect();
+    let nodes: Vec<_> = (heapstring[1..heapstring.len() - 1]).split(", ").collect();
     let root = nodes[0].parse::<i32>().unwrap();
     println!("{}", minheap.peek().unwrap().0 == root); // for max heap: *maxheap.peek().unwrap() == root
     println!("{}", minheap.pop().unwrap().0 == root); // for max heap: maxheap.pop().unwrap() == root
@@ -175,7 +178,7 @@ fn main() {
 
     let treenums = [6, 4, 8, 3, 5, 7, 9];
     let mut treeset = BTreeSet::new();
-    println!("{}", format!("{:?}", treeset) == "{}");
+    println!("{}", format!("{treeset:?}") == "{}");
     for elem in treenums {
         treeset.insert(elem);
     }
@@ -198,7 +201,7 @@ fn main() {
     treeset.insert(30);
     treeset.insert(20);
     treeset.insert(10);
-    println!("{}", format!("{:?}", treeset) == "{10, 20, 30}");
+    println!("{}", format!("{treeset:?}") == "{10, 20, 30}");
 
     treeset.clear();
     treeset.insert(8);
@@ -207,7 +210,7 @@ fn main() {
     treeset.insert(4);
     treeset.insert(7);
     treeset.insert(3);
-    println!("{}", format!("{:?}", treeset) == "{3, 4, 6, 7, 8, 9}");
+    println!("{}", format!("{treeset:?}") == "{3, 4, 6, 7, 8, 9}");
 
     treeset.clear();
     treeset.insert(8);
@@ -216,7 +219,7 @@ fn main() {
     treeset.insert(4);
     treeset.insert(7);
     treeset.insert(5);
-    println!("{}", format!("{:?}", treeset) == "{4, 5, 6, 7, 8, 9}");
+    println!("{}", format!("{treeset:?}") == "{4, 5, 6, 7, 8, 9}");
 
     // left-right rotations
 
@@ -224,7 +227,7 @@ fn main() {
     treeset.insert(30);
     treeset.insert(10);
     treeset.insert(20);
-    println!("{}", format!("{:?}", treeset) == "{10, 20, 30}");
+    println!("{}", format!("{treeset:?}") == "{10, 20, 30}");
 
     treeset.clear();
     treeset.insert(8);
@@ -233,7 +236,7 @@ fn main() {
     treeset.insert(3);
     treeset.insert(6);
     treeset.insert(5);
-    println!("{}", format!("{:?}", treeset) == "{3, 4, 5, 6, 8, 9}");
+    println!("{}", format!("{treeset:?}") == "{3, 4, 5, 6, 8, 9}");
 
     treeset.clear();
     treeset.insert(8);
@@ -242,7 +245,7 @@ fn main() {
     treeset.insert(3);
     treeset.insert(6);
     treeset.insert(7);
-    println!("{}", format!("{:?}", treeset) == "{3, 4, 6, 7, 8, 9}");
+    println!("{}", format!("{treeset:?}") == "{3, 4, 6, 7, 8, 9}");
 
     // left rotations
 
@@ -250,7 +253,7 @@ fn main() {
     treeset.insert(10);
     treeset.insert(20);
     treeset.insert(30);
-    println!("{}", format!("{:?}", treeset) == "{10, 20, 30}");
+    println!("{}", format!("{treeset:?}") == "{10, 20, 30}");
 
     treeset.clear();
     treeset.insert(4);
@@ -259,7 +262,7 @@ fn main() {
     treeset.insert(5);
     treeset.insert(8);
     treeset.insert(7);
-    println!("{}", format!("{:?}", treeset) == "{3, 4, 5, 6, 7, 8}");
+    println!("{}", format!("{treeset:?}") == "{3, 4, 5, 6, 7, 8}");
 
     treeset.clear();
     treeset.insert(4);
@@ -268,7 +271,7 @@ fn main() {
     treeset.insert(5);
     treeset.insert(8);
     treeset.insert(9);
-    println!("{}", format!("{:?}", treeset) == "{3, 4, 5, 6, 8, 9}");
+    println!("{}", format!("{treeset:?}") == "{3, 4, 5, 6, 8, 9}");
 
     // right-left rotations
 
@@ -276,7 +279,7 @@ fn main() {
     treeset.insert(30);
     treeset.insert(10);
     treeset.insert(20);
-    println!("{}", format!("{:?}", treeset) == "{10, 20, 30}");
+    println!("{}", format!("{treeset:?}") == "{10, 20, 30}");
 
     treeset.clear();
     treeset.insert(4);
@@ -285,7 +288,7 @@ fn main() {
     treeset.insert(6);
     treeset.insert(9);
     treeset.insert(5);
-    println!("{}", format!("{:?}", treeset) == "{3, 4, 5, 6, 8, 9}");
+    println!("{}", format!("{treeset:?}") == "{3, 4, 5, 6, 8, 9}");
 
     treeset.clear();
     treeset.insert(4);
@@ -294,5 +297,5 @@ fn main() {
     treeset.insert(6);
     treeset.insert(9);
     treeset.insert(7);
-    println!("{}", format!("{:?}", treeset) == "{3, 4, 6, 7, 8, 9}");
+    println!("{}", format!("{treeset:?}") == "{3, 4, 6, 7, 8, 9}");
 }
