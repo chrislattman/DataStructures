@@ -7,21 +7,25 @@ const MIN_ARR_LEN_THRESHOLD_ARRAY_LIST: usize = 100;
 
 /// An array list data structure.
 pub struct MyArrayList<T> {
+    // It is not straightforward to try to allocate a fixed size generic array
+    // of size n of type Box<[T]>
+    // The generic_array crate solves this issue
     array: Vec<T>,
     size: u32,
 }
 
-/// Returns a new MyArrayList struct with a default
-/// initial capacity of 10.
-pub fn new_array_list_default<T: PartialEq>() -> MyArrayList<T> {
-    new_array_list(DEFAULT_CAPACITY_ARRAY_LIST)
-}
+impl<T: PartialEq> MyArrayList<T> {
+    /// Returns a new MyArrayList struct with a default initial capacity of 10.
+    pub fn new() -> Self {
+        Self::with_capacity(DEFAULT_CAPACITY_ARRAY_LIST)
+    }
 
-/// Returns a new MyArrayList struct with the specified initial capacity.
-pub fn new_array_list<T: PartialEq>(initial_capacity: usize) -> MyArrayList<T> {
-    MyArrayList {
-        array: Vec::with_capacity(initial_capacity),
-        size: 0,
+    /// Returns a new MyArrayList struct with the specified initial capacity.
+    pub fn with_capacity(initial_capacity: usize) -> Self {
+        Self {
+            array: Vec::with_capacity(initial_capacity),
+            size: 0,
+        }
     }
 }
 
@@ -71,7 +75,7 @@ impl<T: PartialEq> MyList<T> for MyArrayList<T> {
         0
     }
 
-    fn to_array(&self) -> Vec<T> {
+    fn to_array(&self) -> Box<[T]> {
         todo!()
     }
 
@@ -100,7 +104,7 @@ mod tests {
 
     #[test]
     fn test_add() {
-        let mut myarraylist: MyArrayList<u32> = new_array_list_default();
+        let mut myarraylist: MyArrayList<u32> = MyArrayList::new();
         myarraylist.clear();
         myarraylist.add(Some(0), 5);
         myarraylist.add(None, 6);
@@ -109,50 +113,50 @@ mod tests {
 
     #[test]
     fn test_contains() {
-        let mut myarraylist: MyArrayList<u32> = new_array_list_default();
+        let mut myarraylist: MyArrayList<u32> = MyArrayList::new();
         myarraylist.add(None, 5);
         assert!(!myarraylist.contains(5));
     }
 
     #[test]
     fn test_equals() {
-        let myarraylist: MyArrayList<u32> = new_array_list_default();
+        let myarraylist: MyArrayList<u32> = MyArrayList::new();
         assert!(!myarraylist.equals(&myarraylist));
     }
 
     #[test]
     fn test_index_of() {
-        let myarraylist: MyArrayList<u32> = new_array_list_default();
+        let myarraylist: MyArrayList<u32> = MyArrayList::new();
         assert_eq!(-1, myarraylist.index_of(0));
     }
 
     #[test]
     fn test_is_empty() {
-        let myarraylist: MyArrayList<u32> = new_array_list_default();
+        let myarraylist: MyArrayList<u32> = MyArrayList::new();
         assert!(myarraylist.is_empty());
     }
 
     #[test]
     fn test_last_index_of() {
-        let myarraylist: MyArrayList<u32> = new_array_list_default();
+        let myarraylist: MyArrayList<u32> = MyArrayList::new();
         assert_eq!(-1, myarraylist.last_index_of(0));
     }
 
     #[test]
     fn test_remove_element() {
-        let mut myarraylist: MyArrayList<u32> = new_array_list_default();
+        let mut myarraylist: MyArrayList<u32> = MyArrayList::new();
         assert!(!myarraylist.remove_element(0));
     }
 
     #[test]
     fn test_size() {
-        let myarraylist: MyArrayList<u32> = new_array_list_default();
+        let myarraylist: MyArrayList<u32> = MyArrayList::new();
         assert_eq!(0, myarraylist.size());
     }
 
     #[test]
     fn test_to_string() {
-        let myarraylist: MyArrayList<u32> = new_array_list_default();
+        let myarraylist: MyArrayList<u32> = MyArrayList::new();
         assert_eq!("[]", myarraylist.to_string());
     }
 }

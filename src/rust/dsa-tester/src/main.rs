@@ -2,14 +2,14 @@ use std::{cmp::Reverse, collections::{BTreeSet, BinaryHeap, HashMap, HashSet, Li
 
 use dsa::{
     algorithms::{binary_search_list, heapsort_list, mergesort_list, quicksort_list},
-    myarraylist::{new_array_list_default, MyArrayList},
+    myarraylist::MyArrayList,
     mylist::MyList,
 };
 
 const NUMS_LENGTH: usize = 10;
 
 fn main() {
-    let mut myarraylist: MyArrayList<u32> = new_array_list_default();
+    let mut myarraylist: MyArrayList<u32> = MyArrayList::new();
     myarraylist.add(Some(0), 6);
     myarraylist.add(None, 5);
 

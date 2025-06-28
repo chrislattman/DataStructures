@@ -40,7 +40,7 @@ pub trait MyList<T> {
     fn size(&self) -> u32;
 
     /// Returns an array containing all the elements in this list.
-    fn to_array(&self) -> Vec<T>;
+    fn to_array(&self) -> Box<[T]>;
 
     /// Returns a string representation of this list, e.g.
     /// "\[element1, element2, element3, ..., elementN\]".

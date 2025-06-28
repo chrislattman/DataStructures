@@ -14,11 +14,13 @@ pub struct MyLinkedList<T> {
     size: u32,
 }
 
-/// Returns a new MyLinkedList struct.
-pub fn new_linked_list<T: PartialEq>() -> MyLinkedList<T> {
-    MyLinkedList {
-        head: None,
-        size: 0,
+impl<T: PartialEq> MyLinkedList<T> {
+    /// Returns a new MyLinkedList struct.
+    pub fn new() -> Self {
+        Self {
+            head: None,
+            size: 0,
+        }
     }
 }
 
@@ -68,7 +70,7 @@ impl<T: PartialEq> MyList<T> for MyLinkedList<T> {
         0
     }
 
-    fn to_array(&self) -> Vec<T> {
+    fn to_array(&self) -> Box<[T]> {
         todo!()
     }
 
