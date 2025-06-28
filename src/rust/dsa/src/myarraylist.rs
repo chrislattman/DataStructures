@@ -7,9 +7,9 @@ const MIN_ARR_LEN_THRESHOLD_ARRAY_LIST: usize = 100;
 
 /// An array list data structure.
 pub struct MyArrayList<T> {
-    // It is not straightforward to try to allocate a fixed size generic array
-    // of size n of type Box<[T]>
-    // The generic_array crate solves this issue
+    // It is not straightforward to try to dynamically allocate a fixed size
+    // generic array of size n of type Box<[T]>
+    // Several crates address similar issues: arrayvec, heapless, generic_array
     array: Vec<T>,
     size: u32,
 }
