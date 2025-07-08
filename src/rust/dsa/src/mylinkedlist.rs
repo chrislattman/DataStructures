@@ -1,4 +1,4 @@
-use std::error::Error;
+use std::{error::Error, fmt};
 
 use crate::mylist::MyList;
 
@@ -15,7 +15,7 @@ pub struct MyLinkedList<T> {
 }
 
 impl<T: PartialEq> MyLinkedList<T> {
-    /// Returns a new MyLinkedList struct.
+    /// Returns a new `MyLinkedList` struct.
     pub fn new() -> Self {
         Self {
             head: None,
@@ -88,5 +88,11 @@ fn check_index<T: PartialEq>(
         Err(From::from("index is out of bounds"))
     } else {
         Ok(())
+    }
+}
+
+impl<T: PartialEq + fmt::Debug> fmt::Debug for MyLinkedList<T> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.to_string())
     }
 }

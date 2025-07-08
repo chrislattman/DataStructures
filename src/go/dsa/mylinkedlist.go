@@ -97,6 +97,11 @@ func (m MyLinkedList[T]) Size() uint32 {
 	return 0
 }
 
+// String overrides String() in the Stringer interface. Calls toString().
+func (m MyLinkedList[T]) String() string {
+	return m.ToString()
+}
+
 // ToArray returns an array containing all the elements in a linked list.
 func (m MyLinkedList[T]) ToArray() []T {
 	return make([]T, 0)

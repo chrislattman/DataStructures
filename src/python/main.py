@@ -13,6 +13,7 @@ NUMS_LENGTH = 10
 mylist = MyArrayList[int]()
 mylist.add(6, 0)
 mylist.add(5)
+print(str(mylist) == "[]")
 
 hashmap = MyHashMap[str, int]()
 hashmap.put("hello", 2)

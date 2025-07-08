@@ -81,6 +81,11 @@ func (m MyPriorityQueue[CT]) Size() uint32 {
 	return 0
 }
 
+// String overrides String() in the Stringer interface. Calls toString().
+func (m MyPriorityQueue[CT]) String() string {
+	return m.ToString()
+}
+
 // ToArray returns an array containing all the elements in a priority queue.
 func (m MyPriorityQueue[CT]) ToArray() []CT {
 	return make([]CT, 0)

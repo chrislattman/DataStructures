@@ -87,6 +87,8 @@ export default class MyLinkedList<T> implements MyList<T> {
      * @param upperBound value that index must be strictly less than
      */
     private checkIndex(index: number, upperBound: number): void {
-
+        if (index < 0 || index >= upperBound) {
+            throw new Error("index is out of bounds");
+        }
     }
 }

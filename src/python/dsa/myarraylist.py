@@ -162,3 +162,5 @@ class MyArrayList(MyList[T]):
         Raises:
             IndexError: if index is out of bounds
         """
+        if index < 0 or index >= upperBound:
+            raise IndexError("index is out of bounds")

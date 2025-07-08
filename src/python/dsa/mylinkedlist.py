@@ -145,6 +145,8 @@ class MyLinkedList(MyList[T]):
         Raises:
             IndexError: if index is out of bounds
         """
+        if index < 0 or index >= upperBound:
+            raise IndexError("index is out of bounds")
 
     class _Node:
         """Internal node object used by this linked list."""

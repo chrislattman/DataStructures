@@ -1,4 +1,4 @@
-use std::error::Error;
+use std::{error::Error, fmt};
 
 use crate::mylist::MyList;
 
@@ -15,12 +15,12 @@ pub struct MyArrayList<T> {
 }
 
 impl<T: PartialEq> MyArrayList<T> {
-    /// Returns a new MyArrayList struct with a default initial capacity of 10.
+    /// Returns a new `MyArrayList` struct with a default initial capacity of 10.
     pub fn new() -> Self {
         Self::with_capacity(DEFAULT_CAPACITY_ARRAY_LIST)
     }
 
-    /// Returns a new MyArrayList struct with the specified initial capacity.
+    /// Returns a new `MyArrayList` struct with the specified initial capacity.
     pub fn with_capacity(initial_capacity: usize) -> Self {
         Self {
             array: Vec::with_capacity(initial_capacity),
@@ -95,6 +95,12 @@ fn check_index<T: PartialEq>(
         Err(From::from("index is out of bounds"))
     } else {
         Ok(())
+    }
+}
+
+impl<T: PartialEq + fmt::Debug> fmt::Debug for MyArrayList<T> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.to_string())
     }
 }
 

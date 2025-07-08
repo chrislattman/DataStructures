@@ -101,6 +101,11 @@ func (m MyArrayList[T]) Size() uint32 {
 	return 0
 }
 
+// String overrides String() in the Stringer interface. Calls toString().
+func (m MyArrayList[T]) String() string {
+	return m.ToString()
+}
+
 // ToArray returns an array containing all the elements in an array list.
 func (m MyArrayList[T]) ToArray() []T {
 	return make([]T, 0)

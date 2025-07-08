@@ -15,6 +15,7 @@ fn main() {
     let mut myarraylist: MyArrayList<u32> = MyArrayList::new();
     myarraylist.add(Some(0), 6);
     myarraylist.add(None, 5);
+    println!("{}", format!("{myarraylist:?}") == "[]");
 
     binary_search_list(&mut myarraylist, 5);
     mergesort_list(&mut myarraylist);
@@ -63,7 +64,7 @@ fn main() {
     arraylist.push(19);
     arraylist.push(11);
     arraylist.push(5);
-    arraylist.sort();
+    arraylist.sort_unstable();
     println!("{}", format!("{arraylist:?}") == "[4, 5, 6, 11, 19]");
     println!("{}", arraylist.binary_search(&11).unwrap() == 3);
     println!("{}", arraylist.binary_search(&2) == Err(0));
@@ -126,7 +127,7 @@ fn main() {
     // is disjoint: hashset.is_disjoint(&hashset) == false
 
     let mut randnums = [0; NUMS_LENGTH];
-    for elem in randnums.iter_mut() {
+    for elem in &mut randnums {
         *elem = rand::random::<i32>().abs() % 100; // (rand::random::<f64>() * 100.0) as i32;
     }
 

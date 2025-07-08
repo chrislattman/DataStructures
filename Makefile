@@ -63,7 +63,7 @@ lintgo:
 
 lintrust:
 	cargo fmt
-	cargo clippy
+	cargo clippy -- -D clippy::all -D clippy::pedantic
 
 coveragejava: testjava
 	rm bin/dsa/*Test.class # excluding tests from code coverage report

@@ -38,6 +38,7 @@ func main() {
 	myarraylist := dsa.NewArrayListDefault[int]()
 	myarraylist.Add(6, 0)
 	myarraylist.AddToEnd(5)
+	fmt.Println(fmt.Sprint(myarraylist) == "[]")
 
 	dsa.BinarySearchList(myarraylist, 7)
 	dsa.MergesortList(myarraylist)
