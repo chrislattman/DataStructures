@@ -13,9 +13,9 @@ const NUMS_LENGTH: usize = 10;
 
 fn main() {
     let mut myarraylist: MyArrayList<u32> = MyArrayList::new();
-    myarraylist.add(Some(0), 6);
-    myarraylist.add(None, 5);
-    println!("{}", format!("{myarraylist:?}") == "[]");
+    myarraylist.add(Some(0), 6).unwrap();
+    myarraylist.add(None, 5).unwrap();
+    println!("{}", format!("{myarraylist:?}") == "[6, 5]");
 
     binary_search_list(&mut myarraylist, 5);
     mergesort_list(&mut myarraylist);

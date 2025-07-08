@@ -1,7 +1,23 @@
+use std::fmt;
+
+/// Types of errors for types that implement MyList.
+#[derive(Debug)]
+pub enum MyListError {
+    IndexError
+}
+
+impl fmt::Display for MyListError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            MyListError::IndexError => write!(f, "index is out of bounds"),
+        }
+    }
+}
+
 /// Trait which defines methods for lists.
 pub trait MyList<T> {
     /// Inserts an element at the specified index or at the end of this list.
-    fn add(&mut self, index: Option<u32>, element: T);
+    fn add(&mut self, index: Option<usize>, element: T) -> Result<(), MyListError>;
 
     /// Empties this list of all elements.
     fn clear(&mut self);
@@ -14,7 +30,7 @@ pub trait MyList<T> {
 
     /// Retrieves, but does not remove, an element from this list at the
     /// specified index.
-    fn get(&self, index: u32) -> T;
+    fn get(&self, index: usize) -> Result<T, MyListError>;
 
     /// Returns the index of the first occurrence of an element found in this
     /// list.
@@ -28,16 +44,16 @@ pub trait MyList<T> {
     fn last_index_of(&self, element: T) -> i64;
 
     /// Retrieves and removes an element from this list at a specified index.
-    fn remove(&mut self, index: u32) -> T;
+    fn remove(&mut self, index: usize) -> Result<T, MyListError>;
 
     /// Removes the first occurrence of an element from this list.
     fn remove_element(&mut self, element: T) -> bool;
 
     /// Sets the existing element at a specified index to a new value.
-    fn set(&mut self, index: u32, element: T) -> T;
+    fn set(&mut self, index: usize, element: T) -> Result<T, MyListError>;
 
     /// Returns the number of elements in this list.
-    fn size(&self) -> u32;
+    fn size(&self) -> usize;
 
     /// Returns an array containing all the elements in this list.
     fn to_array(&self) -> Box<[T]>;

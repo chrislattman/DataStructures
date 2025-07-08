@@ -1,6 +1,6 @@
-use std::{error::Error, fmt};
+use std::fmt::{self, Display};
 
-use crate::mylist::MyList;
+use crate::mylist::{MyList, MyListError};
 
 /// Internal struct used by this linked list.
 struct Node<T> {
@@ -11,7 +11,7 @@ struct Node<T> {
 /// A linked list data structure.
 pub struct MyLinkedList<T> {
     head: Option<Box<Node<T>>>,
-    size: u32,
+    size: usize,
 }
 
 impl<T: PartialEq> MyLinkedList<T> {
@@ -25,8 +25,13 @@ impl<T: PartialEq> MyLinkedList<T> {
 }
 
 // MyArrayList trait item that implements MyList.
-impl<T: PartialEq> MyList<T> for MyLinkedList<T> {
-    fn add(&mut self, index: Option<u32>, element: T) {}
+impl<T> MyList<T> for MyLinkedList<T>
+where
+    T: PartialEq + Copy + Display
+{
+    fn add(&mut self, index: Option<usize>, element: T) -> Result<(), MyListError> {
+        todo!()
+    }
 
     fn clear(&mut self) {}
 
@@ -38,7 +43,7 @@ impl<T: PartialEq> MyList<T> for MyLinkedList<T> {
         false
     }
 
-    fn get(&self, index: u32) -> T {
+    fn get(&self, index: usize) -> Result<T, MyListError> {
         todo!()
     }
 
@@ -54,7 +59,7 @@ impl<T: PartialEq> MyList<T> for MyLinkedList<T> {
         -1
     }
 
-    fn remove(&mut self, index: u32) -> T {
+    fn remove(&mut self, index: usize) -> Result<T, MyListError> {
         todo!()
     }
 
@@ -62,11 +67,11 @@ impl<T: PartialEq> MyList<T> for MyLinkedList<T> {
         false
     }
 
-    fn set(&mut self, index: u32, element: T) -> T {
+    fn set(&mut self, index: usize, element: T) -> Result<T, MyListError> {
         todo!()
     }
 
-    fn size(&self) -> u32 {
+    fn size(&self) -> usize {
         0
     }
 
@@ -79,19 +84,18 @@ impl<T: PartialEq> MyList<T> for MyLinkedList<T> {
     }
 }
 
-fn check_index<T: PartialEq>(
-    list: &MyLinkedList<T>,
-    index: u32,
-    upper_bound: u32,
-) -> Result<(), Box<dyn Error>> {
+fn check_index(index: usize, upper_bound: usize) -> Result<(), MyListError> {
     if index >= upper_bound {
-        Err(From::from("index is out of bounds"))
+        Err(MyListError::IndexError)
     } else {
         Ok(())
     }
 }
 
-impl<T: PartialEq + fmt::Debug> fmt::Debug for MyLinkedList<T> {
+impl<T> fmt::Debug for MyLinkedList<T>
+where
+    T: PartialEq + Copy + Display + fmt::Debug
+{
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.to_string())
     }

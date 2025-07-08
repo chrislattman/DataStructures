@@ -79,7 +79,6 @@ public class Algorithms {
      * @param key key to find
      * @return index of key in array, or -1 if key not found
      * @param <T> data type which much implement Comparable
-     * @throws IllegalArgumentException if array is not sorted
      */
     public static <T extends Comparable<? super T>> int binarySearch(
         T[] array, int startIndex, int endIndex, T key) {
