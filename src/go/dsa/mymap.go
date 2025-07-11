@@ -51,7 +51,7 @@ type MyMap[K, V comparable] interface {
 
 	// ReplaceIfPresent maps key to newValue only if key already maps to
 	// oldValue, and reports whether this replacement was successful.
-	ReplaceIfPresent(key K, oldValue V, newValue V) bool
+	ReplaceIfPresent(key K, oldValue, newValue V) bool
 
 	// Size returns the number of key-value pairs in a map.
 	Size() uint

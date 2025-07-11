@@ -10,9 +10,12 @@ import (
 // Install mockgen with:
 // go install go.uber.org/mock/mockgen@latest
 
+// Preferably put beforeAll(), TestMain(), and afterAll() in separate test file
+
 // beforeAll runs once before the unit tests begin.
 func beforeAll() {
 	var _ MyList[int] = (*MyArrayList[int])(nil)
+	var _ MyList[int] = (*MyLinkedList[int])(nil)
 }
 
 // Entry function which starts unit test execution.
@@ -23,7 +26,7 @@ func TestMain(m *testing.M) {
 	os.Exit(code)
 }
 
-func TestAdd(t *testing.T) {
+func TestMyArrayList_Add(t *testing.T) {
 	myArrayList := NewArrayListDefault[int]()
 	myArrayList.Clear()
 	assertEquals(t, uint(0), myArrayList.Size())
@@ -33,19 +36,19 @@ func TestAdd(t *testing.T) {
 	assertEquals(t, uint(2), myArrayList.Size())
 }
 
-func TestContains(t *testing.T) {
+func TestMyArrayList_Contains(t *testing.T) {
 	myArrayList := NewArrayListDefault[int]()
 	myArrayList.AddToEnd(5)
 	assertTrue(t, myArrayList.Contains(5))
 	assertFalse(t, myArrayList.Contains(6))
 }
 
-func TestEquals(t *testing.T) {
+func TestMyArrayList_Equals(t *testing.T) {
 	myArrayList := NewArrayListDefault[int]()
 	assertFalse(t, myArrayList.Equals(myArrayList))
 }
 
-func TestGet(t *testing.T) {
+func TestMyArrayList_Get(t *testing.T) {
 	myArrayList := NewArrayListDefault[int]()
 	_, err := myArrayList.Get(0)
 	assertNotNil(t, err)
@@ -54,26 +57,26 @@ func TestGet(t *testing.T) {
 	assertEquals(t, 5, res)
 }
 
-func TestIndexOf(t *testing.T) {
+func TestMyArrayList_IndexOf(t *testing.T) {
 	myArrayList := NewArrayListDefault[int]()
 	assertEquals(t, -1, myArrayList.IndexOf(5))
 	myArrayList.AddToEnd(5)
 	assertEquals(t, 0, myArrayList.IndexOf(5))
 }
 
-func TestIsEmpty(t *testing.T) {
+func TestMyArrayList_IsEmpty(t *testing.T) {
 	myArrayList := NewArrayListDefault[int]()
 	assertTrue(t, myArrayList.IsEmpty())
 }
 
-func TestLastIndexOf(t *testing.T) {
+func TestMyArrayList_LastIndexOf(t *testing.T) {
 	myArrayList := NewArrayListDefault[int]()
 	assertEquals(t, -1, myArrayList.LastIndexOf(5))
 	myArrayList.AddToEnd(5)
 	assertEquals(t, 0, myArrayList.LastIndexOf(5)) // failed
 }
 
-func TestRemove(t *testing.T) {
+func TestMyArrayList_Remove(t *testing.T) {
 	myArrayList := NewArrayListDefault[int]()
 	_, err := myArrayList.Remove(0)
 	assertNotNil(t, err)
@@ -83,7 +86,7 @@ func TestRemove(t *testing.T) {
 	assertTrue(t, myArrayList.IsEmpty())
 }
 
-func TestRemoveElement(t *testing.T) {
+func TestMyArrayList_RemoveElement(t *testing.T) {
 	myArrayList := NewArrayListDefault[int]()
 	assertFalse(t, myArrayList.RemoveElement(5))
 	myArrayList.AddToEnd(5)
@@ -91,7 +94,7 @@ func TestRemoveElement(t *testing.T) {
 	assertTrue(t, myArrayList.IsEmpty())
 }
 
-func TestSet(t *testing.T) {
+func TestMyArrayList_Set(t *testing.T) {
 	myArrayList := NewArrayListDefault[int]()
 	_, err := myArrayList.Set(1, 5)
 	assertNotNil(t, err)
@@ -102,12 +105,12 @@ func TestSet(t *testing.T) {
 	assertEquals(t, 6, res)
 }
 
-func TestSize(t *testing.T) {
+func TestMyArrayList_Size(t *testing.T) {
 	myArrayList := NewArrayListDefault[int]()
 	assertEquals(t, uint(0), myArrayList.Size())
 }
 
-func TestToString(t *testing.T) {
+func TestMyArrayList_ToString(t *testing.T) {
 	myArrayList := NewArrayListDefault[int]()
 	assertEquals(t, "[]", myArrayList.ToString())
 	myArrayList.AddToEnd(5)
@@ -116,7 +119,7 @@ func TestToString(t *testing.T) {
 	assertEquals(t, "[5, 6]", myArrayList.ToString())
 }
 
-func TestMock(t *testing.T) {
+func TestMyArrayList_Mock(t *testing.T) {
 	ctrl := gomock.NewController(t)
 	defer ctrl.Finish()
 	mockList := NewMockMyList[int](ctrl)
@@ -132,5 +135,5 @@ func TestMock(t *testing.T) {
 
 // afterAll runs once all unit tests have finished.
 func afterAll() {
-
+	// Cleanup goes here
 }

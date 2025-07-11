@@ -90,7 +90,7 @@ coveragets:
 coveragego:
 	go generate src/go/dsa/mylist.go
 	go test -v -coverprofile=coverage.out ./src/go/dsa
-	grep -v "test_helpers" coverage.out > coverage.out.bak
+	grep -v -e "test_helpers" -e "mock_*" coverage.out > coverage.out.bak
 	rm coverage.out
 	mv coverage.out.bak coverage.out
 	go tool cover -html=coverage.out
@@ -219,4 +219,4 @@ clean:
 		src/python/dsa/__pycache__ test/python/dsa/__pycache__ \
 		.mypy_cache bin jacoco.exec *-coverage-report .coverage coverage.out \
 		dist dsa-1.0.0.tgz target *.profdata *.profraw src/rust/dsa/*.profraw \
-		src/rust/dsa-tester/*.profraw
+		src/rust/dsa-tester/*.profraw src/go/dsa/mock_*.go

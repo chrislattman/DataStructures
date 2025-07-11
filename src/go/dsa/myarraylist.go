@@ -205,7 +205,7 @@ func (m *MyArrayList[T]) checkCapacity() {
 
 // checkIndex validates that the given index is in bounds. Returns an error if index is
 // greater than or equal to upperBound.
-func (m MyArrayList[T]) checkIndex(index uint, upperBound uint) error {
+func (m MyArrayList[T]) checkIndex(index, upperBound uint) error {
 	if index >= upperBound {
 		return errors.New("index is out of bounds")
 	}

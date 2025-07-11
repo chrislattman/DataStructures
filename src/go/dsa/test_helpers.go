@@ -3,7 +3,7 @@ package dsa
 import "testing"
 
 // assertEquals fails if expected does not equal actual.
-func assertEquals(t *testing.T, expected any, actual any) {
+func assertEquals(t *testing.T, expected, actual any) {
 	if actual != expected {
 		t.Fatalf("expected %v but was %v\n", expected, actual)
 	}
