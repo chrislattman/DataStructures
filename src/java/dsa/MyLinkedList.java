@@ -69,6 +69,7 @@ public class MyLinkedList<T> implements MyList<T> {
         return false;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public boolean equals(Object object) {
         if (object == this) {
@@ -84,11 +85,13 @@ public class MyLinkedList<T> implements MyList<T> {
             return false;
         }
         Node current = head;
+        Node objCurrent = (MyLinkedList<T>.Node) obj.head;
         for (int i = 0; i < size; i++) {
-            if (!obj.get(i).equals(current.data)) {
+            if (!objCurrent.data.equals(current.data)) {
                 return false;
             }
             current = current.next;
+            objCurrent = objCurrent.next;
         }
         return true;
     }
@@ -160,7 +163,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public boolean removeElement(T element) {
-        if (element == head.data) {
+        if (head != null && element.equals(head.data)) {
             head = head.next;
             --size;
             return true;

@@ -181,7 +181,7 @@ public class MyStack<T> {
             array = newArray;
         } else if (array.length > minArrLenThreshold
                    && size * 2 < array.length) {
-            T[] newArray = (T[]) new Object[size / 2];
+            T[] newArray = (T[]) new Object[array.length / 2];
             System.arraycopy(array, 0, newArray, 0, size);
             array = newArray;
         }

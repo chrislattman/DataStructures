@@ -226,7 +226,7 @@ public class MyPriorityQueue<T extends Comparable<? super T>>
             array = newArray;
         } else if (array.length > minArrLenThreshold
                    && size * 2 < array.length) {
-            T[] newArray = (T[]) new Comparable[size / 2];
+            T[] newArray = (T[]) new Comparable[array.length / 2];
             System.arraycopy(array, 0, newArray, 0, size);
             array = newArray;
         }

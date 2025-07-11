@@ -41,7 +41,7 @@ private:
             delete[] array;
             array = newArray;
         } else if (array_length > minArrLenThreshold && array_size * 2 < array_length) {
-            T *newArray = new T[array_size / 2];
+            T *newArray = new T[array_length / 2];
             memcpy(newArray, array, array_size);
             delete[] array;
             array = newArray;

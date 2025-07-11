@@ -95,7 +95,7 @@ public class MyArrayList<T> implements MyList<T> {
             return false;
         }
         for (int i = 0; i < size; i++) {
-            if (!obj.get(i).equals(array[i])) {
+            if (!obj.array[i].equals(array[i])) {
                 return false;
             }
         }
@@ -143,7 +143,9 @@ public class MyArrayList<T> implements MyList<T> {
         checkIndex(index, size);
         T element = array[index];
         --size;
-        System.arraycopy(array, index + 1, array, index, size - index);
+        if (index + 1 < size) {
+            System.arraycopy(array, index + 1, array, index, size - index - 1);
+        }
         checkCapacity();
         return element;
     }
@@ -153,7 +155,9 @@ public class MyArrayList<T> implements MyList<T> {
         for (int i = 0; i < size; i++) {
             if (element.equals(array[i])) {
                 --size;
-                System.arraycopy(array, i + 1, array, i, size - i);
+                if (i + 1 < size) {
+                    System.arraycopy(array, i + 1, array, i, size - i - 1);
+                }
                 checkCapacity();
                 return true;
             }
@@ -208,7 +212,7 @@ public class MyArrayList<T> implements MyList<T> {
             array = newArray;
         } else if (array.length > minArrLenThreshold
             && size * 2 < array.length) {
-            T[] newArray = (T[]) new Object[size / 2];
+            T[] newArray = (T[]) new Object[array.length / 2];
             System.arraycopy(array, 0, newArray, 0, size);
             array = newArray;
         }

@@ -1,9 +1,12 @@
 use std::fmt;
 
+#[cfg(test)]
+use mockall::automock;
+
 /// Types of errors for types that implement MyList.
 #[derive(Debug)]
 pub enum MyListError {
-    IndexError
+    IndexError,
 }
 
 impl fmt::Display for MyListError {
@@ -15,6 +18,7 @@ impl fmt::Display for MyListError {
 }
 
 /// Trait which defines methods for lists.
+#[cfg_attr(test, automock)]
 pub trait MyList<T> {
     /// Inserts an element at the specified index or at the end of this list.
     fn add(&mut self, index: Option<usize>, element: T) -> Result<(), MyListError>;
@@ -26,7 +30,7 @@ pub trait MyList<T> {
     fn contains(&self, element: T) -> bool;
 
     /// Compares an object with this list for equality.
-    fn equals(&self, object: &dyn MyList<T>) -> bool;
+    fn equals(&self, object: &Self) -> bool;
 
     /// Retrieves, but does not remove, an element from this list at the
     /// specified index.

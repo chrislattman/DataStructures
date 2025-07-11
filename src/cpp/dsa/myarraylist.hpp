@@ -43,7 +43,7 @@ private:
             delete[] array;
             array = newArray;
         } else if (array_length > minArrLenThreshold && array_size * 2 < array_length) {
-            T *newArray = new T[array_size / 2];
+            T *newArray = new T[array_length / 2];
             memcpy(newArray, array, array_size);
             delete[] array;
             array = newArray;
@@ -202,7 +202,9 @@ public:
         checkIndex(index, array_size);
         T element = array[index];
         --array_size;
-        memmove(array + index, array + index + 1, (array_size - index) * sizeof(T));
+        if (index + 1 < array_size) {
+            memmove(array + index, array + index + 1, (array_size - index - 1) * sizeof(T));
+        }
         checkCapacity();
         return element;
     }
@@ -215,7 +217,9 @@ public:
         for (int i = 0; i < array_size; i++) {
             if (element == array[i]) {
                 --array_size;
-                memmove(array + i, array + i + 1, (array_size - i) * sizeof(T));
+                if (i + 1 < array_size) {
+                    memmove(array + i, array + i + 1, (array_size - i - 1) * sizeof(T));
+                }
                 checkCapacity();
                 return true;
             }
