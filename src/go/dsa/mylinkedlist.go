@@ -11,7 +11,7 @@ type node[T comparable] struct {
 // MyLinkedList is a singly linked list data structure.
 type MyLinkedList[T comparable] struct {
 	head *node[T]
-	size uint32
+	size uint
 }
 
 // NewMyLinkedList returns a new MyLinkedList struct pointer.
@@ -22,15 +22,15 @@ func NewMyLinkedList[T comparable]() *MyLinkedList[T] {
 	return newlist
 }
 
-// Add inserts element elem at index idx of a linked list. Returns an error if
-// idx is out of bounds (idx must be between 0 and Size(), inclusive).
-func (m *MyLinkedList[T]) Add(elem T, idx uint32) error {
+// Add inserts the given element at the given index of a linked list. Returns an error if
+// index is out of bounds (index must be between 0 and Size(), inclusive).
+func (m *MyLinkedList[T]) Add(index uint, element T) error {
 	return nil
 }
 
-// AddToEnd inserts element elem at the end of a linked list.
-func (m *MyLinkedList[T]) AddToEnd(elem T) {
-	m.Add(elem, m.size)
+// AddToEnd inserts the given element at the end of a linked list.
+func (m *MyLinkedList[T]) AddToEnd(element T) {
+	m.Add(m.size, element)
 }
 
 // Clear empties a linked list of all elements.
@@ -38,26 +38,26 @@ func (m *MyLinkedList[T]) Clear() {
 
 }
 
-// Contains reports whether element elem is in a linked list.
-func (m MyLinkedList[T]) Contains(elem T) bool {
+// Contains reports whether the given element is in a linked list.
+func (m MyLinkedList[T]) Contains(element T) bool {
 	return false
 }
 
 // Equals reports whether obj is equal to a linked list.
-func (m MyLinkedList[T]) Equals(obj interface{}) bool {
+func (m MyLinkedList[T]) Equals(obj any) bool {
 	return false
 }
 
-// Get returns, but does not remove, an element from a linked list at index idx.
-// Returns an error if idx is out of bounds (idx must be between 0 and
+// Get returns, but does not remove, an element from a linked list at the given index.
+// Returns an error if index is out of bounds (index must be between 0 and
 // Size() - 1, inclusive).
-func (m MyLinkedList[T]) Get(idx uint32) (T, error) {
+func (m MyLinkedList[T]) Get(index uint) (T, error) {
 	return make([]T, 1)[0], nil
 }
 
-// IndexOf returns the index of the first occurrence of element elem found
+// IndexOf returns the index of the first occurrence of the given element found
 // in a linked list, or -1 if not found.
-func (m MyLinkedList[T]) IndexOf(elem T) int64 {
+func (m MyLinkedList[T]) IndexOf(element T) int {
 	return -1
 }
 
@@ -66,34 +66,34 @@ func (m MyLinkedList[T]) IsEmpty() bool {
 	return true
 }
 
-// IndexOf returns the index of the last occurrence of element elem found
+// IndexOf returns the index of the last occurrence of the given element found
 // in a linked list, or -1 if not found.
-func (m MyLinkedList[T]) LastIndexOf(elem T) int64 {
+func (m MyLinkedList[T]) LastIndexOf(element T) int {
 	return -1
 }
 
-// Remove retrieves and removes an element from a linked list at index idx.
-// Returns an error if idx is out of bounds (idx must be between 0 and
+// Remove retrieves and removes an element from a linked list at the given index.
+// Returns an error if index is out of bounds (index must be between 0 and
 // Size() - 1, inclusive).
-func (m *MyLinkedList[T]) Remove(idx uint32) (T, error) {
+func (m *MyLinkedList[T]) Remove(index uint) (T, error) {
 	return make([]T, 1)[0], nil
 }
 
-// RemoveElement attempts to remove element elem from a linked list, and reports
+// RemoveElement attempts to remove the given element from a linked list, and reports
 // whether the deletion was successful.
-func (m *MyLinkedList[T]) RemoveElement(elem T) bool {
+func (m *MyLinkedList[T]) RemoveElement(element T) bool {
 	return false
 }
 
-// Set sets the existing element at index idx of a linked list to element elem
-// and returns the existing element. Returns an error if idx is out of bounds
-// (idx must be between 0 and Size() - 1, inclusive).
-func (m *MyLinkedList[T]) Set(idx uint32, elem T) (T, error) {
+// Set sets the existing element at the given index of a linked list to the given element
+// and returns the existing element. Returns an error if index is out of bounds
+// (index must be between 0 and Size() - 1, inclusive).
+func (m *MyLinkedList[T]) Set(index uint, element T) (T, error) {
 	return make([]T, 1)[0], nil
 }
 
 // Size returns the number of elements in a linked list.
-func (m MyLinkedList[T]) Size() uint32 {
+func (m MyLinkedList[T]) Size() uint {
 	return 0
 }
 
@@ -113,10 +113,10 @@ func (m MyLinkedList[T]) ToString() string {
 	return "[]"
 }
 
-// checkIndex validates that index idx is in bounds. Returns an error if idx is
+// checkIndex validates that the given index is in bounds. Returns an error if index is
 // greater than or equal to upperBound.
-func (m MyLinkedList[T]) checkIndex(idx uint32, upperBound uint32) error {
-	if idx >= upperBound {
+func (m MyLinkedList[T]) checkIndex(index uint, upperBound uint) error {
+	if index >= upperBound {
 		return errors.New("index is out of bounds")
 	}
 	return nil

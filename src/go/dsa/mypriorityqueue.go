@@ -9,7 +9,7 @@ const minArrLenThresholdPriorityQueue = 100
 // heap.
 type MyPriorityQueue[CT cmp.Ordered] struct {
 	array     []CT
-	size      uint32
+	size      uint
 	isMinHeap bool
 }
 
@@ -22,7 +22,7 @@ func NewMyPriorityQueueDefault[CT cmp.Ordered]() *MyPriorityQueue[CT] {
 // NewMyPriorityQueueDefaultHeap returns a min heap with initial capacity
 // initialCapacity.
 func NewMyPriorityQueueDefaultHeap[CT cmp.Ordered](
-	initialCapacity uint32) *MyPriorityQueue[CT] {
+	initialCapacity uint) *MyPriorityQueue[CT] {
 	return NewMyPriorityQueue[CT](initialCapacity, true)
 }
 
@@ -36,7 +36,7 @@ func NewMyPriorityQueueDefaultCapacity[CT cmp.Ordered](
 // NewMyPriorityQueue returns either a min heap or a max heap with initial
 // capacity initialCapacity.
 func NewMyPriorityQueue[CT cmp.Ordered](
-	initialCapacity uint32, isMinHeap bool) *MyPriorityQueue[CT] {
+	initialCapacity uint, isMinHeap bool) *MyPriorityQueue[CT] {
 	newqueue := new(MyPriorityQueue[CT])
 	newqueue.array = make([]CT, initialCapacity)
 	newqueue.size = 0
@@ -50,7 +50,7 @@ func (m *MyPriorityQueue[CT]) Clear() {
 }
 
 // Equals reports whether obj is equal to a priority queue.
-func (m MyPriorityQueue[CT]) Equals(obj interface{}) bool {
+func (m MyPriorityQueue[CT]) Equals(obj any) bool {
 	return false
 }
 
@@ -59,8 +59,8 @@ func (m MyPriorityQueue[CT]) IsEmpty() bool {
 	return true
 }
 
-// Offer inserts element elem to a priority queue.
-func (m *MyPriorityQueue[CT]) Offer(elem CT) {
+// Offer inserts the given element to a priority queue.
+func (m *MyPriorityQueue[CT]) Offer(element CT) {
 
 }
 
@@ -77,7 +77,7 @@ func (m *MyPriorityQueue[CT]) Poll() (CT, bool) {
 }
 
 // Size returns the number of elements in a priority queue.
-func (m MyPriorityQueue[CT]) Size() uint32 {
+func (m MyPriorityQueue[CT]) Size() uint {
 	return 0
 }
 
@@ -106,6 +106,6 @@ func (m *MyPriorityQueue[CT]) checkCapacity() {
 // getBestIndex returns the index of the lesser element of the internal array
 // of a priority queue if it is a min heap. Otherwise, returns the index of the
 // greater element, or -1. Indices should be distinct and increasing.
-func (m MyPriorityQueue[CT]) getBestIndex(leftIndex uint32) int64 {
+func (m MyPriorityQueue[CT]) getBestIndex(leftIndex uint) int {
 	return -1
 }

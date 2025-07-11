@@ -3,6 +3,11 @@ SHELL=/bin/bash
 CPP_FLAGS=-Wall -Wextra -pedantic -std=c++14
 MOCK=lib/mockito-core-5.9.0.jar:lib/byte-buddy-1.14.11.jar:lib/objenesis-3.3.jar
 
+OS=$(shell echo `uname -a`)
+ifneq ($(findstring Darwin,$(OS)),)
+PREFIX=/usr/local/opt/llvm/bin/
+endif
+
 runjava: libjava
 	javac -cp dsa.jar src/java/Main.java
 	java -cp dsa.jar:src/java Main
@@ -83,6 +88,7 @@ coveragets:
 	open typescript-coverage-report/lcov-report/index.html
 
 coveragego:
+	go generate src/go/dsa/mylist.go
 	go test -v -coverprofile=coverage.out ./src/go/dsa
 	grep -v "test_helpers" coverage.out > coverage.out.bak
 	rm coverage.out
@@ -91,10 +97,11 @@ coveragego:
 
 coveragerust:
 	RUSTFLAGS="-C instrument-coverage" cargo test -q
-	llvm-profdata merge --sparse -o default.profdata src/rust/dsa/default*.profraw
+	$(PREFIX)llvm-profdata merge --sparse -o default.profdata src/rust/dsa/default*.profraw
 	rm -f target/debug/deps/dsa-*.o target/debug/deps/dsa-*.d
-	llvm-cov show -format=html -output-dir=rust-coverage-report \
-		-instr-profile=default.profdata ./target/debug/deps/dsa-*
+	$(PREFIX)llvm-cov show -format=html -output-dir=rust-coverage-report \
+		-instr-profile=default.profdata ./target/debug/deps/dsa-* \
+		-ignore-filename-regex="/.cargo/|/.rustup/"
 	open rust-coverage-report/index.html
 
 testjava:
@@ -114,6 +121,7 @@ testts:
 	npm test
 
 testgo:
+	go generate src/go/dsa/mylist.go
 	go test -v ./src/go/dsa
 
 testrust:
@@ -210,5 +218,5 @@ clean:
 	rm -rf *.jar main src/java/Main.class src/java/dsa/*.class out public \
 		src/python/dsa/__pycache__ test/python/dsa/__pycache__ \
 		.mypy_cache bin jacoco.exec *-coverage-report .coverage coverage.out \
-		dist dsa-1.0.0.tgz target *.profdata src/rust/dsa/*.profraw \
+		dist dsa-1.0.0.tgz target *.profdata *.profraw src/rust/dsa/*.profraw \
 		src/rust/dsa-tester/*.profraw

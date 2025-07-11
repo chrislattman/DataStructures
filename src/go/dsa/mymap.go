@@ -12,7 +12,7 @@ type MyMap[K, V comparable] interface {
 	ContainsValue(value V) bool
 
 	// Equals reports whether obj is equal to a map.
-	Equals(obj interface{}) bool
+	Equals(obj any) bool
 
 	// GetValue returns the value associated with key. False is returned if key
 	// was not found.
@@ -54,7 +54,7 @@ type MyMap[K, V comparable] interface {
 	ReplaceIfPresent(key K, oldValue V, newValue V) bool
 
 	// Size returns the number of key-value pairs in a map.
-	Size() uint32
+	Size() uint
 
 	// ToString returns a string representation of a map, e.g.
 	// "{key1=value1, key2=value2, key3=value3, ..., keyN=valueN}".

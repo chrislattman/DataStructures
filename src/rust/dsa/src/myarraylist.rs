@@ -324,6 +324,7 @@ mod tests {
         let mut mock_list = MockMyList::<i32>::new();
         mock_list.expect_size().returning(|| 10);
         assert_eq!(10, mock_list.size());
+
         mock_list.expect_contains().with(eq(3)).returning(|_| true);
         mock_list
             .expect_contains()

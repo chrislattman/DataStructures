@@ -14,6 +14,7 @@ import (
 )
 
 type PriorityQueue []int
+
 func (h PriorityQueue) Len() int           { return len(h) }
 func (h PriorityQueue) Less(i, j int) bool { return h[i] < h[j] }
 func (h PriorityQueue) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
@@ -22,7 +23,7 @@ func (h *PriorityQueue) Pop() any {
 	old := *h
 	n := len(old)
 	x := old[n-1]
-	*h = old[0:n-1]
+	*h = old[0 : n-1]
 	return x
 }
 
@@ -64,7 +65,7 @@ func main() {
 	// arraylist = append(arraylist[:slices.Index(arraylist, 19)], arraylist[slices.Index(arraylist, 19) + 1:]...)
 	// old style:
 	// arraylist = append(arraylist[:slices.Index(arraylist, 10)], arraylist[slices.Index(arraylist, 10) + 1:]...)
-	arraylist = slices.Delete(arraylist, slices.Index(arraylist, 10), slices.Index(arraylist, 10) + 1)
+	arraylist = slices.Delete(arraylist, slices.Index(arraylist, 10), slices.Index(arraylist, 10)+1)
 	fmt.Println(fmt.Sprint(arraylist) == "[5 17 12]")
 	arraylist[1] = 13
 	fmt.Println(fmt.Sprint(arraylist) == "[5 13 12]")
@@ -91,7 +92,7 @@ func main() {
 	fmt.Println(fmt.Sprint(arraylist) == "[19 11 6 5 4]")
 
 	keys := [4]string{"hello", "world", "hi", "bye"} // both allocated
-	values := [4]int{5, 17, 3, 0}					 // on the stack
+	values := [4]int{5, 17, 3, 0}                    // on the stack
 	hashmap := make(map[string]int)
 	fmt.Println(fmt.Sprint(hashmap) == "map[]")
 	for i := 0; i < 4; i++ {
@@ -100,15 +101,15 @@ func main() {
 
 	fmt.Println(len(hashmap) == 4)
 	if _, ok := hashmap["hello"]; ok {
-        fmt.Println(true)
-    } else {
-        fmt.Println(false)
-    }
+		fmt.Println(true)
+	} else {
+		fmt.Println(false)
+	}
 	if _, ok := hashmap["hellos"]; ok {
-        fmt.Println(false)
-    } else {
-        fmt.Println(true)
-    }
+		fmt.Println(false)
+	} else {
+		fmt.Println(true)
+	}
 	// no built-in containsValue/values function
 	for val := range maps.Values(hashmap) {
 		if val == 5 {
@@ -148,15 +149,15 @@ func main() {
 	delete(hashset, 3)
 	fmt.Println(len(hashset) == 4)
 	if _, ok := hashset[10]; ok {
-        fmt.Println(true)
-    } else {
-        fmt.Println(false)
-    }
+		fmt.Println(true)
+	} else {
+		fmt.Println(false)
+	}
 	if _, ok := hashset[4]; ok {
-        fmt.Println(false)
-    } else {
-        fmt.Println(true)
-    }
+		fmt.Println(false)
+	} else {
+		fmt.Println(true)
+	}
 	for elem := range hashset {
 		delete(hashset, elem)
 	}
@@ -185,18 +186,18 @@ func main() {
 	fmt.Println(linkedlist.Len() == NUMS_LENGTH)
 	// can only get front or back of a list
 	linkedlist.Remove(linkedlist.Front()) // Remove returns removed element (but it's unused here)
-	fmt.Println(linkedlist.Len() == NUMS_LENGTH - 1)
+	fmt.Println(linkedlist.Len() == NUMS_LENGTH-1)
 	linkedlist.Remove(linkedlist.Back())
-	fmt.Println(linkedlist.Len() == NUMS_LENGTH - 2)
+	fmt.Println(linkedlist.Len() == NUMS_LENGTH-2)
 	fmt.Println(linkedlist == linkedlist)
 
 	fmt.Println(minheap.Len() == NUMS_LENGTH)
 	heapstring := fmt.Sprint(minheap)
-	nodes := strings.Split(heapstring[1:len(heapstring) - 1], " ")
+	nodes := strings.Split(heapstring[1:len(heapstring)-1], " ")
 	root, _ := strconv.Atoi(nodes[0])
 	fmt.Println(minheap[0] == root)
 	fmt.Println(heap.Pop(&minheap) == root)
-	fmt.Println(minheap.Len() == NUMS_LENGTH - 1)
+	fmt.Println(minheap.Len() == NUMS_LENGTH-1)
 	fmt.Println(slices.Equal(minheap, minheap))
 
 	fmt.Println(len(arrayqueue) == NUMS_LENGTH)
@@ -204,14 +205,14 @@ func main() {
 	arrayqueue = arrayqueue[1:]
 	fmt.Println(poll == randnums[0])
 	fmt.Println(arrayqueue[0] == randnums[1])
-	fmt.Println(len(arrayqueue) == NUMS_LENGTH - 1)
+	fmt.Println(len(arrayqueue) == NUMS_LENGTH-1)
 	fmt.Println(slices.Equal(arrayqueue, arrayqueue))
 
 	fmt.Println(len(stack) == NUMS_LENGTH)
-	pop := stack[len(stack) - 1]
-	stack = stack[:len(stack) - 1]
-	fmt.Println(pop == randnums[len(randnums) - 1])
-	fmt.Println(stack[len(stack) - 1] == randnums[len(randnums) - 2])
-	fmt.Println(len(stack) == NUMS_LENGTH - 1)
+	pop := stack[len(stack)-1]
+	stack = stack[:len(stack)-1]
+	fmt.Println(pop == randnums[len(randnums)-1])
+	fmt.Println(stack[len(stack)-1] == randnums[len(randnums)-2])
+	fmt.Println(len(stack) == NUMS_LENGTH-1)
 	fmt.Println(slices.Equal(stack, stack))
 }

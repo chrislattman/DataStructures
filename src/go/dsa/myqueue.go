@@ -6,13 +6,13 @@ type MyQueue[T comparable] interface {
 	Clear()
 
 	// Equals reports whether obj is equal to a queue.
-	Equals(obj interface{}) bool
+	Equals(obj any) bool
 
 	// IsEmpty reports whether a queue has no elements.
 	IsEmpty() bool
 
-	// Offer inserts element elem to a queue.
-	Offer(elem T)
+	// Offer inserts the given element to a queue.
+	Offer(element T)
 
 	// Peek returns, but does not remove, the element at the front of a queue.
 	// False is returned if the queue is empty.
@@ -23,7 +23,7 @@ type MyQueue[T comparable] interface {
 	Poll() (T, bool)
 
 	// Size returns the number of elements in a queue.
-	Size() uint32
+	Size() uint
 
 	// ToArray returns an array containing all the elements in a queue.
 	ToArray() []T

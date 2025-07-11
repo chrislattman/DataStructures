@@ -3,7 +3,7 @@ use std::fmt;
 #[cfg(test)]
 use mockall::automock;
 
-/// Types of errors for types that implement MyList.
+/// Types of errors for types that implement `MyList`.
 #[derive(Debug)]
 pub enum MyListError {
     IndexError,
@@ -21,6 +21,10 @@ impl fmt::Display for MyListError {
 #[cfg_attr(test, automock)]
 pub trait MyList<T> {
     /// Inserts an element at the specified index or at the end of this list.
+    ///
+    /// # Errors
+    ///
+    /// `MyListError` if index is out of bounds
     fn add(&mut self, index: Option<usize>, element: T) -> Result<(), MyListError>;
 
     /// Empties this list of all elements.
@@ -34,6 +38,10 @@ pub trait MyList<T> {
 
     /// Retrieves, but does not remove, an element from this list at the
     /// specified index.
+    ///
+    /// # Errors
+    ///
+    /// `MyListError` if index is out of bounds
     fn get(&self, index: usize) -> Result<T, MyListError>;
 
     /// Returns the index of the first occurrence of an element found in this
@@ -48,12 +56,20 @@ pub trait MyList<T> {
     fn last_index_of(&self, element: T) -> i64;
 
     /// Retrieves and removes an element from this list at a specified index.
+    ///
+    /// # Errors
+    ///
+    /// `MyListError` if index is out of bounds
     fn remove(&mut self, index: usize) -> Result<T, MyListError>;
 
     /// Removes the first occurrence of an element from this list.
     fn remove_element(&mut self, element: T) -> bool;
 
     /// Sets the existing element at a specified index to a new value.
+    ///
+    /// # Errors
+    ///
+    /// `MyListError` if index is out of bounds
     fn set(&mut self, index: usize, element: T) -> Result<T, MyListError>;
 
     /// Returns the number of elements in this list.
