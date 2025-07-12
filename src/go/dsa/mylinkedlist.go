@@ -29,7 +29,8 @@ func NewMyLinkedList[T comparable]() *MyLinkedList[T] {
 // Add inserts the given element at the given index of a linked list. Returns an error if
 // index is out of bounds (index must be between 0 and Size(), inclusive).
 func (m *MyLinkedList[T]) Add(index uint, element T) error {
-	err := m.checkIndex(index, m.size + 1); if err != nil {
+	err := m.checkIndex(index, m.size+1)
+	if err != nil {
 		return err
 	}
 	if m.IsEmpty() {
@@ -83,7 +84,8 @@ func (m MyLinkedList[T]) Equals(obj any) bool {
 // Returns an error if index is out of bounds (index must be between 0 and
 // Size() - 1, inclusive).
 func (m MyLinkedList[T]) Get(index uint) (T, error) {
-	err := m.checkIndex(index, m.size); if err != nil {
+	err := m.checkIndex(index, m.size)
+	if err != nil {
 		return make([]T, 1)[0], err
 	}
 	current := m.head
@@ -129,7 +131,8 @@ func (m MyLinkedList[T]) LastIndexOf(element T) int {
 // Returns an error if index is out of bounds (index must be between 0 and
 // Size() - 1, inclusive).
 func (m *MyLinkedList[T]) Remove(index uint) (T, error) {
-	err := m.checkIndex(index, m.size); if err != nil {
+	err := m.checkIndex(index, m.size)
+	if err != nil {
 		return make([]T, 1)[0], err
 	}
 	if index == 0 {
@@ -172,7 +175,8 @@ func (m *MyLinkedList[T]) RemoveElement(element T) bool {
 // and returns the existing element. Returns an error if index is out of bounds
 // (index must be between 0 and Size() - 1, inclusive).
 func (m *MyLinkedList[T]) Set(index uint, element T) (T, error) {
-	err := m.checkIndex(index, m.size); if err != nil {
+	err := m.checkIndex(index, m.size)
+	if err != nil {
 		return make([]T, 1)[0], err
 	}
 	current := m.head
