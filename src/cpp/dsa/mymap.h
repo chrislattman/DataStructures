@@ -94,7 +94,7 @@ public:
     /// @brief Returns the number of key-value pairs in this map.
     ///
     /// @return size of map
-    virtual int size() const = 0;
+    virtual unsigned int size() const = 0;
 
     /// @brief Returns a string representation of this map, e.g. "{key1=value1, key2=value2, key3=value3, ..., keyN=valueN}".
     ///

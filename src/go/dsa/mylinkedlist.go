@@ -139,7 +139,7 @@ func (m *MyLinkedList[T]) Remove(index uint) (T, error) {
 		return oldValue, nil
 	}
 	current := m.head
-	stop := int(index) - 1
+	stop := index - 1
 	for range stop {
 		current = current.next
 	}

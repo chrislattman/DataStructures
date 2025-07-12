@@ -27,9 +27,9 @@ template<typename T>
 class MyArrayList: public MyList<T> {
 private:
     T *array;
-    int array_size, array_length;
-    static const int defaultCapacity = 10;
-    const int minArrLenThreshold = 100;
+    unsigned int array_size, array_length;
+    static const unsigned int defaultCapacity = 10;
+    const unsigned int minArrLenThreshold = 100;
 
     /// @brief Doubles or halves the size of the internal array depending on size. Used in add and remove methods.
     void checkCapacity() {
@@ -54,8 +54,8 @@ private:
     ///
     /// @param index index to validate
     /// @param upperBound value that index must be strictly less than
-    void checkIndex(int index, int upperBound) const {
-        if (index < 0 || index >= upperBound) {
+    void checkIndex(unsigned int index, unsigned int upperBound) const {
+        if (index >= upperBound) {
             throw out_of_range("Index is out of bounds");
         }
     }
@@ -65,10 +65,7 @@ public:
     /// Also known as the custom constructor.
     ///
     /// @param initialCapacity initial capacity of this array list
-    MyArrayList(int initialCapacity) {
-        if (initialCapacity < 0) {
-            throw invalid_argument("Negative capacity provided.");
-        }
+    MyArrayList(unsigned int initialCapacity) {
         array = new T[initialCapacity];
         array_length = initialCapacity;
         array_size = 0;
@@ -115,7 +112,7 @@ public:
     ///
     /// @param index index to add element
     /// @param element element to add
-    void add(int index, const T &element) override {
+    void add(unsigned int index, const T &element) override {
         checkIndex(index, array_size + 1);
         checkCapacity();
         if (index < array_size) {
@@ -145,7 +142,7 @@ public:
     /// @param element element to check for
     /// @return true if found, false otherwise
     bool contains(const T &element) const override {
-        for (int i = 0; i < array_size; i++) {
+        for (unsigned int i = 0; i < array_size; i++) {
             if (element == array[i]) {
                 return true;
             }
@@ -164,7 +161,7 @@ public:
         if (list.size() != array_size) {
             return false;
         }
-        for (int i = 0; i < array_size; i++) {
+        for (unsigned int i = 0; i < array_size; i++) {
             if (list.get(i) != array[i]) {
                 return false;
             }
@@ -176,7 +173,7 @@ public:
     ///
     /// @param index index to retrieve element from
     /// @return element found
-    T get(int index) const override {
+    T get(unsigned int index) const override {
         checkIndex(index, array_size);
         return array[index];
     }
@@ -195,8 +192,8 @@ public:
     ///
     /// @param element element to search for
     /// @return index of the first occurrence of element, or -1 if not found
-    int indexOf(const T &element) const override {
-        for (int i = 0; i < array_size; i++) {
+    long indexOf(const T &element) const override {
+        for (long i = 0; i < (long)array_size; i++) {
             if (element == array[i]) {
                 return i;
             }
@@ -215,8 +212,8 @@ public:
     ///
     /// @param element element to search for
     /// @return index of the last occurrence of element, or -1 if not found
-    int lastIndexOf(const T &element) const override {
-        for (int i = array_size - 1; i >= 0; i--) {
+    long lastIndexOf(const T &element) const override {
+        for (long i = (long)array_size - 1; i >= 0; i--) {
             if (element == array[i]) {
                 return i;
             }
@@ -228,7 +225,7 @@ public:
     ///
     /// @param index index to remove element from
     /// @return element found at index
-    T remove(int index) override {
+    T remove(unsigned int index) override {
         checkIndex(index, array_size);
         T element = array[index];
         --array_size;
@@ -244,7 +241,7 @@ public:
     /// @param element element to remove first occurrence of
     /// @return true if successful, false otherwise
     bool removeElement(const T &element) override {
-        for (int i = 0; i < array_size; i++) {
+        for (unsigned int i = 0; i < array_size; i++) {
             if (element == array[i]) {
                 --array_size;
                 if (i < array_size) {
@@ -262,7 +259,7 @@ public:
     /// @param index index to set element at
     /// @param element new value to set existing element to
     /// @return old value of the element at position index
-    T set(int index, const T &element) override {
+    T set(unsigned int index, const T &element) override {
         checkIndex(index, array_size);
         T oldValue = array[index];
         array[index] = element;
@@ -272,7 +269,7 @@ public:
     /// @brief Returns the number of elements in this list.
     ///
     /// @return size of list
-    int size() const override {
+    unsigned int size() const override {
         return array_size;
     }
 
@@ -291,10 +288,10 @@ public:
     string toString() const override {
         stringstream builder;
         builder << "[";
-        int lastIndex = array_size - 1;
-        for (int i = 0; i < array_size; i++) {
+        long lastIndex = (long)array_size - 1;
+        for (unsigned int i = 0; i < array_size; i++) {
             builder << array[i];
-            if (i != lastIndex) {
+            if ((long)i != lastIndex) {
                 builder << ", ";
             }
         }

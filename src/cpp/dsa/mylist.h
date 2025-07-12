@@ -15,7 +15,7 @@ public:
     ///
     /// @param index index to add element
     /// @param element element to add
-    virtual void add(int index, const T &element) = 0;
+    virtual void add(unsigned int index, const T &element) = 0;
 
     /// @brief Inserts an element at the end of this list.
     ///
@@ -35,13 +35,13 @@ public:
     ///
     /// @param index index to retrieve element from
     /// @return element found
-    virtual T get(int index) const = 0;
+    virtual T get(unsigned int index) const = 0;
 
     /// @brief Returns the index of the first occurrence of an element found in this list.
     ///
     /// @param element element to search for
     /// @return index of the first occurrence of element, or -1 if not found
-    virtual int indexOf(const T &element) const = 0;
+    virtual long indexOf(const T &element) const = 0;
 
     /// @brief Checks if this list has no elements.
     ///
@@ -52,13 +52,13 @@ public:
     ///
     /// @param element element to search for
     /// @return index of the last occurrence of element, or -1 if not found
-    virtual int lastIndexOf(const T &element) const = 0;
+    virtual long lastIndexOf(const T &element) const = 0;
 
     /// @brief Retrieves and removes an element from this list at a specified index.
     ///
     /// @param index index to remove element from
     /// @return element found at index
-    virtual T remove(int index) = 0;
+    virtual T remove(unsigned int index) = 0;
 
     /// @brief Removes the first occurrence of an element from this list.
     ///
@@ -71,12 +71,12 @@ public:
     /// @param index index to set element at
     /// @param element new value to set existing element to
     /// @return old value of the element at position index
-    virtual T set(int index, const T &element) = 0;
+    virtual T set(unsigned int index, const T &element) = 0;
 
     /// @brief Returns the number of elements in this list.
     ///
     /// @return size of list
-    virtual int size() const = 0;
+    virtual unsigned int size() const = 0;
 
     /// @brief Returns an array containing all the elements in this list.
     ///

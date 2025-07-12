@@ -26,7 +26,7 @@ template<typename T>
 class MyHashSet: public MySet<T> {
 private:
     MyHashMap<T, int> *map;
-    static const int defaultCapacity = 16;
+    static const unsigned int defaultCapacity = 16;
     static constexpr float defaultLoadFactor = 0.75F;
 
 public:
@@ -35,14 +35,14 @@ public:
     /// @param initialCapacity initial capacity of this hash set
     /// @param loadFactor maximum value of (number of elements / number of total slots in hash set) before rehashing
     /// occurs
-    MyHashSet(int initialCapacity, float loadFactor) {
+    MyHashSet(unsigned int initialCapacity, float loadFactor) {
         map = new MyHashMap<T, int>(initialCapacity, loadFactor);
     }
 
     /// @brief Constructs a hash set instance with the specified initial capacity and a default load factor of 0.75.
     ///
     /// @param initialCapacity initial capacity of this hash set
-    MyHashSet(int initialCapacity): MyHashSet(initialCapacity, defaultLoadFactor) {}
+    MyHashSet(unsigned int initialCapacity): MyHashSet(initialCapacity, defaultLoadFactor) {}
 
     /// @brief Constructs a hash set instance with a default initial capacity of 16 and a default load factor of 0.75.
     MyHashSet(): MyHashSet(defaultCapacity, defaultLoadFactor) {}
@@ -57,9 +57,9 @@ public:
     /// @param element element to add
     /// @return true if element was not present, false otherwise
     bool add(const T &element) {
-        int currentSize = map->size();
+        unsigned int currentSize = map->size();
         map->putIfAbsent(element, 0);
-        int newSize = map->size();
+        unsigned int newSize = map->size();
         return currentSize != newSize;
     }
 
@@ -89,8 +89,8 @@ public:
         }
         T *elements = set.toArray();
         T *array = toArray();
-        int array_length = size();
-        for (int i = 0; i < array_length; i++) {
+        unsigned int array_length = size();
+        for (unsigned int i = 0; i < array_length; i++) {
             if (elements[i] != array[i]) {
                 return false;
             }
@@ -116,7 +116,7 @@ public:
     /// @brief Returns the number of elements in this set.
     ///
     /// @return size of set
-    int size() const {
+    unsigned int size() const {
         return map->size();
     }
 
@@ -125,9 +125,9 @@ public:
     /// @return array of set elements
     T *toArray() const {
         MyList<T> *keys = map->keyList();
-        int array_length = size();
+        unsigned int array_length = size();
         T *array = new T[array_length];
-        for (int i = 0; i < array_length; i++) {
+        for (unsigned int i = 0; i < array_length; i++) {
             array[i] = keys->get(i);
         }
         return array;
@@ -140,11 +140,11 @@ public:
         MyList<T> *keys = map->keyList();
         stringstream builder;
         builder << "[";
-        int length = size();
-        int lastIndex = length - 1;
-        for (int i = 0; i < length; i++) {
+        unsigned int length = size();
+        long lastIndex = (long)length - 1;
+        for (unsigned int i = 0; i < length; i++) {
             builder << keys->get(i);
-            if (i != lastIndex) {
+            if ((long)i != lastIndex) {
                 builder << ", ";
             }
         }

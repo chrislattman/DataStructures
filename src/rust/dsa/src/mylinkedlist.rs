@@ -141,7 +141,7 @@ where
             }
         }
         let mut current = &mut self.head;
-        let stop = index as i64 - 1;
+        let stop = index - 1;
         for _ in 0..stop {
             if let Some(curr) = current {
                 current = &mut curr.next;

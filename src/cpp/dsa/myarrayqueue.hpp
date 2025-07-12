@@ -25,9 +25,9 @@ template<typename T>
 class MyArrayQueue: public MyQueue<T> {
 private:
     T *array;
-    int array_size, array_length;
-    static const int defaultCapacity = 16;
-    const int minArrLenThreshold = 100;
+    unsigned int array_size, array_length;
+    static const unsigned int defaultCapacity = 16;
+    const unsigned int minArrLenThreshold = 100;
 
     /// @brief Doubles or halves the size of the internal array depending on size. Used in offer and poll methods.
     void checkCapacity() {
@@ -52,10 +52,7 @@ public:
     /// @brief Constructs an array queue instance with a specified initial capacity.
     ///
     /// @param initialCapacity initial capacity of this array queue
-    MyArrayQueue(int initialCapacity) {
-        if (initialCapacity < 0) {
-            throw invalid_argument("Negative capacity provided.");
-        }
+    MyArrayQueue(unsigned int initialCapacity) {
         array = new T[initialCapacity];
         array_length = initialCapacity;
         array_size = 0;
@@ -115,7 +112,7 @@ public:
         }
         T *elements = queue.toArray();
         bool retval = true;
-        for (int i = 0; i < array_size; i++) {
+        for (unsigned int i = 0; i < array_size; i++) {
             if (elements[i] != array[i]) {
                 retval = false;
                 break;
@@ -170,7 +167,7 @@ public:
     /// @brief Returns the number of elements in this queue.
     ///
     /// @return size of queue
-    int size() const {
+    unsigned int size() const {
         return array_size;
     }
 
@@ -189,10 +186,10 @@ public:
     string toString() const {
         stringstream builder;
         builder << "[";
-        int lastIndex = array_size - 1;
-        for (int i = 0; i < array_size; i++) {
+        long lastIndex = (long)array_size - 1;
+        for (unsigned int i = 0; i < array_size; i++) {
             builder << array[i];
-            if (i != lastIndex) {
+            if ((long)i != lastIndex) {
                 builder << ", ";
             }
         }

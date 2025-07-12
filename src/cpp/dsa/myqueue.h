@@ -34,7 +34,7 @@ public:
     /// @brief Returns the number of elements in this queue.
     ///
     /// @return size of queue
-    virtual int size() const = 0;
+    virtual unsigned int size() const = 0;
 
     /// @brief Returns an array containing all the elements in this queue.
     ///

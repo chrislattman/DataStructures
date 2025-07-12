@@ -28,9 +28,9 @@ class MyHashMap: public MyMap<K, V> {
 private:
     K *keys;
     V *value_array;
-    int map_size, map_length;
+    unsigned int map_size, map_length;
     float loadFactor;
-    static const int defaultCapacity = 16;
+    static const unsigned int defaultCapacity = 16;
     static constexpr float defaultLoadFactor = 0.75F;
 
     /// @brief Internal function used to add or modify a key-value pair in this map.
@@ -52,9 +52,9 @@ private:
             resizeMap();
             return insert(key, newValue, oldValue, addOnlyIfAbsent, addOnlyIfKeyExists);
         }
-        int hash_value = (int) Hash{}(key);
-        for (int i = 0; i < map_length; i++) {
-            int mapIndex = (hash_value + i*i) % map_length;
+        unsigned int hash_value = (unsigned int) Hash{}(key);
+        for (unsigned int i = 0; i < map_length; i++) {
+            unsigned int mapIndex = (hash_value + i*i) % map_length;
             K currentKey = keys[mapIndex];
             if (currentKey == K(NULL)) {
                 if (!addOnlyIfKeyExists) {
@@ -91,7 +91,7 @@ private:
         delete[] value_array;
         keys = newKeys;
         value_array = newValues;
-        for (int i = 0; i < map_length; i++) {
+        for (unsigned int i = 0; i < map_length; i++) {
             put(keysCopy[i], valuesCopy[i]);
         }
         delete[] keysCopy;
@@ -105,10 +105,7 @@ public:
     /// @param initialCapacity initial capacity of this hash map
     /// @param loadFactor maximum value of (number of key-value pairs / number of total slots in hash map) before
     /// rehashing occurs
-    MyHashMap(int initialCapacity, float loadFactor) {
-        if (initialCapacity < 0) {
-            throw invalid_argument("Initial capacity is negative");
-        }
+    MyHashMap(unsigned int initialCapacity, float loadFactor) {
         if (loadFactor <= 0) {
             throw invalid_argument("Load factor is nonpositive");
         }
@@ -122,7 +119,7 @@ public:
     /// @brief Constructs a hash map instance with the specified initial capacity and a default load factor of 0.75.
     ///
     /// @param initialCapacity initial capacity of this hash map
-    MyHashMap(int initialCapacity): MyHashMap(initialCapacity, defaultLoadFactor) {}
+    MyHashMap(unsigned int initialCapacity): MyHashMap(initialCapacity, defaultLoadFactor) {}
 
     /// @brief Constructs a hash map instance with a default initial capacity of 16 and a default load factor of 0.75.
     MyHashMap(): MyHashMap(defaultCapacity, defaultLoadFactor) {}
@@ -156,7 +153,7 @@ public:
     /// @param value value to check for
     /// @return true if value was found, false otherwise
     bool containsValue(const V &value) const {
-        for (int i = 0; i < map_length; i++) {
+        for (unsigned int i = 0; i < map_length; i++) {
             if (value == value_array[i]) {
                 return true;
             }
@@ -203,9 +200,9 @@ public:
         if (key == K(NULL)) {
             return V(NULL);
         }
-        int hash = (int) Hash{}(key);
-        for (int i = 0; i < map_length; i++) {
-            int mapIndex = (hash + i*i) % map_length;
+        unsigned int hash = (unsigned int) Hash{}(key);
+        for (unsigned int i = 0; i < map_length; i++) {
+            unsigned int mapIndex = (hash + i*i) % map_length;
             K currentKey = keys[mapIndex];
             if (key == currentKey) {
                 return value_array[mapIndex];
@@ -226,9 +223,9 @@ public:
         if (key == K(NULL)) {
             return V(NULL);
         }
-        int hash = (int) Hash{}(key);
-        for (int i = 0; i < map_length; i++) {
-            int mapIndex = (hash + i*i) % map_length;
+        unsigned int hash = (unsigned int) Hash{}(key);
+        for (unsigned int i = 0; i < map_length; i++) {
+            unsigned int mapIndex = (hash + i*i) % map_length;
             K currentKey = keys[mapIndex];
             if (key == currentKey) {
                 return value_array[mapIndex];
@@ -252,7 +249,7 @@ public:
     /// @return a list of the keys
     MyList<K> *keyList() const {
         MyList<K> *list = new MyArrayList<K>();
-        for (int i = 0; i < map_length; i++) {
+        for (unsigned int i = 0; i < map_length; i++) {
             if (keys[i] != K(NULL)) {
                 list->add(keys[i]);
             }
@@ -286,9 +283,9 @@ public:
         if (key == K(NULL)) {
             return V(NULL);
         }
-        int hash = (int) Hash{}(key);
-        for (int i = 0; i < map_length; i++) {
-            int mapIndex = (hash + i*i) % map_length;
+        unsigned int hash = (unsigned int) Hash{}(key);
+        for (unsigned int i = 0; i < map_length; i++) {
+            unsigned int mapIndex = (hash + i*i) % map_length;
             K currentKey = keys[mapIndex];
             if (key == currentKey) {
                 keys[mapIndex] = K(NULL);
@@ -311,9 +308,9 @@ public:
         if (key == K(NULL) || value == V(NULL)) {
             return false;
         }
-        int hash = (int) Hash{}(key);
-        for (int i = 0; i < map_length; i++) {
-            int mapIndex = (hash + i*i) % map_length;
+        unsigned int hash = (unsigned int) Hash{}(key);
+        for (unsigned int i = 0; i < map_length; i++) {
+            unsigned int mapIndex = (hash + i*i) % map_length;
             K currentKey = keys[mapIndex];
             V currentValue = value_array[mapIndex];
             if (key == currentKey && value == currentValue) {
@@ -351,7 +348,7 @@ public:
     /// @brief Returns the number of key-value pairs in this map.
     ///
     /// @return size of map
-    int size() const {
+    unsigned int size() const {
         return map_size;
     }
 
@@ -361,7 +358,7 @@ public:
     string toString() const {
         stringstream builder;
         builder << "{";
-        for (int i = 0; i < map_length; i++) {
+        for (unsigned int i = 0; i < map_length; i++) {
             K currentKey = keys[i];
             if (currentKey != K(NULL)) {
                 builder << currentKey;
@@ -383,7 +380,7 @@ public:
     /// @return a list of the values
     MyList<V> *values() const {
         MyList<V> *list = new MyArrayList<V>();
-        for (int i = 0; i < map_length; i++) {
+        for (unsigned int i = 0; i < map_length; i++) {
             if (value_array[i] != V(NULL)) {
                 list->add(value_array[i]);
             }

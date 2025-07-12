@@ -31,14 +31,14 @@ private:
     } Node;
 
     Node *head;
-    int list_size;
+    unsigned int list_size;
 
     /// @brief Helper function for index validation.
     ///
     /// @param index index to validate
     /// @param upperBound value that index must be strictly less than
-    void checkIndex(int index, int upperBound) const {
-        if (index < 0 || index >= upperBound) {
+    void checkIndex(unsigned int index, unsigned int upperBound) const {
+        if (index >= upperBound) {
             throw out_of_range("Index is out of bounds");
         }
     }
@@ -105,7 +105,7 @@ public:
     ///
     /// @param index index to add element
     /// @param element element to add
-    void add(int index, const T &element) {
+    void add(unsigned int index, const T &element) {
         checkIndex(index, list_size + 1);
         if (isEmpty()) {
             head = new Node();
@@ -118,8 +118,8 @@ public:
                 head = newNode;
             } else {
                 Node *current = head;
-                int stop = index - 1;
-                for (int i = 0; i < stop; i++) {
+                unsigned int stop = index - 1;
+                for (unsigned int i = 0; i < stop; i++) {
                     current = current->next;
                 }
                 newNode->next = current->next;
@@ -171,7 +171,7 @@ public:
             return false;
         }
         Node *current = head;
-        for (int i = 0; i < list_size; i++) {
+        for (unsigned int i = 0; i < list_size; i++) {
             if (list.get(i) != current->data) {
                 return false;
             }
@@ -184,10 +184,10 @@ public:
     ///
     /// @param index index to retrieve element from
     /// @return element found
-    T get(int index) const {
+    T get(unsigned int index) const {
         checkIndex(index, list_size);
         Node *current = head;
-        for (int i = 0; i < index; i++) {
+        for (unsigned int i = 0; i < index; i++) {
             current = current->next;
         }
         return current->data;
@@ -197,9 +197,9 @@ public:
     ///
     /// @param element element to search for
     /// @return index of the first occurrence of element, or -1 if not found
-    int indexOf(const T &element) const {
+    long indexOf(const T &element) const {
         Node *current = head;
-        for (int i = 0; i < list_size; i++) {
+        for (long i = 0; i < (long)list_size; i++) {
             if (element == current->data) {
                 return i;
             }
@@ -219,10 +219,10 @@ public:
     ///
     /// @param element element to search for
     /// @return index of the last occurrence of element, or -1 if not found
-    int lastIndexOf(const T &element) const {
-        int index = -1;
+    long lastIndexOf(const T &element) const {
+        long index = -1;
         Node *current = head;
-        for (int i = 0; i < list_size; i++) {
+        for (long i = 0; i < (long)list_size; i++) {
             if (element == current->data) {
                 index = i;
             }
@@ -235,7 +235,7 @@ public:
     ///
     /// @param index index to remove element from
     /// @return element found at index
-    T remove(int index) {
+    T remove(unsigned int index) {
         checkIndex(index, list_size);
         if (index == 0) {
             T oldValue = head->data;
@@ -244,8 +244,8 @@ public:
             return oldValue;
         }
         Node *current = head;
-        int stop = index - 1;
-        for (int i = 0; i < stop; i++) {
+        unsigned int stop = index - 1;
+        for (unsigned int i = 0; i < stop; i++) {
             current = current->next;
         }
         T oldValue = current->next->data;
@@ -280,10 +280,10 @@ public:
     /// @param index index to set element at
     /// @param element new value to set existing element to
     /// @return old value of the element at position index
-    T set(int index, const T &element) {
+    T set(unsigned int index, const T &element) {
         checkIndex(index, list_size);
         Node *current = head;
-        for (int i = 0; i < index; i++) {
+        for (unsigned int i = 0; i < index; i++) {
             current = current->next;
         }
         T oldValue = current->data;
@@ -294,7 +294,7 @@ public:
     /// @brief Returns the number of elements in this list.
     ///
     /// @return size of list
-    int size() const {
+    unsigned int size() const {
         return list_size;
     }
 
@@ -304,7 +304,7 @@ public:
     T *toArray() const {
         T *array = new T[list_size];
         Node *current = head;
-        for (int i = 0; i < list_size; i++) {
+        for (unsigned int i = 0; i < list_size; i++) {
             array[i] = current->data;
             current = current->next;
         }
