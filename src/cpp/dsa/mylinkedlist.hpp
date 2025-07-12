@@ -50,6 +50,52 @@ public:
         list_size = 0;
     }
 
+    /// @brief Constructs a linked list instance with the copied contents of another linked list.
+    ///
+    /// @param list other linked list to deep copy from
+    MyLinkedList(const MyLinkedList<T> &list) {
+        if (list.list_size > 0) {
+            head = new Node();
+            head->data = list.head->data;
+            Node *curr = head;
+            Node *otherCurr = list.head->next;
+            while (otherCurr != nullptr) {
+                curr->next = new Node();
+                curr->next->data = otherCurr->data;
+                curr = curr->next;
+                otherCurr = otherCurr->next;
+            }
+            list_size = list.list_size;
+        } else {
+            head = nullptr;
+            list_size = 0;
+        }
+    }
+
+    /// @brief Reinitalizes assignee (left hand side) linked list instance from another linked list.
+    ///
+    /// @param list other linked list to deep copy from
+    /// @return updated version of assignee list
+    MyLinkedList &operator=(const MyLinkedList<T> &list) {
+        if (this != &list) {
+            clear();
+            if (list.list_size > 0) {
+                head = new Node();
+                head->data = list.head->data;
+                Node *curr = head;
+                Node *otherCurr = list.head->next;
+                while (otherCurr != nullptr) {
+                    curr->next = new Node();
+                    curr->next->data = otherCurr->data;
+                    curr = curr->next;
+                    otherCurr = otherCurr->next;
+                }
+                list_size = list.list_size;
+            }
+        }
+        return *this;
+    }
+
     /// @brief Frees dynamically allocated resources.
     virtual ~MyLinkedList() {
         clear();
@@ -92,9 +138,8 @@ public:
 
     /// @brief Empties this list of all elements.
     void clear() {
-        Node *next;
         while (head != nullptr) {
-            next = head->next;
+            Node *next = head->next;
             delete head;
             head = next;
         }

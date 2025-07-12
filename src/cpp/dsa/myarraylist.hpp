@@ -39,12 +39,12 @@ private:
             array_length = defaultCapacity;
         } else if (array_size == array_length) {
             T *newArray = new T[array_size * 2];
-            memcpy(newArray, array, array_size);
+            memcpy(newArray, array, array_size * sizeof(T));
             delete[] array;
             array = newArray;
         } else if (array_length > minArrLenThreshold && array_size * 2 < array_length) {
             T *newArray = new T[array_length / 2];
-            memcpy(newArray, array, array_size);
+            memcpy(newArray, array, array_size * sizeof(T));
             delete[] array;
             array = newArray;
         }
@@ -62,6 +62,7 @@ private:
 
 public:
     /// @brief Constructs an array list instance with a specified initial capacity.
+    /// Also known as the custom constructor.
     ///
     /// @param initialCapacity initial capacity of this array list
     MyArrayList(int initialCapacity) {
@@ -74,9 +75,38 @@ public:
     }
 
     /// @brief Constructs an array list instance with a default initial capacity of 10.
+    /// Also known as the default constructor.
     MyArrayList(): MyArrayList(defaultCapacity) {};
 
+    /// @brief Constructs an array list instance with the copied contents of another array list.
+    /// Also known as the copy constructor.
+    ///
+    /// @param list other array list to deep copy from
+    MyArrayList(const MyArrayList<T> &list) {
+        array = new T[list.array_length];
+        memcpy(array, list.array, list.array_size * sizeof(T));
+        array_length = list.array_length;
+        array_size = list.array_size;
+    }
+
+    /// @brief Reinitalizes assignee (left hand side) array list instance from another array list.
+    /// Also known as the copy assignment operator.
+    ///
+    /// @param list other array list to deep copy from
+    /// @return updated version of assignee array list
+    MyArrayList &operator=(const MyArrayList<T> &list) {
+        if (this != &list) {
+            delete[] array;
+            array = new T[list.array_length];
+            memcpy(array, list.array, list.array_size * sizeof(T));
+            array_length = list.array_length;
+            array_size = list.array_size;
+        }
+        return *this;
+    }
+
     /// @brief Frees dynamically allocated resources.
+    /// Also known as the destructor.
     virtual ~MyArrayList() {
         delete[] array;
     }
@@ -202,8 +232,8 @@ public:
         checkIndex(index, array_size);
         T element = array[index];
         --array_size;
-        if (index + 1 < array_size) {
-            memmove(array + index, array + index + 1, (array_size - index - 1) * sizeof(T));
+        if (index < array_size) {
+            memmove(array + index, array + index + 1, (array_size - index) * sizeof(T));
         }
         checkCapacity();
         return element;
@@ -217,8 +247,8 @@ public:
         for (int i = 0; i < array_size; i++) {
             if (element == array[i]) {
                 --array_size;
-                if (i + 1 < array_size) {
-                    memmove(array + i, array + i + 1, (array_size - i - 1) * sizeof(T));
+                if (i < array_size) {
+                    memmove(array + i, array + i + 1, (array_size - i) * sizeof(T));
                 }
                 checkCapacity();
                 return true;
@@ -251,7 +281,7 @@ public:
     /// @return array of list elements
     T *toArray() const override {
         T *arrayCopy = new T[array_size];
-        memcpy(arrayCopy, array, array_size);
+        memcpy(arrayCopy, array, array_size * sizeof(T));
         return arrayCopy;
     }
 

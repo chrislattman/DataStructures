@@ -35,12 +35,12 @@ private:
             array_length = defaultCapacity;
         } else if (array_size == array_length) {
             T *newArray = new T[array_size * 2];
-            memcpy(newArray, array, array_size);
+            memcpy(newArray, array, array_size * sizeof(T));
             delete[] array;
             array = newArray;
         } else if (array_length > minArrLenThreshold && array_size * 2 < array_length) {
             T *newArray = new T[array_length / 2];
-            memcpy(newArray, array, array_size);
+            memcpy(newArray, array, array_size * sizeof(T));
             delete[] array;
             array = newArray;
         }
@@ -52,6 +52,31 @@ public:
         array = new T[defaultCapacity];
         array_length = defaultCapacity;
         array_size = 0;
+    }
+
+    /// @brief Constructs a stack instance with the copied contents of another stack.
+    ///
+    /// @param stack other stack to deep copy from
+    MyStack(const MyStack<T> &stack) {
+        array = new T[stack.array_length];
+        memcpy(array, stack.array, stack.array_size * sizeof(T));
+        array_length = stack.array_length;
+        array_size = stack.array_size;
+    }
+
+    /// @brief Reinitalizes assignee (left hand side) stack instance from another stack.
+    ///
+    /// @param stack other stack to deep copy from
+    /// @return updated version of assignee stack
+    MyStack &operator=(const MyStack<T> &stack) {
+        if (this != &stack) {
+            delete[] array;
+            array = new T[stack.array_length];
+            memcpy(array, stack.array, stack.array_size * sizeof(T));
+            array_length = stack.array_length;
+            array_size = stack.array_size;
+        }
+        return *this;
     }
 
     /// @brief Frees dynamically allocated resources.
@@ -141,7 +166,7 @@ public:
     /// @return array of stack elements
     T *toArray() const {
         T *arrayCopy = new T[array_size];
-        memcpy(arrayCopy, array, array_size);
+        memcpy(arrayCopy, array, array_size * sizeof(T));
         return arrayCopy;
     }
 

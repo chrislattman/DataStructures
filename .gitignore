@@ -75,3 +75,4 @@ dsa-*.tgz
 target/
 *.profraw
 *.profdata
+src/go/dsa/mock*.go

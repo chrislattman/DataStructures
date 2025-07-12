@@ -120,8 +120,8 @@ func (m *MyArrayList[T]) Remove(index uint) (T, error) {
 	}
 	element := m.array[index]
 	m.size--
-	if index+1 < m.size {
-		copy(m.array[index:m.size-1], m.array[index+1:m.size])
+	if index < m.size {
+		copy(m.array[index:m.size], m.array[index+1:m.size+1])
 	}
 	m.checkCapacity()
 	return element, nil
@@ -133,8 +133,8 @@ func (m *MyArrayList[T]) RemoveElement(element T) bool {
 	for i := 0; i < int(m.size); i++ {
 		if element == m.array[i] {
 			m.size--
-			if i+1 < int(m.size) {
-				copy(m.array[i:m.size-1], m.array[i+1:m.size])
+			if i < int(m.size) {
+				copy(m.array[i:m.size], m.array[i+1:m.size+1])
 			}
 			m.checkCapacity()
 			return true

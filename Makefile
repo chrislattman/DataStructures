@@ -219,4 +219,4 @@ clean:
 		src/python/dsa/__pycache__ test/python/dsa/__pycache__ \
 		.mypy_cache bin jacoco.exec *-coverage-report .coverage coverage.out \
 		dist dsa-1.0.0.tgz target *.profdata *.profraw src/rust/dsa/*.profraw \
-		src/rust/dsa-tester/*.profraw src/go/dsa/mock_*.go
+		src/rust/dsa-tester/*.profraw

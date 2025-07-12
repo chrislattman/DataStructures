@@ -108,8 +108,8 @@ where
         check_index(index, self.size)?;
         let element = self.array[index];
         self.size -= 1;
-        if index + 1 < self.size {
-            self.array.copy_within((index + 1)..self.size, index);
+        if index < self.size {
+            self.array.copy_within((index + 1)..(self.size + 1), index);
         }
         check_capacity(self);
         Ok(element)
@@ -119,8 +119,8 @@ where
         for i in 0..self.size {
             if element == self.array[i] {
                 self.size -= 1;
-                if i + 1 < self.size {
-                    self.array.copy_within((i + 1)..self.size, i);
+                if i < self.size {
+                    self.array.copy_within((i + 1)..(self.size + 1), i);
                 }
                 check_capacity(self);
                 return true;

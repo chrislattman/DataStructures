@@ -28,6 +28,7 @@ using namespace std;
 
 int main(void) {
     // Every print statement should output true
+    // There have been sporadic issues with T(NULL) causing issues
 
     MyArrayList<int> mylist;
     vector<int> arraylist;
@@ -99,14 +100,18 @@ int main(void) {
     cout << (mylist == myList2) << endl;
     cout << (myList2 == mylist) << endl;
 
-    // internal array for mylist is freed twice when destructor for listRef is called
-    // MyArrayList<int> listRef = mylist;
-    // cout << (listRef.toString() == string("[5, 12]")) << endl;
-    // cout << (listRef.size() == 2) << endl;
-    // cout << listRef.contains(5) << endl;
-    // cout << !listRef.contains(6) << endl;
-    // cout << !listRef.isEmpty() << endl;
-    // cout << (listRef == listRef) << endl;
+    // Testing copy assignment operator and copy constructor (in that order)
+    MyArrayList<int> listCopy;
+    listCopy = mylist;
+    MyArrayList<int> listRef = mylist;
+    cout << (listRef.toString() == "[5, 12]") << endl;
+    cout << (listRef.size() == 2) << endl;
+    cout << listRef.contains(5) << endl;
+    cout << !listRef.contains(6) << endl;
+    cout << !listRef.isEmpty() << endl;
+    cout << (listRef == listRef) << endl;
+    cout << (listRef == mylist) << endl;
+    cout << (listCopy == mylist) << endl;
 
     MyArrayList<int> *myList3 = new MyArrayList<int>();
     myList3->add(5);
@@ -489,16 +494,14 @@ int main(void) {
     copy(treeset.begin(), treeset.end(), ostream_iterator<int>(oss, ", "));
     cout << (oss.str().substr(0, oss.str().length() - 2).append("]") == "[3, 4, 6, 7, 8, 9]") << endl;
 
-    /**
-     * Commenting out because I'm not following the C++ Rule of 3
-     * and MyLinkedList has a non-trivial destructor
-     */
-    // MyLinkedList<int> linkedListRef = myLinkedList;
-    // cout << linkedListRef << endl;
-    // cout << (linkedListRef.toString() == string("[5, 17]")) << endl;
-    // cout << (linkedListRef.size() == 2) << endl;
-    // cout << linkedListRef.contains(5) << endl;
-    // cout << !linkedListRef.contains(6) << endl;
-    // cout << !linkedListRef.isEmpty() << endl;
-    // cout << (linkedListRef == linkedListRef) << endl;
+    // Testing copy assignment operator and copy constructor (in that order)
+    MyLinkedList<int> linkedListCopy;
+    linkedListCopy = mylinkedlist;
+    MyLinkedList<int> linkedListRef = mylinkedlist;
+    cout << (linkedListRef.toString() == mylinkedlist.toString()) << endl;
+    cout << (linkedListRef.size() == 8) << endl;
+    cout << !linkedListRef.isEmpty() << endl;
+    cout << (linkedListRef == linkedListRef) << endl;
+    cout << (linkedListRef == mylinkedlist) << endl;
+    cout << (linkedListCopy == mylinkedlist) << endl;
 }

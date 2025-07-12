@@ -37,12 +37,12 @@ private:
             array_length = defaultCapacity;
         } else if (array_size == array_length) {
             T *newArray = new T[array_size * 2];
-            memcpy(newArray, array, array_size);
+            memcpy(newArray, array, array_size * sizeof(T));
             delete[] array;
             array = newArray;
         } else if (array_length > minArrLenThreshold && array_size * 2 < array_length) {
             T *newArray = new T[array_length / 2];
-            memcpy(newArray, array, array_size);
+            memcpy(newArray, array, array_size * sizeof(T));
             delete[] array;
             array = newArray;
         }
@@ -63,6 +63,31 @@ public:
 
     /// @brief Constructs an array queue instance with a default initial capacity of 16.
     MyArrayQueue(): MyArrayQueue(defaultCapacity) {};
+
+    /// @brief Constructs an array queue instance with the copied contents of another array queue.
+    ///
+    /// @param queue other array queue to deep copy from
+    MyArrayQueue(const MyArrayQueue<T> &queue) {
+        array = new T[queue.array_length];
+        memcpy(array, queue.array, queue.array_size * sizeof(T));
+        array_length = queue.array_length;
+        array_size = queue.array_size;
+    }
+
+    /// @brief Reinitalizes assignee (left hand side) array queue instance from another array queue.
+    ///
+    /// @param queue other array queue to deep copy from
+    /// @return updated version of assignee array queue
+    MyArrayQueue &operator=(const MyArrayQueue<T> &queue) {
+        if (this != &queue) {
+            delete[] array;
+            array = new T[queue.array_length];
+            memcpy(array, queue.array, queue.array_size * sizeof(T));
+            array_length = queue.array_length;
+            array_size = queue.array_size;
+        }
+        return *this;
+    }
 
     /// @brief Frees dynamically allocated resources.
     virtual ~MyArrayQueue() {
@@ -154,7 +179,7 @@ public:
     /// @return array of queue elements
     T *toArray() const {
         T *arrayCopy = new T[array_size];
-        memcpy(arrayCopy, array, array_size);
+        memcpy(arrayCopy, array, array_size * sizeof(T));
         return arrayCopy;
     }
 

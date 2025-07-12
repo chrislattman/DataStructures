@@ -143,8 +143,8 @@ public class MyArrayList<T> implements MyList<T> {
         checkIndex(index, size);
         T element = array[index];
         --size;
-        if (index + 1 < size) {
-            System.arraycopy(array, index + 1, array, index, size - index - 1);
+        if (index < size) {
+            System.arraycopy(array, index + 1, array, index, size - index);
         }
         checkCapacity();
         return element;
@@ -155,8 +155,8 @@ public class MyArrayList<T> implements MyList<T> {
         for (int i = 0; i < size; i++) {
             if (element.equals(array[i])) {
                 --size;
-                if (i + 1 < size) {
-                    System.arraycopy(array, i + 1, array, i, size - i - 1);
+                if (i < size) {
+                    System.arraycopy(array, i + 1, array, i, size - i);
                 }
                 checkCapacity();
                 return true;
