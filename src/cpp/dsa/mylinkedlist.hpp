@@ -258,7 +258,7 @@ public:
     /// @param element element to remove first occurrence of
     /// @return true if successful, false otherwise
     bool removeElement(const T &element) {
-        if (element == head->data) {
+        if (head != nullptr && element == head->data) {
             head = head->next;
             --list_size;
             return true;
