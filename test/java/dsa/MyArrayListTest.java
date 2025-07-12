@@ -127,6 +127,7 @@ class MyArrayListTest {
         MockitoAnnotations.openMocks(this);
         when(mockList.size()).thenReturn(10);
         assertEquals(10, mockList.size());
+        // All other behavior for mockList is undefined
 
         MyArrayList<Integer> spyList = spy(myArrayList);
         when(spyList.contains(3)).thenReturn(true);

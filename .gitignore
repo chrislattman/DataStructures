@@ -61,7 +61,7 @@ __pycache__/
 .DS_Store
 out/
 public/
-main
+main*
 .mypy_cache/
 jacoco.exec
 bin/
@@ -76,3 +76,5 @@ target/
 *.profraw
 *.profdata
 src/go/dsa/mock*.go
+*.gc*
+*.info

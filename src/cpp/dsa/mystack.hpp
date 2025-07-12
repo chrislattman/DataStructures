@@ -1,7 +1,7 @@
 #pragma once
 
 #include <sstream>
-#include <string>
+#include <cstring>
 
 using namespace std;
 
@@ -96,7 +96,7 @@ public:
     ///
     /// @param stack object to compare to this stack
     /// @return true if object and this stack are equal
-    bool operator==(const MyStack<T> &stack) {
+    bool operator==(const MyStack<T> &stack) const {
         if (&stack == this) {
             return true;
         }

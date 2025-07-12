@@ -1,10 +1,11 @@
 SHELL=/bin/bash
 
-CPP_FLAGS=-Wall -Wextra -pedantic -std=c++14
+CPP_FLAGS=-Wall -Wextra -pedantic -std=c++23
+CPP_TEST_LIBS=-lgtest -lgtest_main -lgmock -pthread
 MOCK=lib/mockito-core-5.9.0.jar:lib/byte-buddy-1.14.11.jar:lib/objenesis-3.3.jar
 
-OS=$(shell echo `uname -a`)
-ifneq ($(findstring Darwin,$(OS)),)
+OS=$(shell echo `uname`)
+ifeq ($(OS),Darwin)
 PREFIX=/usr/local/opt/llvm/bin/
 endif
 
@@ -76,6 +77,22 @@ coveragejava: testjava
 		--classfiles bin --sourcefiles src/java --html java-coverage-report
 	open java-coverage-report/index.html
 
+coveragecpp:
+	g++ $(CPP_FLAGS) --coverage -O0 -ggdb -g3 -Isrc/cpp/dsa -o main test/cpp/dsa/*.cpp $(CPP_TEST_LIBS)
+	./main
+	mv main-* test/cpp/dsa
+	@for f in test/cpp/dsa/main-*; do \
+		mv "$$f" "test/cpp/dsa/$${f##*/main-}"; \
+	done
+	gcov test/cpp/dsa/*.cpp
+	mv my*.gcov test/cpp/dsa
+	rm *.gcov
+	# Let's happily ignore all of these errors
+	lcov --ignore-errors format,format,unsupported,inconsistent,inconsistent --capture --directory test/cpp/dsa --output-file coverage.info
+	lcov --ignore-errors format --remove coverage.info "/usr/local/include/*" "*/v1/*" "test/*" --output-file coverage.filtered.info
+	genhtml --ignore-errors unsupported,unsupported,inconsistent,inconsistent,corrupt,category,category coverage.filtered.info --output-directory cpp-coverage-report
+	open cpp-coverage-report/index.html
+
 coveragepy:
 	coverage run -a -m unittest discover -v -s test/python/dsa -p "*test.py"
 	coverage html --omit=*test*,*__init__*,*typing_extensions*
@@ -114,6 +131,10 @@ testjava:
 		-jar lib/junit-platform-console-standalone-1.9.3.jar \
 		-cp bin:$(MOCK) --scan-classpath --fail-if-no-tests
 
+testcpp:
+	g++ $(CPP_FLAGS) -O2 -Isrc/cpp/dsa -o main test/cpp/dsa/*.cpp $(CPP_TEST_LIBS)
+	./main
+
 testpy:
 	python3 -m unittest discover -v -s test/python/dsa -p "*test.py"
 
@@ -132,7 +153,7 @@ debugjava:
 	# cd out; jdb Main
 
 debugcpp:
-	g++ $(CPP_FLAGS) -Og -ggdb -o main src/cpp/dsa/*.cpp src/cpp/main.cpp
+	g++ $(CPP_FLAGS) -Og -ggdb -g3 -o main src/cpp/dsa/*.cpp src/cpp/main.cpp
 	# gdb main
 
 debugpy:
@@ -215,8 +236,8 @@ updaterust:
 	cargo update
 
 clean:
-	rm -rf *.jar main src/java/Main.class src/java/dsa/*.class out public \
+	rm -rf *.jar main main* src/java/Main.class src/java/dsa/*.class out public \
 		src/python/dsa/__pycache__ test/python/dsa/__pycache__ \
 		.mypy_cache bin jacoco.exec *-coverage-report .coverage coverage.out \
 		dist dsa-1.0.0.tgz target *.profdata *.profraw src/rust/dsa/*.profraw \
-		src/rust/dsa-tester/*.profraw
+		src/rust/dsa-tester/*.profraw test/cpp/dsa/*.gc* *.info

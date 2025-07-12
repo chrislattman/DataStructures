@@ -4,7 +4,6 @@
 #include "mylist.h"
 #include "myhashmap.hpp"
 #include <sstream>
-#include <string>
 
 using namespace std;
 
@@ -80,7 +79,7 @@ public:
     ///
     /// @param set object to compare to this set
     /// @return true if object and this set are equal
-    bool operator==(const MyHashSet<T> &set) {
+    bool operator==(const MyHashSet<T> &set) const {
         if (&set == this) {
             return true;
         }

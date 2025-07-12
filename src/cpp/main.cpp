@@ -32,7 +32,7 @@ int main(void) {
 
     MyArrayList<int> mylist;
     vector<int> arraylist;
-    cout << boolalpha << (mylist.toString() == "[]") << endl;
+    cout << boolalpha << ("[]" == mylist.toString()) << endl;
     mylist.add(5);
     mylist.add(10);
     mylist.add(12);

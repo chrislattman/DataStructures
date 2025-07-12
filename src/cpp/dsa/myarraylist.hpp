@@ -3,7 +3,7 @@
 #include "mylist.h"
 #include <stdexcept>
 #include <sstream>
-#include <string>
+#include <cstring>
 
 using namespace std;
 

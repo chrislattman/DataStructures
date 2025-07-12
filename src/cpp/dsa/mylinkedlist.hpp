@@ -3,7 +3,6 @@
 #include "mylist.h"
 #include <stdexcept>
 #include <sstream>
-#include <string>
 
 using namespace std;
 
@@ -163,7 +162,7 @@ public:
     ///
     /// @param list object to compare to this list
     /// @return true if object and this list are equal
-    bool operator==(const MyLinkedList<T> &list) {
+    bool operator==(const MyLinkedList<T> &list) const {
         if (&list == this) {
             return true;
         }

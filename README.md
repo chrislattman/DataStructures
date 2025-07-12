@@ -87,3 +87,7 @@ cargo fetch
 - `cargo install --path .` installs the local package in `~/.cargo/bin`
 - Add a Rust dependency by running `cargo add <package>`
 - `llvm` needs to be installed
+
+For C++, you need to install `flawfinder`, `cppcheck`, `libgtest-dev` and `libgmock-dev` (on Linux) or `googletest` (on macOS) or `mingw-w64-ucrt-x86_64-gtest` (on MSYS2 UCRT64), and `lcov` for the examples to work.
+
+- For Linux, you will have to build the `gtest` and `gmock` libraries yourself, then move them to `/usr/lib/`

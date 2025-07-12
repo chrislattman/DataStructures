@@ -3,7 +3,7 @@
 #include "mymap.h"
 #include "myarraylist.hpp"
 #include <sstream>
-#include <string>
+#include <cstring>
 
 using namespace std;
 
