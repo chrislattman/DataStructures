@@ -1,9 +1,10 @@
 #pragma once
 
-#include "myqueue.h"
-#include <stdexcept>
-#include <sstream>
 #include <cstring>
+#include <sstream>
+#include <stdexcept>
+
+#include "myqueue.h"
 
 using namespace std;
 

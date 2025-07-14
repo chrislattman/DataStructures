@@ -1,7 +1,8 @@
 #pragma once
 
-#include "mylist.h"
 #include <string>
+
+#include "mylist.h"
 
 /// @brief Abstract class (used as an interface) which defines methods for maps.
 ///

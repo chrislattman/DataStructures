@@ -139,19 +139,20 @@ where
                 self.size -= 1;
                 return Ok(old.data);
             }
-        }
-        let mut current = &mut self.head;
-        let stop = index - 1;
-        for _ in 0..stop {
-            if let Some(curr) = current {
-                current = &mut curr.next;
+        } else {
+            let mut current = &mut self.head;
+            let stop = index - 1;
+            for _ in 0..stop {
+                if let Some(curr) = current {
+                    current = &mut curr.next;
+                }
             }
-        }
-        if let Some(curr) = current {
-            if let Some(mut old) = curr.next.take() {
-                curr.next = old.next.take();
-                self.size -= 1;
-                return Ok(old.data);
+            if let Some(curr) = current {
+                if let Some(mut old) = curr.next.take() {
+                    curr.next = old.next.take();
+                    self.size -= 1;
+                    return Ok(old.data);
+                }
             }
         }
         Err(MyListError::IndexError)
@@ -161,7 +162,7 @@ where
         let mut current = &mut self.head;
         if let Some(old) = current {
             if element == old.data {
-                *current = old.next.take();
+                self.head = old.next.take();
                 self.size -= 1;
                 return true;
             }
@@ -249,14 +250,5 @@ where
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.to_string())
-    }
-}
-
-impl<T> Drop for MyLinkedList<T> {
-    fn drop(&mut self) {
-        let mut current = self.head.take();
-        while let Some(mut curr) = current {
-            current = curr.next.take();
-        }
     }
 }

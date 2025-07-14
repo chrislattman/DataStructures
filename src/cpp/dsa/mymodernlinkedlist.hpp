@@ -1,11 +1,11 @@
 #pragma once
 
+#include <memory>
 #include <sstream>
 #include <stdexcept>
+#include <utility>
 
 #include "mylist.h"
-
-using namespace std;
 
 /**
  * Implementations need to be in this header file due to generic templates.
@@ -13,25 +13,25 @@ using namespace std;
  * functions in a .cpp file like:
  *
  * template<typename T>
- * return-type MyLinkedList<T>::method(args) {
+ * return-type MyModernLinkedList<T>::method(args) {
  *     ...
  * }
  */
 
-/// @brief A singly linked list data structure.
+/// @brief A singly linked list data structure using modern C++ techniques.
 ///
 /// @tparam T data type
 template<typename T>
-class MyLinkedList: public MyList<T> {
+class MyModernLinkedList: public MyList<T> {
 private:
     /// @brief Internal node representation.
     typedef struct Node {
         T data;
-        struct Node *next;
+        std::unique_ptr<Node> next;
     } Node;
 
-    Node *head;
-    unsigned int list_size;
+    std::unique_ptr<Node> head = nullptr;
+    unsigned int list_size = 0;
 
     /// @brief Helper function for index validation.
     ///
@@ -39,68 +39,11 @@ private:
     /// @param upperBound value that index must be strictly less than
     void checkIndex(unsigned int index, unsigned int upperBound) const {
         if (index >= upperBound) {
-            throw out_of_range("Index is out of bounds");
+            throw std::out_of_range("Index is out of bounds");
         }
     }
 
 public:
-    /// @brief Default constructor for this linked list.
-    MyLinkedList() {
-        head = nullptr;
-        list_size = 0;
-    }
-
-    /// @brief Constructs a linked list instance with the copied contents of another linked list.
-    ///
-    /// @param list other linked list to deep copy from
-    MyLinkedList(const MyLinkedList<T> &list) {
-        if (list.list_size > 0) {
-            head = new Node();
-            head->data = list.head->data;
-            Node *curr = head;
-            Node *otherCurr = list.head->next;
-            while (otherCurr != nullptr) {
-                curr->next = new Node();
-                curr->next->data = otherCurr->data;
-                curr = curr->next;
-                otherCurr = otherCurr->next;
-            }
-            list_size = list.list_size;
-        } else {
-            head = nullptr;
-            list_size = 0;
-        }
-    }
-
-    /// @brief Reinitalizes assignee (left hand side) linked list instance from another linked list.
-    ///
-    /// @param list other linked list to deep copy from
-    /// @return updated version of assignee list
-    MyLinkedList &operator=(const MyLinkedList<T> &list) {
-        if (this != &list) {
-            clear();
-            if (list.list_size > 0) {
-                head = new Node();
-                head->data = list.head->data;
-                Node *curr = head;
-                Node *otherCurr = list.head->next;
-                while (otherCurr != nullptr) {
-                    curr->next = new Node();
-                    curr->next->data = otherCurr->data;
-                    curr = curr->next;
-                    otherCurr = otherCurr->next;
-                }
-                list_size = list.list_size;
-            }
-        }
-        return *this;
-    }
-
-    /// @brief Frees dynamically allocated resources.
-    virtual ~MyLinkedList() {
-        clear();
-    }
-
     /// @brief Inserts an element at the specified index.
     ///
     /// @param index index to add element
@@ -108,22 +51,22 @@ public:
     void add(unsigned int index, const T &element) {
         checkIndex(index, list_size + 1);
         if (isEmpty()) {
-            head = new Node();
+            head = std::make_unique<Node>();
             head->data = element;
         } else {
-            Node *newNode = new Node();
-            newNode->data = element;
+            auto newnode = std::make_unique<Node>();
+            newnode->data = element;
             if (index == 0) {
-                newNode->next = head;
-                head = newNode;
+                newnode->next = std::move(head);
+                head = std::move(newnode);
             } else {
-                Node *current = head;
+                auto current = head.get();
                 unsigned int stop = index - 1;
                 for (unsigned int i = 0; i < stop; i++) {
-                    current = current->next;
+                    current = current->next.get();
                 }
-                newNode->next = current->next;
-                current->next = newNode;
+                newnode->next = std::move(current->next);
+                current->next = std::move(newnode);
             }
         }
         ++list_size;
@@ -138,11 +81,7 @@ public:
 
     /// @brief Empties this list of all elements.
     void clear() {
-        while (head != nullptr) {
-            Node *next = head->next;
-            delete head;
-            head = next;
-        }
+        head.reset();
         list_size = 0;
     }
 
@@ -151,10 +90,12 @@ public:
     /// @param element element to check for
     /// @return true if found, false otherwise
     bool contains(const T &element) const {
-        for (Node *current = head; current != nullptr; current = current->next) {
+        auto current = head.get();
+        while (current != nullptr) {
             if (element == current->data) {
                 return true;
             }
+            current = current->next.get();
         }
         return false;
     }
@@ -163,21 +104,23 @@ public:
     ///
     /// @param list object to compare to this list
     /// @return true if object and this list are equal
-    bool operator==(const MyLinkedList<T> &list) const {
+    bool operator==(const MyModernLinkedList<T> &list) const {
         if (&list == this) {
             return true;
         }
-        if (list.size() != list_size) {
+        if (list.list_size != list_size) {
             return false;
         }
-        Node *current = head;
-        for (unsigned int i = 0; i < list_size; i++) {
-            if (list.get(i) != current->data) {
+        auto currentself = head.get();
+        auto currentother = list.head.get();
+        while (currentself != nullptr && currentother != nullptr) {
+            if (currentself->data != currentother->data) {
                 return false;
             }
-            current = current->next;
+            currentself = currentself->next.get();
+            currentother = currentother->next.get();
         }
-        return true;
+        return currentself == nullptr && currentother == nullptr;
     }
 
     /// @brief Retrieves, but does not remove, an element from this list at the specified index.
@@ -186,9 +129,9 @@ public:
     /// @return element found
     T get(unsigned int index) const {
         checkIndex(index, list_size);
-        Node *current = head;
+        auto current = head.get();
         for (unsigned int i = 0; i < index; i++) {
-            current = current->next;
+            current = current->next.get();
         }
         return current->data;
     }
@@ -198,12 +141,12 @@ public:
     /// @param element element to search for
     /// @return index of the first occurrence of element, or -1 if not found
     long indexOf(const T &element) const {
-        Node *current = head;
+        auto current = head.get();
         for (long i = 0; i < (long)list_size; i++) {
             if (element == current->data) {
                 return i;
             }
-            current = current->next;
+            current = current->next.get();
         }
         return -1;
     }
@@ -221,12 +164,12 @@ public:
     /// @return index of the last occurrence of element, or -1 if not found
     long lastIndexOf(const T &element) const {
         long index = -1;
-        Node *current = head;
+        auto current = head.get();
         for (long i = 0; i < (long)list_size; i++) {
             if (element == current->data) {
                 index = i;
             }
-            current = current->next;
+            current = current->next.get();
         }
         return index;
     }
@@ -238,20 +181,20 @@ public:
     T remove(unsigned int index) {
         checkIndex(index, list_size);
         if (index == 0) {
-            T oldValue = head->data;
-            head = head->next;
+            auto old = std::move(head);
+            head = std::move(old->next);
             --list_size;
-            return oldValue;
+            return old->data;
         }
-        Node *current = head;
+        auto current = head.get();
         unsigned int stop = index - 1;
         for (unsigned int i = 0; i < stop; i++) {
-            current = current->next;
+            current = current->next.get();
         }
-        T oldValue = current->next->data;
-        current->next = current->next->next;
+        auto old = std::move(current->next);
+        current->next = std::move(old->next);
         --list_size;
-        return oldValue;
+        return old->data;
     }
 
     /// @brief Removes the first occurrence of an element from this list.
@@ -259,18 +202,20 @@ public:
     /// @param element element to remove first occurrence of
     /// @return true if successful, false otherwise
     bool removeElement(const T &element) {
-        if (head != nullptr && element == head->data) {
-            head = head->next;
+        auto current = head.get();
+        if (current != nullptr && element == current->data) {
+            head = std::move(current->next);
             --list_size;
             return true;
         }
-        for (Node *current = head; current != nullptr; current = current->next) {
-            Node *nextNode = current->next;
-            if (nextNode != nullptr && element == nextNode->data) {
-                current->next = nextNode->next;
+        while (current != nullptr) {
+            auto nextnode = current->next.get();
+            if (nextnode != nullptr && element == nextnode->data) {
+                current->next = std::move(nextnode->next);
                 --list_size;
                 return true;
             }
+            current = current->next.get();
         }
         return false;
     }
@@ -282,9 +227,9 @@ public:
     /// @return old value of the element at position index
     T set(unsigned int index, const T &element) {
         checkIndex(index, list_size);
-        Node *current = head;
+        auto current = head.get();
         for (unsigned int i = 0; i < index; i++) {
-            current = current->next;
+            current = current->next.get();
         }
         T oldValue = current->data;
         current->data = element;
@@ -303,10 +248,10 @@ public:
     /// @return array of list elements
     T *toArray() const {
         T *array = new T[list_size];
-        Node *current = head;
+        auto current = head.get();
         for (unsigned int i = 0; i < list_size; i++) {
             array[i] = current->data;
-            current = current->next;
+            current = current->next.get();
         }
         return array;
     }
@@ -314,14 +259,16 @@ public:
     /// @brief Returns a string representation of this list, e.g. "[element1, element2, element3, ..., elementN]".
     ///
     /// @return string form of this list
-    string toString() const {
-        stringstream builder;
+    std::string toString() const {
+        std::stringstream builder;
         builder << "[";
-        for (Node *current = head; current != nullptr; current = current->next) {
+        auto current = head.get();
+        while (current != nullptr) {
             builder << current->data;
-            if (current->next != nullptr) {
+            if (current->next.get() != nullptr) {
                 builder << ", ";
             }
+            current = current->next.get();
         }
         builder << "]";
         return builder.str();
@@ -335,6 +282,6 @@ public:
 /// @param list linked list to print out
 /// @return updated ostream
 template<typename T>
-ostream& operator<<(ostream &str, const MyLinkedList<T> &list) {
+std::ostream& operator<<(std::ostream &str, const MyModernLinkedList<T> &list) {
     return str << list.toString();
 }

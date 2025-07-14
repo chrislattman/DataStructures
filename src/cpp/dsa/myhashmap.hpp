@@ -1,9 +1,10 @@
 #pragma once
 
-#include "mymap.h"
-#include "myarraylist.hpp"
-#include <sstream>
 #include <cstring>
+#include <sstream>
+
+#include "myarraylist.hpp"
+#include "mymap.h"
 
 using namespace std;
 
@@ -83,8 +84,8 @@ private:
     void resizeMap() {
         K *keysCopy = new K[map_length];
         V *valuesCopy = new V[map_length];
-        memcpy(keysCopy, keys, map_length);
-        memcpy(valuesCopy, value_array, map_length);
+        memcpy(keysCopy, keys, map_length * sizeof(K));
+        memcpy(valuesCopy, value_array, map_length * sizeof(V));
         K *newKeys = new K[map_length * 2];
         V *newValues = new V[map_length * 2];
         delete[] keys;

@@ -9,7 +9,7 @@ public interface MyQueue<T> {
     /**
      * Empties this queue of all elements.
      */
-     void clear();
+    void clear();
 
     /**
      * Compares an object with this queue for equality.
@@ -18,7 +18,7 @@ public interface MyQueue<T> {
      * @return true if object and this queue are equal
      */
     @Override
-     boolean equals(Object object);
+    boolean equals(Object object);
 
     /**
      * Returns the Object class-generated hash code of this queue.
@@ -26,49 +26,49 @@ public interface MyQueue<T> {
      * @return hash code of this queue
      */
     @Override
-     int hashCode();
+    int hashCode();
 
     /**
      * Checks if this queue has no elements.
      *
      * @return true if this queue is empty, false otherwise
      */
-     boolean isEmpty();
+    boolean isEmpty();
 
     /**
      * Inserts an element to this queue. Null elements are not permitted.
      *
      * @param element element to add
      */
-     void offer(T element);
+    void offer(T element);
 
     /**
      * Retrieves, but does not remove, the element at the front of this queue.
      *
      * @return element at the front of this queue, or null if queue is empty
      */
-     T peek();
+    T peek();
 
     /**
      * Retrieves and removes the element at the front of this queue.
      *
      * @return element at the front of this queue, or null if queue is empty
      */
-     T poll();
+    T poll();
 
     /**
      * Returns the number of elements in this queue.
      *
      * @return size of queue
      */
-     int size();
+    int size();
 
     /**
      * Returns an array containing all the elements in this queue.
      *
      * @return array of queue elements
      */
-     Object[] toArray();
+    Object[] toArray();
 
     /**
      * Returns a string representation of this queue, e.g.
@@ -77,5 +77,5 @@ public interface MyQueue<T> {
      * @return string form of this queue
      */
     @Override
-     String toString();
+    String toString();
 }

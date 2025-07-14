@@ -1,6 +1,6 @@
 # DataStructures
 
-Collection of implemented data structures and algorithms in Java, some C++, Python, TypeScript, Go, and Rust, as well as multithreading examples in Java.
+Collection of implemented data structures and algorithms in Java, C++, Python, TypeScript, Go, and Rust, as well as multithreading examples in Java.
 
 - For the Java examples, these are not exact copies of the Java Collections Framework, since there is no such thing as an ArrayQueue (rather, there is the ArrayDeque), LinkedList is slightly different (doubly-linked, for one), both of which implement the Deque interface, and the hash codes are defined differently
 - There are also no NavigableMap/NavigableSet, SortedMap/SortedSet, or SequencedMap/SequencedSet interfaces, etc.
@@ -46,6 +46,7 @@ For Go, run
 echo "export PATH=$HOME/go/bin:$PATH" >> ~/.bashrc
 source ~/.bashrc
 go install golang.org/x/pkgsite/cmd/pkgsite@latest
+go install go.uber.org/mock/mockgen@latest
 go work use
 ```
 

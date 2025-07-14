@@ -495,6 +495,7 @@ int main(void) {
     cout << (oss.str().substr(0, oss.str().length() - 2).append("]") == "[3, 4, 6, 7, 8, 9]") << endl;
 
     // Testing copy assignment operator and copy constructor (in that order)
+    // Note that this isn't supported for MyModernLinkedList, would need to use std::shared_ptr<Node> instead (this is equivalent to Option<Rc<Node<T>>> in Rust)
     MyLinkedList<int> linkedListCopy;
     linkedListCopy = mylinkedlist;
     MyLinkedList<int> linkedListRef = mylinkedlist;

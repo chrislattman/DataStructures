@@ -1,9 +1,10 @@
 #pragma once
 
-#include "myset.h"
-#include "mylist.h"
-#include "myhashmap.hpp"
 #include <sstream>
+
+#include "myhashmap.hpp"
+#include "mylist.h"
+#include "myset.h"
 
 using namespace std;
 

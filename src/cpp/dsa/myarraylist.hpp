@@ -1,9 +1,10 @@
 #pragma once
 
-#include "mylist.h"
-#include <stdexcept>
-#include <sstream>
 #include <cstring>
+#include <sstream>
+#include <stdexcept>
+
+#include "mylist.h"
 
 using namespace std;
 
@@ -236,7 +237,7 @@ public:
         return element;
     }
 
-    /// @brief Retrieves and removes the first occurrence of an element from this list.
+    /// @brief Removes the first occurrence of an element from this list.
     ///
     /// @param element element to remove first occurrence of
     /// @return true if successful, false otherwise
