@@ -24,7 +24,7 @@ using namespace std;
 /// none of them (as is the case for the other classes).
 ///
 /// @tparam T data type
-template<typename T>
+template<typename T> // replace <typename T> with <std::totally_ordered T> for a priority queue
 class MyArrayList: public MyList<T> {
 private:
     T *array;

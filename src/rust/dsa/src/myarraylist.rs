@@ -14,7 +14,7 @@ pub struct MyArrayList<T> {
     size: usize,
 }
 
-impl<T: PartialEq> MyArrayList<T> {
+impl<T: PartialEq> MyArrayList<T> { // replace <T: PartialEQ> with <T: Ord> for a priority queue
     // <T: PartialEq> is an alternative to where
     /// Returns a new `MyArrayList` struct with a default initial capacity of 10.
     pub fn new() -> Self {
