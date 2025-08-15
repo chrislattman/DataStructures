@@ -6,6 +6,8 @@
 
 #include "mylist.h"
 
+#define MAX(a, b) ((a) > (b) ? (a) : (b))
+
 using namespace std;
 
 /**
@@ -116,7 +118,7 @@ public:
     void add(unsigned int index, const T &element) override {
         checkIndex(index, array_size + 1);
         checkCapacity();
-        if (index < array_size) {
+        if (MAX(array_size, index) == array_size) { // index < array_size
             memmove(array + index + 1, array + index, (array_size - index) * sizeof(T));
         }
         array[index] = element;

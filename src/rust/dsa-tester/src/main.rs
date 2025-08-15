@@ -17,7 +17,7 @@ fn main() {
     myarraylist.add(None, 5).unwrap();
     println!("{}", format!("{myarraylist:?}") == "[6, 5]");
 
-    binary_search_list(&mut myarraylist, 5);
+    binary_search_list(&myarraylist, 5);
     mergesort_list(&mut myarraylist);
     quicksort_list(&mut myarraylist);
     heapsort_list(&mut myarraylist);

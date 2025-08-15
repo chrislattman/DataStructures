@@ -2,6 +2,13 @@ use std::fmt::{self, Display};
 
 use crate::mylist::{MyList, MyListError};
 
+/// A basic MAX macro in Rust.
+macro_rules! rust_max {
+    ($a:expr, $b:expr) => {
+        if $a > $b { $a } else { $b }
+    };
+}
+
 const DEFAULT_CAPACITY_ARRAY_LIST: usize = 10;
 const MIN_ARR_LEN_THRESHOLD_ARRAY_LIST: usize = 100;
 
@@ -14,7 +21,8 @@ pub struct MyArrayList<T> {
     size: usize,
 }
 
-impl<T: PartialEq> MyArrayList<T> { // replace <T: PartialEQ> with <T: Ord> for a priority queue
+impl<T: PartialEq> MyArrayList<T> {
+    // replace <T: PartialEQ> with <T: Ord> for a priority queue
     // <T: PartialEq> is an alternative to where
     /// Returns a new `MyArrayList` struct with a default initial capacity of 10.
     pub fn new() -> Self {
@@ -45,7 +53,8 @@ where
         if let Some(idx) = index {
             check_index(idx, self.size + 1)?;
             check_capacity(self);
-            if idx < self.size {
+            if rust_max!(self.size, idx) == self.size {
+                // idx < self.size
                 self.array.copy_within(idx..self.size, idx + 1);
             }
             self.array[idx] = element;
