@@ -9,8 +9,11 @@ import "sync/atomic"
 type MySPSCArrayQueue[T comparable] struct {
 	mask   int32
 	buffer []T
+	// _pad0  [16]int32 // padding to avoid false sharing on same 64 byte cache line
 	head   int32
+	// _pad1  [15]int32	// padding to avoid false sharing on same 64 byte cache line
 	tail   int32
+	// _pad2  [15]int32	// padding to avoid false sharing on same 64 byte cache line
 }
 
 // Returns a lock-free SPSC queue with a usable capacity of 2^k - 1.
