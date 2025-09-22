@@ -9,7 +9,7 @@ public class MyLinkedList<T> implements MyList<T> {
     /**
      * Internal head node used by this linked list.
      */
-    private Node head;
+    private Node<T> head;
 
     /**
      * Number of connected nodes in this linked list.
@@ -27,16 +27,16 @@ public class MyLinkedList<T> implements MyList<T> {
     public void add(int index, T element) throws IndexOutOfBoundsException {
         checkIndex(index, size + 1);
         if (isEmpty()) {
-            head = new Node();
+            head = new Node<>();
             head.data = element;
         } else {
-            Node newNode = new Node();
+            Node<T> newNode = new Node<>();
             newNode.data = element;
             if (index == 0) {
                 newNode.next = head;
                 head = newNode;
             } else {
-                Node current = head;
+                Node<T> current = head;
                 int stop = index - 1;
                 for (int i = 0; i < stop; i++) {
                     current = current.next;
@@ -61,7 +61,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public boolean contains(T element) {
-        for (Node current = head; current != null; current = current.next) {
+        for (Node<T> current = head; current != null; current = current.next) {
             if (element.equals(current.data)) {
                 return true;
             }
@@ -84,8 +84,8 @@ public class MyLinkedList<T> implements MyList<T> {
         if (obj.size() != size) {
             return false;
         }
-        Node current = head;
-        Node objCurrent = (MyLinkedList<T>.Node) obj.head;
+        Node<T> current = head;
+        Node<T> objCurrent = (MyLinkedList.Node<T>) obj.head;
         for (int i = 0; i < size; i++) {
             if (!objCurrent.data.equals(current.data)) {
                 return false;
@@ -99,7 +99,7 @@ public class MyLinkedList<T> implements MyList<T> {
     @Override
     public T get(int index) throws IndexOutOfBoundsException {
         checkIndex(index, size);
-        Node current = head;
+        Node<T> current = head;
         for (int i = 0; i < index; i++) {
             current = current.next;
         }
@@ -113,7 +113,7 @@ public class MyLinkedList<T> implements MyList<T> {
 
     @Override
     public int indexOf(T element) {
-        Node current = head;
+        Node<T> current = head;
         for (int i = 0; i < size; i++) {
             if (element.equals(current.data)) {
                 return i;
@@ -131,7 +131,7 @@ public class MyLinkedList<T> implements MyList<T> {
     @Override
     public int lastIndexOf(T element) {
         int index = -1;
-        Node current = head;
+        Node<T> current = head;
         for (int i = 0; i < size; i++) {
             if (element.equals(current.data)) {
                 index = i;
@@ -150,7 +150,7 @@ public class MyLinkedList<T> implements MyList<T> {
             --size;
             return oldValue;
         }
-        Node current = head;
+        Node<T> current = head;
         int stop = index - 1;
         for (int i = 0; i < stop; i++) {
             current = current.next;
@@ -168,8 +168,8 @@ public class MyLinkedList<T> implements MyList<T> {
             --size;
             return true;
         }
-        for (Node current = head; current != null; current = current.next) {
-            Node nextNode = current.next;
+        for (Node<T> current = head; current != null; current = current.next) {
+            Node<T> nextNode = current.next;
             if (nextNode != null && element.equals(nextNode.data)) {
                 current.next = nextNode.next;
                 --size;
@@ -182,7 +182,7 @@ public class MyLinkedList<T> implements MyList<T> {
     @Override
     public T set(int index, T element) throws IndexOutOfBoundsException {
         checkIndex(index, size);
-        Node current = head;
+        Node<T> current = head;
         for (int i = 0; i < index; i++) {
             current = current.next;
         }
@@ -199,7 +199,7 @@ public class MyLinkedList<T> implements MyList<T> {
     @Override
     public Object[] toArray() {
         Object[] array = new Object[size];
-        Node current = head;
+        Node<T> current = head;
         for (int i = 0; i < size; i++) {
             array[i] = current.data;
             current = current.next;
@@ -210,7 +210,7 @@ public class MyLinkedList<T> implements MyList<T> {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder("[");
-        for (Node current = head; current != null; current = current.next) {
+        for (Node<T> current = head; current != null; current = current.next) {
             builder.append(current.data);
             if (current.next != null) {
                 builder.append(", ");
@@ -237,15 +237,15 @@ public class MyLinkedList<T> implements MyList<T> {
     /**
      * Internal node object used by this linked list.
      */
-    private class Node {
+    private static class Node<E> {
         /**
          * Data stored in this node.
          */
-        private T data = null;
+        private E data = null;
 
         /**
          * Node following this node.
          */
-        private Node next = null;
+        private Node<E> next = null;
     }
 }

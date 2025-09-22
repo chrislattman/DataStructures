@@ -17,9 +17,11 @@
 
 #include "dsa/myarraylist.hpp"
 #include "dsa/myarrayqueue.hpp"
-// #include "dsa/myhashmap.hpp"
-// #include "dsa/myhashset.hpp"
+#include "dsa/myhashmap.hpp"
+#include "dsa/myhashset.hpp"
 #include "dsa/mylinkedlist.hpp"
+#include "dsa/mymodernlinkedlist.hpp"
+#include "dsa/myspscarrayqueue.hpp"
 #include "dsa/mystack.hpp"
 
 #define NUMS_LENGTH 10

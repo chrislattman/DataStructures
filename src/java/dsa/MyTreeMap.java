@@ -11,7 +11,7 @@ public class MyTreeMap<K extends Comparable<? super K>, V>
     /**
      * Internal root node used by this tree map.
      */
-    private Node root;
+    private Node<K, V> root;
 
     /**
      * Number of connected nodes in this tree map.
@@ -94,7 +94,7 @@ public class MyTreeMap<K extends Comparable<? super K>, V>
      */
     public K firstKey() {
         K key = null;
-        Node current = root;
+        Node<K, V> current = root;
         while (current.left != null) {
             key = current.key;
             current = current.left;
@@ -180,7 +180,7 @@ public class MyTreeMap<K extends Comparable<? super K>, V>
      */
     public K lastKey() {
         K key = null;
-        Node current = root;
+        Node<K, V> current = root;
         while (current.right != null) {
             key = current.key;
             current = current.right;
@@ -307,7 +307,7 @@ public class MyTreeMap<K extends Comparable<? super K>, V>
      * @param node current node
      * @param list list to add keys to
      */
-    private void collectKeys(Node node, MyArrayList<K> list) {
+    private void collectKeys(Node<K, V> node, MyArrayList<K> list) {
         if (node != null) {
             collectKeys(node.left, list);
             list.add(node.key);
@@ -322,7 +322,7 @@ public class MyTreeMap<K extends Comparable<? super K>, V>
      * @param node current node
      * @param list list to add values to
      */
-    private void collectValues(Node node, MyArrayList<V> list) {
+    private void collectValues(Node<K, V> node, MyArrayList<V> list) {
         if (node != null) {
             collectValues(node.left, list);
             list.add(node.value);
@@ -338,7 +338,7 @@ public class MyTreeMap<K extends Comparable<? super K>, V>
      * @return value associated with key, or null if key was not found
      */
     @SuppressWarnings("unchecked")
-    private V findKey(Node node, Object key) {
+    private V findKey(Node<K, V> node, Object key) {
         if (node == null || key == null) {
             return null;
         }
@@ -359,7 +359,7 @@ public class MyTreeMap<K extends Comparable<? super K>, V>
      * @param value value to search for
      * @return true if value was found, false otherwise
      */
-    private boolean findValue(Node node, Object value) {
+    private boolean findValue(Node<K, V> node, Object value) {
         if (node == null || value == null) {
             return false;
         }
@@ -383,11 +383,11 @@ public class MyTreeMap<K extends Comparable<? super K>, V>
      * exists
      * @return root node
      */
-    private Node insert(Node node, K key, V newValue, V oldValue,
+    private Node<K, V> insert(Node<K, V> node, K key, V newValue, V oldValue,
         boolean addOnlyIfAbsent, boolean addOnlyIfKeyExists) {
         if (node == null && !addOnlyIfKeyExists) {
             ++size;
-            node = new Node();
+            node = new Node<>();
             node.key = key;
             node.value = newValue;
             return node;
@@ -427,7 +427,7 @@ public class MyTreeMap<K extends Comparable<? super K>, V>
      * @param value current value to check for, leave as null if not applicable
      * @return root node
      */
-    private Node delete(Node node, K key, V value) {
+    private Node<K, V> delete(Node<K, V> node, K key, V value) {
         if (node == null) {
             return null;
         }
@@ -447,7 +447,7 @@ public class MyTreeMap<K extends Comparable<? super K>, V>
                 --size;
                 return node.left;
             } else {
-                Node successor = node.right;
+                Node<K, V> successor = node.right;
                 while (successor.left != null) {
                     successor = successor.left;
                 }
@@ -472,7 +472,7 @@ public class MyTreeMap<K extends Comparable<? super K>, V>
      * @param node root of subtree to get height of
      * @return height of subtree
      */
-    private int height(Node node) {
+    private int height(Node<K, V> node) {
         if (node == null) {
             return -1;
         }
@@ -490,7 +490,7 @@ public class MyTreeMap<K extends Comparable<? super K>, V>
      * @param node root of subtree to balance
      * @return possibly modified root node of subtree
      */
-    private Node balanceSubtree(Node node) {
+    private Node<K, V> balanceSubtree(Node<K, V> node) {
         if (node.balanceFactor > 1) {
             if (node.left.balanceFactor <= -1) {
                 // if this is called, then it becomes left-right
@@ -513,8 +513,8 @@ public class MyTreeMap<K extends Comparable<? super K>, V>
      * @param node root of subtree to rotate
      * @return modified root node of subtree
      */
-    private Node leftRotation(Node node) {
-        Node newRoot = node.right;
+    private Node<K, V> leftRotation(Node<K, V> node) {
+        Node<K, V> newRoot = node.right;
         node.right = newRoot.left;
         newRoot.left = node;
         return newRoot;
@@ -526,8 +526,8 @@ public class MyTreeMap<K extends Comparable<? super K>, V>
      * @param node root of subtree to rotate
      * @return modified root node of subtree
      */
-    private Node rightRotation(Node node) {
-        Node newRoot = node.left;
+    private Node<K, V> rightRotation(Node<K, V> node) {
+        Node<K, V> newRoot = node.left;
         node.left = newRoot.right;
         newRoot.right = node;
         return newRoot;
@@ -536,26 +536,26 @@ public class MyTreeMap<K extends Comparable<? super K>, V>
     /**
      * Internal node object used by this tree map.
      */
-    private class Node {
+    private static class Node<E, O> {
         /**
          * Key for this node.
          */
-        private K key = null;
+        private E key = null;
 
         /**
          * Value associated with key.
          */
-        private V value = null;
+        private O value = null;
 
         /**
          * Left leaf/child node of this node.
          */
-        private Node left = null;
+        private Node<E, O> left = null;
 
         /**
          * Right leaf/child node of this node.
          */
-        private Node right = null;
+        private Node<E, O> right = null;
 
         /**
          * Difference in height between left subtree and right subtree of this

@@ -147,12 +147,12 @@ where
                     current = &mut curr.next;
                 }
             }
-            if let Some(curr) = current {
-                if let Some(mut old) = curr.next.take() {
-                    curr.next = old.next.take();
-                    self.size -= 1;
-                    return Ok(old.data);
-                }
+            if let Some(curr) = current
+                && let Some(mut old) = curr.next.take()
+            {
+                curr.next = old.next.take();
+                self.size -= 1;
+                return Ok(old.data);
             }
         }
         Err(MyListError::IndexError)
@@ -160,20 +160,20 @@ where
 
     fn remove_element(&mut self, element: T) -> bool {
         let mut current = &mut self.head;
-        if let Some(old) = current {
-            if element == old.data {
-                self.head = old.next.take();
-                self.size -= 1;
-                return true;
-            }
+        if let Some(old) = current
+            && element == old.data
+        {
+            self.head = old.next.take();
+            self.size -= 1;
+            return true;
         }
         while let Some(curr) = current {
-            if let Some(ref mut next_node) = curr.next {
-                if element == next_node.data {
-                    curr.next = next_node.next.take();
-                    self.size -= 1;
-                    return true;
-                }
+            if let Some(ref mut next_node) = curr.next
+                && element == next_node.data
+            {
+                curr.next = next_node.next.take();
+                self.size -= 1;
+                return true;
             }
             current = &mut curr.next;
         }

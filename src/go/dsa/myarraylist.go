@@ -15,15 +15,15 @@ type MyArrayList[T comparable] struct {
 	size  uint
 }
 
-// NewArrayListDefault returns a new MyArrayList struct pointer with a default
+// NewMyArrayListDefault returns a new MyArrayList struct pointer with a default
 // initial capacity of 10.
-func NewArrayListDefault[T comparable]() *MyArrayList[T] {
-	return NewArrayList[T](defaultCapacityArrayList)
+func NewMyArrayListDefault[T comparable]() *MyArrayList[T] {
+	return NewMyArrayList[T](defaultCapacityArrayList)
 }
 
-// NewArrayList returns a new MyArrayList struct pointer with initial capacity
+// NewMyArrayList returns a new MyArrayList struct pointer with initial capacity
 // initialCapacity.
-func NewArrayList[T comparable](initialCapacity uint) *MyArrayList[T] {
+func NewMyArrayList[T comparable](initialCapacity uint) *MyArrayList[T] {
 	newlist := new(MyArrayList[T])
 	newlist.array = make([]T, initialCapacity)
 	newlist.size = 0

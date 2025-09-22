@@ -36,10 +36,10 @@ func main() {
 	// verifies that MyPriorityQueue implements MyQueue
 	var _ dsa.MyQueue[int] = (*dsa.MyPriorityQueue[int])(nil)
 
-	myarraylist := dsa.NewArrayListDefault[int]()
-	myarraylist.Add(6, 0)
+	myarraylist := dsa.NewMyArrayListDefault[int]()
+	myarraylist.Add(0, 6)
 	myarraylist.AddToEnd(5)
-	fmt.Println(fmt.Sprint(myarraylist) == "[]")
+	fmt.Println(fmt.Sprint(myarraylist) == "[6, 5]")
 
 	dsa.BinarySearchList(myarraylist, 7)
 	dsa.MergesortList(myarraylist)

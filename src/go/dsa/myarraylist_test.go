@@ -27,7 +27,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestMyArrayList_Add(t *testing.T) {
-	myArrayList := NewArrayListDefault[int]()
+	myArrayList := NewMyArrayListDefault[int]()
 	myArrayList.Clear()
 	assertEquals(t, uint(0), myArrayList.Size())
 	myArrayList.Add(0, 5)
@@ -37,19 +37,19 @@ func TestMyArrayList_Add(t *testing.T) {
 }
 
 func TestMyArrayList_Contains(t *testing.T) {
-	myArrayList := NewArrayListDefault[int]()
+	myArrayList := NewMyArrayListDefault[int]()
 	myArrayList.AddToEnd(5)
 	assertTrue(t, myArrayList.Contains(5))
 	assertFalse(t, myArrayList.Contains(6))
 }
 
 func TestMyArrayList_Equals(t *testing.T) {
-	myArrayList := NewArrayListDefault[int]()
+	myArrayList := NewMyArrayListDefault[int]()
 	assertFalse(t, myArrayList.Equals(myArrayList))
 }
 
 func TestMyArrayList_Get(t *testing.T) {
-	myArrayList := NewArrayListDefault[int]()
+	myArrayList := NewMyArrayListDefault[int]()
 	_, err := myArrayList.Get(0)
 	assertNotNil(t, err)
 	myArrayList.AddToEnd(5)
@@ -58,26 +58,26 @@ func TestMyArrayList_Get(t *testing.T) {
 }
 
 func TestMyArrayList_IndexOf(t *testing.T) {
-	myArrayList := NewArrayListDefault[int]()
+	myArrayList := NewMyArrayListDefault[int]()
 	assertEquals(t, -1, myArrayList.IndexOf(5))
 	myArrayList.AddToEnd(5)
 	assertEquals(t, 0, myArrayList.IndexOf(5))
 }
 
 func TestMyArrayList_IsEmpty(t *testing.T) {
-	myArrayList := NewArrayListDefault[int]()
+	myArrayList := NewMyArrayListDefault[int]()
 	assertTrue(t, myArrayList.IsEmpty())
 }
 
 func TestMyArrayList_LastIndexOf(t *testing.T) {
-	myArrayList := NewArrayListDefault[int]()
+	myArrayList := NewMyArrayListDefault[int]()
 	assertEquals(t, -1, myArrayList.LastIndexOf(5))
 	myArrayList.AddToEnd(5)
 	assertEquals(t, 0, myArrayList.LastIndexOf(5)) // failed
 }
 
 func TestMyArrayList_Remove(t *testing.T) {
-	myArrayList := NewArrayListDefault[int]()
+	myArrayList := NewMyArrayListDefault[int]()
 	_, err := myArrayList.Remove(0)
 	assertNotNil(t, err)
 	myArrayList.AddToEnd(5)
@@ -87,7 +87,7 @@ func TestMyArrayList_Remove(t *testing.T) {
 }
 
 func TestMyArrayList_RemoveElement(t *testing.T) {
-	myArrayList := NewArrayListDefault[int]()
+	myArrayList := NewMyArrayListDefault[int]()
 	assertFalse(t, myArrayList.RemoveElement(5))
 	myArrayList.AddToEnd(5)
 	assertTrue(t, myArrayList.RemoveElement(5))
@@ -95,7 +95,7 @@ func TestMyArrayList_RemoveElement(t *testing.T) {
 }
 
 func TestMyArrayList_Set(t *testing.T) {
-	myArrayList := NewArrayListDefault[int]()
+	myArrayList := NewMyArrayListDefault[int]()
 	_, err := myArrayList.Set(1, 5)
 	assertNotNil(t, err)
 	myArrayList.AddToEnd(5)
@@ -106,12 +106,12 @@ func TestMyArrayList_Set(t *testing.T) {
 }
 
 func TestMyArrayList_Size(t *testing.T) {
-	myArrayList := NewArrayListDefault[int]()
+	myArrayList := NewMyArrayListDefault[int]()
 	assertEquals(t, uint(0), myArrayList.Size())
 }
 
 func TestMyArrayList_ToString(t *testing.T) {
-	myArrayList := NewArrayListDefault[int]()
+	myArrayList := NewMyArrayListDefault[int]()
 	assertEquals(t, "[]", myArrayList.ToString())
 	myArrayList.AddToEnd(5)
 	assertEquals(t, "[5]", myArrayList.ToString())
