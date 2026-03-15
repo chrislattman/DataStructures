@@ -146,7 +146,7 @@ testgo:
 	go test -v ./src/go/dsa
 
 testrust:
-	cargo test -q
+	cargo test -q --release
 
 debugjava:
 	javac -g -d out -cp src/java/dsa/*.java src/java/Main.java
