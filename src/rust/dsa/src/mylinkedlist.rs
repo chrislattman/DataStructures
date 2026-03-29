@@ -2,6 +2,14 @@ use std::fmt::{self, Display};
 
 use crate::mylist::{MyList, MyListError};
 
+fn check_index(index: usize, upper_bound: usize) -> Result<(), MyListError> {
+    if index >= upper_bound {
+        Err(MyListError::IndexError)
+    } else {
+        Ok(())
+    }
+}
+
 /// Internal struct used by this linked list.
 struct Node<T> {
     data: T,
@@ -215,14 +223,6 @@ where
         }
         sb.push(']');
         sb
-    }
-}
-
-fn check_index(index: usize, upper_bound: usize) -> Result<(), MyListError> {
-    if index >= upper_bound {
-        Err(MyListError::IndexError)
-    } else {
-        Ok(())
     }
 }
 

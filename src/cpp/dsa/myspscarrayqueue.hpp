@@ -1,6 +1,7 @@
 #pragma once
 
 #include <atomic>
+#include <optional>
 
 /// @brief A lock-free SPSC (single producer, single consumer) queue (ring buffer/FIFO)
 /// built on top of an array. SPSC queues are used in HFT pipelines, audio/video
@@ -59,11 +60,11 @@ public:
     /// @brief Retrieves, but does not remove, the element at the front of this lock-free SPSC queue.
     ///
     /// @return element at the front of this queue, or NULL if queue is empty
-    T peek() const {
+    std::optional<T> peek() const {
         size_t current_head = head.load(std::memory_order_acquire);
         size_t current_tail = tail.load(std::memory_order_acquire);
         if (current_head == current_tail) {
-            return T{};
+            return std::nullopt;
         }
         return buffer[current_head];
     }
@@ -71,11 +72,11 @@ public:
     /// @brief Retrieves and removes the element at the front of this lock-free SPSC queue.
     ///
     /// @return element at the front of this queue, or NULL if queue is empty
-    T poll() {
+    std::optional<T> poll() {
         // head.load(std::memory_order_relaxed) technically works for SPSC
         size_t current_head = head.load(std::memory_order_acquire);
         if (current_head == tail.load(std::memory_order_acquire)) {
-            return T{};
+            return std::nullopt;
         }
         T value = buffer[current_head];
         buffer[current_head] = T{};

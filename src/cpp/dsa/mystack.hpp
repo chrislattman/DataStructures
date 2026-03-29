@@ -2,8 +2,7 @@
 
 #include <cstring>
 #include <sstream>
-
-using namespace std;
+#include <optional>
 
 /**
  * Implementations need to be in this header file due to generic templates.
@@ -125,9 +124,9 @@ public:
     /// @brief Retrieves, but does not remove, the element at the top of this stack.
     ///
     /// @return topmost element on stack, or NULL if stack is empty
-    T peek() const {
+    std::optional<T> peek() const {
         if (isEmpty()) {
-            return T(NULL);
+            return std::nullopt;
         }
         return array[array_size - 1];
     }
@@ -135,9 +134,9 @@ public:
     /// @brief Retrieves and removes the element at the top of this stack.
     ///
     /// @return topmost element on stack, or NULL if stack is empty
-    T pop() {
+    std::optional<T> pop() {
         if (isEmpty()) {
-            return T(NULL);
+            return std::nullopt;
         }
         T element = array[array_size - 1];
         --array_size;
@@ -173,8 +172,8 @@ public:
     /// @brief Returns a string representation of this stack, e.g. "[element1, element2, element3, ..., elementN]".
     ///
     /// @return string form of this stack
-    string toString() const {
-        stringstream builder;
+    std::string toString() const {
+        std::stringstream builder;
         builder << "[";
         long lastIndex = (long)array_size - 1;
         for (unsigned int i = 0; i < array_size; i++) {
@@ -195,6 +194,6 @@ public:
 /// @param stack stack to print out
 /// @return updated ostream
 template<typename T>
-ostream& operator<<(ostream &str, const MyStack<T> &stack) {
+std::ostream &operator<<(std::ostream &str, const MyStack<T> &stack) {
     return str << stack.toString();
 }

@@ -1,4 +1,4 @@
-use std::fmt::{self, Display};
+use std::fmt::{self, Debug, Display};
 
 use crate::mylist::{MyList, MyListError};
 
@@ -19,6 +19,36 @@ pub struct MyArrayList<T> {
     // Several crates address similar issues: arrayvec, heapless, generic_array
     array: Vec<T>,
     size: usize,
+}
+
+impl<T> MyArrayList<T>
+where
+    T: PartialEq + Copy,
+{
+    fn check_capacity(&mut self) {
+        if self.array.capacity() == 0 {
+            self.array = Vec::with_capacity(DEFAULT_CAPACITY_ARRAY_LIST);
+        } else if self.size == self.array.capacity() {
+            let mut new_array = Vec::with_capacity(self.size * 2);
+            new_array[..self.size].copy_from_slice(&self.array);
+            self.array = new_array;
+        } else if self.array.capacity() > MIN_ARR_LEN_THRESHOLD_ARRAY_LIST
+            && self.size * 2 < self.array.capacity()
+        {
+            let mut new_array = Vec::with_capacity(self.array.capacity() / 2);
+            new_array[..self.size].copy_from_slice(&self.array[..self.size]);
+            self.array = new_array;
+        }
+    }
+
+    // Doesn't need to be a impl method, could be a static method instead
+    fn check_index(&self, index: usize, upper_bound: usize) -> Result<(), MyListError> {
+        if index >= upper_bound {
+            Err(MyListError::IndexError)
+        } else {
+            Ok(())
+        }
+    }
 }
 
 impl<T: PartialEq> MyArrayList<T> {
@@ -51,8 +81,8 @@ where
         }
 
         if let Some(idx) = index {
-            check_index(idx, self.size + 1)?;
-            check_capacity(self);
+            self.check_index(idx, self.size + 1)?;
+            self.check_capacity();
             if rust_max!(self.size, idx) == self.size {
                 // idx < self.size
                 self.array.copy_within(idx..self.size, idx + 1);
@@ -87,7 +117,7 @@ where
     }
 
     fn get(&self, index: usize) -> Result<T, MyListError> {
-        check_index(index, self.size)?;
+        self.check_index(index, self.size)?;
         Ok(self.array[index])
     }
 
@@ -114,13 +144,13 @@ where
     }
 
     fn remove(&mut self, index: usize) -> Result<T, MyListError> {
-        check_index(index, self.size)?;
+        self.check_index(index, self.size)?;
         let element = self.array[index];
         self.size -= 1;
         if index < self.size {
             self.array.copy_within((index + 1)..=self.size, index);
         }
-        check_capacity(self);
+        self.check_capacity();
         Ok(element)
     }
 
@@ -131,7 +161,7 @@ where
                 if i < self.size {
                     self.array.copy_within((i + 1)..=self.size, i);
                 }
-                check_capacity(self);
+                self.check_capacity();
                 return true;
             }
         }
@@ -139,7 +169,7 @@ where
     }
 
     fn set(&mut self, index: usize, element: T) -> Result<T, MyListError> {
-        check_index(index, self.size)?;
+        self.check_index(index, self.size)?;
         let old_value = self.array[index];
         self.array[index] = element;
         Ok(old_value)
@@ -167,30 +197,6 @@ where
     }
 }
 
-fn check_capacity<T: PartialEq + Copy>(list: &mut MyArrayList<T>) {
-    if list.array.capacity() == 0 {
-        list.array = Vec::with_capacity(DEFAULT_CAPACITY_ARRAY_LIST);
-    } else if list.size == list.array.capacity() {
-        let mut new_array = Vec::with_capacity(list.size * 2);
-        new_array[..list.size].copy_from_slice(&list.array);
-        list.array = new_array;
-    } else if list.array.capacity() > MIN_ARR_LEN_THRESHOLD_ARRAY_LIST
-        && list.size * 2 < list.array.capacity()
-    {
-        let mut new_array = Vec::with_capacity(list.array.capacity() / 2);
-        new_array[..list.size].copy_from_slice(&list.array[..list.size]);
-        list.array = new_array;
-    }
-}
-
-fn check_index(index: usize, upper_bound: usize) -> Result<(), MyListError> {
-    if index >= upper_bound {
-        Err(MyListError::IndexError)
-    } else {
-        Ok(())
-    }
-}
-
 impl<T: PartialEq> PartialEq for MyArrayList<T> {
     fn eq(&self, other: &Self) -> bool {
         if self.size != other.size {
@@ -205,9 +211,9 @@ impl<T: PartialEq> PartialEq for MyArrayList<T> {
     }
 }
 
-impl<T> fmt::Debug for MyArrayList<T>
+impl<T> Debug for MyArrayList<T>
 where
-    T: PartialEq + Copy + Display + fmt::Debug,
+    T: PartialEq + Copy + Display + Debug,
 {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "{}", self.to_string())

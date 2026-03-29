@@ -6,8 +6,6 @@
 
 #include "myqueue.h"
 
-using namespace std;
-
 /**
  * Implementations need to be in this header file due to generic templates.
  * Otherwise you could leave method signatures here and implement the
@@ -184,8 +182,8 @@ public:
     /// @brief Returns a string representation of this queue, e.g. "[element1, element2, element3, ..., elementN]".
     ///
     /// @return string form of this queue
-    string toString() const {
-        stringstream builder;
+    std::string toString() const {
+        std::stringstream builder;
         builder << "[";
         long lastIndex = (long)array_size - 1;
         for (unsigned int i = 0; i < array_size; i++) {
@@ -206,6 +204,6 @@ public:
 /// @param queue array queue to print out
 /// @return updated ostream
 template<typename T>
-ostream& operator<<(ostream &str, const MyArrayQueue<T> &queue) {
+std::ostream &operator<<(std::ostream &str, const MyArrayQueue<T> &queue) {
     return str << queue.toString();
 }

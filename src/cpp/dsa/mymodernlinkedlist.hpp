@@ -18,6 +18,16 @@
  * }
  */
 
+/// @brief Helper function for index validation.
+///
+/// @param index index to validate
+/// @param upperBound value that index must be strictly less than
+static void checkIndex(unsigned int index, unsigned int upperBound) {
+    if (index >= upperBound) {
+        throw std::out_of_range("Index is out of bounds");
+    }
+}
+
 /// @brief A singly linked list data structure using modern C++ techniques.
 ///
 /// @tparam T data type
@@ -33,23 +43,17 @@ private:
     std::unique_ptr<Node> head = nullptr;
     unsigned int list_size = 0;
 
-    /// @brief Helper function for index validation.
-    ///
-    /// @param index index to validate
-    /// @param upperBound value that index must be strictly less than
-    void checkIndex(unsigned int index, unsigned int upperBound) const {
-        if (index >= upperBound) {
-            throw std::out_of_range("Index is out of bounds");
-        }
-    }
-
 public:
     /// @brief Inserts an element at the specified index.
     ///
     /// @param index index to add element
     /// @param element element to add
-    void add(unsigned int index, const T &element) {
-        checkIndex(index, list_size + 1);
+    std::expected<void, std::string> add(unsigned int index, const T &element) {
+        try {
+            checkIndex(index, list_size + 1);
+        } catch (const std::out_of_range &e) {
+            return std::unexpected(e.what());
+        }
         if (isEmpty()) {
             head = std::make_unique<Node>();
             head->data = element;
@@ -70,6 +74,7 @@ public:
             }
         }
         ++list_size;
+        return {};
     }
 
     /// @brief Inserts an element at the end of this list.
@@ -127,8 +132,12 @@ public:
     ///
     /// @param index index to retrieve element from
     /// @return element found
-    T get(unsigned int index) const {
-        checkIndex(index, list_size);
+    std::expected<T, std::string> get(unsigned int index) const {
+        try {
+            checkIndex(index, list_size);
+        } catch (const std::out_of_range &e) {
+            return std::unexpected(e.what());
+        }
         auto current = head.get();
         for (unsigned int i = 0; i < index; i++) {
             current = current->next.get();
@@ -178,8 +187,12 @@ public:
     ///
     /// @param index index to remove element from
     /// @return element found at index
-    T remove(unsigned int index) {
-        checkIndex(index, list_size);
+    std::expected<T, std::string> remove(unsigned int index) {
+        try {
+            checkIndex(index, list_size);
+        } catch (const std::out_of_range &e) {
+            return std::unexpected(e.what());
+        }
         if (index == 0) {
             auto old = std::move(head);
             head = std::move(old->next);
@@ -225,8 +238,12 @@ public:
     /// @param index index to set element at
     /// @param element new value to set existing element to
     /// @return old value of the element at position index
-    T set(unsigned int index, const T &element) {
-        checkIndex(index, list_size);
+    std::expected<T, std::string> set(unsigned int index, const T &element) {
+        try {
+            checkIndex(index, list_size);
+        } catch (const std::out_of_range &e) {
+            return std::unexpected(e.what());
+        }
         auto current = head.get();
         for (unsigned int i = 0; i < index; i++) {
             current = current->next.get();
@@ -282,6 +299,6 @@ public:
 /// @param list linked list to print out
 /// @return updated ostream
 template<typename T>
-std::ostream& operator<<(std::ostream &str, const MyModernLinkedList<T> &list) {
+std::ostream &operator<<(std::ostream &str, const MyModernLinkedList<T> &list) {
     return str << list.toString();
 }

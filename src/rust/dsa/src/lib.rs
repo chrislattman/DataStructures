@@ -6,3 +6,4 @@ pub mod myarraylist;
 pub mod mylinkedlist;
 pub mod mylist;
 pub mod myspscarrayqueue;
+pub mod mystack;

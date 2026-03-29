@@ -6,8 +6,6 @@
 #include "mylist.h"
 #include "myset.h"
 
-using namespace std;
-
 /**
  * Implementations need to be in this header file due to generic templates.
  * Otherwise you could leave method signatures here and implement the
@@ -136,9 +134,9 @@ public:
     /// @brief Returns a string representation of this set, e.g. "[element1, element2, element3, ..., elementN]".
     ///
     /// @return string form of this set
-    string toString() const {
+    std::string toString() const {
         MyList<T> *keys = map->keyList();
-        stringstream builder;
+        std::stringstream builder;
         builder << "[";
         unsigned int length = size();
         long lastIndex = (long)length - 1;
@@ -160,6 +158,6 @@ public:
 /// @param list hash set to print out
 /// @return updated ostream
 template<typename T>
-ostream& operator<<(ostream &str, const MyHashSet<T> &set) {
+std::ostream &operator<<(std::ostream &str, const MyHashSet<T> &set) {
     return str << set.toString();
 }

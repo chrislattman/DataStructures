@@ -8,8 +8,6 @@
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
-using namespace std;
-
 /**
  * Implementations need to be in this header file due to generic templates.
  * Otherwise you could leave method signatures here and implement the
@@ -59,7 +57,7 @@ private:
     /// @param upperBound value that index must be strictly less than
     void checkIndex(unsigned int index, unsigned int upperBound) const {
         if (index >= upperBound) {
-            throw out_of_range("Index is out of bounds");
+            throw std::out_of_range("Index is out of bounds");
         }
     }
 
@@ -115,14 +113,19 @@ public:
     ///
     /// @param index index to add element
     /// @param element element to add
-    void add(unsigned int index, const T &element) override {
-        checkIndex(index, array_size + 1);
+    std::expected<void, std::string> add(unsigned int index, const T &element) override {
+        try {
+            checkIndex(index, array_size + 1);
+        } catch (const std::out_of_range &e) {
+            return std::unexpected(e.what());
+        }
         checkCapacity();
         if (MAX(array_size, index) == array_size) { // index < array_size
             memmove(array + index + 1, array + index, (array_size - index) * sizeof(T));
         }
         array[index] = element;
         ++array_size;
+        return {};
     }
 
     /// @brief Inserts an element at the end of this list.
@@ -176,8 +179,12 @@ public:
     ///
     /// @param index index to retrieve element from
     /// @return element found
-    T get(unsigned int index) const override {
-        checkIndex(index, array_size);
+    std::expected<T, std::string> get(unsigned int index) const override {
+        try {
+            checkIndex(index, array_size);
+        } catch (const std::out_of_range &e) {
+            return std::unexpected(e.what());
+        }
         return array[index];
     }
 
@@ -186,7 +193,7 @@ public:
     ///
     /// @param index index to retrieve element from
     /// @return element found
-    T& operator[](int index) {
+    T &operator[](int index) {
         checkIndex(index, array_size);
         return array[index];
     }
@@ -228,8 +235,12 @@ public:
     ///
     /// @param index index to remove element from
     /// @return element found at index
-    T remove(unsigned int index) override {
-        checkIndex(index, array_size);
+    std::expected<T, std::string> remove(unsigned int index) override {
+        try {
+            checkIndex(index, array_size);
+        } catch (const std::out_of_range &e) {
+            return std::unexpected(e.what());
+        }
         T element = array[index];
         --array_size;
         if (index < array_size) {
@@ -262,8 +273,12 @@ public:
     /// @param index index to set element at
     /// @param element new value to set existing element to
     /// @return old value of the element at position index
-    T set(unsigned int index, const T &element) override {
-        checkIndex(index, array_size);
+    std::expected<T, std::string> set(unsigned int index, const T &element) override {
+        try {
+            checkIndex(index, array_size);
+        } catch (const std::out_of_range &e) {
+            return std::unexpected(e.what());
+        }
         T oldValue = array[index];
         array[index] = element;
         return oldValue;
@@ -288,8 +303,8 @@ public:
     /// @brief Returns a string representation of this list, e.g. "[element1, element2, element3, ..., elementN]".
     ///
     /// @return string form of this list
-    string toString() const override {
-        stringstream builder;
+    std::string toString() const override {
+        std::stringstream builder;
         builder << "[";
         long lastIndex = (long)array_size - 1;
         for (unsigned int i = 0; i < array_size; i++) {
@@ -310,6 +325,6 @@ public:
 /// @param list array list to print out
 /// @return updated ostream
 template<typename T>
-ostream& operator<<(ostream &str, const MyArrayList<T> &list) {
+std::ostream &operator<<(std::ostream &str, const MyArrayList<T> &list) {
     return str << list.toString();
 }

@@ -9,7 +9,6 @@
 #include <set>
 #include <sstream>
 #include <stack>
-#include <stdexcept>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
@@ -38,7 +37,7 @@ int main(void) {
     mylist.add(5);
     mylist.add(10);
     mylist.add(12);
-    mylist.add(2, 17);
+    mylist.add(2, 17).value();
     arraylist.push_back(5);
     arraylist.push_back(10);
     arraylist.push_back(12);
@@ -85,7 +84,7 @@ int main(void) {
     cout << (arraylist.size() == 3) << endl;
     cout << (mylist == mylist) << endl;
     cout << (arraylist == arraylist) << endl;
-    mylist.remove(1);
+    mylist.remove(1).value();
     arraylist.erase(arraylist.begin() + 1);
     cout << (mylist.toString() == "[5, 12]") << endl;
     oss.str("");
@@ -97,7 +96,7 @@ int main(void) {
     MyArrayList<int> myList2;
     myList2.add(5);
     myList2.add(12);
-    myList2.remove(0);
+    myList2.remove(0).value();
     myList2.add(0, 5);
     cout << (mylist == myList2) << endl;
     cout << (myList2 == mylist) << endl;
@@ -258,7 +257,7 @@ int main(void) {
     copy(linkedlist.begin(), range_end, ostream_iterator<int>(oss, ", "));
     oss << linkedlist.back() << "]";
     cout << (mylinkedlist.toString() == oss.str()) << endl;
-    mylinkedlist.remove(4);
+    mylinkedlist.remove(4).value();
     // no built-in remove method that returns element removed at index
     range_end = linkedlist.begin();
     advance(range_end, 4);
@@ -271,7 +270,7 @@ int main(void) {
     copy(linkedlist.begin(), range_end, ostream_iterator<int>(oss, ", "));
     oss << linkedlist.back() << "]";
     cout << (mylinkedlist.toString() == oss.str()) << endl;
-    mylinkedlist.remove(mylinkedlist.size() - 1);
+    mylinkedlist.remove(mylinkedlist.size() - 1).value();
     range_end = linkedlist.begin();
     advance(range_end, linkedlist.size() - 1);
     linkedlist.erase(range_end);
@@ -326,14 +325,14 @@ int main(void) {
     cout << !stack1.empty() << endl;
     cout << (mystack.size() == NUMS_LENGTH) << endl;
     // no immutable way of getting a string representation of a stack
-    int pop1 = mystack.pop();
+    int pop1 = mystack.pop().value();
     int pop2 = stack1.top();
     // pop doesn't return the removed element
     stack1.pop();
     cout << (pop1 == randnums[NUMS_LENGTH - 1]) << endl;
     cout << (pop1 == pop2) << endl;
-    cout << (mystack.peek() == randnums[NUMS_LENGTH - 2]) << endl;
-    cout << (mystack.peek() == stack1.top()) << endl;
+    cout << (mystack.peek().value() == randnums[NUMS_LENGTH - 2]) << endl;
+    cout << (mystack.peek().value() == stack1.top()) << endl;
     cout << (mystack.size() == NUMS_LENGTH - 1) << endl;
     cout << (mystack == mystack) << endl;
     cout << (stack1 == stack1) << endl;

@@ -12,7 +12,7 @@ pub enum MyListError {
 impl fmt::Display for MyListError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            MyListError::IndexError => write!(f, "index is out of bounds"),
+            MyListError::IndexError => write!(f, "Index is out of bounds"),
         }
     }
 }

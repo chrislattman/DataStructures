@@ -5,8 +5,6 @@
 
 #include "mylist.h"
 
-using namespace std;
-
 /**
  * Implementations need to be in this header file due to generic templates.
  * Otherwise you could leave method signatures here and implement the
@@ -39,7 +37,7 @@ private:
     /// @param upperBound value that index must be strictly less than
     void checkIndex(unsigned int index, unsigned int upperBound) const {
         if (index >= upperBound) {
-            throw out_of_range("Index is out of bounds");
+            throw std::out_of_range("Index is out of bounds");
         }
     }
 
@@ -105,8 +103,12 @@ public:
     ///
     /// @param index index to add element
     /// @param element element to add
-    void add(unsigned int index, const T &element) {
-        checkIndex(index, list_size + 1);
+    std::expected<void, std::string> add(unsigned int index, const T &element) {
+        try {
+            checkIndex(index, list_size + 1);
+        } catch (const std::out_of_range &e) {
+            return std::unexpected(e.what());
+        }
         if (isEmpty()) {
             head = new Node();
             head->data = element;
@@ -127,6 +129,7 @@ public:
             }
         }
         ++list_size;
+        return {};
     }
 
     /// @brief Inserts an element at the end of this list.
@@ -184,8 +187,12 @@ public:
     ///
     /// @param index index to retrieve element from
     /// @return element found
-    T get(unsigned int index) const {
-        checkIndex(index, list_size);
+    std::expected<T, std::string> get(unsigned int index) const {
+        try {
+            checkIndex(index, list_size);
+        } catch (const std::out_of_range &e) {
+            return std::unexpected(e.what());
+        }
         Node *current = head;
         for (unsigned int i = 0; i < index; i++) {
             current = current->next;
@@ -235,8 +242,12 @@ public:
     ///
     /// @param index index to remove element from
     /// @return element found at index
-    T remove(unsigned int index) {
-        checkIndex(index, list_size);
+    std::expected<T, std::string> remove(unsigned int index) {
+        try {
+            checkIndex(index, list_size);
+        } catch (const std::out_of_range &e) {
+            return std::unexpected(e.what());
+        }
         if (index == 0) {
             T oldValue = head->data;
             head = head->next;
@@ -280,8 +291,12 @@ public:
     /// @param index index to set element at
     /// @param element new value to set existing element to
     /// @return old value of the element at position index
-    T set(unsigned int index, const T &element) {
-        checkIndex(index, list_size);
+    std::expected<T, std::string> set(unsigned int index, const T &element) {
+        try {
+            checkIndex(index, list_size);
+        } catch (const std::out_of_range &e) {
+            return std::unexpected(e.what());
+        }
         Node *current = head;
         for (unsigned int i = 0; i < index; i++) {
             current = current->next;
@@ -314,8 +329,8 @@ public:
     /// @brief Returns a string representation of this list, e.g. "[element1, element2, element3, ..., elementN]".
     ///
     /// @return string form of this list
-    string toString() const {
-        stringstream builder;
+    std::string toString() const {
+        std::stringstream builder;
         builder << "[";
         for (Node *current = head; current != nullptr; current = current->next) {
             builder << current->data;
@@ -335,6 +350,6 @@ public:
 /// @param list linked list to print out
 /// @return updated ostream
 template<typename T>
-ostream& operator<<(ostream &str, const MyLinkedList<T> &list) {
+std::ostream &operator<<(std::ostream &str, const MyLinkedList<T> &list) {
     return str << list.toString();
 }

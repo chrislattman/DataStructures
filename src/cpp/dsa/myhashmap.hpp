@@ -6,8 +6,6 @@
 #include "myarraylist.hpp"
 #include "mymap.h"
 
-using namespace std;
-
 /**
  * Implementations need to be in this header file due to generic templates.
  * Otherwise you could leave method signatures here and implement the
@@ -24,7 +22,7 @@ using namespace std;
 /// @tparam K key data type
 /// @tparam V value data type
 /// @tparam Hash hash function used for keys
-template<typename K, typename V, class Hash = hash<K>>
+template<typename K, typename V, class Hash = std::hash<K>>
 class MyHashMap: public MyMap<K, V> {
 private:
     K *keys;
@@ -108,7 +106,7 @@ public:
     /// rehashing occurs
     MyHashMap(unsigned int initialCapacity, float loadFactor) {
         if (loadFactor <= 0) {
-            throw invalid_argument("Load factor is nonpositive");
+            throw std::invalid_argument("Load factor is nonpositive");
         }
         keys = new K[initialCapacity];
         value_array = new V[initialCapacity];
@@ -197,7 +195,7 @@ public:
     ///
     /// @param key key to search for
     /// @return value associated with key, or NULL if key was not found
-    V& operator[](const K &key) {
+    V &operator[](const K &key) {
         if (key == K(NULL)) {
             return V(NULL);
         }
@@ -356,8 +354,8 @@ public:
     /// @brief Returns a string representation of this map, e.g. "{key1=value1, key2=value2, key3=value3, ..., keyN=valueN}".
     ///
     /// @return string form of this map
-    string toString() const {
-        stringstream builder;
+    std::string toString() const {
+        std::stringstream builder;
         builder << "{";
         for (unsigned int i = 0; i < map_length; i++) {
             K currentKey = keys[i];
@@ -368,7 +366,7 @@ public:
                 builder << ", ";
             }
         }
-        string result = builder.str();
+        std::string result = builder.str();
         if (map_size > 0) {
             result.erase(result.length() - 2, 2);
         }
@@ -398,6 +396,6 @@ public:
 /// @param list hash map to print out
 /// @return updated ostream
 template<typename K, typename V>
-ostream& operator<<(ostream &str, const MyHashMap<K, V> &map) {
+std::ostream &operator<<(std::ostream &str, const MyHashMap<K, V> &map) {
     return str << map.toString();
 }

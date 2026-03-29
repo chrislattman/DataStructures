@@ -1,5 +1,6 @@
 #pragma once
 
+#include <expected>
 #include <string>
 
 /// @brief Abstract class (used as an interface) which defines methods for lists.
@@ -15,7 +16,7 @@ public:
     ///
     /// @param index index to add element
     /// @param element element to add
-    virtual void add(unsigned int index, const T &element) = 0;
+    virtual std::expected<void, std::string> add(unsigned int index, const T &element) = 0;
 
     /// @brief Inserts an element at the end of this list.
     ///
@@ -35,7 +36,7 @@ public:
     ///
     /// @param index index to retrieve element from
     /// @return element found
-    virtual T get(unsigned int index) const = 0;
+    virtual std::expected<T, std::string> get(unsigned int index) const = 0;
 
     /// @brief Returns the index of the first occurrence of an element found in this list.
     ///
@@ -58,7 +59,7 @@ public:
     ///
     /// @param index index to remove element from
     /// @return element found at index
-    virtual T remove(unsigned int index) = 0;
+    virtual std::expected<T, std::string> remove(unsigned int index) = 0;
 
     /// @brief Removes the first occurrence of an element from this list.
     ///
@@ -71,7 +72,7 @@ public:
     /// @param index index to set element at
     /// @param element new value to set existing element to
     /// @return old value of the element at position index
-    virtual T set(unsigned int index, const T &element) = 0;
+    virtual std::expected<T, std::string> set(unsigned int index, const T &element) = 0;
 
     /// @brief Returns the number of elements in this list.
     ///
