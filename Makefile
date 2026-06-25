@@ -42,6 +42,7 @@ lintcpp:
 	flawfinder src/cpp/
 
 lintpy:
+  # Modern Python projects use ruff
 	autoflake -i --remove-all-unused-imports src/python/main.py
 	autoflake -i --remove-all-unused-imports src/python/dsa/*.py
 	autoflake -i --remove-all-unused-imports test/python/dsa/*.py
