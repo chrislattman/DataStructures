@@ -90,10 +90,7 @@ where
     }
 
     fn equals(&self, object: &Self) -> bool {
-        if object == self {
-            return true;
-        }
-        false
+        object == self
     }
 
     fn get(&self, index: usize) -> Result<T, MyListError> {

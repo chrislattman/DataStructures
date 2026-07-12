@@ -44,10 +44,7 @@ impl<T: PartialEq + Copy + Display> MyStack<T> {
 
     /// Compares an object with this stack for equality.
     pub fn equals(&self, object: &Self) -> bool {
-        if object == self {
-            return true;
-        }
-        false
+        object == self
     }
 
     /// Checks if this stack has no elements.
