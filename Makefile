@@ -211,7 +211,7 @@ libcpp:
 libpy:
 	pip wheel --no-deps -w dist .
 	python3 -m build --sdist
-	rm -rf build dsa.egg-info src/python/dsa.egg-info
+	rm -rf build src/python/dsa.egg-info
 
 libts:
 	npm pack
