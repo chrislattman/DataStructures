@@ -40,6 +40,7 @@ npm install
 - TypeScript non-standard direct dependencies are listed in `package.json`, whereas all (direct and transitive) dependencies are located in `package-lock.json`, which is updated with `npm update`
 - Add a TypeScript dependency by running `npm install -D <package>`
 - Even though this repository uses Jest, Node.js has it's own [built-in](https://nodejs.org/api/test.html) testing framework
+- A TypeScript-native alternative to `npm` is `yarn`
 
 For Go, run
 
