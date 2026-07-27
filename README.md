@@ -16,10 +16,10 @@ pip install -r requirements.txt
 ```
 
 - This creates a Python virtual environment, which indicates that all non-standard Python dependencies specific to this project be stored in the `.venv` folder, uses this folder as the default Python environment, and proceeds to download the dependencies in `requirements.txt` to it
-- `requirements.in` contains the direct non-standard dependencies, whereas `requirements.txt`, which is updated with `pip-compile`, contains all (direct and transitive) non-standard dependencies
+- `pyproject.toml` contains the direct non-standard dependencies, whereas `requirements.txt`, which is updated with `pip-compile`, contains all (direct and transitive) non-standard dependencies
 - To leave this virtual environment, simply run `deactivate`
-- Other Python projects use [build](https://build.pypa.io/en/stable/) which use `pyproject.toml` files
-- Add a Python dependency by running `pip install <package>` and add it to `requirements.in`
+- Older Python projects used `setup.py` files
+- Add a Python dependency by running `pip install <package>` and add it to `pyproject.toml`
 
 Likewise for Java, run
 

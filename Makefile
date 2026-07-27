@@ -42,7 +42,7 @@ lintcpp:
 	flawfinder src/cpp/
 
 lintpy:
-  # Modern Python projects use ruff
+  	# Modern Python projects use ruff
 	autoflake -i --remove-all-unused-imports src/python/main.py
 	autoflake -i --remove-all-unused-imports src/python/dsa/*.py
 	autoflake -i --remove-all-unused-imports test/python/dsa/*.py
@@ -210,7 +210,7 @@ libcpp:
 
 libpy:
 	pip wheel --no-deps -w dist .
-	python3 setup.py sdist
+	python3 -m build --sdist
 	rm -rf build dsa.egg-info src/python/dsa.egg-info
 
 libts:
@@ -223,7 +223,7 @@ updatecpp:
 	@echo "Update C++ dependencies with your package manager."
 
 updatepy:
-	pip-compile requirements.in --upgrade
+	pip-compile --extra=dev pyproject.toml --upgrade
 	pip install -r requirements.txt
 
 updatets:
@@ -236,9 +236,18 @@ updatego:
 updaterust:
 	cargo update
 
+deptreets:
+	npm ls --omit=dev
+
+deptreego:
+	go list -deps -f '{{if not .Standard}}{{.ImportPath}}{{end}}' ./src/go/dsa/...
+
+deptreerust:
+	cargo tree --edges normal
+
 clean:
 	rm -rf *.jar main main* src/java/Main.class src/java/dsa/*.class out public \
 		src/python/dsa/__pycache__ test/python/dsa/__pycache__ \
 		.mypy_cache bin jacoco.exec *-coverage-report .coverage coverage.out \
 		dist dsa-1.0.0.tgz target *.profdata *.profraw src/rust/dsa/*.profraw \
-		src/rust/dsa-tester/*.profraw test/cpp/dsa/*.gc* *.info
+		src/rust/dsa-tester/*.profraw test/cpp/dsa/*.gc* *.info src/python/dsa.egg-info

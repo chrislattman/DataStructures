@@ -77,3 +77,4 @@ target/
 src/go/dsa/mock*.go
 *.gc*
 *.info
+src/python/dsa.egg-info/*
