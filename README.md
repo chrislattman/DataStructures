@@ -20,6 +20,7 @@ pip install -r requirements.txt
 - To leave this virtual environment, simply run `deactivate`
 - Older Python projects used `setup.py` files
 - Add a Python dependency by running `pip install <package>` and add it to `pyproject.toml`
+- Third-party tools like `uv` (with `ruff` and `pytest`) provide a Rust `cargo`-like experience for Python
 
 Likewise for Java, run
 
