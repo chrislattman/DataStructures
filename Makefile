@@ -40,6 +40,8 @@ lintjava:
 lintcpp:
 	cppcheck --std=c++14 --language=c++ src/cpp src/cpp/dsa/*.h*
 	flawfinder src/cpp/
+	# find src/cpp/dsa -type f \( -name "*.cpp" -o -name "*.hpp" -o -name "*.h" \) | xargs clang-format -i
+ 	# clang-tidy src/cpp/main.cpp -checks='*' -header-filter='src/cpp/dsa/*' -- -std=c++23
 
 lintpy:
   	# Modern Python projects use ruff
